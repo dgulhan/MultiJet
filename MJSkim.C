@@ -107,6 +107,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
      treeMJ[ialgo][iR][iN]->Branch("rawphi", evnt.rawphi, "rawphi[nref]/F");
      treeMJ[ialgo][iR][iN]->Branch("raweta", evnt.raweta, "raweta[nref]/F");
     }
+   }
  }
  for (Long64_t jentry=0; jentry<nentries;jentry++) { 
 
