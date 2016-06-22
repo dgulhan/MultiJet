@@ -49,7 +49,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  }
  
  int nJet = 3;
- int NJet = {3,4,5};
+ int NJet[] = {3,4,5};
  
  fastjet::contrib::XConePlugin *plugin[nR][nJet];
  JetDefinition *jet_def_xcone[nR][nJet];
@@ -86,7 +86,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  for (int iN = 0; iN < nJet ; iN++){
   for(int iR = 0; iR < nR; iR++){
     treeMJ[0][iR][iN] = new TTree(Form("akR%dNPF",radius[iR]),"");
-    treeMJ[1][iR][iN] = new TTree(Form("xcR%dN%dPF",radius[iR],Njet[iN]),"");
+    treeMJ[1][iR][iN] = new TTree(Form("xcR%dN%dPF",radius[iR],NJet[iN]),"");
     for(int ialgo = 0; ialgo < nalgo; ialgo++){
      treeMJ[ialgo][iR][iN]->Branch("run", &evnt.run, "run/I");
      treeMJ[ialgo][iR][iN]->Branch("lumi", &evnt.lumi, "lumi/I");
@@ -150,7 +150,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
       ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
       fjpfjets[0][iR][iN] = sorted_by_pt(cspf_ak.inclusive_jets());
                   
-      ClusterSequence cspf_xcone(particlespf, *jet_def_xcone[iR]);
+      ClusterSequence cspf_xcone(particlespf, *jet_def_xcone[iR][iN]);
       fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone.inclusive_jets());
      }
     }
