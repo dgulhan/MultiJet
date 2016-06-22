@@ -13,7 +13,12 @@
 #include "TNtuple.h"
 #include "TF1.h"
 
-#include "treeSetup/akPu3PF.C"
+
+#include "treeSetup/skimChain.C"
+#include "treeSetup/hiChain.C"
+#include "treeSetup/hltChain.C"
+#include "treeSetup/pfChainVec.C"
+// #include "treeSetup/genChain.C"
 
 #include "fastjet/ClusterSequence.hh"
 #include "fastjet/contrib/XConePlugin.hh"
@@ -21,13 +26,14 @@
 #include "event.h"
 
 using namespace fastjet; 
+// using namespace fastjet::contrib; 
 using namespace std; 
 
 
-void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDirectories/2015pp_MinBias_2/", TString infile = "MinimumBias2_HiForestAOD_101.root", TString outfname = "test.root"){ 
+void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDirectories/2015pp_MinBias_2/", TString outfname = "test.root"){ 
  TH2D::SetDefaultSumw2(true);
  TH1D::SetDefaultSumw2();
-
+ TString mode = "PbPbData";
  int nR = 3;
 
  float R[] = {0.3, 0.4, 0.5};
@@ -37,6 +43,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  } 
  JetDefinition *jet_def_antikt[nR];
  for(int iR = 0; iR < nR; iR++){
+  // jet_def_antikt[iR](antikt_algorithm, R[iR]);
   jet_def_antikt[iR] = new JetDefinition(antikt_algorithm, R[iR]);
  }
  
@@ -52,15 +59,16 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  float etacut = 2;
  // TString algo=Form("ak%dPF",radius[iR]);
  
- TString infname = Form("%s/%s",dataset.Data(), infile.Data());
+ TString infname = Form("%s/*.root",dataset.Data());
 
- HiTree   *fhi = new HiTree(infname.Data()); 
- HltTree   *fhlt = new HltTree(infname.Data());
- skimTree   *fskim = new skimTree(infname.Data());
+ hiChain   *fhi = new hiChain(infname.Data()); 
+ hltChain   *fhlt = new hltChain(infname.Data());
+ skimChain   *fskim = new skimChain(infname.Data());
  // akPu3PF *t = new akPu3PF(infname.Data(),algo);
- pfTreeNew * fpf = new pfTreeNew(infname.Data());
+ pfChainVec * fpf = new pfChainVec(infname.Data());
+ // genChain * fgen = new genChain(infname.Data());
 
- int nentries = fpf->GetEntriesFast();
+ int nentries = fpf->GetEntries();
  std::cout<<"nentries = "<<nentries<<std::endl;
 
 
@@ -103,10 +111,12 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
   fhlt->GetEntry(jentry);
   fskim->GetEntry(jentry);
   fpf->GetEntry(jentry);
+  // fgen->GetEntry(jentry);
 
   // if(!(fskim->pHBHENoiseFilter && fskim->pPAcollisionEventSelectionPA && fabs(fhi->vz)<15 && fskim->pVertexFilterCutGplus && fskim->pprimaryvertexFilter)) continue;
 
   if(!(fskim->HBHENoiseFilterResultRun2Loose && fskim->pPAprimaryVertexFilter && fabs(fhi->vz)<15 && fskim->pBeamScrapingFilter)) continue;
+  if(mode == "PbPbData" && !fhlt->HLT_HIPuAk4CaloJet80_Eta5p1_v1) continue;
   vector<PseudoJet> fjpfjets[2][nR];
   int nparticlefj = 0;
   vector<PseudoJet> particlespf;
@@ -179,6 +189,6 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
 
 int main(int argc, char *argv[])
 { 
-  MJSkim(argv[1],argv[2],argv[3]);
+  MJSkim(argv[1],argv[3]);
   return 0;
 }
