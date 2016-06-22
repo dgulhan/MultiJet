@@ -201,9 +201,12 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     treeMJ[ialgo][iR][iN]->Write();
    }
   }
-  fnt->Close();
  }
+ 
+  fnt->Close();
+ 
 
+}
 
 int main(int argc, char *argv[])
 { 
