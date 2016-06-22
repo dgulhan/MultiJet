@@ -34,9 +34,10 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  TH2D::SetDefaultSumw2(true);
  TH1D::SetDefaultSumw2();
  TString mode = "PbPbData";
+    
  int nR = 3;
 
- float R[] = {0.3, 0.4, 0.5};
+ float R[] = {0.3, 0.4, 0.5}; //Radius values
  int radius[nR];
  for(int iR = 0; iR < nR; iR++){
   radius[iR] = (int)(10*R[iR]);
@@ -47,13 +48,17 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
   jet_def_antikt[iR] = new JetDefinition(antikt_algorithm, R[iR]);
  }
  
- int Njet = 3;
+ int nJet = 3;
+ int NJet = {3,4,5};
  
- fastjet::contrib::XConePlugin *plugin[nR];
- JetDefinition *jet_def_xcone[nR];
- for(int iR = 0; iR < nR; iR++){ 
-   plugin[iR] = new fastjet::contrib::XConePlugin(Njet,R[iR],2);
-   jet_def_xcone[iR] = new JetDefinition(plugin[iR]);
+ fastjet::contrib::XConePlugin *plugin[nR][nJet];
+ JetDefinition *jet_def_xcone[nR][nJet];
+ for(int iR = 0; iR < nR; iR++){
+     for (int iNJet; iNJet < nJet; iNJet++) {
+         plugin[iR][iNJet] = new fastjet::contrib::XConePlugin(NJet[iNJet],R[iR],2);
+         jet_def_xcone[iR][iNJet] = new JetDefinition(plugin[iR][iNJet]);
+     }
+   
  }
    
  float etacut = 2;
@@ -76,30 +81,32 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  newEvent evnt;
  
  int nalgo = 2;
- TTree * treeMJ[2][nR];
- for(int iR = 0; iR < nR; iR++){
-   treeMJ[0][iR] = new TTree(Form("ak%dPF",radius[iR]),"");
-   treeMJ[1][iR] = new TTree(Form("xc%dPF",radius[iR]),"");
-   for(int ialgo = 0; ialgo < nalgo; ialgo++){
-    treeMJ[ialgo][iR]->Branch("run", &evnt.run, "run/I");
-    treeMJ[ialgo][iR]->Branch("lumi", &evnt.lumi, "lumi/I");
-    treeMJ[ialgo][iR]->Branch("evt", &evnt.evt, "evt/I");
-    treeMJ[ialgo][iR]->Branch("hiBin", &evnt.hiBin, "hiBin/I");
-    treeMJ[ialgo][iR]->Branch("pthat", &evnt.pthat, "pthat/F");
-    treeMJ[ialgo][iR]->Branch("pt1", &evnt.pt1, "pt1/F");
-    treeMJ[ialgo][iR]->Branch("pt2", &evnt.pt2, "pt2/F");
-    treeMJ[ialgo][iR]->Branch("pt3", &evnt.pt3, "pt3/F");
-    treeMJ[ialgo][iR]->Branch("eta1", &evnt.eta1, "eta1/F");
-    treeMJ[ialgo][iR]->Branch("eta2", &evnt.eta2, "eta2/F");
-    treeMJ[ialgo][iR]->Branch("eta3", &evnt.eta3, "eta3/F");
-    treeMJ[ialgo][iR]->Branch("phi1", &evnt.phi1, "phi1/F");
-    treeMJ[ialgo][iR]->Branch("phi2", &evnt.phi2, "phi2/F");
-    treeMJ[ialgo][iR]->Branch("phi3", &evnt.phi3, "phi3/F"); 
-    treeMJ[ialgo][iR]->Branch("nref", &evnt.nref, "nref/I");
-    treeMJ[ialgo][iR]->Branch("rawpt", evnt.rawpt, "rawpt[nref]/F");
-    treeMJ[ialgo][iR]->Branch("rawphi", evnt.rawphi, "rawphi[nref]/F");
-    treeMJ[ialgo][iR]->Branch("raweta", evnt.raweta, "raweta[nref]/F");
-   }
+    
+ TTree * treeMJ[2][nR][nJet]; // two algorithms 3 radius values and nJet values
+ for (int iN = 0; iN < nJet ; iN++){
+  for(int iR = 0; iR < nR; iR++){
+    treeMJ[0][iR][iN] = new TTree(Form("akR%dNPF",radius[iR]),"");
+    treeMJ[1][iR][iN] = new TTree(Form("xcR%dN%dPF",radius[iR],Njet[iN]),"");
+    for(int ialgo = 0; ialgo < nalgo; ialgo++){
+     treeMJ[ialgo][iR][iN]->Branch("run", &evnt.run, "run/I");
+     treeMJ[ialgo][iR][iN]->Branch("lumi", &evnt.lumi, "lumi/I");
+     treeMJ[ialgo][iR][iN]->Branch("evt", &evnt.evt, "evt/I");
+     treeMJ[ialgo][iR][iN]->Branch("hiBin", &evnt.hiBin, "hiBin/I");
+     treeMJ[ialgo][iR][iN]->Branch("pthat", &evnt.pthat, "pthat/F");
+     treeMJ[ialgo][iR][iN]->Branch("pt1", &evnt.pt1, "pt1/F");
+     treeMJ[ialgo][iR][iN]->Branch("pt2", &evnt.pt2, "pt2/F");
+     treeMJ[ialgo][iR][iN]->Branch("pt3", &evnt.pt3, "pt3/F");
+     treeMJ[ialgo][iR][iN]->Branch("eta1", &evnt.eta1, "eta1/F");
+     treeMJ[ialgo][iR][iN]->Branch("eta2", &evnt.eta2, "eta2/F");
+     treeMJ[ialgo][iR][iN]->Branch("eta3", &evnt.eta3, "eta3/F");
+     treeMJ[ialgo][iR][iN]->Branch("phi1", &evnt.phi1, "phi1/F");
+     treeMJ[ialgo][iR][iN]->Branch("phi2", &evnt.phi2, "phi2/F");
+     treeMJ[ialgo][iR][iN]->Branch("phi3", &evnt.phi3, "phi3/F");
+     treeMJ[ialgo][iR][iN]->Branch("nref", &evnt.nref, "nref/I");
+     treeMJ[ialgo][iR][iN]->Branch("rawpt", evnt.rawpt, "rawpt[nref]/F");
+     treeMJ[ialgo][iR][iN]->Branch("rawphi", evnt.rawphi, "rawphi[nref]/F");
+     treeMJ[ialgo][iR][iN]->Branch("raweta", evnt.raweta, "raweta[nref]/F");
+    }
  }
  for (Long64_t jentry=0; jentry<nentries;jentry++) { 
 
@@ -117,7 +124,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
 
   if(!(fskim->HBHENoiseFilterResultRun2Loose && fskim->pPAprimaryVertexFilter && fabs(fhi->vz)<15 && fskim->pBeamScrapingFilter)) continue;
   if(mode == "PbPbData" && !fhlt->HLT_HIPuAk4CaloJet80_Eta5p1_v1) continue;
-  vector<PseudoJet> fjpfjets[2][nR];
+  vector<PseudoJet> fjpfjets[2][nR][nJet];
   int nparticlefj = 0;
   vector<PseudoJet> particlespf;
   for(int ipart = 0; ipart < fpf->nPFpart; ipart++){ 
@@ -137,54 +144,64 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
    nparticlefj++;
   }
   if(nparticlefj>0){
-   for(int iR = 0; iR < nR; iR++){
+   for (int iN;  iN < nJet ; iN++) {
+    for(int iR = 0; iR < nR; iR++){
      for(int ialgo = 0; ialgo < nalgo; ialgo++){
       ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
-      fjpfjets[0][iR] = sorted_by_pt(cspf_ak.inclusive_jets());
-
+      fjpfjets[0][iR][iN] = sorted_by_pt(cspf_ak.inclusive_jets());
+                  
       ClusterSequence cspf_xcone(particlespf, *jet_def_xcone[iR]);
-      fjpfjets[1][iR] = sorted_by_pt(cspf_xcone.inclusive_jets());
+      fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone.inclusive_jets());
      }
+    }
+          
    }
+   
   }
   particlespf.clear();
   
-  int njet[nalgo][nR];
-  vector<Jet> jets[nalgo][nR];
-  
-  for(int iR = 0; iR < nR; iR++){
-    for(int ialgo = 0; ialgo < nalgo; ialgo++){
-      njet[ialgo][iR] = 0;
-      for(unsigned int ijet = 0;  ijet < fjpfjets[ialgo][iR].size(); ijet++){
-        float jtpt = fjpfjets[ialgo][iR][ijet].perp();
-  	    if(jtpt<5) continue;
-	    float jtphi = fjpfjets[ialgo][iR][ijet].phi();
-	    float jteta = fjpfjets[ialgo][iR][ijet].eta();
-        if(fabs(jteta)>etacut) continue;
-	    Jet jet(jtpt, jteta, jtphi);
-	    jets[ialgo][iR].push_back(jet);
-	    njet[ialgo][iR]++;
-      }
-    }
-  }
-  for(int iR = 0; iR < nR; iR++){
-    for(int ialgo = 0; ialgo < nalgo; ialgo++){
-      if(njet[ialgo][iR] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[ialgo][iR]);  
-	  treeMJ[ialgo][iR]->Fill();
-      evnt.reset();
-    }
-  }
- 
-}
+  int njet[nalgo][nR][nJet];
+  vector<Jet> jets[nalgo][nR][nJet];
 
- fnt->cd();
- for(int iR = 0; iR < nR; iR++){
-  for(int ialgo = 0; ialgo < nalgo; ialgo++){
-   treeMJ[ialgo][iR]->Write();
+ for (int iN;  iN < nJet ; iN++) {
+  for(int iR = 0; iR < nR; iR++){
+   for(int ialgo = 0; ialgo < nalgo; ialgo++){
+    njet[ialgo][iR][iN] = 0;
+    for(unsigned int ijet = 0;  ijet < fjpfjets[ialgo][iR][iN].size(); ijet++){
+     float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
+     if(jtpt<5) continue;
+     float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
+     float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
+     if(fabs(jteta)>etacut) continue;
+     Jet jet(jtpt, jteta, jtphi);
+     jets[ialgo][iR][iN].push_back(jet);
+     njet[ialgo][iR][iN]++;
+     }
+    }
+   }
+  }
+     
+  for (int iN;  iN < nJet ; iN++) {
+     
+   for(int iR = 0; iR < nR; iR++){
+     for(int ialgo = 0; ialgo < nalgo; ialgo++){
+       if(njet[ialgo][iR][iN] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[ialgo][iR][iN]);
+	   treeMJ[ialgo][iR][iN]->Fill();
+       evnt.reset();
+     }
+   }
+ 
   }
  }
- fnt->Close();
-}
+ fnt->cd();
+ for (int iN;  iN < nJet ; iN++) {
+  for(int iR = 0; iR < nR; iR++){
+   for(int ialgo = 0; ialgo < nalgo; ialgo++){
+    treeMJ[ialgo][iR][iN]->Write();
+   }
+  }
+  fnt->Close();
+ }
 
 
 int main(int argc, char *argv[])
