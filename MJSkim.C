@@ -54,9 +54,9 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  fastjet::contrib::XConePlugin *plugin[nR][nJet];
  JetDefinition *jet_def_xcone[nR][nJet];
  for(int iR = 0; iR < nR; iR++){
-     for (int iNJet; iNJet < nJet; iNJet++) {
-         plugin[iR][iNJet] = new fastjet::contrib::XConePlugin(NJet[iNJet],R[iR],2);
-         jet_def_xcone[iR][iNJet] = new JetDefinition(plugin[iR][iNJet]);
+     for (int iN; iN < nJet; iN++) {
+         plugin[iR][iN] = new fastjet::contrib::XConePlugin(NJet[iN],R[iR],2);
+         jet_def_xcone[iR][iN] = new JetDefinition(plugin[iR][iN]);
      }
    
  }
