@@ -1,10 +1,10 @@
 
 
-inFile=
+infile=
 
 until [ -z "$1" ]; do
     case "$1" in
-        -i|--input) shift; inFile="$1"; shift ;;
+        -i|--input) shift; infile="$1"; shift ;;
         -h|--help) shift; echo "sh run.sh -i(--input) HiForest_0.root "; shift;;
         -*) shift ;;
         *) break ;;
