@@ -59,7 +59,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  float etacut = 2;
  // TString algo=Form("ak%dPF",radius[iR]);
  
- TString infname = Form("%s/*.root",dataset.Data());
+ TString infname = Form("%s",dataset.Data());
 
  hiChain   *fhi = new hiChain(infname.Data()); 
  hltChain   *fhlt = new hltChain(infname.Data());
