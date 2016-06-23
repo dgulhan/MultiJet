@@ -213,7 +213,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
                 evnt.reset();
             for (int iN = 0; iN < nJet ; iN ++){
                 if(njet[1][iR][iN] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[1][iR][iN]);
-                treeMJ[0][iR][iN]->Fill();
+                treeMJ[1][iR][iN]->Fill();
                 evnt.reset();
             }
         }
