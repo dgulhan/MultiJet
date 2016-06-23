@@ -167,6 +167,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
             for(int iR = 0; iR < nR; iR++){
                 ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
                 fjpfjets[0][iR][0] = sorted_by_pt(cspf_ak.inclusive_jets());
+                cout<<fjpfjets[0][iR][0]<<endl;
                 cout<<"Sorting for ak"<<endl;
                 for (int iN = 0; iN < nJet ; iN++){
                     cout<<"Sorting for xcone"<<endl;
