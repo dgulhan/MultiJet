@@ -66,6 +66,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     // TString algo=Form("ak%dPF",radius[iR]);
  
     TString infname = Form("%s",dataset.Data());
+    cout<<"Input file:"<<dataset.Data()<<std::endl;
     
     hiChain   *fhi = new hiChain(infname.Data());
     hltChain   *fhlt = new hltChain(infname.Data());
@@ -136,6 +137,8 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         
         if(mode == "PbPbData" && !fhlt->HLT_HIPuAk4CaloJet80_Eta5p1_v1) continue;
         
+        cout<< "Step 1"<<endl;
+        
         vector<PseudoJet> fjpfjets[nalgo][nR][nJet];
   
         int nparticlefj = 0;
@@ -143,7 +146,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         vector<PseudoJet> particlespf;
   
         for(int ipart = 0; ipart < fpf->nPFpart; ipart++){
-  
+            cout << "Ipart loop"<<endl;
             // cout << ipart << endl;
             float pt = fpf->pfPt->at(ipart);
             if(pt<=0) continue;
@@ -175,7 +178,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
   
         int njet[nalgo][nR][nJet];
         vector<Jet> jets[nalgo][nR][nJet];
-  
+        cout<<"Jet vector"<<endl;
         for(int iR = 0; iR < nR; iR++){
             njet[0][iR][0] = 0;
             for(unsigned int ijet = 0;  ijet < fjpfjets[0][iR][0].size(); ijet++){
