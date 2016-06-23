@@ -50,7 +50,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     }
  
     int nJet = 3; //Three values for n
-    float NJet[] = {3.0, 4.0, 5.0};
+    int NJet[] = {3, 4, 5};
  
     fastjet::contrib::XConePlugin *plugin[nR][nJet]; //?
     JetDefinition *jet_def_xcone[nR][nJet];
@@ -65,7 +65,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     float etacut = 2;
     // TString algo=Form("ak%dPF",radius[iR]);
  
-    TString infname = Form("%s/*.root",dataset.Data());
+    TString infname = Form("%s",dataset.Data());
 
     hiChain   *fhi = new hiChain(infname.Data());
     hltChain   *fhlt = new hltChain(infname.Data());
@@ -92,7 +92,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         
         for (int iN = 0; iN < nJet ; iN++){
             
-            treeMJ[1][iR][iN] = new TTree(Form("xc_R%d_N%f_PF",radius[iR],NJet[iN]),"");
+            treeMJ[1][iR][iN] = new TTree(Form("xc_R%d_N%d_PF",radius[iR],NJet[iN]),"");
             
             // here there was a for loop over ialgo = 0 , 1 but iN only goes for ialgo = 1
             treeMJ[1][iR][iN]->Branch("run", &evnt.run, "run/I");
