@@ -4,3 +4,5 @@
 
 to see the status of the submited job type `bjobs`. 
 
+More info at: http://information-technology.web.cern.ch/fr/services/batch
+
