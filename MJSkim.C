@@ -33,7 +33,7 @@ using namespace std;
 void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDirectories/2015pp_MinBias_2/", TString outfname = "test.root"){ 
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
-    TString mode = "PbPbData";
+    TString mode = "";
     
     int nR = 3;
     float R[] = {0.3, 0.4, 0.5};
