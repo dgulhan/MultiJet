@@ -136,7 +136,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         
         if(mode == "PbPbData" && !fhlt->HLT_HIPuAk4CaloJet80_Eta5p1_v1) continue;
         
-        vector<PseudoJet> fjpfjets[2][nR][nJet];
+        vector<PseudoJet> fjpfjets[nalgo][nR][nJet];
   
         int nparticlefj = 0;
   
@@ -161,15 +161,14 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
   
         if(nparticlefj>0){
             for(int iR = 0; iR < nR; iR++){
-                for(int ialgo = 0; ialgo < nalgo; ialgo++){
-                    ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
-                    fjpfjets[0][iR][0] = sorted_by_pt(cspf_ak.inclusive_jets());
+                ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
+                fjpfjets[0][iR][0] = sorted_by_pt(cspf_ak.inclusive_jets());
                     
-                    for (int iN = 0; iN < nJet ; iN++){
-                        ClusterSequence cspf_xcone(particlespf, *jet_def_xcone[iR][iN]);
-                        fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone.inclusive_jets());
-                    }
+                for (int iN = 0; iN < nJet ; iN++){
+                    ClusterSequence cspf_xcone(particlespf, *jet_def_xcone[iR][iN]);
+                    fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone.inclusive_jets());
                 }
+                
             }
         }
         particlespf.clear();
