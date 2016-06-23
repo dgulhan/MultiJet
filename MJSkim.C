@@ -49,8 +49,8 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         jet_def_antikt[iR] = new JetDefinition(antikt_algorithm, R[iR]);
     }
  
-    int nJet = 3; //Three values for n
-    int NJet[] = {3, 4, 5};
+    int nJet = 2; //Three values for n
+    int NJet[] = {2, 3};
  
     fastjet::contrib::XConePlugin *plugin[nR][nJet]; //?
     JetDefinition *jet_def_xcone[nR][nJet];
@@ -167,7 +167,6 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
             for(int iR = 0; iR < nR; iR++){
                 ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
                 fjpfjets[0][iR][0] = sorted_by_pt(cspf_ak.inclusive_jets());
-                cout<<fjpfjets[0][iR][0]<<endl;
                 cout<<"Sorting for ak"<<endl;
                 for (int iN = 0; iN < nJet ; iN++){
                     cout<<"Sorting for xcone"<<endl;
