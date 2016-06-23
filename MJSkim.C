@@ -92,7 +92,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         
         for (int iN = 0; iN < nJet ; iN++){
             
-            treeMJ[1][iR][iN] = new TTree(Form("xc_R%d_N%d_PF",radius[iR],NJet[iN]),"");
+            treeMJ[1][iR][iN] = new TTree(Form("xc_R%d_N%f_PF",radius[iR],NJet[iN]),"");
             
             // here there was a for loop over ialgo = 0 , 1 but iN only goes for ialgo = 1
             treeMJ[1][iR][iN]->Branch("run", &evnt.run, "run/I");
