@@ -121,7 +121,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     for (Long64_t jentry=0; jentry<nentries;jentry++) {
 
         if(nentries%1000==jentry)cout << jentry << endl;
-            // cout << jentry << endl;
+        cout << jentry << endl;
   
         // t->GetEntry(jentry);
         fhi->GetEntry(jentry);
