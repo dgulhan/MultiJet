@@ -146,7 +146,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         vector<PseudoJet> particlespf;
   
         for(int ipart = 0; ipart < fpf->nPFpart; ipart++){
-            cout << "Ipart loop"<<endl;
+            cout << "Ipart loop: "<<ipart<<"of "<<fpf->nPFpart<<endl;
             // cout << ipart << endl;
             float pt = fpf->pfPt->at(ipart);
             if(pt<=0) continue;
@@ -161,15 +161,17 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
             particlespf.push_back(Particle);
             nparticlefj++;
         }
-  
+        cout<<"Out of loop ipart"<<endl;
+        
         if(nparticlefj>0){
             for(int iR = 0; iR < nR; iR++){
                 ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
                 fjpfjets[0][iR][0] = sorted_by_pt(cspf_ak.inclusive_jets());
-                    
+                cout<<"Sorting for ak"<<endl;
                 for (int iN = 0; iN < nJet ; iN++){
                     ClusterSequence cspf_xcone(particlespf, *jet_def_xcone[iR][iN]);
                     fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone.inclusive_jets());
+                    cout<<"Sorting for xcone"<<endl;
                 }
                 
             }
