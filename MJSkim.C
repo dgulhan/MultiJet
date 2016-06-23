@@ -66,7 +66,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     // TString algo=Form("ak%dPF",radius[iR]);
  
     TString infname = Form("%s",dataset.Data());
-
+    
     hiChain   *fhi = new hiChain(infname.Data());
     hltChain   *fhlt = new hltChain(infname.Data());
     skimChain   *fskim = new skimChain(infname.Data());
@@ -74,7 +74,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     pfChainVec * fpf = new pfChainVec(infname.Data());
     // genChain * fgen = new genChain(infname.Data());
 
-    int nentries = fpf->GetEntries();
+    int nentries = 1000;//fpf->GetEntries();
     std::cout<<"nentries = "<<nentries<<std::endl;
 
 
