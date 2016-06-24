@@ -91,6 +91,25 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         
         treeMJ[0][iR][0] = new TTree(Form("ak%dPF",radius[iR]),"");
         
+        treeMJ[0][iR][0]->Branch("run", &evnt.run, "run/I");
+        treeMJ[0][iR][0]->Branch("lumi", &evnt.lumi, "lumi/I");
+        treeMJ[0][iR][0]->Branch("evt", &evnt.evt, "evt/I");
+        treeMJ[0][iR][0]->Branch("hiBin", &evnt.hiBin, "hiBin/I");
+        treeMJ[0][iR][0]->Branch("pthat", &evnt.pthat, "pthat/F");
+        treeMJ[0][iR][0]->Branch("pt1", &evnt.pt1, "pt1/F");
+        treeMJ[0][iR][0]->Branch("pt2", &evnt.pt2, "pt2/F");
+        treeMJ[0][iR][0]->Branch("pt3", &evnt.pt3, "pt3/F");
+        treeMJ[0][iR][0]->Branch("eta1", &evnt.eta1, "eta1/F");
+        treeMJ[0][iR][0]->Branch("eta2", &evnt.eta2, "eta2/F");
+        treeMJ[0][iR][0]->Branch("eta3", &evnt.eta3, "eta3/F");
+        treeMJ[0][iR][0]->Branch("phi1", &evnt.phi1, "phi1/F");
+        treeMJ[0][iR][0]->Branch("phi2", &evnt.phi2, "phi2/F");
+        treeMJ[0][iR][0]->Branch("phi3", &evnt.phi3, "phi3/F");
+        treeMJ[0][iR][0]->Branch("nref", &evnt.nref, "nref/I");
+        treeMJ[0][iR][0]->Branch("rawpt", evnt.rawpt, "rawpt[nref]/F");
+        treeMJ[0][iR][0]->Branch("rawphi", evnt.rawphi, "rawphi[nref]/F");
+        treeMJ[0][iR][0]->Branch("raweta", evnt.raweta, "raweta[nref]/F");
+        
         for (int iN = 0; iN < nJet ; iN++){
             
             treeMJ[1][iR][iN] = new TTree(Form("xc_R%d_N%d_PF",radius[iR],NJet[iN]),"");
