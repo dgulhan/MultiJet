@@ -14,7 +14,7 @@ until [ -z "$1" ]; do
     esac
 done
 
-
+echo $indir
 FILES=$(eos ls $indir)
 
 echo ${FILES[@]}
