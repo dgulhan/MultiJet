@@ -49,8 +49,8 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         jet_def_antikt[iR] = new JetDefinition(antikt_algorithm, R[iR]);
     }
  
-    int nJet = 1; //number of values for n (xcone relevant)
-    int NJet[] = {3};
+    int nJet = 3; //number of values for n (xcone relevant)
+    int NJet[] = {1,2,3};
  
     fastjet::contrib::XConePlugin *plugin[nR][nJet]; //
     JetDefinition *jet_def_xcone[nR][nJet];
