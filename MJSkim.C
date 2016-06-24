@@ -33,7 +33,7 @@ using namespace std;
 void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDirectories/2015pp_MinBias_2/", TString outfname = "test.root"){ 
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
-    TString mode = "PbPbData";
+    TString mode = "ppData";
     
     int nR = 3;
     float R[] = {0.3, 0.4, 0.5};
@@ -49,16 +49,16 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         jet_def_antikt[iR] = new JetDefinition(antikt_algorithm, R[iR]);
     }
  
-    int nJet = 1; //Three values for n
+    int nJet = 1; //number of values for n (xcone relevant)
     int NJet[] = {3};
  
-    fastjet::contrib::XConePlugin *plugin[nR][nJet]; //?
+    fastjet::contrib::XConePlugin *plugin[nR][nJet]; //
     JetDefinition *jet_def_xcone[nR][nJet];
  
     for(int iR = 0; iR < nR; iR++){
         for ( int iN = 0; iN < nJet; iN++){
             plugin[iR][iN] = new fastjet::contrib::XConePlugin(NJet[iN],R[iR],2);
-            jet_def_xcone[iR][nJet] = new JetDefinition(plugin[iR][iN]);
+            jet_def_xcone[iR][iN] = new JetDefinition(plugin[iR][iN]);
         }
     }
    
