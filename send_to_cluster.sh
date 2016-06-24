@@ -17,6 +17,9 @@ done
 echo $indir
 FILES=$(eos ls $indir)
 
-echo ${FILES[@]}
+for f in ${FILES[@]}
+do
+    echo $f
+done
 
 echo "FIN"
