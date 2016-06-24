@@ -15,7 +15,7 @@ until [ -z "$1" ]; do
 done
 
 
-FILES=$(eos ls $indir/*.root)
+FILES=$(eos ls $indir)
 
 echo ${FILES[@]}
 
