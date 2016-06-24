@@ -2,6 +2,8 @@
 
 WD=/afs/cern.ch/work/e/eruizvel/private/MuliJetEdna/MultiJet
 
+HOME=/afs/cern.ch/user/e/eruizvel/private
+eosmount $HOME/eos
 
 indir=/store/group/cmst3/group/hintt/mverweij/PP5TeV/data/HighPtJet80/crab_HighPtJet80_v2/160525_095945/mergePartialV2
 
@@ -15,3 +17,7 @@ do
 done
 
 echo "FIN"
+
+
+eosumount $HOME/eos
+
