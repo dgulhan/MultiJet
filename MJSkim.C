@@ -50,7 +50,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     }
  
     int nJet = 3; //number of values for n (xcone relevant)
-    int NJet[] = {1,2,3};
+    int NJet[] = {2,3,4};
  
     fastjet::contrib::XConePlugin *plugin[nR][nJet]; //
     JetDefinition *jet_def_xcone[nR][nJet];
