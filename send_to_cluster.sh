@@ -3,16 +3,7 @@
 WD=/afs/cern.ch/work/e/eruizvel/private/MuliJetEdna/MultiJet
 
 
-indir=
-
-until [ -z "$1" ]; do
-    case "$1" in
-    -d|--dir) shift; indir="$1"; shift ;;
-    -h|--help) shift; echo "sh send_to_cluster.sh -d(--dir) /your/directory "; shift;;
-    -*) shift ;;
-    *) break ;;
-    esac
-done
+indir=/store/group/cmst3/group/hintt/mverweij/PP5TeV/data/HighPtJet80/crab_HighPtJet80_v2/160525_095945/mergePartialV2
 
 echo $indir
 FILES=$(eos ls $indir)
