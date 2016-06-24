@@ -18,3 +18,5 @@ done
 FILES=$(eos ls $indir/*.root)
 
 echo ${FILES[@]}
+
+echo "FIN"
