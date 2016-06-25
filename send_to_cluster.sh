@@ -1,11 +1,11 @@
 
 ## mounting eos necessary. see https://twiki.cern.ch/twiki/bin/view/TOTEM/CompEOS
 
-HOME=/afs/cern.ch/user/e/eruizvel/private
+#HOME=/afs/cern.ch/user/e/eruizvel/private
 WD=/afs/cern.ch/work/e/eruizvel/private/MuliJetEdna/MultiJet
 
-echo "Mounting eos at $HOME"
-eosmount $HOME/eos
+#echo "Mounting eos at $HOME"
+#eosmount $HOME/eos
 
 
 indir=
@@ -27,7 +27,7 @@ do
 done
 
 
-eosforceumount $HOME/eos
+#eosforceumount $HOME/eos
 echo "eos unmounted and jobs submited..."
 
 
