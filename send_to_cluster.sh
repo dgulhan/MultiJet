@@ -19,16 +19,21 @@ case "$1" in
 esac
 done
 
+indir=/store/group/cmst3/group/hintt/mverweij/PP5TeV/data/HighPtJet80/crab_HighPtJet80_v2/160525_095945/mergePartialV2
+
 FILES=$(eos ls $indir/*.root)
 
 for f in ${FILES[@]}
 do
-    echo "f"
+    echo "bsub -q 1nd $WD/run.sh -d $indir -i $f"
+    bsub -q 1nd $WD/run.sh -d $indir -i $f
 done
 
 
-#eosforceumount $HOME/eos
-echo "eos unmounted and jobs submited..."
+echo "jobs submited..."
+
+echo "status"
+bjobs
 
 
 

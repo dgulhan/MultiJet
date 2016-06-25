@@ -75,7 +75,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     pfChainVec * fpf = new pfChainVec(infname.Data());
     // genChain * fgen = new genChain(infname.Data());
 
-    int nentries = 1000;//fpf->GetEntries();
+    int nentries = fpf->GetEntries();
     std::cout<<"nentries = "<<nentries<<std::endl;
 
 
