@@ -25,8 +25,8 @@ FILES=$(eos ls $indir/*.root)
 
 for f in ${FILES[@]}
 do
-    echo "bsub -q 1nd $WD/run.sh -d $indir -i $f"
-    bsub -q 1nd $WD/run.sh -d $indir -i $f
+echo "bsub -q 1nd $WD/run.sh -d $indir -i $f"
+bsub -q 1nd $WD/run.sh -d $indir -i $f
 done
 
 
@@ -34,6 +34,4 @@ echo "jobs submited..."
 
 echo "status"
 bjobs
-
-
 
