@@ -4,5 +4,7 @@
 
 to see the status of the submited job type `bjobs`. 
 
+The scripts run.sh and send_to_cluster.sh are meant to send the jobs for data and sim.
+
 More info at: http://information-technology.web.cern.ch/fr/services/batch
 
