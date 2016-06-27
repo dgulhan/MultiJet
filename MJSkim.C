@@ -156,7 +156,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         
         if(mode == "PbPbData" && !fhlt->HLT_HIPuAk4CaloJet80_Eta5p1_v1) continue;
         
-        cout<< "Step 1"<<endl;
+        //cout<< "Step 1"<<endl;
         
         vector<PseudoJet> fjpfjets[nalgo][nR][nJet];
   
@@ -165,7 +165,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         vector<PseudoJet> particlespf;
   
         for(int ipart = 0; ipart < fpf->nPFpart; ipart++){
-            cout << "Ipart loop: "<<ipart<<"of "<<fpf->nPFpart<<endl;
+            //cout << "Ipart loop: "<<ipart<<"of "<<fpf->nPFpart<<endl;
             // cout << ipart << endl;
             float pt = fpf->pfPt->at(ipart);
             if(pt<=0) continue;
@@ -180,15 +180,15 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
             particlespf.push_back(Particle);
             nparticlefj++;
         }
-        cout<<"Out of loop ipart"<<endl;
+        //cout<<"Out of loop ipart"<<endl;
         
         if(nparticlefj>0){
             for(int iR = 0; iR < nR; iR++){
                 ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
                 fjpfjets[0][iR][0] = sorted_by_pt(cspf_ak.inclusive_jets());
-                cout<<"Sorting for ak"<<endl;
+                //cout<<"Sorting for ak"<<endl;
                 for (int iN = 0; iN < nJet ; iN++){
-                    cout<<"Sorting for xcone"<<endl;
+                    //cout<<"Sorting for xcone"<<endl;
                     ClusterSequence cspf_xcone(particlespf, *jet_def_xcone[iR][iN]);
                     fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone.inclusive_jets());
                     
@@ -200,7 +200,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
   
         int njet[nalgo][nR][nJet];
         vector<Jet> jets[nalgo][nR][nJet];
-        cout<<"Jet vector"<<endl;
+        //cout<<"Jet vector"<<endl;
         for(int iR = 0; iR < nR; iR++){
             njet[0][iR][0] = 0;
             for(unsigned int ijet = 0;  ijet < fjpfjets[0][iR][0].size(); ijet++){
