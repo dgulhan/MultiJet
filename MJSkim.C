@@ -298,13 +298,13 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
 							    float genphi = fjgenjets[ialgo][iR][iN][ijet].phi();
 								if(deltaR(jteta, jtphi, geneta, genphi) < R[iR]){
   							        float genpt = fjgenjets[ialgo][iR][iN][ijet].perp();								
-								    if(fabs(jtpt/genpt - 1) < fabs(ptrat - 1) ){
+								//    if(fabs(jtpt/genpt - 1) < fabs(ptrat - 1) ){
 									    ptrat = jtpt/genpt;
 										refpt = genpt;
 										refeta = geneta;
 										refphi = genphi;
 										if(ptrat < 0.1) break;
-									}
+								//	}
 								}
 							}
 						}
