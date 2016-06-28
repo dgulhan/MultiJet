@@ -8,7 +8,7 @@ until [ -z "$1" ]; do
 case "$1" in
 -i|--input) shift; infile="$1"; shift ;;
 -d|--dir) shift; indir="$1"; shift;;
--l|--label) shift; inlabel="$"; shift;;
+-l|--label) shift; inlabel="$1"; shift;;
 -h|--help) shift; echo "sh run.sh -d(--dir) your/directory -i(--input) HiForest_0.root -l(--label) label for output name"; shift;;
 -*) shift ;;
 *) break ;;
@@ -29,7 +29,7 @@ echo "cambio de dir"
 #dir=root://eoscms//eos/cms/store/group/cmst3/group/hintt/mverweij/PP5TeV/data/HighPtJet80/crab_HighPtJet80_v2/160525_095945/mergePartialV2/
 #dir=root://eoscms//eos/cms/store/group/cmst3/group/hintt/mverweij/jetsPbPb/Run2/MC/PP/Pythia6_Dijet100_pp502/local/zcutcombi/v1/
 #dir=root://eoscms//eos/cms/store/group/cmst3/group/hintt/mverweij/PP5TeV/data/HighPtJet80/crab_HighPtJet80_v2/160525_095945/mergePartialV2/
-dir=root://eoscms//eos/cms/$indir
+dir=root://eoscms//eos/cms$indir
 
 out=$WD/$inlabel$infile
 
