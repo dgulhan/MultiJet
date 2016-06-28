@@ -31,14 +31,18 @@ public :
    Float_t         scale;
    Int_t           n[3];
    Float_t         ptav[3];
-   Int_t           mult;
-   Float_t         pt[2534];   //[mult]
-   Float_t         eta[2534];   //[mult]
-   Float_t         phi[2534];   //[mult]
-   Int_t           pdg[2534];   //[mult]
-   Int_t           chg[2534];   //[mult]
-   Int_t           sta[2534];   //[mult]
-   Int_t           sube[2534];   //[mult]
+   Int_t           mult;  
+   vector<float>   *pt;
+   vector<float>   *eta;
+   vector<float>   *phi;
+   vector<int>     *pdg;
+   vector<int>     *chg;
+   vector<int>     *matchingID;
+   vector<int>     *nMothers;
+   vector<vector<int> > *motherIdx;
+   vector<int>     *nDaughters;
+   vector<vector<int> > *daughterIdx;
+   vector<int>     *sube;
    Float_t         vx;
    Float_t         vy;
    Float_t         vz;
@@ -60,7 +64,11 @@ public :
    TBranch        *b_phi;   //!
    TBranch        *b_pdg;   //!
    TBranch        *b_chg;   //!
-   TBranch        *b_sta;   //!
+   TBranch        *b_matchingID;   //!
+   TBranch        *b_nMothers;   //!
+   TBranch        *b_motherIdx;   //!
+   TBranch        *b_nDaughters;   //!
+   TBranch        *b_daughterIdx;   //!
    TBranch        *b_sube;   //!
    TBranch        *b_vx;   //!
    TBranch        *b_vy;   //!
@@ -83,26 +91,16 @@ public :
 #ifdef genChain_cxx
 genChain::genChain(TString infile, TChain *tree) 
 {
+   cout << "genchain" << 1 << endl;
    tree = new TChain("HiGenParticleAna/hi");
+   
+   cout << "genchain" << 2 << endl;
    tree->Add(infile.Data());
    // TFile * f = TFile::Open(infile);
    // tree = (TTree*) f->Get("HiGenParticleAna/hi");
-
+   cout << tree->GetEntries() <<endl;
    Init(tree);
 }
-
-  TChain *skimTree = new TChain("skimanalysis/HltTree");
-  TChain *hltTree = new TChain("hltanalysis/HltTree");
-  //  TFile *f = TFile::Open(str.Data());
-  fChain->Add(str.Data());
-  pfTree->Add(str.Data());
-  rhoTree->Add(str.Data());
-  skimTree->Add(str.Data());
-  hltTree->Add(str.Data());
-  fChain->AddFriend(pfTree);
-  fChain->AddFriend(rhoTree);
-  fChain->AddFriend(skimTree);
-  fChain->AddFriend(hltTree);
 
 genChain::~genChain()
 {
@@ -154,13 +152,17 @@ void genChain::Init(TChain *tree)
    fChain->SetBranchAddress("n", n, &b_n);
    fChain->SetBranchAddress("ptav", ptav, &b_ptav);
    fChain->SetBranchAddress("mult", &mult, &b_mult);
-   fChain->SetBranchAddress("pt", pt, &b_pt);
-   fChain->SetBranchAddress("eta", eta, &b_eta);
-   fChain->SetBranchAddress("phi", phi, &b_phi);
-   fChain->SetBranchAddress("pdg", pdg, &b_pdg);
-   fChain->SetBranchAddress("chg", chg, &b_chg);
-   fChain->SetBranchAddress("sta", sta, &b_sta);
-   fChain->SetBranchAddress("sube", sube, &b_sube);
+   fChain->SetBranchAddress("pt", &pt, &b_pt);
+   fChain->SetBranchAddress("eta", &eta, &b_eta);
+   fChain->SetBranchAddress("phi", &phi, &b_phi);
+   fChain->SetBranchAddress("pdg", &pdg, &b_pdg);
+   fChain->SetBranchAddress("chg", &chg, &b_chg);
+   fChain->SetBranchAddress("matchingID", &matchingID, &b_matchingID);
+   fChain->SetBranchAddress("nMothers", &nMothers, &b_nMothers);
+   fChain->SetBranchAddress("motherIdx", &motherIdx, &b_motherIdx);
+   fChain->SetBranchAddress("nDaughters", &nDaughters, &b_nDaughters);
+   fChain->SetBranchAddress("daughterIdx", &daughterIdx, &b_daughterIdx);
+   fChain->SetBranchAddress("sube", &sube, &b_sube);
    fChain->SetBranchAddress("vx", &vx, &b_vx);
    fChain->SetBranchAddress("vy", &vy, &b_vy);
    fChain->SetBranchAddress("vz", &vz, &b_vz);
@@ -193,4 +195,4 @@ Int_t genChain::Cut(Long64_t entry)
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef hi_cxx
+#endif // #ifdef genChain_cxx
