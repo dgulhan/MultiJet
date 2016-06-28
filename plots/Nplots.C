@@ -39,7 +39,7 @@ void Nplots.C{
     
     //TO ADAPT A BIT MORE
     
-    TFile*  file = new TFile("");
+    TFile*  file = new TFile("/afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/prueba1HiForest_0.root");
     
     TH1D * hist1[nAlgo][nR][nN][nVar];
     
