@@ -251,7 +251,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
                 float pz = pt*sinh(eta);
                 float E = pt*cosh(eta);
 				
-    			cout << ipart << endl;
+    			//cout << ipart << endl;
                 fastjet::PseudoJet Particle(px,py,pz,E);
                 particles.push_back(Particle);
             }
