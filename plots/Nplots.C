@@ -7,7 +7,7 @@
 
 
 
-void Nplots.C{
+void Nplots{
     
     TH1D::SetDefaultSumw2();
     
