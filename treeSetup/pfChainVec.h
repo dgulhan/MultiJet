@@ -49,7 +49,7 @@ public :
    TBranch        *b_vpsi;   //!
    TBranch        *b_sumpt;   //!
 
-   pfChainVec(TString infile);
+   pfChainVec(TString infile, TString treename);
    virtual ~pfChainVec();
 
    virtual Int_t    Cut(Long64_t entry);
@@ -67,9 +67,10 @@ public :
 #endif
 
 #ifdef pfChainVec_cxx
-pfChainVec::pfChainVec(TString infile) 
+pfChainVec::pfChainVec(TString infile, TString treename) 
 {
-   TChain * tree = new TChain("pfcandAnalyzer/pfTree");
+   TChain * tree = new TChain(Form("%s/pfTree", treename.Data()));
+   cout << Form("%s/pfTree", treename.Data()) << endl;
    tree->Add(infile.Data());
    Init(tree);
 }
