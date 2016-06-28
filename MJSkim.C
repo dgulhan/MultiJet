@@ -51,10 +51,10 @@ float deltaR( float eta1, float phi1, float eta2, float phi2){
   return sqrt( theDphi*theDphi + theDeta*theDeta);
 }
 
-void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDirectories/2015pp_MinBias_2/", TString outfname = "test.root"){ 
+void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDirectories/2015pp_MinBias_2/", TString outfname = "test.root",TString mode){
+    //mode options are: ppMC PbPbMC ppData PbPbData
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
-    TString mode = "ppMC";
     
     int nR = 3;
     float R[] = {0.3, 0.4, 0.5};
@@ -87,7 +87,8 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     // TString algo=Form("ak%dPF",radius[iR]);
  
     TString infname = Form("%s",dataset.Data());
-    cout<<"Input file:"<<dataset.Data()<<std::endl;
+    cout<<"Input file: "<<dataset.Data()<<std::endl;
+    cout<<"Mode: "<<mode.Data()<<std::endl;
     
 	TString PFcollection = "pfcandAnalyzer";
 	if(mode == "PbPbData" || mode == "PbPbMC") PFcollection = "pfcandAnalyzerCS";
@@ -178,7 +179,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     // for (Long64_t jentry = 0; jentry < nentries; jentry++) {
     for (Long64_t jentry = 0; jentry < 100; jentry++) {
 
-        if(nentries%1000 == jentry)cout << jentry << endl;
+        //if(nentries%1000 == jentry)cout << jentry << endl;
         // cout << jentry << endl;
   
         // t->GetEntry(jentry);
@@ -313,7 +314,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
                         njet[ialgo][iR][iN]++;
                     }
 					if(doGen){
-					    cout << "ngen = " << fjgenjets[ialgo][iR][iN].size() << endl;
+					    //cout << "ngen = " << fjgenjets[ialgo][iR][iN].size() << endl;
 					    for(unsigned int ijet = 0;  ijet < fjgenjets[ialgo][iR][iN].size(); ijet++){
 							float geneta = fjgenjets[ialgo][iR][iN][ijet].eta();
 							float genphi = fjgenjets[ialgo][iR][iN][ijet].phi();
@@ -353,6 +354,6 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
 
 int main(int argc, char *argv[])
 { 
-  MJSkim(argv[1],argv[3]);
+  MJSkim(argv[1],argv[3],argv[4]);
   return 0;
 }
