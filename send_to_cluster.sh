@@ -21,9 +21,9 @@ done
 
 #######
 #Changed by user
-indir=/store/group/cmst3/group/hintt/mverweij/PP5TeV/data/HighPtJet80/crab_HighPtJet80_v2/160525_095945/mergePartialV2
-label=PP5TeVhp80
-
+indir=/store/group/cmst3/group/hintt/mverweij/jetsPbPb/Run2/MC/PP/Pythia6_Dijet100_pp502/local/zcutcombi/v1
+label=Pyth6Dij100PP
+WD=/afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet
 #######
 
 FILES=$(eos ls $indir/*.root)
