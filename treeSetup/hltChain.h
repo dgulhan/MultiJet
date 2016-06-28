@@ -22,7 +22,7 @@ public :
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
    // Declaration of leaf types
-   Int_t           HLT_HIPuAk4CaloJet80_Eta5p1_v1;
+   Int_t           HLT_HIPuAK4CaloJet80_Eta5p1_v1;
    Int_t           HLT_AK4CaloJet40_Eta5p1_v1;
    Int_t           HLT_AK4CaloJet40_Eta5p1_v1_Prescl;
    Int_t           HLT_AK4CaloJet60_Eta5p1_v1;
@@ -233,7 +233,7 @@ public :
    Int_t           HLT_L1MinimumBiasHF1OR_part19_v1_Prescl;
 
    // List of branches
-   TBranch        *b_HLT_HIPuAk4CaloJet80_Eta5p1_v1;   //!
+   TBranch        *b_HLT_HIPuAK4CaloJet80_Eta5p1_v1;   //!
    TBranch        *b_HLT_AK4CaloJet40_Eta5p1_v1;   //!
    TBranch        *b_HLT_AK4CaloJet40_Eta5p1_v1_Prescl;   //!
    TBranch        *b_HLT_AK4CaloJet60_Eta5p1_v1;   //!
@@ -508,7 +508,7 @@ void hltChain::Init(TChain *tree)
    fChain = tree;
    fCurrent = -1;
    fChain->SetMakeClass(1);
-   fChain->SetBranchAddress("HLT_HIPuAk4CaloJet80_Eta5p1_v1", &HLT_HIPuAk4CaloJet80_Eta5p1_v1, &b_HLT_HIPuAk4CaloJet80_Eta5p1_v1);
+   fChain->SetBranchAddress("HLT_HIPuAK4CaloJet80_Eta5p1_v1", &HLT_HIPuAK4CaloJet80_Eta5p1_v1, &b_HLT_HIPuAK4CaloJet80_Eta5p1_v1);
    fChain->SetBranchAddress("HLT_AK4CaloJet40_Eta5p1_v1", &HLT_AK4CaloJet40_Eta5p1_v1, &b_HLT_AK4CaloJet40_Eta5p1_v1);
    fChain->SetBranchAddress("HLT_AK4CaloJet40_Eta5p1_v1_Prescl", &HLT_AK4CaloJet40_Eta5p1_v1_Prescl, &b_HLT_AK4CaloJet40_Eta5p1_v1_Prescl);
    fChain->SetBranchAddress("HLT_AK4CaloJet60_Eta5p1_v1", &HLT_AK4CaloJet60_Eta5p1_v1, &b_HLT_AK4CaloJet60_Eta5p1_v1);

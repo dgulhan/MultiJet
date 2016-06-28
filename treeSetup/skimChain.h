@@ -47,6 +47,8 @@ public :
    Int_t           pVertexFilterCutGplus;
    Int_t           pVertexFilterCutE;
    Int_t           pVertexFilterCutEandG;
+   Int_t           pclusterCompatibilityFilter;
+   Int_t           pprimaryVertexFilter;
    Int_t           hltAna;
 
    // List of branches
@@ -76,6 +78,8 @@ public :
    TBranch        *b_pVertexFilterCutGplus;   //!
    TBranch        *b_pVertexFilterCutE;   //!
    TBranch        *b_pVertexFilterCutEandG;   //!
+   TBranch        *b_pclusterCompatibilityFilter;
+   TBranch        *b_pprimaryVertexFilter;
    TBranch        *b_hltAna;   //!
 
 
@@ -170,6 +174,8 @@ void skimChain::Init(TChain *tree)
    fChain->SetBranchAddress("pVertexFilterCutGplus", &pVertexFilterCutGplus, &b_pVertexFilterCutGplus);
    fChain->SetBranchAddress("pVertexFilterCutE", &pVertexFilterCutE, &b_pVertexFilterCutE);
    fChain->SetBranchAddress("pVertexFilterCutEandG", &pVertexFilterCutEandG, &b_pVertexFilterCutEandG);
+   fChain->SetBranchAddress("pclusterCompatibilityFilter", &pclusterCompatibilityFilter, &b_pclusterCompatibilityFilter);
+   fChain->SetBranchAddress("pprimaryVertexFilter", &pprimaryVertexFilter, &b_pprimaryVertexFilter);
    fChain->SetBranchAddress("hltAna", &hltAna, &b_hltAna);
    Notify();
 }
