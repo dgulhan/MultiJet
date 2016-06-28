@@ -3,9 +3,11 @@
 #include "TGraphErrors.h"
 #include "TStyle.h"
 #include "TColor.h"
+#include "TMath.h"
 #define sign(a) ( ( (a) < 0 )  ?  -1   : ( (a) > 0 ) )
 
 
+using namespace std;
 
 void Nplots{
     
@@ -32,9 +34,9 @@ void Nplots{
     
     TString stringCuts[] = {"pt1>120 && pt2>30 && (acos(cos(phi1-phi2)))>2*TMath::Pi()/3 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120","pt1>120 && pt2>30 && (acos(cos(phi1-phi2)))>2*TMath::Pi()/3 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10 && abs(eta2)<0.5" };
     
-    Float_t histoxmin[] = {0,0,0,0,0,-3,0.0,0,-200,-200,-2,-2,-2,0,-2};
+    Double_t histoxmin[] = {0,0,0,0,0,-3,0.0,0,-200,-200,-2,-2,-2,0,-2};
     
-    Float_t histoxmax[] = {1,TMath::Pi(),TMath::Pi(),TMath::Pi(),TMath::Pi(),2,20.,1.0,200,200,2,2,2,1,2};
+    Double_t histoxmax[] = {1,TMath::Pi(),TMath::Pi(),TMath::Pi(),TMath::Pi(),2,20.,1.0,200,200,2,2,2,1,2};
     
     
     //TO ADAPT A BIT MORE
