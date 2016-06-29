@@ -70,7 +70,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         jet_def_antikt[iR] = new JetDefinition(antikt_algorithm, R[iR]);
     }
  
-    int nJet = 3; //number of values for n (xcone relevant)
+    int nJet = 3; //number of values for n (xcone )
     int NJet[] = {2,3,4};
  
     fastjet::contrib::XConePlugin *plugin[nR][nJet]; //
@@ -110,13 +110,13 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
  
     int nalgo = 2;
     
-    TTree * treeMJ[2][nR][nJet];
+    TTree * treeMJ[nalgo][nR][nJet];
 
     // algo = 0 is anti-Kt , algo = 1 is XCone.
     for(int ialgo = 0; ialgo < 2; ialgo++){
         for(int iR = 0; iR < nR; iR++){
             for (int iN = 0; iN < nJet ; iN++){
-                if(ialgo == 0 && iN > 0) continue;               // here there was a for loop over ialgo = 0 , 1 but iN only goes for ialgo = 1
+                if(ialgo == 0 && iN > 0) continue;
                 if(ialgo == 0) treeMJ[ialgo][iR][iN] = new TTree(Form("ak%dPF",radius[iR]),"");            
                 if(ialgo == 1) treeMJ[ialgo][iR][iN] = new TTree(Form("xc_R%d_N%d_PF",radius[iR],NJet[iN]),"");            
                 treeMJ[ialgo][iR][iN]->Branch("run", &evnt.run, "run/I");
@@ -177,7 +177,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         
     
     // for (Long64_t jentry = 0; jentry < nentries; jentry++) {
-    for (Long64_t jentry = 0; jentry < 100; jentry++) {
+    for (Long64_t jentry = 0; jentry < 10; jentry++) {
 
         //if(nentries%1000 == jentry)cout << jentry << endl;
         // cout << jentry << endl;
@@ -278,7 +278,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         vector<Jet> genjets[nalgo][nR][nJet];
         //cout<<"Jet vector"<<endl;
 
-	    for(int ialgo = 0; ialgo < 2; ialgo++){
+	    for(int ialgo = 0; ialgo < nalgo; ialgo++){
             for(int iR = 0; iR < nR; iR++){
                 for(int iN = 0; iN < nJet ; iN++){
 				    if(ialgo == 0 && iN > 0) continue;
@@ -289,11 +289,11 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
                         float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
                         float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
                         if(fabs(jteta)>etacut) continue;
-						float refpt, refeta, refphi;
-						refpt = refeta = refphi = -99;
+						float  refpt, refeta, refphi;
+						refpt = refeta = refphi = -99.0;
 						
 					    if(mode == "ppMC" || mode == "PbPbMC"){ // matching to gen jets
-						    float ptrat = 9999;
+						    float ptrat = 9999.0;
    						    for(unsigned int ijet = 0;  ijet < fjgenjets[ialgo][iR][iN].size(); ijet++){
 							    float geneta = fjgenjets[ialgo][iR][iN][ijet].eta();
 							    float genphi = fjgenjets[ialgo][iR][iN][ijet].phi();
