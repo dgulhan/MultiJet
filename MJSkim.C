@@ -304,7 +304,8 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
 										refpt = genpt;
 										refeta = geneta;
 										refphi = genphi;
-										if(ptrat < 0.1) break;
+                                        break;
+										//if(ptrat < 0.1) break;
 								//	}
 								}
 							}
