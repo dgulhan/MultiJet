@@ -177,7 +177,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         
     
     // for (Long64_t jentry = 0; jentry < nentries; jentry++) {
-    for (Long64_t jentry = 0; jentry < 100; jentry++) {
+    for (Long64_t jentry = 0; jentry < 2; jentry++) {
 
         //if(nentries%1000 == jentry)cout << jentry << endl;
         // cout << jentry << endl;
@@ -188,7 +188,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         fskim->GetEntry(jentry);
         fpf->GetEntry(jentry);
         
-        //cout<<" 191 rawpt: "<<event.rawpt<<endl;
+        
 
         if(mode == "ppMC" || mode == "PbPbMC") fgen->GetEntry(jentry);
 
