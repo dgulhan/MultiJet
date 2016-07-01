@@ -199,17 +199,15 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         if((mode == "PbPbData") && !(fhlt->HLT_HIPuAK4CaloJet80_Eta5p1_v1 && fskim->pprimaryVertexFilter && fskim->pclusterCompatibilityFilter && fskim->pcollisionEventSelection && fskim->HBHENoiseFilterResultRun2Loose)) continue;
         if((mode == "PbPbMC") && !(fskim->pprimaryVertexFilter && fskim->pclusterCompatibilityFilter && fskim->pcollisionEventSelection && fskim->HBHENoiseFilterResultRun2Loose)) continue;
         
-       
         vector<PseudoJet> fjpfjets[nalgo][nR][nJet];
         vector<PseudoJet> fjgenjets[nalgo][nR][nJet];
-  
         //cluster PF candidates
         vector<PseudoJet> particlespf;
         for(int ipart = 0; ipart < fpf->nPFpart; ipart++){
             //cout << "Ipart loop: "<<ipart<<"of "<<fpf->nPFpart<<endl;
             // cout << ipart << endl;
             float pt = fpf->pfPt->at(ipart);
-            cout<<" l210 pt: "<<pt<<endl;
+            cout<<" l210 pfpt: "<<pt<<endl;
             if(pt<=0) continue;
             float eta = fpf->pfEta->at(ipart);
             if(fabs(eta) > 3) continue;
@@ -296,8 +294,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
                         if(fabs(jteta)>etacut) continue;
 						float  refpt, refeta, refphi;
 						refpt = refeta = refphi = -99.0;
-                        cout<<" l297 refpt: "<<refpt<<endl;
-						
+
 					    if(mode == "ppMC" || mode == "PbPbMC"){ // matching to gen jets
 						    float ptrat = 9999.0;
    						    for(unsigned int ijet = 0;  ijet < fjgenjets[ialgo][iR][iN].size(); ijet++){
