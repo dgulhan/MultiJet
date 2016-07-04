@@ -330,10 +330,12 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         for(int iR = 0; iR < nR; iR++){
             if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
             treeMJ[0][iR][0]->Fill();
+            std::cout<<"Filling akt trees"<<std::endl;
             evnt.reset();
             for (int iN = 0; iN < nJet ; iN ++){
                 if(njet[1][iR][iN] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[1][iR][iN], &genjets[1][iR][iN]);
                 treeMJ[1][iR][iN]->Fill();
+                std::cout<<"Filling xcone trees"<<std::endl;
                 evnt.reset();
             }
         }
@@ -344,8 +346,10 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     
     for(int iR = 0; iR < nR; iR++){
         treeMJ[0][iR][0]->Write();
+        std::cout<<"Writing akt trees"<<std::endl;
         for (int iN = 0; iN < nJet ; iN ++){
             treeMJ[1][iR][iN]->Write();
+            std::cout<<"Writing xcone trees"<<std::endl;
         }
     }
     fnt->Close();
