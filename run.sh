@@ -1,14 +1,13 @@
-
-
 indir=
 infile=
 inlabel=
-
+inmode=
 until [ -z "$1" ]; do
 case "$1" in
 -i|--input) shift; infile="$1"; shift ;;
 -d|--dir) shift; indir="$1"; shift;;
 -l|--label) shift; inlabel="$1"; shift;;
+-m|--mode) shift; inmode="$1"; shift;;
 -h|--help) shift; echo "sh run.sh -d(--dir) your/directory -i(--input) HiForest_0.root -l(--label) label for output name"; shift;;
 -*) shift ;;
 *) break ;;
@@ -33,4 +32,4 @@ dir=root://eoscms//eos/cms$indir
 
 out=$WD/$inlabel$infile
 
-echo | awk -v dataset=$dir/$infile -v  outfile=$out '{print "./dijetSkim \""dataset"\" \""infile"\" \""outfile"\""}' | bash
+echo | awk -v dataset=$dir/$infile -v  outfile=$out -v mode=$inmode '{print "./dijetSkim \""dataset"\" \""infile"\" \""outfile"\" \""mode"\""}' | bash
