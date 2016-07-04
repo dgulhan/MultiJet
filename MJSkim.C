@@ -54,7 +54,7 @@ float deltaR( float eta1, float phi1, float eta2, float phi2){
 void MJSkim(TString dataset = "", TString outfname = ""){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
-    TString mode = "ppMC";
+    TString mode = "PbPbMC";
     
     int nR = 3;
     float R[] = {0.3, 0.4, 0.5};
@@ -105,7 +105,7 @@ void MJSkim(TString dataset = "", TString outfname = ""){
     std::cout<<"Outfile: "<<outfname.Data()<<std::endl;
     std::cout<<"Mode: "<<mode<<std::endl;
     
-    TFile * fnt = new TFile("outPrueba.root","recreate");
+    TFile * fnt = new TFile(outfname.Data(),"recreate");
     newEvent evnt(doGen);
     
     int nalgo = 2;
