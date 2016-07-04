@@ -102,7 +102,8 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
     
     int nentries = fpf->GetEntries();
     std::cout<<"nentries = "<<nentries<<std::endl;
-    
+    std::cout<<"Outfile: "<<outfname.Data()<<std::endl;
+    std::cout<<"Mode: "<<mode<<std:endl;
     
     TFile * fnt = new TFile(outfname.Data(),"recreate");
     newEvent evnt(doGen);
