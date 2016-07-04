@@ -54,7 +54,7 @@ float deltaR( float eta1, float phi1, float eta2, float phi2){
 void MJSkim(TString dataset = "", TString outfname = ""){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
-    TString mode = "PbPbMC";
+    TString mode = "ppMC";
     
     int nR = 3;
     float R[] = {0.3, 0.4, 0.5};
