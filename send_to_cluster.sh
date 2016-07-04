@@ -19,7 +19,7 @@ FILES=$(eos ls $indir/*.root)
 for f in ${FILES[@]}
 do
 echo "bsub -q 1nd $WD/run.sh -d $indir -i $f -l $label"
-bsub -q 8nh $WD/run.sh -d $indir -i $f -l $label -m ppMC
+bsub -q 8nh $WD/run.sh -d $indir -i $f -l $label
 done
 
 
