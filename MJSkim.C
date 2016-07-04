@@ -105,7 +105,7 @@ void MJSkim(TString dataset = "", TString outfname = ""){
     std::cout<<"Outfile: "<<outfname.Data()<<std::endl;
     std::cout<<"Mode: "<<mode<<std::endl;
     
-    TFile * fnt = new TFile(outfname.Data(),"recreate");
+    TFile * fnt = new TFile("outPrueba.root","recreate");
     newEvent evnt(doGen);
     
     int nalgo = 2;
@@ -359,6 +359,6 @@ void MJSkim(TString dataset = "", TString outfname = ""){
 
 int main(int argc, char *argv[])
 { 
-    MJSkim(argv[1],argv[3]);
+    MJSkim(argv[1],argv[2]);
     return 0;
 }
