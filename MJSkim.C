@@ -362,6 +362,6 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
 
 int main(int argc, char *argv[])
 { 
-  MJSkim(argv[1],argv[3]);
+  MJSkim(argv[1],argv[2]);
   return 0;
 }
