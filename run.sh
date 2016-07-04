@@ -30,6 +30,6 @@ dir=root://eoscms//eos/cms$indir
 
 out=$WD/$inlabel$infile
 
-./dijetSkim $dir/$infile $out
+#./dijetSkim $dir/$infile $out
 
-#echo | awk -v dataset=$dir/$infile -v  outfile=$out '{print "./dijetSkim \""dataset"\" \""infile"\" \""outfile"\""}' | bash
+echo | awk -v dataset=$dir/$infile -v  outfile=$out '{print "./dijetSkim \""dataset"\" \""infile"\" \""outfile"\""}' | bash
