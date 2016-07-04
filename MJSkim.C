@@ -353,7 +353,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         }
     }
     fnt->Close();
-    std::cout<<"Closeing file"<<std::endl
+    std::cout<<"Closeing file"<<std::endl;
 }
 
 
