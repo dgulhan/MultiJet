@@ -51,7 +51,7 @@ float deltaR( float eta1, float phi1, float eta2, float phi2){
     return sqrt( theDphi*theDphi + theDeta*theDeta);
 }
 
-void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDirectories/2015pp_MinBias_2/", TString outfname = "test.root"){
+void MJSkim(TString dataset = "", TString outfname = ""){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
     TString mode = "ppMC";
@@ -353,7 +353,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
         }
     }
     fnt->Close();
-    std::cout<<"Closeing file"<<std::endl;
+    std::cout<<"Closing file"<<std::endl;
 }
 
 
