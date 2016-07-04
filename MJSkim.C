@@ -207,7 +207,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
             //cout << "Ipart loop: "<<ipart<<"of "<<fpf->nPFpart<<endl;
             // cout << ipart << endl;
             float pt = fpf->pfPt->at(ipart);
-            cout<<" l210 pfpt: "<<pt<<endl;
+            
             if(pt<=0) continue;
             float eta = fpf->pfEta->at(ipart);
             if(fabs(eta) > 3) continue;
@@ -243,7 +243,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
                 // cout << ipart << endl;
 			    if(fgen->sube->at(ipart) != 0) continue;
                 float pt = fgen->pt->at(ipart);
-                cout<<" l246 pt: "<<pt<<endl;
+                
                 if(pt<=0) continue;
                 float eta = fgen->eta->at(ipart);
                 if(fabs(eta) > 3) continue;
@@ -287,13 +287,14 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
                     njet[ialgo][iR][iN] = 0;
                     for(unsigned int ijet = 0;  ijet < fjpfjets[ialgo][iR][iN].size(); ijet++){
                         float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
-                        cout<<" l290 jtpt: "<<jtpt<<endl;
+                        
                         if(jtpt<5) continue;
                         float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
                         float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
                         if(fabs(jteta)>etacut) continue;
 						float  refpt, refeta, refphi;
 						refpt = refeta = refphi = -99.0;
+
 
 					    if(mode == "ppMC" || mode == "PbPbMC"){ // matching to gen jets
 						    float ptrat = 9999.0;
@@ -302,16 +303,15 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
 							    float genphi = fjgenjets[ialgo][iR][iN][ijet].phi();
 								if(deltaR(jteta, jtphi, geneta, genphi) < R[iR]){
   							        float genpt = fjgenjets[ialgo][iR][iN][ijet].perp();
-                                    cout<<" l306 genpt: "<<genpt<<endl;
+                                    
 								//    if(fabs(jtpt/genpt - 1) < fabs(ptrat - 1) ){
 									    ptrat = jtpt/genpt;
-                                        cout<<" l308 ptrat: "<<ptrat<<endl;
+                                    
 										refpt = genpt;
-                                        cout<<" l310 refpt=genpt: "<<refpt<<endl;
+                                    
 										refeta = geneta;
 										refphi = genphi;
-                                        break;
-										//if(ptrat < 0.1) break;
+										if(ptrat < 0.1) break;
 								//	}
 								}
 							}
@@ -326,7 +326,7 @@ void MJSkim(TString dataset = "/mnt/hadoop/cms/store/user/abaty/transferTargetDi
 							float geneta = fjgenjets[ialgo][iR][iN][ijet].eta();
 							float genphi = fjgenjets[ialgo][iR][iN][ijet].phi();
   							float genpt = fjgenjets[ialgo][iR][iN][ijet].perp();
-                            cout<<" l330 pt: "<<genpt<<endl;
+                            
                             Jet genjet(genpt, geneta, genphi);
 							genjets[ialgo][iR][iN].push_back(genjet);
 						}
