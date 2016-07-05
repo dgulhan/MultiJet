@@ -1,6 +1,9 @@
+
+
 indir=
 infile=
 inlabel=
+
 until [ -z "$1" ]; do
 case "$1" in
 -i|--input) shift; infile="$1"; shift ;;
@@ -13,13 +16,13 @@ esac
 done
 echo "Flags leidas"
 
+
 WD=/afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet
 cd $WD
-echo "cambio de dir"
+
 
 dir=root://eoscms//eos/cms$indir
 
 out=$WD/$inlabel$infile
 
-echo | awk -v dataset=$dir/$infile -v  outfile=$out '{print "./dijetSkim_PbPbMC \""dataset"\" \""infile"\" \""outfile"\""}' | bash
-
+./dijetSkim_PbPbMC $dir/$infile $out
