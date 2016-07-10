@@ -219,7 +219,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         
         // Cluster Secuence
         ClusterSequence *cspf_ak[nalgo][nR][nJet];
-        ClusterSequence cspf_xcone[nalgo][nR][nJet];
+        ClusterSequence *cspf_xcone[nalgo][nR][nJet];
         
         
         //cluster PF candidates
@@ -248,8 +248,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 //cout<<"Sorting for ak"<<endl;
                 for (int iN = 0; iN < nJet ; iN++){
                     //cout<<"Sorting for xcone"<<endl;
-                    cspf_xcone[1][iR][iN] = ClusterSequence(particlespf, *jet_def_xcone[iR][iN]);
-                    fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone[1][iR][iN].inclusive_jets());
+                    cspf_xcone[1][iR][iN] = new ClusterSequence(particlespf, *jet_def_xcone[iR][iN]);
+                    fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone[1][iR][iN]->inclusive_jets());
                     
                 }
             }
@@ -398,8 +398,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                     
                     float pull_y = pull1_ijet ;
                     float pull_phi = pull2_ijet ;
-                    cout<<pull_y<<endl;
-                    cout<<pull_phi<<endl;
+                    cout<<"pull y "<<pull_y<<endl;
+                    cout<<"pull z "<<pull_phi<<endl;
                     
                 }
             
