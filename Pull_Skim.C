@@ -358,7 +358,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
                 if(jtpt<5) continue;
                 float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
-                float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
+                //float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
                 float jtrap = fjpfjets[ialgo][iR][iN][ijet].rap();
                 float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
                 float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
@@ -369,6 +369,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                     
                     float pull_y = pull1_ijet ;
                     float pull_phi = pull2_ijet ;
+                    cout<<pull_y<<endl;
+                    cout<<pull_phi<<endl;
                     
                 }
             
@@ -386,7 +388,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                     float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
                     if(jtpt<5) continue;
                     float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
-                    float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
+                    //float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
                     float jtrap = fjpfjets[ialgo][iR][iN][ijet].rap();
                     float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
                     float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
@@ -397,8 +399,11 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             
 
                     }
+                    
                     float pull_y = pull1_ijet ;
                     float pull_phi = pull2_ijet ;
+                    cout<<pull_y<<endl;
+                    cout<<pull_phi<<endl;
                     //here i need to write somewhere in the tree the value of pull*_ijet
                     treeMJ[1][iR][iN]->Fill();
                     evnt.reset();
