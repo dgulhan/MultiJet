@@ -310,6 +310,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                         if(jtpt<5) continue;
                         float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
                         float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
+                        float jtrap = fjpfjets[ialgo][iR][iN][ijet].rap();
+
                         if(fabs(jteta)>etacut) continue;
                         float refpt, refeta, refphi;
                         refpt = refeta = refphi = -99;
