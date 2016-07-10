@@ -312,6 +312,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                         float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
                         float jtrap = fjpfjets[ialgo][iR][iN][ijet].rap();
 
+                        cout<<jtphi<<" "<<jteta << endl;
                         if(fabs(jteta)>etacut) continue;
                         float refpt, refeta, refphi;
                         refpt = refeta = refphi = -99;
