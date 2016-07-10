@@ -21,7 +21,7 @@ float Pull1_i( float Jy , float Jphi, float JpT, float pY, float pphi, float ppT
     //          and same for p stands for particle.
     // RETRUNS i_PULL. Need to sum over all i pulls one for each particle insinde jet
     // is a 2D vector
-    float w_ratio = ppT* sqrt((pY-Jy)^2 + (pphi - Jphi)^2 )/ JpT ;
+    float w_ratio = ppT* sqrt(pow((pY-Jy),2) + pow((pphi - Jphi),2) )/ JpT ;
     float t_i1 = w_ratio*(pY-Jy);
     return t_i1;
 }
@@ -32,7 +32,7 @@ float Pull2_i( float Jy , float Jphi, float JpT, float pY, float pphi, float ppT
     //          and same for p stands for particle.
     // RETRUNS i_PULL. Need to sum over all i pulls one for each particle insinde jet
     // is a 2D vector
-    float w_ratio = ppT* sqrt((pY-Jy)^2 + (pphi - Jphi)^2 )/ JpT ;
+    float w_ratio = ppT* sqrt(pow((pY-Jy),2) + pow((pphi - Jphi),2) )/ JpT ;
     float t_i2 = w_ratio*(pphi-Jphi);
     return t_i2;
 }

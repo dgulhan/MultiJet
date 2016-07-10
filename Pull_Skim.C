@@ -367,8 +367,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                     pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                     pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                     
-                    pull_y = pull1_ijet ;
-                    pull_phi = pull2_ijet ;
+                    float pull_y = pull1_ijet ;
+                    float pull_phi = pull2_ijet ;
                     
                 }
             
@@ -397,8 +397,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             
 
                     }
-                    pull_y = pull1_ijet ;
-                    pull_phi = pull2_ijet ;
+                    float pull_y = pull1_ijet ;
+                    float pull_phi = pull2_ijet ;
                     //here i need to write somewhere in the tree the value of pull*_ijet
                     treeMJ[1][iR][iN]->Fill();
                     evnt.reset();
@@ -428,7 +428,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
 
 int main(int argc, char *argv[])
 {
-    MJSkim(argv[1],argv[2]);
+    Pull_Skim(argv[1],argv[2]);
     return 0;
 }
 
