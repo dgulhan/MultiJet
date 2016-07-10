@@ -330,11 +330,29 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                                 }
                             }
                         }
-                        Jet jet(jtpt, jteta, jtphi, refpt, refeta, refphi);
+
+                        float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
+                        float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
+                        vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
+                        for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
+                            pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
+                            pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
+                            
+                            float pull_y = pull1_ijet ;
+                            float pull_phi = pull2_ijet ;
+                            cout<<pull_y<<endl;
+                            cout<<pull_phi<<endl;
+                            
+                        }
+                        
+
+                        // !!!!!!!!!!!!!
+                        
+                        Jet jet(jtpt, jteta, jtphi, refpt, refeta, refphi); //extend jet structure to have pull var.
                         jets[ialgo][iR][iN].push_back(jet);
                         njet[ialgo][iR][iN]++;
                     }
-                    if(doGen){
+                    if(doGen){ // pull for gen not yet
                         cout << "ngen = " << fjgenjets[ialgo][iR][iN].size() << endl;
                         for(unsigned int ijet = 0;  ijet < fjgenjets[ialgo][iR][iN].size(); ijet++){
                             float geneta = fjgenjets[ialgo][iR][iN][ijet].eta();
@@ -349,6 +367,10 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             }
         }
         
+        
+        
+        
+        /***
         for(int iR = 0; iR < nR; iR++){
             int ialgo = 0;
             int iN = 0;
@@ -414,21 +436,38 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             }
         }
         
-        fnt->cd();
+         
+         ***/
         
         for(int iR = 0; iR < nR; iR++){
-            treeMJ[0][iR][0]->Write();
-            std::cout<<"Writing akt trees"<<std::endl;
+            if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
+            treeMJ[0][iR][0]->Fill();
+            std::cout<<"Filling akt trees"<<std::endl;
+            evnt.reset();
             for (int iN = 0; iN < nJet ; iN ++){
-                treeMJ[1][iR][iN]->Write();
-                std::cout<<"Writing xcone trees"<<std::endl;
+                if(njet[1][iR][iN] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[1][iR][iN], &genjets[1][iR][iN]);
+                treeMJ[1][iR][iN]->Fill();
+                std::cout<<"Filling xcone trees"<<std::endl;
+                evnt.reset();
             }
         }
-        fnt->Close();
-        std::cout<<"Closing file"<<std::endl;
-
+        
     }
+    
+    fnt->cd();
+    
+    for(int iR = 0; iR < nR; iR++){
+        treeMJ[0][iR][0]->Write();
+        std::cout<<"Writing akt trees"<<std::endl;
+        for (int iN = 0; iN < nJet ; iN ++){
+            treeMJ[1][iR][iN]->Write();
+            std::cout<<"Writing xcone trees"<<std::endl;
+        }
+    }
+    fnt->Close();
+    std::cout<<"Closing file"<<std::endl;
 }
+
 
 
 
