@@ -382,7 +382,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             for(int iN = 0; iN < nJet ; iN++){
                 if(njet[1][iR][iN] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[1][iR][iN], &genjets[1][iR][iN]);
                     //loop over all the jets.
-                for (int ijet = 0, ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
+                for (int ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
                     float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
                     if(jtpt<5) continue;
                     float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
