@@ -217,9 +217,10 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         vector<PseudoJet> fjpfjets[nalgo][nR][nJet];
         vector<PseudoJet> fjgenjets[nalgo][nR][nJet];
         
-        vector<PseudoJet> fjpfjets_const[nalgo][nR][nJet];
+        // Cluster Secuence
+        ClusterSequence cspf_ak[nalgo][nR][nJet];
+        ClusterSequence cspf_xcone[nalgo][nR][nJet];
         
-
         
         //cluster PF candidates
         vector<PseudoJet> particlespf;
@@ -242,15 +243,13 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         
         if(particlespf.size()>0){
             for(int iR = 0; iR < nR; iR++){
-                ClusterSequence cspf_ak(particlespf, *jet_def_antikt[iR]);
-                fjpfjets[0][iR][0] = sorted_by_pt(cspf_ak.inclusive_jets());
-                fjpfjets_const[0][iR][0] = fjpfjets[1][iR][iN].constituents();
+                cspf_ak[0][iR][0](particlespf, *jet_def_antikt[iR]);
+                fjpfjets[0][iR][0] = sorted_by_pt(cspf_ak[0][iR][0].inclusive_jets());
                 //cout<<"Sorting for ak"<<endl;
                 for (int iN = 0; iN < nJet ; iN++){
                     //cout<<"Sorting for xcone"<<endl;
-                    ClusterSequence cspf_xcone(particlespf, *jet_def_xcone[iR][iN]);
-                    fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone.inclusive_jets());
-                    fjpfjets_const[1][iR][iN] = fjpfjets[1][iR][iN].constituents();
+                    cspf_xcone[1][iR][iN](particlespf, *jet_def_xcone[iR][iN]);
+                    fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone[1][iR][iN].inclusive_jets());
                     
                 }
             }
@@ -302,7 +301,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         vector<Jet> jets[nalgo][nR][nJet];
         vector<Jet> genjets[nalgo][nR][nJet];
         
-        
+        /***
         for(int ialgo = 0; ialgo < 2; ialgo++){
             for(int iR = 0; iR < nR; iR++){
                 for(int iN = 0; iN < nJet ; iN++){
@@ -374,11 +373,11 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 }
             }
         }
+        ***/
         
         
         
         
-        /***
         for(int iR = 0; iR < nR; iR++){
             int ialgo = 0;
             int iN = 0;
@@ -445,7 +444,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         }
         
          
-         ***/
+        
         
         for(int iR = 0; iR < nR; iR++){
             if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
