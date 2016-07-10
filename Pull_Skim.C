@@ -248,7 +248,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 //cout<<"Sorting for ak"<<endl;
                 for (int iN = 0; iN < nJet ; iN++){
                     //cout<<"Sorting for xcone"<<endl;
-                    cspf_xcone[1][iR][iN](particlespf, *jet_def_xcone[iR][iN]);
+                    cspf_xcone[1][iR][iN] = ClusterSequence(particlespf, *jet_def_xcone[iR][iN]);
                     fjpfjets[1][iR][iN] = sorted_by_pt(cspf_xcone[1][iR][iN].inclusive_jets());
                     
                 }
