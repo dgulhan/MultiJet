@@ -354,7 +354,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             int iN = 0;
             if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
             
-            for (int ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
+            for (unsigned ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
                 float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
                 if(jtpt<5) continue;
                 float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
@@ -363,7 +363,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
                 float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
                 vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
-                for (int j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
+                for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
                     pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                     pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                     
@@ -382,7 +382,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             for(int iN = 0; iN < nJet ; iN++){
                 if(njet[1][iR][iN] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[1][iR][iN], &genjets[1][iR][iN]);
                     //loop over all the jets.
-                for (int ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
+                for (unsigned ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
                     float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
                     if(jtpt<5) continue;
                     float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
@@ -391,7 +391,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                     float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
                     float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
                     vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
-                    for (int j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
+                    for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
                         pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                         pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             
