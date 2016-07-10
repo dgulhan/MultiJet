@@ -176,8 +176,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 treeMJ[ialgo][iR][iN]->Branch("rawphi", evnt.rawphi, "rawphi[nref]/F");
                 treeMJ[ialgo][iR][iN]->Branch("raweta", evnt.raweta, "raweta[nref]/F");
                 //Pull
-                treeMJ[ialgo][iR][iN]->Branch("pull_y", &evnt.pull_y, "pull_y/F");
-                treeMJ[ialgo][iR][iN]->Branch("pull_phi", &evnt.pull_phi, "pull_phi/F");
+                treeMJ[ialgo][iR][iN]->Branch("pull_y", evnt.pull_y, "pull_y[nref]/F");
+                treeMJ[ialgo][iR][iN]->Branch("pull_phi", evnt.pull_phi, "pull_phi[nref]/F");
                 
                 if(mode == "ppMC" || mode == "PbPbMC"){
                     treeMJ[ialgo][iR][iN]->Branch("refpt", evnt.refpt, "refpt[nref]/F");
