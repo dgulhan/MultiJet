@@ -346,8 +346,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             //pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,fjpfjets_const[1][iR][iN][j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             //pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             
-                            //float pull_y = pull1_ijet ;
-                            //float pull_phi = pull2_ijet ;
+                            float pull_y = pull1_ijet ;
+                            float pull_phi = pull2_ijet ;
                             cout<<pull_y<<endl;
                             cout<<pull_phi<<endl;
                             
