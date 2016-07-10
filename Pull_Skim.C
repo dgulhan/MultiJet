@@ -353,7 +353,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             int ialgo = 0;
             int iN = 0;
             if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
-            
+            cout<<"Tamaño: "<<fjpfjets[ialgo][iR][iN].size()<<endl;
             for (unsigned ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
                 float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
                 if(jtpt<5) continue;
