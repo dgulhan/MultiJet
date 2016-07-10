@@ -13,6 +13,34 @@
 #include <math.h>
 // #include <time.h>
 
+
+float Pull1_i( float Jy , float Jphi, float JpT float pY, float pphi, float ppT  ){
+    // input is Jy (pseudorapidity of Jet)
+    //          Jphi (phi angle of Jet)
+    //          JpT (pT of jet)
+    //          and same for p stands for particle.
+    // RETRUNS i_PULL. Need to sum over all i pulls one for each particle insinde jet
+    // is a 2D vector
+    w_ratio = ppT* sqrt((pY-Jy)^2 + (pphi - Jphi)^2 )/ JpT ;
+    t_i1 = w_ratio*(pY-Jy);
+    return t_i1;
+}
+float Pull2_i( float Jy , float Jphi, float JpT float pY, float pphi, float ppT  ){
+    // input is Jy (pseudorapidity of Jet)
+    //          Jphi (phi angle of Jet)
+    //          JpT (pT of jet)
+    //          and same for p stands for particle.
+    // RETRUNS i_PULL. Need to sum over all i pulls one for each particle insinde jet
+    // is a 2D vector
+    w_ratio = ppT* sqrt((pY-Jy)^2 + (pphi - Jphi)^2 )/ JpT ;
+    t_i2 = w_ratio*(pphi-Jphi);
+    return t_i2;
+}
+
+
+
+
+
 struct Jet{
 public :
   float pt;
@@ -88,7 +116,11 @@ public :
    int            ngen;
    float          genpt[100]; 
    float          genphi[100]; 
-   float          geneta[100]; 
+   float          geneta[100];
+   //variables for pull(x,y)
+    float          pull_y[100];
+    float          pull_phi[100];
+    
    void reset(){
     evt = lumi = run = -99;
  	pt1 = pt2 = pt3 = eta1 = eta2 = eta3 = phi1 = phi2 = phi3 = pthat = -99;
@@ -96,6 +128,7 @@ public :
 	genpt1 = genpt2 = genpt3 = geneta1 = geneta2 = geneta3 = genphi1 = genphi2 = genphi3 = -99;
 	nref = -99;
 	ngen = -99;
+    
     for(int i = 0; i < 100; i++){
      rawpt[i] = -99;
      rawphi[i] = -99;
@@ -103,6 +136,10 @@ public :
      refpt[i] = -99;
      refphi[i] = -99;
      refeta[i] = -99;
+        
+    //PUll
+     pull_y[i] = -99;
+     pull_phi[i] = -99;
     }
     for(int i = 0; i < 100; i++){
      genpt[i] = -99;
@@ -155,6 +192,9 @@ public :
 	    }
 	  }
 	}
+
+      
+      
 	if(doGen){
 	  ngen = genjets->size();
 	  for(int i = 0; i < ngen; i++){
