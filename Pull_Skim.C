@@ -336,7 +336,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
 
                         float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
                         float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
-                        vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
+                        vector<PseudoJet> jpfconstituents = fjpfjets[0][0][0][ijet].constituents();
                         cout<<"Init const"<<endl;
 
                         for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
