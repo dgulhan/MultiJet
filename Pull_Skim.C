@@ -121,6 +121,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     newEvent evnt(doGen);
     
     int nalgo = 2;
+    TTree * treeMJ[2][nR][nJet];
 
     // algo = 0 is anti-Kt , algo = 1 is XCone.
     for(int ialgo = 0; ialgo < 2; ialgo++){
@@ -353,7 +354,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             int iN = 0;
             if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
             
-            for (int ijet = 0, ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
+            for (int ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
                 float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
                 if(jtpt<5) continue;
                 float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
