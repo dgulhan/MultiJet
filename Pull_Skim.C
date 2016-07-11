@@ -318,12 +318,12 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 for(int iR = 0; iR < nR; iR++){
                     // Clustering for gen particles.
                     csgen_ak[0][iR][0] = new ClusterSequence(particles, *jet_def_antikt[iR]);
-                    fjgenjets[0][iR][0] = sorted_by_pt(csgen_ak->inclusive_jets());
+                    fjgenjets[0][iR][0] = sorted_by_pt(csgen_ak[0][iR][0]->inclusive_jets());
                     //cout<<"Sorting for ak"<<endl;
                     for (int iN = 0; iN < nJet ; iN++){
                         //cout<<"Sorting for xcone"<<endl;
                         csgen_xcone[1][iR][iN] = new ClusterSequence(particles, *jet_def_xcone[iR][iN]);
-                        fjgenjets[1][iR][iN] = sorted_by_pt(csgen_xcone->inclusive_jets());
+                        fjgenjets[1][iR][iN] = sorted_by_pt(csgen_xcone[1][iR][iN]->inclusive_jets());
                         
                     }
                 }
@@ -383,14 +383,16 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                                         
                                         float genpull1_ijet = 0;
                                         float genpull2_ijet = 0;
+                                        float genpull_y;
+                                        float genpull_phi;
                                         vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
                                         
                                         for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
                                             genpull1_ijet = genpull1_ijet + Pull1_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
                                             genpull2_ijet = genpull2_ijet + Pull2_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
                                             
-                                            float genpull_y = genpull1_ijet ;
-                                            float genpull_phi = genpull2_ijet ;
+                                            genpull_y = genpull1_ijet ;
+                                            genpull_phi = genpull2_ijet ;
                                         }
 
                                         
