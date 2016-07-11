@@ -52,10 +52,14 @@ public :
   // pull
     float pull_y;
     float pull_phi;
+    // pull
+    float refpull_y;
+    float refpull_phi;
   void reset(){
     pt = eta = phi = -99;
 	refpt = refeta = refphi = -99;
       pull_y = pull_phi = -99;
+      refpull_y = refpull_phi = -99;
   }
   Jet(float pt, float eta, float phi, float pull_y, float pull_phi, float refpt = -99, float refeta = -99, float refphi = -99, float refpull_y = -99 , float refpull_phi = -99){
     this->pt = pt; 
@@ -169,10 +173,9 @@ public :
        refpull_y2 = refpull_phi2 = -99;
        refpull_y3 = refpull_phi3 = -99;
        
-       
-       genpull_y1 = genpull_phi1 = -99
-       genpull_y1 = genpull_phi1 = -99
-       genpull_y1 = genpull_phi1 = -99
+       genpull_y1 = genpull_phi1 = -99;
+       genpull_y1 = genpull_phi1 = -99;
+       genpull_y1 = genpull_phi1 = -99;
     
     for(int i = 0; i < 100; i++){
      rawpt[i] = -99;
@@ -213,12 +216,12 @@ public :
 	  raweta[i] = jets->at(i).eta;
 	  rawphi[i] = jets->at(i).phi;
         pull_y[i] = jets->at(i).pull_y;
-        pull_phi[i] = jet->at(i).pull_phi;
+        pull_phi[i] = jets->at(i).pull_phi;
 	  refpt[i] = jets->at(i).refpt;
 	  refeta[i] = jets->at(i).refeta;
 	  refphi[i] = jets->at(i).refphi;
         refpull_y[i] = jets->at(i).refpull_y;
-        refpull_phi[i] = jet->at(i).refpull_phi;
+        refpull_phi[i] = jets->at(i).refpull_phi;
 	}
 	std::sort(jets->begin(), jets->end());
 	if(nref > 0){
