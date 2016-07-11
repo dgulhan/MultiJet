@@ -50,18 +50,20 @@ public :
   float refeta; 
   float refphi;
   // pull
-    float pull_y;
-    float pull_phi;
+  float pull_y;
+  float pull_phi;
     // pull
-    float refpull_y;
-    float refpull_phi;
+  float refpull_y;
+  float refpull_phi;
+  
   void reset(){
     pt = eta = phi = -99;
 	refpt = refeta = refphi = -99;
-      pull_y = pull_phi = -99;
-      refpull_y = refpull_phi = -99;
+    pull_y = pull_phi = -99;
+    refpull_y = refpull_phi = -99;
   }
-  Jet(float pt, float eta, float phi, float pull_y, float pull_phi, float refpt = -99, float refeta = -99, float refphi = -99, float refpull_y = -99 , float refpull_phi = -99){
+  Jet(float pt, float eta, float phi, float pull_y = -99, float pull_phi = -99, float refpt = -99, float refeta = -99, float refphi = -99, float refpull_y = -99 , float refpull_phi = -99){
+    reset();
     this->pt = pt; 
 	this->eta = eta;
 	this->phi = phi;
@@ -271,29 +273,29 @@ public :
 	    genpt[i] = genjets->at(i).pt;
 	    geneta[i] = genjets->at(i).eta;
 	    genphi[i] = genjets->at(i).phi;
-          genpull_y[i] = genjets->at(i).genpull_y;
-          genpull_phi[i] = genjets->at(i).genpull_phi;
+        genpull_y[i] = genjets->at(i).pull_y;
+        genpull_phi[i] = genjets->at(i).pull_phi;
 	  }
       std::sort(genjets->begin(), genjets->end());
 	  if(ngen > 0){
         genpt1 = genjets->at(ngen-1).pt;
         geneta1 = genjets->at(ngen-1).eta;
         genphi1 = genjets->at(ngen-1).phi;
-          genpull_phi1 = genjets->at(ngen-1).genpull_phi;
-          genpull_y1 = genjets->at(ngen-1).genpull_y;
+        genpull_phi1 = genjets->at(ngen-1).pull_phi;
+        genpull_y1 = genjets->at(ngen-1).pull_y;
 
 	    if(ngen > 1){
           genpt2 = genjets->at(ngen-2).pt;
           geneta2 = genjets->at(ngen-2).eta;
           genphi2 = genjets->at(ngen-2).phi;
-            genpull_phi2 = genjets->at(ngen-2).genpull_phi;
-            genpull_y2 = genjets->at(ngen-2).genpull_y;
+            genpull_phi2 = genjets->at(ngen-2).pull_phi;
+            genpull_y2 = genjets->at(ngen-2).pull_y;
 	      if(ngen > 2){
             genpt3 = genjets->at(ngen-3).pt;
             geneta3 = genjets->at(ngen-3).eta;
             genphi3 = genjets->at(ngen-3).phi;
-              genpull_phi3 = genjets->at(ngen-3).genpull_phi;
-              genpull_y3 = genjets->at(ngen-3).genpull_y;
+              genpull_phi3 = genjets->at(ngen-3).pull_phi;
+              genpull_y3 = genjets->at(ngen-3).pull_y;
 	      }
 	    }
 	  }
