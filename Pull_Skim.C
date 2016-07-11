@@ -23,7 +23,7 @@
 #include "fastjet/ClusterSequence.hh"
 #include "fastjet/contrib/XConePlugin.hh"
 
-#include "event.h"
+#include "event_pull.h"
 
 
 
@@ -115,7 +115,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     int nentries = fpf->GetEntries();
     std::cout<<"nentries = "<<nentries<<std::endl;
     std::cout<<"Outfile: "<<outfname.Data()<<std::endl;
-    std::cout<<"Mode: "<<mode<<std::endl;
+    std::cout<<"Mode: "<<mode.Data()<<std::endl;
     
     TFile * fnt = new TFile(outfname.Data(),"recreate");
     newEvent evnt(doGen);
@@ -145,6 +145,17 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 treeMJ[ialgo][iR][iN]->Branch("phi1", &evnt.phi1, "phi1/F");
                 treeMJ[ialgo][iR][iN]->Branch("phi2", &evnt.phi2, "phi2/F");
                 treeMJ[ialgo][iR][iN]->Branch("phi3", &evnt.phi3, "phi3/F");
+                //pull for leading, subleading and third jet.
+                treeMJ[ialgo][iR][iN]->Branch("pull_y1", &evnt.pull_y1, "pull_y1/F");
+                treeMJ[ialgo][iR][iN]->Branch("pull_phi1", &evnt.pull_phi1, "pull_phi1/F");
+                treeMJ[ialgo][iR][iN]->Branch("pull_y2", &evnt.pull_y2, "pull_y2/F");
+                treeMJ[ialgo][iR][iN]->Branch("pull_phi2", &evnt.pull_phi2, "pull_phi2/F");
+                treeMJ[ialgo][iR][iN]->Branch("pull_y3", &evnt.pull_y3, "pull_y3/F");
+                treeMJ[ialgo][iR][iN]->Branch("pull_phi3", &evnt.pull_phi3, "pull_phi3/F");
+                
+                treeMJ[ialgo][iR][iN]->Branch("phi1", &evnt.phi1, "phi1/F");
+                treeMJ[ialgo][iR][iN]->Branch("phi2", &evnt.phi2, "phi2/F");
+                treeMJ[ialgo][iR][iN]->Branch("phi3", &evnt.phi3, "phi3/F");
                 
                 
 
@@ -158,6 +169,13 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                     treeMJ[ialgo][iR][iN]->Branch("refphi1", &evnt.refphi1, "refphi1/F");
                     treeMJ[ialgo][iR][iN]->Branch("refphi2", &evnt.refphi2, "refphi2/F");
                     treeMJ[ialgo][iR][iN]->Branch("refphi3", &evnt.refphi3, "refphi3/F");
+                    //pull
+                    treeMJ[ialgo][iR][iN]->Branch("refpull_y1", &evnt.refpull_y1, "refpull_y1/F");
+                    treeMJ[ialgo][iR][iN]->Branch("refpull_phi1", &evnt.refpull_phi1, "refpull_phi1/F");
+                    treeMJ[ialgo][iR][iN]->Branch("refpull_y2", &evnt.refpull_y2, "refpull_y2/F");
+                    treeMJ[ialgo][iR][iN]->Branch("refpull_phi2", &evnt.refpull_phi2, "refpull_phi2/F");
+                    treeMJ[ialgo][iR][iN]->Branch("refpull_y3", &evnt.refpull_y3, "refpull_y3/F");
+                    treeMJ[ialgo][iR][iN]->Branch("refpull_phi3", &evnt.refpull_phi3, "refpull_phi3/F");
                     
                     if(doGen){
                         treeMJ[ialgo][iR][iN]->Branch("genpt1", &evnt.genpt1, "genpt1/F");
@@ -169,6 +187,15 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                         treeMJ[ialgo][iR][iN]->Branch("genphi1", &evnt.genphi1, "genphi1/F");
                         treeMJ[ialgo][iR][iN]->Branch("genphi2", &evnt.genphi2, "genphi2/F");
                         treeMJ[ialgo][iR][iN]->Branch("genphi3", &evnt.genphi3, "genphi3/F");
+                        //pull
+                        treeMJ[ialgo][iR][iN]->Branch("genpull_y1", &evnt.genpull_y1, "genpull_y1/F");
+                        treeMJ[ialgo][iR][iN]->Branch("genpull_phi1", &evnt.genpull_phi1, "genpull_phi1/F");
+                        treeMJ[ialgo][iR][iN]->Branch("genpull_y2", &evnt.genpull_y2, "genpull_y2/F");
+                        treeMJ[ialgo][iR][iN]->Branch("genpull_phi2", &evnt.genpull_phi2, "genpull_phi2/F");
+                        treeMJ[ialgo][iR][iN]->Branch("genpull_y3", &evnt.genpull_y3, "genpull_y3/F");
+                        treeMJ[ialgo][iR][iN]->Branch("genpull_phi3", &evnt.genpull_phi3, "genpull_phi3/F");
+
+                        
                     }
                 }
                 treeMJ[ialgo][iR][iN]->Branch("nref", &evnt.nref, "nref/I");
@@ -183,11 +210,19 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                     treeMJ[ialgo][iR][iN]->Branch("refpt", evnt.refpt, "refpt[nref]/F");
                     treeMJ[ialgo][iR][iN]->Branch("refphi", evnt.refphi, "refphi[nref]/F");
                     treeMJ[ialgo][iR][iN]->Branch("refeta", evnt.refeta, "refeta[nref]/F");
+                    //pull
+                    treeMJ[ialgo][iR][iN]->Branch("refpull_y", evnt.pull_y, "pull_y[nref]/F");
+                    treeMJ[ialgo][iR][iN]->Branch("refpull_phi", evnt.pull_phi, "pull_phi[nref]/F");
+                    
                     if(doGen){
                         treeMJ[ialgo][iR][iN]->Branch("ngen", &evnt.ngen, "ngen/I");
                         treeMJ[ialgo][iR][iN]->Branch("genpt", evnt.genpt, "genpt[ngen]/F");
                         treeMJ[ialgo][iR][iN]->Branch("genphi", evnt.genphi, "genphi[ngen]/F");
                         treeMJ[ialgo][iR][iN]->Branch("geneta", evnt.geneta, "geneta[ngen]/F");
+                        //pull
+                        treeMJ[ialgo][iR][iN]->Branch("genpull_y", evnt.pull_y, "pull_y[nref]/F");
+                        treeMJ[ialgo][iR][iN]->Branch("genpull_phi", evnt.pull_phi, "pull_phi[nref]/F");
+                        
                     }
                 }
             }
@@ -220,7 +255,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         // Cluster Secuence
         ClusterSequence *cspf_ak[nalgo][nR][nJet];
         ClusterSequence *cspf_xcone[nalgo][nR][nJet];
-        
+        ClusterSequence *csgen_ak[nalgo][nR][nJet];
+        ClusterSequence *csgen_xcone[nalgo][nR][nJet];
         
         //cluster PF candidates
         vector<PseudoJet> particlespf;
@@ -281,13 +317,13 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             if(particles.size()>0){
                 for(int iR = 0; iR < nR; iR++){
                     // Clustering for gen particles.
-                    ClusterSequence csgen_ak(particles, *jet_def_antikt[iR]);
-                    fjgenjets[0][iR][0] = sorted_by_pt(csgen_ak.inclusive_jets());
+                    csgen_ak[0][iR][0] = new ClusterSequence(particles, *jet_def_antikt[iR]);
+                    fjgenjets[0][iR][0] = sorted_by_pt(csgen_ak->inclusive_jets());
                     //cout<<"Sorting for ak"<<endl;
                     for (int iN = 0; iN < nJet ; iN++){
                         //cout<<"Sorting for xcone"<<endl;
-                        ClusterSequence csgen_xcone(particles, *jet_def_xcone[iR][iN]);
-                        fjgenjets[1][iR][iN] = sorted_by_pt(csgen_xcone.inclusive_jets());
+                        csgen_xcone[1][iR][iN] = new ClusterSequence(particles, *jet_def_xcone[iR][iN]);
+                        fjgenjets[1][iR][iN] = sorted_by_pt(csgen_xcone->inclusive_jets());
                         
                     }
                 }
@@ -301,151 +337,112 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         vector<Jet> jets[nalgo][nR][nJet];
         vector<Jet> genjets[nalgo][nR][nJet];
         
-        /***
         for(int ialgo = 0; ialgo < 2; ialgo++){
             for(int iR = 0; iR < nR; iR++){
                 for(int iN = 0; iN < nJet ; iN++){
                     if(ialgo == 0 && iN > 0) continue;
-                    
                     njet[ialgo][iR][iN] = 0;
+                    
                     for(unsigned int ijet = 0;  ijet < fjpfjets[ialgo][iR][iN].size(); ijet++){
                         float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
                         if(jtpt<5) continue;
                         float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
                         float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
                         float jtrap = fjpfjets[ialgo][iR][iN][ijet].rap();
-
-                        cout<<jtphi<<" "<<jteta <<" "<<jtrap<< endl;
+                        
+                        float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
+                        float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
+                        vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
+                        for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
+                            pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
+                            pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
+                            
+                            float pull_y = pull1_ijet ;
+                            float pull_phi = pull2_ijet ;
+                        }
+                        
+                        
                         if(fabs(jteta)>etacut) continue;
-                        float refpt, refeta, refphi;
+                        float refpt, refeta, refphi, refpull_phi, refpull_y;
                         refpt = refeta = refphi = -99;
+                        refpull_phi = refpull_y = -99;
+                        
                         if(mode == "ppMC" || mode == "PbPbMC"){ // matching to gen jets
                             float ptrat = 9999;
                             for(unsigned int ijet = 0;  ijet < fjgenjets[ialgo][iR][iN].size(); ijet++){
                                 float geneta = fjgenjets[ialgo][iR][iN][ijet].eta();
                                 float genphi = fjgenjets[ialgo][iR][iN][ijet].phi();
+                                float genrap = fjgenjets[ialgo][iR][iN][ijet].rap();
+                                float genpull1_ijet = 0;
+                                float genpull2_ijet = 0;
+                                
                                 if(deltaR(jteta, jtphi, geneta, genphi) < R[iR]){
                                     float genpt = fjgenjets[ialgo][iR][iN][ijet].perp();
+                                    
                                     if(fabs(jtpt/genpt - 1) < fabs(ptrat - 1) ){
+                                        
+                                        float genpull1_ijet = 0;
+                                        float genpull2_ijet = 0;
+                                        vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
+                                        
+                                        for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
+                                            genpull1_ijet = genpull1_ijet + Pull1_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                            genpull2_ijet = genpull2_ijet + Pull2_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                            
+                                            float genpull_y = genpull1_ijet ;
+                                            float genpull_phi = genpull2_ijet ;
+                                        }
+
+                                        
                                         ptrat = jtpt/genpt;
                                         refpt = genpt;
                                         refeta = geneta;
                                         refphi = genphi;
+                                        refpull_y = genpull_y;
+                                        refpull_phi = genpull_phi;
                                         if(ptrat < 0.1) break;
                                     }
                                 }
                             }
                         }
-
-                        float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
-                        float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
-                       
-                        
-                        for (unsigned j_const = 0; j_const< fjpfjets_const[1][iR][iN].size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
-                            //pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,fjpfjets_const[1][iR][iN][j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                            //pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                            
-                            float pull_y = pull1_ijet ;
-                            float pull_phi = pull2_ijet ;
-                            cout<<pull_y<<endl;
-                            cout<<pull_phi<<endl;
-                            
-                        }
-                        
-
-                        // !!!!!!!!!!!!!
-                        
-                        Jet jet(jtpt, jteta, jtphi, refpt, refeta, refphi); //extend jet structure to have pull var.
+                        Jet jet(jtpt, jteta, jtphi,pull_y,pull_phi, refpt, refeta, refphi, refpull_y,refpull_phi);
                         jets[ialgo][iR][iN].push_back(jet);
                         njet[ialgo][iR][iN]++;
                     }
-                    if(doGen){ // pull for gen not yet
+                    if(doGen){
                         cout << "ngen = " << fjgenjets[ialgo][iR][iN].size() << endl;
                         for(unsigned int ijet = 0;  ijet < fjgenjets[ialgo][iR][iN].size(); ijet++){
+                            
                             float geneta = fjgenjets[ialgo][iR][iN][ijet].eta();
                             float genphi = fjgenjets[ialgo][iR][iN][ijet].phi();
                             float genpt = fjgenjets[ialgo][iR][iN][ijet].perp();
-                            Jet genjet(genpt, geneta, genphi);
+                            
+                            //////////
+                            
+                            float genrap = fjgenjets[ialgo][iR][iN][ijet].rap();
+                            float genpull1_ijet = 0;
+                            float genpull2_ijet = 0;
+                            
+                            float genpull1_ijet = 0;
+                            float genpull2_ijet = 0;
+                            vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
+                            
+                            for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
+                                genpull1_ijet = genpull1_ijet + Pull1_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                genpull2_ijet = genpull2_ijet + Pull2_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                
+                                float genpull_y = genpull1_ijet ;
+                                float genpull_phi = genpull2_ijet ;
+                            }
+                            Jet genjet(genpt, geneta, genphi, genpull_y,genpull_phi);
                             genjets[ialgo][iR][iN].push_back(genjet);
                         }
                     }
-                    
+
                 }
             }
         }
-        ***/
-        
-        
-        
-        
-        for(int iR = 0; iR < nR; iR++){
-            int ialgo = 0;
-            int iN = 0;
-            if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
-            cout<<"Tamaño: "<<fjpfjets[ialgo][iR][iN][0].perp()<<endl;
-            for (unsigned ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
-                float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
-                if(jtpt<5) continue;
-                float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
-                //float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
-                float jtrap = fjpfjets[ialgo][iR][iN][ijet].rap();
-                float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
-                float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
-                vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
-                for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
-                    pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                    pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                    
-                    float pull_y = pull1_ijet ;
-                    float pull_phi = pull2_ijet ;
-                    cout<<"pull y "<<pull_y<<endl;
-                    cout<<"pull z "<<pull_phi<<endl;
-                    
-                }
-            
 
-                //figure out how to link pull*_ijet to the branch to fill.
-            treeMJ[0][iR][0]->Fill();
-            evnt.reset();
-            }
-            ialgo = 1; //for entering the xcone loop with for ( N ... ) loop.
-            
-            for(int iN = 0; iN < nJet ; iN++){
-                if(njet[1][iR][iN] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[1][iR][iN], &genjets[1][iR][iN]);
-                    //loop over all the jets.
-                for (unsigned ijet = 0 ; ijet < fjpfjets[ialgo][iR][iN].size() ; ijet++ ){
-                    float jtpt = fjpfjets[ialgo][iR][iN][ijet].perp();
-                    if(jtpt<5) continue;
-                    float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
-                    //float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
-                    float jtrap = fjpfjets[ialgo][iR][iN][ijet].rap();
-                    float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
-                    float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
-                    vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
-                    cout<<jtpt<<endl;
-                    cout<<"Accesing constituents"<<endl;
-                    for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
-                        pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                        pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                            
-
-                    }
-                    
-                    float pull_y = pull1_ijet ;
-                    float pull_phi = pull2_ijet ;
-                    cout<<pull_y<<endl;
-                    cout<<pull_phi<<endl;
-                    //here i need to write somewhere in the tree the value of pull*_ijet
-                    treeMJ[1][iR][iN]->Fill();
-                    evnt.reset();
-                    
-                }
-            }
-        }
-        
-         
-        
-        
         for(int iR = 0; iR < nR; iR++){
             if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
             treeMJ[0][iR][0]->Fill();
@@ -481,7 +478,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
 
 int main(int argc, char *argv[])
 {
-    Pull_Skim(argv[1],argv[2]);
+    Pull_Skim(argv[1],argv[2],argv[3]);
     return 0;
 }
 
