@@ -121,7 +121,7 @@ public :
     float          refpull_y2;
     float          refpull_phi2;
     float          refpull_y3;
-    float          refpull_phi4;
+    float          refpull_phi3;
    float          genpt1;
    float          genpt2;
    float          genpt3;
