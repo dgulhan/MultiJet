@@ -426,7 +426,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             float genrap = fjgenjets[ialgo][iR][iN][ijet].rap();
                             float genpull1_ijet = 0;
                             float genpull2_ijet = 0;
-                            float genppull_y ;
+                            float genpull_y ;
                             float genpull_phi ;
                             vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
                             
