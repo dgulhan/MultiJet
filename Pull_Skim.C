@@ -352,13 +352,15 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                         
                         float pull1_ijet = 0; //initiaize first coordinate of the pull vector for the i-jet.
                         float pull2_ijet = 0; //initiaize second coordinate of the pull vector for the i-jet.
+                        float pull_y;
+                        float pull_phi;
                         vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
                         for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
                             pull1_ijet = pull1_ijet + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             pull2_ijet = pull2_ijet + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             
-                            float pull_y = pull1_ijet ;
-                            float pull_phi = pull2_ijet ;
+                            pull_y = pull1_ijet ;
+                            pull_phi = pull2_ijet ;
                         }
                         
                         
@@ -424,17 +426,16 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             float genrap = fjgenjets[ialgo][iR][iN][ijet].rap();
                             float genpull1_ijet = 0;
                             float genpull2_ijet = 0;
-                            
-                            float genpull1_ijet = 0;
-                            float genpull2_ijet = 0;
+                            float genppull_y ;
+                            float genpull_phi ;
                             vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
                             
                             for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
                                 genpull1_ijet = genpull1_ijet + Pull1_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
                                 genpull2_ijet = genpull2_ijet + Pull2_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
                                 
-                                float genpull_y = genpull1_ijet ;
-                                float genpull_phi = genpull2_ijet ;
+                                genpull_y = genpull1_ijet ;
+                                genpull_phi = genpull2_ijet ;
                             }
                             Jet genjet(genpt, geneta, genphi, genpull_y,genpull_phi);
                             genjets[ialgo][iR][iN].push_back(genjet);
