@@ -17,9 +17,9 @@ FILES=$(eos ls $indir/*.root)
 
 for f in ${FILES[@]}
 do
-echo "bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $labeldone -m $mode"
-bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $labeldone -m $mode
-
+    echo "bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $labeldone -m $mode"
+    bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode
+done
 
 bjobs
 
