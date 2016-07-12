@@ -213,9 +213,9 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         }
     }
     
-    //for (Long64_t jentry = 0; jentry < nentries; jentry++) {
+    for (Long64_t jentry = 0; jentry < nentries; jentry++) {
 
-    for (Long64_t jentry = 0; jentry < 100; jentry++) {
+    //for (Long64_t jentry = 0; jentry < 100; jentry++) {
         
         if(nentries%1000 == jentry)cout << jentry << endl;
      
