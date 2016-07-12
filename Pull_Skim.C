@@ -375,7 +375,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                                             genratio_i = w_ratio_i(geneta,genphi,genpt,jgenconstituents[j_const].eta(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
                                             genpull_y += genratio_i*(jgenconstituents[j_const].eta()-geneta);
 
-                                            genpull_phi += genratio_i*(deltaPhi(jgenconstituents[j_const].phi()-genphi));
+                                            genpull_phi += genratio_i*(deltaPhi(jgenconstituents[j_const].phi(),genphi));
                                             
                                             
                                             
@@ -416,7 +416,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
                                 genratio_i = w_ratio_i(geneta,genphi,genpt,jgenconstituents[j_const].eta(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
                                 genpull_y += genratio_i*(jgenconstituents[j_const].eta()-geneta);
-                                genpull_phi += genratio_i*(deltaPhi(jgenconstituents[j_const].phi()-genphi));
+                                genpull_phi += genratio_i*(deltaPhi(jgenconstituents[j_const].phi(),genphi));
                                 
                                 
                                 
