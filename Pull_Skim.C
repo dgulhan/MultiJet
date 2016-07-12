@@ -348,12 +348,15 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                         
                         float pull_y = 0; //initiaize first coordinate of the pull vector for the i-jet.
                         float pull_phi = 0; //initiaize second coordinate of the pull vector for the i-jet.
-
+                        float ratio_i = 0;
                         vector<PseudoJet> jpfconstituents = fjpfjets[ialgo][iR][iN][ijet].constituents();
                         for (unsigned j_const = 0; j_const< jpfconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
-                            pull_y = pull_y + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                            pull_phi = pull_phi + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                            
+                            //pull_y = pull_y + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
+                            //pull_phi = pull_phi + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
+                            ratio_i= w_ratio_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
+                            cout<<"ratio raw: "<<ratio_i<<endl;
+                            pull_y = pull_y + ratio_i*(jpfconstituents.rap()-jtrap);
+                            pull_phi = pull_phi + ratio_i*(jpfconstituents.phi()-jtphi);
                         }
                         
                         if(fabs(jteta)>etacut) continue;
