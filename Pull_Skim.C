@@ -345,7 +345,6 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                         if(jtpt<5) continue;
                         float jtphi = fjpfjets[ialgo][iR][iN][ijet].phi();
                         float jteta = fjpfjets[ialgo][iR][iN][ijet].eta();
-                        float jtrap = fjpfjets[ialgo][iR][iN][ijet].rap();
                         
                         float pull_y = 0; //initiaize first coordinate of the pull vector for the i-jet.
                         float pull_phi = 0; //initiaize second coordinate of the pull vector for the i-jet.
@@ -372,7 +371,6 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             for(unsigned int ijet = 0;  ijet < fjgenjets[ialgo][iR][iN].size(); ijet++){
                                 float geneta = fjgenjets[ialgo][iR][iN][ijet].eta();
                                 float genphi = fjgenjets[ialgo][iR][iN][ijet].phi();
-                                float genrap = fjgenjets[ialgo][iR][iN][ijet].rap();
                                 
                                 
                                 if(deltaR(jteta, jtphi, geneta, genphi) < R[iR]){
@@ -387,8 +385,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                                         vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
                                         
                                         for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
-                                            genratio_i = w_ratio_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
-                                            genpull_y += genratio_i*(jgenconstituents[j_const].rap()-genrap);
+                                            genratio_i = w_ratio_i(geneta,genphi,genpt,jgenconstituents[j_const].eta(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                            genpull_y += genratio_i*(jgenconstituents[j_const].eta()-geneta);
                                             genpull_phi += genratio_i*(jgenconstituents[j_const].phi()-genphi);
                                             
                                             
@@ -421,7 +419,6 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             
                             //////////
                             
-                            float genrap = fjgenjets[ialgo][iR][iN][ijet].rap();
                             float genpull_y = 0 ;
                             float genpull_phi = 0 ;
                             float genratio_i = 0 ;
@@ -429,8 +426,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
                             
                             for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
-                                genratio_i = w_ratio_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
-                                genpull_y += genratio_i*(jgenconstituents[j_const].rap()-genrap);
+                                genratio_i = w_ratio_i(geneta,genphi,genpt,jgenconstituents[j_const].eta(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                genpull_y += genratio_i*(jgenconstituents[j_const].eta()-geneta);
                                 genpull_phi += genratio_i*(jgenconstituents[j_const].phi()-genphi);
                                 
                                 
