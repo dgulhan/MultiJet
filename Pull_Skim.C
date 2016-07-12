@@ -343,7 +343,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             ratio_i = w_ratio_i(jteta,jtphi,jtpt,jpfconstituents[j_const].eta(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             
                             pull_y += ratio_i*(jpfconstituents[j_const].eta()-jteta);
-                            pull_phi += sign(jtphi-jpfconstituents[j_const].phi())*ratio_i*(deltaPhi(jpfconstituents[j_const].phi(),jtphi));
+                            pull_phi += ratio_i*(deltaPhi(jpfconstituents[j_const].phi(),jtphi));
                             //cout<<"ratio raw: "<<ratio_i<<endl;
                             //cout<<"Jtrap: "<<jtrap<<" jtphi: "<<jtphi<<" jtpt: "<<jtpt<<" prap: "<<jpfconstituents[j_const].rap()<<" pphi: "<<jpfconstituents[j_const].phi()<<" ppt: "<<jpfconstituents[j_const].pt()<<" pull_y:"<<pull_y<<" pull_phi: "<<pull_phi<<endl;
                         }
