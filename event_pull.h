@@ -38,6 +38,13 @@ float Pull2_i( float Jy , float Jphi, float JpT, float pY, float pphi, float ppT
 }
 
 
+float w_ratio_i( float Jy , float Jphi, float JpT, float pY, float pphi, float ppT  ){
+    //this only computes the ratio tu verifiy that it is allways <1
+    return ppT* sqrt(pow((pY-Jy),2) + pow((pphi - Jphi),2) )/ JpT ;
+    
+}
+
+
 
 
 
