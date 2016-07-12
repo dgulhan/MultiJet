@@ -355,8 +355,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             //pull_phi = pull_phi + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             ratio_i= w_ratio_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             cout<<"ratio raw: "<<ratio_i<<endl;
-                            pull_y = pull_y + ratio_i*(jpfconstituents.rap()-jtrap);
-                            pull_phi = pull_phi + ratio_i*(jpfconstituents.phi()-jtphi);
+                            pull_y = pull_y + ratio_i*(jpfconstituents[j_const].rap()-jtrap);
+                            pull_phi = pull_phi + ratio_i*(jpfconstituents[j_const].phi()-jtphi);
                         }
                         
                         if(fabs(jteta)>etacut) continue;
