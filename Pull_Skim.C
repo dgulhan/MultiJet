@@ -33,20 +33,7 @@ using namespace fastjet;
 // using namespace fastjet::contrib;
 using namespace std;
 
-float deltaPhi( float phi1, float phi2) {
-    float dphi = phi1 - phi2;
-    
-    if ( dphi > 3.141592653589 )
-        dphi = dphi - 2. * 3.141592653589;
-    if ( dphi <= -3.141592653589 )
-        dphi = dphi + 2. * 3.141592653589;
-    
-    if ( TMath::Abs(dphi) > 3.141592653589 ) {
-        cout << " commonUtility::getDPHI error!!! dphi is bigger than 3.141592653589 " << endl;
-    }
-    
-    return dphi;
-}
+
 
 
 float deltaR( float eta1, float phi1, float eta2, float phi2){
