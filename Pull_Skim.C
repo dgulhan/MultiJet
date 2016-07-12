@@ -354,10 +354,10 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             //pull_y = pull_y + Pull1_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             //pull_phi = pull_phi + Pull2_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
                             ratio_i = w_ratio_i(jtrap,jtphi,jtpt,jpfconstituents[j_const].rap(),jpfconstituents[j_const].phi(),jpfconstituents[j_const].pt());
-                            cout<<"ratio raw: "<<ratio_i<<endl;
                             pull_y += ratio_i*(jpfconstituents[j_const].rap()-jtrap);
                             pull_phi += ratio_i*(jpfconstituents[j_const].phi()-jtphi);
-                            cout<<"Jtrap: "<<jtrap<<" jtphi: "<<jtphi<<" jtpt: "<<jtpt<<" prap: "<<jpfconstituents[j_const].rap()<<" pphi: "<<jpfconstituents[j_const].phi()<<" ppt: "<<jpfconstituents[j_const].pt()<<" pull_y:"<<pull_y<<" pull_phi: "<<pull_phi<<endl;
+                            //cout<<"ratio raw: "<<ratio_i<<endl;
+                            //cout<<"Jtrap: "<<jtrap<<" jtphi: "<<jtphi<<" jtpt: "<<jtpt<<" prap: "<<jpfconstituents[j_const].rap()<<" pphi: "<<jpfconstituents[j_const].phi()<<" ppt: "<<jpfconstituents[j_const].pt()<<" pull_y:"<<pull_y<<" pull_phi: "<<pull_phi<<endl;
                         }
                         
                         if(fabs(jteta)>etacut) continue;
@@ -381,11 +381,14 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                                         
                                         float genpull_y = 0;
                                         float genpull_phi = 0;
+                                        float genratio_i = 0 ;
                                         vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
                                         
                                         for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
-                                            genpull_y += Pull1_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
-                                            genpull_phi += Pull2_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                            genratio_i = w_ratio_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                            genpull_y += genratio_i*(jgenconstituents[j_const].rap()-genrap);
+                                            genpull_phi += genratio_i*(jgenconstituents[j_const].phi()-genphi);
+                                            
                                             
                                             
                                         }
@@ -419,11 +422,16 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                             float genrap = fjgenjets[ialgo][iR][iN][ijet].rap();
                             float genpull_y = 0 ;
                             float genpull_phi = 0 ;
+                            float genratio_i = 0 ;
+                            
                             vector<PseudoJet> jgenconstituents = fjgenjets[ialgo][iR][iN][ijet].constituents();
                             
                             for (unsigned j_const = 0; j_const< jgenconstituents.size(); j_const++){ //load pf constituents of the jet. Here we sum over the pull value for each particle constituent
-                                genpull_y = genpull_y + Pull1_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
-                                genpull_phi = genpull_phi + Pull2_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                genratio_i = w_ratio_i(genrap,genphi,genpt,jgenconstituents[j_const].rap(),jgenconstituents[j_const].phi(),jgenconstituents[j_const].pt());
+                                genpull_y += genratio_i*(jgenconstituents[j_const].rap()-genrap);
+                                genpull_phi += genratio_i*(jgenconstituents[j_const].phi()-genphi);
+                                
+                                
                                 
                                 
                             }
