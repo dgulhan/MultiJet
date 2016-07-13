@@ -47,7 +47,7 @@ void multi_plots(){
     //refpt><0 in here
     TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " ,
                           " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " ,
-                          " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 ",        " "};
+                          " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 ",        " pt1>100 && pt3>30 "};
     
     TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" ,
                          "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3",
