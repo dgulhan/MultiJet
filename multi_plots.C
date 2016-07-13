@@ -96,10 +96,11 @@ void multi_plots(){
     t3->SetTextSize(15);
     t3->SetTextAlign(13);
     
-    for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
+    for (int iCentr = 0 ; iCentr < nCentrBins ; iCentr++) {
+
+        for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         
-        for (int iCentr = 0 ; iCentr < nCentrBins ; iCentr++) {
-            c2->cd(iCentr+1);
+                   c2->cd(iCentr+1);
         
             if (iFile==0){
             
@@ -143,39 +144,40 @@ void multi_plots(){
                 hist[iFile][0]->SetMarkerColor(Color[1]);
                 hist[iFile][0]->SetLineColor(Color[1]);
             }
-            
-            TLegend *t2;
-            
-            if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
-            if (iCentr > 0){ t2=new TLegend(0.015,0.83,0.03,0.95);}
-            
-            t2->SetFillColor(0);
-            t2->SetBorderSize(0);
-            t2->SetFillStyle(0);
-            t2->SetTextFont(43);
-            t2->SetTextSize(19);
-            t2->AddEntry(c2 ,CentrText[iCentr].Data(),"");
-            t2->Draw("SAME");
-            
-            if (iCentr == 0){
-                drawText("CMS Preliminary",0.20,0.93,23);
-            }
-            if (iCentr == 1) {
-                drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
-            }
-            if (iCentr == 2){
-                drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
-            }
-            if (iCentr == nCentrBins-1){
-                t3->AddEntry(hist[0][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
-                t3->AddEntry(hist[1][iCentr],"XCone PbPb Data","p");
-                t3->AddEntry(hist[2][0],"XCone pp PYTHIA","f");
-                t3->AddEntry(hist[3][0],"XCone pp Data","p");
-                
-                t3->Draw("SAME");
-            }
-        
         }
+        
+        TLegend *t2;
+        
+        if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
+        if (iCentr > 0){ t2=new TLegend(0.015,0.83,0.03,0.95);}
+        
+        t2->SetFillColor(0);
+        t2->SetBorderSize(0);
+        t2->SetFillStyle(0);
+        t2->SetTextFont(43);
+        t2->SetTextSize(19);
+        t2->AddEntry(c2 ,CentrText[iCentr].Data(),"");
+        t2->Draw("SAME");
+        
+        if (iCentr == 0){
+            drawText("CMS Preliminary",0.20,0.93,23);
+        }
+        if (iCentr == 1) {
+            drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
+        }
+        if (iCentr == 2){
+            drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
+        }
+        if (iCentr == nCentrBins-1 ){
+            t3->AddEntry(hist[0][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
+            t3->AddEntry(hist[1][iCentr],"XCone PbPb Data","p");
+            t3->AddEntry(hist[2][0],"XCone pp PYTHIA","f");
+            t3->AddEntry(hist[3][0],"XCone pp Data","p");
+            
+            t3->Draw("SAME");
+        }
+        
+        
     }
     
     
