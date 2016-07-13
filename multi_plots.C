@@ -28,7 +28,7 @@ void multi_plots(){
     
     TString XLabel[] = {"#Delta#phi_{1,3}" , "#Delta#phi_{1,2}" , "#Delta#phi_{2,3}" , "#Delta#eta_{1,3}" , "#Delta#eta_{1,2}" , "#Delta#eta_{2,3}" , "#Delta R_{1,3}" , "#Delta R_{1,2}" , "#Delta R_{2,3}","p_{T}^{gen}" };
     
-    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ppPy8hat80HiForestAOD_ALL.root","ppDatahat80HiForest_ALL.root"};
+    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root"};//, "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ppPy8hat80HiForestAOD_ALL.root","ppDatahat80HiForest_ALL.root"};
     
     int nFiles = 1;
     
