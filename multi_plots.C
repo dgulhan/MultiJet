@@ -30,7 +30,7 @@ void multi_plots(){
     
     TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ppPy8hat80HiForestAOD_ALL.root","ppDatahat80HiForest_ALL.root"};
     
-    int nFiles = 4;
+    int nFiles = 1;
     
     TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ", " 30 < hiBin/2 && hiBin/2 < 50 " , " 10 < hiBin/2 && hiBin/2 < 30 " , " 0 < hiBin/2 && hiBin/2 < 10" };
     
@@ -122,7 +122,8 @@ void multi_plots(){
                 hist[iFile][iCentr]->SetMarkerSize(0.5);
                 hist[iFile][iCentr]->SetMarkerColor(Color[0]);
                 hist[iFile][iCentr]->SetLineColor(Color[0]);
-                
+                hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+
             }
             
             if (iFile==2){
@@ -132,6 +133,8 @@ void multi_plots(){
                 hist[iFile][0]->SetFillColorAlpha(Color[1],0.35);
                 hist[iFile][0]->SetFillStyle(3004);
                 hist[iFile][0]->SetLineColor(Color[1]);
+                hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+
             }
             
             if (iFile==0){
@@ -143,6 +146,8 @@ void multi_plots(){
                 hist[iFile][0]->SetMarkerSize(0.5);
                 hist[iFile][0]->SetMarkerColor(Color[1]);
                 hist[iFile][0]->SetLineColor(Color[1]);
+                hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+
             }
         }
         
@@ -168,13 +173,27 @@ void multi_plots(){
         if (iCentr == 2){
             drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
         }
-        if (iCentr == nCentrBins-1 ){
-            t3->AddEntry(hist[0][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
-            t3->AddEntry(hist[1][iCentr],"XCone PbPb Data","p");
-            t3->AddEntry(hist[2][0],"XCone pp PYTHIA","f");
-            t3->AddEntry(hist[3][0],"XCone pp Data","p");
-            
+        
+        for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
+            if (iCentr == nCentrBins-1 ){
+                if (iFile == 0 ) {
+                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
+                }
+                if (iFile == 1) {
+                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb Data","p");
+                }
+                if (iFile == 2 ){
+                    t3->AddEntry(hist[iFile][0],"XCone pp PYTHIA","f");
+                }
+                if (iFile == 3) {
+                    t3->AddEntry(hist[iFile][0],"XCone pp Data","p");
+
+                }
+                
+            }
             t3->Draw("SAME");
+
+            
         }
         
         
