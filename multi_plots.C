@@ -54,7 +54,7 @@ void multi_plots(){
     int Color[] = {kRed,kBlue};
     
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
-        file[iFile] = new TFile (Files[iFile]);
+        file[iFile] = TFile::Open(Files[iFile].Data());
         
         //if (iFile == 3 ){tree[iFile] = (TTree*)file[iFile]->Get("xc4PF");}
         //if (iFile  < 3 ){tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));}
