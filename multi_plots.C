@@ -30,33 +30,22 @@ void multi_plots(){
     
     TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ppPy8hat80HiForestAOD_ALL.root","ppDatahat80HiForest_ALL.root"};
     
-    int nFiles = 1;
+    int nFiles = 4;
     
-    TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ",
-                                  " 30 < hiBin/2 && hiBin/2 < 50 " ,
-                                  " 10 < hiBin/2 && hiBin/2 < 30 " ,
-                                  " 0 < hiBin/2 && hiBin/2 < 10" };
+    TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ", " 30 < hiBin/2 && hiBin/2 < 50 " , " 10 < hiBin/2 && hiBin/2 < 30 " , " 0 < hiBin/2 && hiBin/2 < 10" };
     
     TCut PPCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30", " pt1>100 && pt3>30" };
     
-    TCut PbPbCuts[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " ,
-                        " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " ,
-                        " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30",
-                        " pt1>100 && pt3>30"};
+    TCut PbPbCuts[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30", " pt1>100 && pt3>30"};
     
     //refpt><0 in here
-    TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " ,
-                          " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " ,
-                          " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 ",        " pt1>100 && pt3>30 "};
+    TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 ", "refpt1>0 && refpt3>0 "};
     
-    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" ,
-                         "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3",
-                         " " , "  " , " " ,
-                         " p_{T_1}^{gen}>0 p_{T_3}^{gen}>0"};
+    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " " , "  " , " " , " p_{T_1}^{gen}>0 p_{T_3}^{gen}>0"};
     
-    Double_t YMaxHist[] = {0.12,0.25,0.12,0.085,0.09,0.1,0.15,0.17,0.12,1.0};
-    Double_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,-150.};
-    Double_t XMax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.,300.};
+    Double_t YMaxHist[] = {0.12,0.25,0.12,0.085,0.09,0.1,0.15,0.17,0.12,-200};
+    Double_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,200};
+    Double_t XMax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.,20.};
     
     
     TFile *file[nFiles];
@@ -120,7 +109,7 @@ void multi_plots(){
         hist[iFile][iCentr]->SetFillStyle(3005);
         hist[iFile][iCentr]->SetFillColorAlpha(Color[0],0.35);
         hist[iFile][iCentr]->SetLineColor(Color[0]);
-        /***
+        
         iFile = 1;
         
         makePretty(hist[iFile][iCentr]);
@@ -145,7 +134,7 @@ void multi_plots(){
         hist[iFile][0]->SetMarkerColor(Color[1]);
         hist[iFile][0]->SetLineColor(Color[1]);
         
-        ***/
+        
         TLegend *t2;
         
         if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
