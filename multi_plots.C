@@ -2,6 +2,7 @@
 #include "TGraph.h"
 #include "TGraphErrors.h"
 #include "TStyle.h"
+#include "TMath.h"
 #include "TColor.h"
 #include <stdio.h>
 #define sign(a) ( ( (a) < 0 )  ?  -1   : ( (a) > 0 ) )
@@ -39,7 +40,7 @@ void multi_plots(){
     //refpt><0 in here
     TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 ", "refpt1>0 && refpt3>0 "};
     
-    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " " , "  " , " " , " p_{T_1}^{gen}>0\,p_{T_3}^{gen}>0"};
+    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " " , "  " , " " , " p_{T_1}^{gen}>0 p_{T_3}^{gen}>0"};
     
     Float_t YMaxHist[] = {0.12,0.25,0.12,0.085,0.09,0.1,0.15,0.17,0.12,-200};
     Float_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,200};
