@@ -16,8 +16,9 @@ void multi_plots(){
     int R = 4;
     int N = 3;
     
-    int iVar = 8;
-    
+    int iVar;
+    cout<<"Var number: ";
+    cin >> iVar;
     
     //acos(cos(phi1-phi2))> 2*TMath::Pi()/2
     TString CentrText[] = {"Centr. 100-50%","Centr. 50-30%","Centr. 30-10%","Centr. 10-0%"};
