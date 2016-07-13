@@ -30,7 +30,7 @@ void multi_plots(){
     
     TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ppPy8hat80HiForestAOD_ALL.root","ppDatahat80HiForest_ALL.root"};
     
-    int nFiles = 2;
+    int nFiles = 1;
     
     TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ",
                                   " 30 < hiBin/2 && hiBin/2 < 50 " ,
@@ -120,7 +120,7 @@ void multi_plots(){
         hist[iFile][iCentr]->SetFillStyle(3005);
         hist[iFile][iCentr]->SetFillColorAlpha(Color[0],0.35);
         hist[iFile][iCentr]->SetLineColor(Color[0]);
-        
+        /***
         iFile = 1;
         
         makePretty(hist[iFile][iCentr]);
@@ -129,7 +129,7 @@ void multi_plots(){
         hist[iFile][iCentr]->SetMarkerSize(0.5);
         hist[iFile][iCentr]->SetMarkerColor(Color[0]);
         hist[iFile][iCentr]->SetLineColor(Color[0]);
-        /***
+        
         iFile = 2;
         makePretty(hist[iFile][0]);
         hist[iFile][0]->Draw("SAME HIST");
