@@ -64,20 +64,30 @@ void multi_plots(){
         
         for ( int iCentr = 0 ; iCentr < nCentrBins ; iCentr++ ) {
             
-            if (iFile==0||iFile == 1) {
-                cout<<"Reading PbPb"<<endl;
+            if (iFile==0){
                 hist[iFile][iCentr] = new TH1D(Form("hist_F%iV%iC%i",iFile,iVar,iCentr),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-                if (iFile==0){ tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),CentralityBinsCuts[iCentr] && PbPbCutsMC[iVar]);}
-                if (iFile==1){ tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),CentralityBinsCuts[iCentr] && PbPbCuts[iVar]);}
+                tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),CentralityBinsCuts[iCentr] && PbPbCutsMC[iVar]);
                 hist[iFile][iCentr]->Scale(1./hist[iFile][iCentr]->Integral());
                 hist[iFile][iCentr]->SetStats(0);
+
+            }
+            
+            if (iFile==1){
                 
+                hist[iFile][iCentr] = new TH1D(Form("hist_F%iV%iC%i",iFile,iVar,iCentr),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar])
+                tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),CentralityBinsCuts[iCentr] && PbPbCuts[iVar]);
+                hist[iFile][iCentr]->Scale(1./hist[iFile][iCentr]->Integral());
+                hist[iFile][iCentr]->SetStats(0);
+            }
+            
                 
-            } else {
+            
+            if (iFile == 2 || iFile==3) {
+                
                 cout<<"Reading pp"<<endl;
                 hist[iFile][0] = new TH1D(Form("hist_F%iV%iC%i",iFile,iVar,iCentr),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
                 tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),PPCuts[iVar]);
-                hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
+                hist[iFile][0]->Scale(1./hist[iFile][iCentr]->Integral());
                 hist[iFile][0]->SetStats(0);
                 
                 
@@ -100,7 +110,7 @@ void multi_plots(){
 
         for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         
-                   c2->cd(iCentr+1);
+            c2->cd(iCentr+1);
         
             if (iFile==0){
             
