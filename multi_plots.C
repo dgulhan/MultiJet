@@ -74,7 +74,7 @@ void multi_plots(){
             
             if (iFile==1){
                 
-                hist[iFile][iCentr] = new TH1D(Form("hist_F%iV%iC%i",iFile,iVar,iCentr),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar])
+                hist[iFile][iCentr] = new TH1D(Form("hist_F%iV%iC%i",iFile,iVar,iCentr),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
                 tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),CentralityBinsCuts[iCentr] && PbPbCuts[iVar]);
                 hist[iFile][iCentr]->Scale(1./hist[iFile][iCentr]->Integral());
                 hist[iFile][iCentr]->SetStats(0);
