@@ -103,7 +103,7 @@ void multi_plots(){
         iFile = 0;
         makePretty(hist[iFile][iCentr]);
         hist[iFile][iCentr]->SetMaximum(YMaxHist[iVar]);
-        hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.00001,XMax[iVar]-0.00001);
+        hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
         
         hist[iFile][iCentr]->Draw("SAME HIST");
         hist[iFile][iCentr]->SetFillStyle(3005);
