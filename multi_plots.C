@@ -83,11 +83,11 @@ void multi_plots(){
                 
             
             if (iFile == 2 || iFile==3) {
-                
+                //For pp centrality is not computed.
                 cout<<"Reading pp"<<endl;
                 hist[iFile][0] = new TH1D(Form("hist_F%iV%iC%i",iFile,iVar,iCentr),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
                 tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),PPCuts[iVar]);
-                hist[iFile][0]->Scale(1./hist[iFile][iCentr]->Integral());
+                hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
                 hist[iFile][0]->SetStats(0);
                 
                 
@@ -143,7 +143,7 @@ void multi_plots(){
                 hist[iFile][0]->SetFillColorAlpha(Color[1],0.35);
                 hist[iFile][0]->SetFillStyle(3004);
                 hist[iFile][0]->SetLineColor(Color[1]);
-                hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+                hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
 
             }
             
@@ -156,7 +156,7 @@ void multi_plots(){
                 hist[iFile][0]->SetMarkerSize(0.5);
                 hist[iFile][0]->SetMarkerColor(Color[1]);
                 hist[iFile][0]->SetLineColor(Color[1]);
-                hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+                hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
 
             }
         }
