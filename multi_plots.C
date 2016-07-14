@@ -34,14 +34,16 @@ void multi_plots(){
     
     TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ", " 30 < hiBin/2 && hiBin/2 < 50 " , " 10 < hiBin/2 && hiBin/2 < 30 " , " 0 < hiBin/2 && hiBin/2 < 10" };
     
-    TCut PPCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30", " pt1>100 && pt3>30" };
+    TCut PPCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3", " pt1>100 && pt3>30" };
     
-    TCut PbPbCuts[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30", " pt1>100 && pt3>30"};
+    TCut PbPbCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3", " pt1>100 && pt3>30" };
     
     //refpt><0 in here
-    TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 ", "refpt1>0 && refpt3>0 "};
+    TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3", " pt1>100 && pt3>30" };
     
-    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " " , "  " , " " , " p_{T_1}^{gen}>0 p_{T_3}^{gen}>0"};
+
+    
+    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " #Delta#phi_{1,2}> 2#pi/3" , "  " , " #Delta#phi_{1,2}> 2#pi/3" , " p_{T_1}^{gen}>0 p_{T_3}^{gen}>0"};
     
     Double_t YMaxHist[] = {0.12,0.25,0.12,0.095,0.09,0.13,0.15,0.17,0.12,0.15};
     Double_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,-110};
