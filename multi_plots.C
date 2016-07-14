@@ -44,7 +44,7 @@ void multi_plots(){
     
     TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " " , "  " , " " , " p_{T,1}^{gen}>0 p_{T,2}^{gen}>0"};
     
-    Double_t YMaxHist[] = {0.12,0.25,0.12,0.095,0.09,0.13,0.15,0.17,0.12,0.22};
+    Double_t YMaxHist[] = {0.12,0.25,0.12,0.095,0.09,0.13,0.15,0.17,0.12,0.26};
     Double_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,-110};
     Double_t XMax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.,300};
     
@@ -99,7 +99,7 @@ void multi_plots(){
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
     makeMultiPanelCanvas(c2,4,1,0.0,0.0,0.17,0.17,0.02);
     
-    TLegend *t3=new TLegend(0.10,0.80,0.29,0.96);
+    TLegend *t3=new TLegend(0.08,0.80,0.27,0.90);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -173,8 +173,8 @@ void multi_plots(){
         
         TLegend *t2;
         
-        if (iCentr == 0){ t2=new TLegend(0.35,0.63,0.55,0.75);}
-        if (iCentr > 0){ t2=new TLegend(0.45,0.63,0.63,0.75);}
+        if (iCentr == 0){ t2=new TLegend(0.45,0.7,0.65,0.75);}
+        if (iCentr > 0){ t2=new TLegend(0.55,0.63,0.65,0.75);}
         
         t2->SetFillColor(0);
         t2->SetBorderSize(0);
