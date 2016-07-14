@@ -28,20 +28,21 @@ void multi_plots(){
     
     TString XLabel[] = {"#Delta#phi_{1,3}" , "#Delta#phi_{1,2}" , "#Delta#phi_{2,3}" , "#Delta#eta_{1,3}" , "#Delta#eta_{1,2}" , "#Delta#eta_{2,3}" , "#Delta R_{1,3}" , "#Delta R_{1,2}" , "#Delta R_{2,3}","p_{T,3}^{gen}<0" };
     
-    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ppPy8hat80HiForestAOD_ALL.root","ppDatahat80HiForest_ALL.root"};
+    //TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ppPy8hat80HiForestAOD_ALL.root","ppDatahat80HiForest_ALL.root"};
     
-    int nFiles = 1;
+    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "ppPy8hat80HiForestAOD_ALL.root","ppDatahat80HiForest_ALL.root"};
+    int nFiles = 2;
     
     TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ", " 30 < hiBin/2 && hiBin/2 < 50 " , " 10 < hiBin/2 && hiBin/2 < 30 " , " 0 < hiBin/2 && hiBin/2 < 10" };
     
     TCut PPCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30", " pt1>100 && pt3>30" };
     
-    TCut PbPbCuts[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30", " pt1>100 && pt3>30"};
+    TCut PbPbCuts[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30", " pt1>100 && pt3>30 && refpt3>0 && refpt1>0 && refpt2>0  "};
     
     //refpt><0 in here
-    TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 ", "refpt1>0 && refpt2>0 && refpt3<0 "};
+    TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 ", " pt1>100 && pt3>30 && refpt1>0 && refpt2>0 && refpt3<0 "};
     
-    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " " , "  " , " " , " p_{T_1}^{gen}>0 p_{T_3}^{gen}>0"};
+    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " " , "  " , " " , " p_{T,1}^{gen}>0 p_{T,2}^{gen}>0"};
     
     Double_t YMaxHist[] = {0.12,0.25,0.12,0.095,0.09,0.13,0.15,0.17,0.12,0.22};
     Double_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,-110};
@@ -125,7 +126,15 @@ void multi_plots(){
             }
             
             if (iFile==1){
+                makePretty(hist[iFile][iCentr]);
+                hist[iFile][iCentr]->SetMaximum(YMaxHist[iVar]);
+                hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
                 
+                hist[iFile][iCentr]->Draw("SAME HIST");
+                hist[iFile][iCentr]->SetFillStyle(3005);
+                hist[iFile][iCentr]->SetFillColorAlpha(Color[1],0.35);
+                hist[iFile][iCentr]->SetLineColor(Color[1]);
+                /***
                 makePretty(hist[iFile][iCentr]);
                 hist[iFile][iCentr]->Draw("SAME");
                 hist[iFile][iCentr]->SetMarkerStyle(20);
@@ -133,6 +142,7 @@ void multi_plots(){
                 hist[iFile][iCentr]->SetMarkerColor(Color[0]);
                 hist[iFile][iCentr]->SetLineColor(Color[0]);
                 hist[iFile][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+                 ***/
 
             }
             
@@ -187,10 +197,10 @@ void multi_plots(){
         for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
             if (iCentr == nCentrBins-1 ){
                 if (iFile == 0 ) {
-                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
+                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET p_{T,3}^{gen}<0 ","f");
                 }
                 if (iFile == 1) {
-                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb Data","p");
+                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET p_{T,3}^{gen}>0 ","f");
                 }
                 if (iFile == 2 ){
                     t3->AddEntry(hist[iFile][0],"XCone pp PYTHIA","f");
