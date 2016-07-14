@@ -147,7 +147,7 @@ void multi_plots(){
 
             }
             
-            if (iFile==0){
+            if (iFile==3){
 
            
                 makePretty(hist[iFile][0]);
