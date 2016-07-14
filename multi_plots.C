@@ -99,7 +99,7 @@ void multi_plots(){
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
     makeMultiPanelCanvas(c2,4,1,0.0,0.0,0.17,0.17,0.02);
     
-    TLegend *t3=new TLegend(0.09,0.83,0.26,0.93);
+    TLegend *t3=new TLegend(0.09,0.83,0.26,0.96);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
