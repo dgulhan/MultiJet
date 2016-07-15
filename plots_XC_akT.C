@@ -157,7 +157,7 @@ void plots_XC_akT(){
     makeMultiPanelCanvas(c2,1,1,-0.12,0.0,0.15,0.16,0.02);
 
     c2->cd(1);
-    TLegend *t3=new TLegend(0.60,0.80,0.75,0.96);
+    TLegend *t3=new TLegend(0.55,0.80,0.75,0.96);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -198,7 +198,7 @@ void plots_XC_akT(){
             hist[iFile][0]->SetMarkerColor(ColorAK[0]);
             hist[iFile][0]->SetLineColor(ColorAK[0]);
             hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
-            t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb Data","f");
+            t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb Data","p");
 
             //xcone
             makePretty(hist[iFile][1] );
@@ -208,14 +208,14 @@ void plots_XC_akT(){
             hist[iFile][1]->SetMarkerColor(ColorXC[0]);
             hist[iFile][1]->SetLineColor(ColorXC[0]);
             hist[iFile][1]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
-            t3->AddEntry(hist[iFile][1] ,"XCone PbPb Data","f");
+            t3->AddEntry(hist[iFile][1] ,"XCone PbPb Data","p");
 
         }
     }
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.17,0.93,23);
-    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.17,0.89,18);
-    drawText(Form("%s",TextCut[iVar].Data()),0.17,0.85,18);
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.55,0.78,18);
+    drawText(Form("%s",TextCut[iVar].Data()),0.55,0.73,18);
     
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
