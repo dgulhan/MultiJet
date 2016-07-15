@@ -158,7 +158,14 @@ void plots_XC_akT(){
     makeMultiPanelCanvas(c2,1,1,0.0,0.0,0.22,0.22,0.02);
 
     c2->cd(1);
-    
+    TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
+    t3->SetFillColor(0);
+    t3->SetBorderSize(0);
+    t3->SetFillStyle(0);
+    t3->SetTextFont(43);
+    t3->SetTextSize(15);
+    t3->SetTextAlign(13);
+
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         if (iFile==0){
             
@@ -171,7 +178,7 @@ void plots_XC_akT(){
             hist[iFile][0]->SetFillStyle(3005);
             hist[iFile][0]->SetFillColorAlpha(Color[0],0.35);
             hist[iFile][0]->SetLineColor(Color[0]);
-            
+            t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb PYTHIA+HYDJET","f");
             //xcone
             makePretty(hist[iFile][1]);
             hist[iFile][1]->SetMaximum(YMaxHist[iVar]);
@@ -181,6 +188,7 @@ void plots_XC_akT(){
             hist[iFile][1]->SetFillStyle(3005);
             hist[iFile][1]->SetFillColorAlpha(Color[0],0.35);
             hist[iFile][1]->SetLineColor(Color[0]);
+            t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
         }
         if (iFile==1){
             //akt
@@ -203,6 +211,7 @@ void plots_XC_akT(){
             
         }
     }
+    t3->Draw("SAME");
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
     t3->SetFillColor(0);
