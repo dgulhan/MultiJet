@@ -155,7 +155,8 @@ void plots_XC_akT(){
     
     
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
-    
+    makeMultiPanelCanvas(c2[iVar][iN],3,1,0.0,0.0,0.22,0.22,0.02);
+
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
@@ -171,13 +172,13 @@ void plots_XC_akT(){
                 
                 //akt
             makePretty(hist[iFile][0] );
-            hist[iFile][0] ->SetMaximum(YMaxHist[iVar]);
-            hist[iFile][0] ->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            hist[iFile][0]->SetMaximum(YMaxHist[iVar]);
+            hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
             
-            hist[iFile][0] ->Draw("SAME HIST");
-            hist[iFile][0] ->SetFillStyle(3005);
-            hist[iFile][0] ->SetFillColorAlpha(Color[0],0.35);
-            hist[iFile][0] ->SetLineColor(Color[0]);
+            hist[iFile][0]->Draw("SAME HIST");
+            hist[iFile][0]->SetFillStyle(3005);
+            hist[iFile][0]->SetFillColorAlpha(Color[0],0.35);
+            hist[iFile][0]->SetLineColor(Color[0]);
                 
                 //xcone
             makePretty(hist[iFile][1] );
