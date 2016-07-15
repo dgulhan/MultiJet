@@ -25,7 +25,6 @@ void plots_XC_akT{
     cin >> iVar;
     
     //acos(cos(phi1-phi2))> 2*TMath::Pi()/2
-    TString CentrText[] = {"Centr. 100-50%","Centr. 50-30%","Centr. 30-10%","Centr. 10-0%"};
     
     TString XAxis[] = {"acos(cos(phi1-phi3))","acos(cos(phi1-phi2))","acos(cos(phi2-phi3))","sign(eta1)*(eta3-eta1)","sign(eta1)*(eta2-eta1)","sign(eta2)*(eta3-eta2)","sqrt(pow(acos(cos(phi1-phi3)),2.)+pow(eta1-eta3,2.))","sqrt(pow(acos(cos(phi1-phi2)),2.)+pow(eta1-eta2,2.))","sqrt(pow(acos(cos(phi2-phi3)),2.)+pow(eta2-eta3,2.))" , "refpt "};
     
@@ -34,7 +33,6 @@ void plots_XC_akT{
     TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ALL/ppPy8hat80HiForestAOD_ALL.root","ALL/ppDatahat80HiForest_ALL.root"};
     
     
-    TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ", " 30 < hiBin/2 && hiBin/2 < 50 " , " 10 < hiBin/2 && hiBin/2 < 30 " , " 0 < hiBin/2 && hiBin/2 < 10" };
     
     TCut PPCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3", " pt1>100 && pt3>30" };
     
@@ -53,7 +51,7 @@ void plots_XC_akT{
     
     
     TFile *file[nFiles];
-    TH1D *hist[nFiles][nAlgo][nCentrBins];
+    TH1D *hist[nFiles][nAlgo];
     TTree *tree[nFiles][nAlgo];
     
     int Color[] = {kRed,kBlue};
@@ -67,63 +65,61 @@ void plots_XC_akT{
         tree[iFile][0] = (TTree*)file[iFile]->Get("akt4PF");
         tree[iFile][1] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
         
-        for ( int iCentr = 0 ; iCentr < nCentrBins ; iCentr++ ) {
+    
             
-            if (iFile==0){
-                //akt
-                hist[iFile][0][iCentr] = new TH1D(Form("hist_F%iV%iC%iA%i",iFile,iVar,iCentr,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-                tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iC%iA%i",XAxis[iVar].Data(),iFile,iVar,iCentr,0),CentralityBinsCuts[iCentr] && PbPbCutsMC[iVar]);
-                hist[iFile][0][iCentr]->Scale(1./hist[iFile][0][iCentr]->Integral());
-                hist[iFile][0][iCentr]->SetStats(0);
-                //xcone
-                hist[iFile][1][iCentr] = new TH1D(Form("hist_F%iV%iC%iA%i",iFile,iVar,iCentr,1),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-                tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iC%iA%i",XAxis[iVar].Data(),iFile,iVar,iCentr,1),CentralityBinsCuts[iCentr] && PbPbCutsMC[iVar]);
-                hist[iFile][1][iCentr]->Scale(1./hist[iFile][1][iCentr]->Integral());
-                hist[iFile][1][iCentr]->SetStats(0);
+        if (iFile==0){
+            //akt
+            hist[iFile][0]= new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
+            tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCutsMC[iVar]);
+            hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
+            hist[iFile][0]->SetStats(0);
+            //xcone
+            hist[iFile][1]  = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,1),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
+            tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,1),PbPbCutsMC[iVar]);
+            hist[iFile][1]->Scale(1./hist[iFile][1]->Integral());
+            hist[iFile][1]->SetStats(0);
             
-            }
+        }
             
-            if (iFile==1){
-                //akt = 0
-                hist[iFile][0][iCentr] = new TH1D(Form("hist_F%iV%iC%iA%i",iFile,iVar,iCentr,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-                tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iC%iA%i",XAxis[iVar].Data(),iFile,iVar,iCentr,0),CentralityBinsCuts[iCentr] && PbPbCuts[iVar]);
-                hist[iFile][0][iCentr]->Scale(1./hist[iFile][0][iCentr]->Integral());
-                hist[iFile][0][iCentr]->SetStats(0);
+        if (iFile==1){
+            //akt = 0
+            hist[iFile][0]  = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
+            tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCuts[iVar]);
+            hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
+            hist[iFile][0]->SetStats(0);
                 
-                //XCone = 1
-                hist[iFile][1][iCentr] = new TH1D(Form("hist_F%iV%iC%iA%i",iFile,iVar,iCentr,1),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-                tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iC%iA%i",XAxis[iVar].Data(),iFile,iVar,iCentr,1),CentralityBinsCuts[iCentr] && PbPbCuts[iVar]);
-                hist[iFile][1][iCentr]->Scale(1./hist[iFile][1][iCentr]->Integral());
-                hist[iFile][1][iCentr]->SetStats(0);
+            //XCone = 1
+            hist[iFile][1]  = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,1),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
+            tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,1),PbPbCuts[iVar]);
+            hist[iFile][1]->Scale(1./hist[iFile][1]->Integral());
+            hist[iFile][1]->SetStats(0);
                 
                 
-            }
+        }
+            
+        
+        if (iFile == 2 || iFile==3) {
+            //For pp centrality is not computed !!
+        
+            //ak = 0
+            hist[iFile][0] = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
+            tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PPCuts[iVar]);
+            hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
+            hist[iFile][0]->SetStats(0);
+                
+            //xcone = 1
+            hist[iFile][1] = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,1),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
+            tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,1),PPCuts[iVar]);
+            hist[iFile][1]->Scale(1./hist[iFile][1]->Integral());
+            hist[iFile][1]->SetStats(0);
+                
             
                 
-            
-            if (iFile == 2 || iFile==3) {
-                //For pp centrality is not computed !!
-                
-                //ak = 0
-                hist[iFile][0][0] = new TH1D(Form("hist_F%iV%iC%iA%i",iFile,iVar,iCentr,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-                tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iC%iA%i",XAxis[iVar].Data(),iFile,iVar,iCentr,0),PPCuts[iVar]);
-                hist[iFile][0][0]->Scale(1./hist[iFile][0][0]->Integral());
-                hist[iFile][0][0]->SetStats(0);
-                
-                //xcone = 1
-                hist[iFile][1][0] = new TH1D(Form("hist_F%iV%iC%iA%i",iFile,iVar,iCentr,1),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-                tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iC%iA%i",XAxis[iVar].Data(),iFile,iVar,iCentr,1),PPCuts[iVar]);
-                hist[iFile][1][0]->Scale(1./hist[iFile][1][0]->Integral());
-                hist[iFile][1][0]->SetStats(0);
-                
-                
-                
-            }
         }
     }
     
+   /***
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
-    makeMultiPanelCanvas(c2,4,1,0.0,0.0,0.17,0.17,0.02);
     
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
     t3->SetFillColor(0);
@@ -133,141 +129,137 @@ void plots_XC_akT{
     t3->SetTextSize(15);
     t3->SetTextAlign(13);
     
-    for (int iCentr = 0 ; iCentr < nCentrBins ; iCentr++) {
-
-        for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
+    for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         
-            c2->cd(iCentr+1);
         
-            if (iFile==0){
+        if (iFile==0){
                 
                 //akt
-                makePretty(hist[iFile][0][iCentr]);
-                hist[iFile][0][iCentr]->SetMaximum(YMaxHist[iVar]);
-                hist[iFile][0][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
-                
-                hist[iFile][0][iCentr]->Draw("SAME HIST");
-                hist[iFile][0][iCentr]->SetFillStyle(3005);
-                hist[iFile][0][iCentr]->SetFillColorAlpha(Color[0],0.35);
-                hist[iFile][0][iCentr]->SetLineColor(Color[0]);
-                
-                //xcone
-                makePretty(hist[iFile][1][iCentr]);
-                hist[iFile][1][iCentr]->SetMaximum(YMaxHist[iVar]);
-                hist[iFile][1][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
-                
-                hist[iFile][1][iCentr]->Draw("SAME HIST");
-                hist[iFile][1][iCentr]->SetFillStyle(3005);
-                hist[iFile][1][iCentr]->SetFillColorAlpha(Color[0],0.35);
-                hist[iFile][1][iCentr]->SetLineColor(Color[0]);
-            }
+            makePretty(hist[iFile][0] );
+            hist[iFile][0] ->SetMaximum(YMaxHist[iVar]);
+            hist[iFile][0] ->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
             
-            if (iFile==1){
-                //akt
-                makePretty(hist[iFile][0][iCentr]);
-                hist[iFile][0][iCentr]->Draw("SAME");
-                hist[iFile][0][iCentr]->SetMarkerStyle(20);
-                hist[iFile][0][iCentr]->SetMarkerSize(0.5);
-                hist[iFile][0][iCentr]->SetMarkerColor(Color[0]);
-                hist[iFile][0][iCentr]->SetLineColor(Color[0]);
-                hist[iFile][0][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            hist[iFile][0] ->Draw("SAME HIST");
+            hist[iFile][0] ->SetFillStyle(3005);
+            hist[iFile][0] ->SetFillColorAlpha(Color[0],0.35);
+            hist[iFile][0] ->SetLineColor(Color[0]);
                 
                 //xcone
-                makePretty(hist[iFile][1][iCentr]);
-                hist[iFile][1][iCentr]->Draw("SAME");
-                hist[iFile][1][iCentr]->SetMarkerStyle(20);
-                hist[iFile][1][iCentr]->SetMarkerSize(0.5);
-                hist[iFile][1][iCentr]->SetMarkerColor(Color[0]);
-                hist[iFile][1][iCentr]->SetLineColor(Color[0]);
-                hist[iFile][1][iCentr]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
-
-            }
+            makePretty(hist[iFile][1] );
+            hist[iFile][1] ->SetMaximum(YMaxHist[iVar]);
+            hist[iFile][1] ->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+                
+            hist[iFile][1] ->Draw("SAME HIST");
+            hist[iFile][1] ->SetFillStyle(3005);
+            hist[iFile][1] ->SetFillColorAlpha(Color[0],0.35);
+            hist[iFile][1] ->SetLineColor(Color[0]);
+        }
             
-            if (iFile==2){
-                //akt
-                makePretty(hist[iFile][0][0]);
-                hist[iFile][0][0]->Draw("SAME HIST");
-                hist[iFile][0][0]->SetFillColorAlpha(Color[1],0.35);
-                hist[iFile][0][0]->SetFillStyle(3004);
-                hist[iFile][0][0]->SetLineColor(Color[1]);
-                hist[iFile][0][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+        if (iFile==1){
+            //akt
+            makePretty(hist[iFile][0] );
+            hist[iFile][0] ->Draw("SAME");
+            hist[iFile][0] ->SetMarkerStyle(20);
+            hist[iFile][0] ->SetMarkerSize(0.5);
+            hist[iFile][0] ->SetMarkerColor(Color[0]);
+            hist[iFile][0] ->SetLineColor(Color[0]);
+            hist[iFile][0] ->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
                 
-                //xcone
-                makePretty(hist[iFile][1][0]);
-                hist[iFile][1][0]->Draw("SAME HIST");
-                hist[iFile][1][0]->SetFillColorAlpha(Color[1],0.35);
-                hist[iFile][1][0]->SetFillStyle(3004);
-                hist[iFile][1][0]->SetLineColor(Color[1]);
-                hist[iFile][1][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            //xcone
+            makePretty(hist[iFile][1] );
+            hist[iFile][1] ->Draw("SAME");
+            hist[iFile][1] ->SetMarkerStyle(20);
+            hist[iFile][1] ->SetMarkerSize(0.5);
+            hist[iFile][1] ->SetMarkerColor(Color[0]);
+            hist[iFile][1] ->SetLineColor(Color[0]);
+            hist[iFile][1] ->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
 
-            }
+        }
             
-            if (iFile==3){
-                //akt
-                makePretty(hist[iFile][0][0]);
-                hist[iFile][0][0]->Draw("SAME");
-                hist[iFile][0][0]->SetMarkerStyle(20);
-                hist[iFile][0][0]->SetMarkerSize(0.5);
-                hist[iFile][0][0]->SetMarkerColor(Color[1]);
-                hist[iFile][0][0]->SetLineColor(Color[1]);
-                hist[iFile][0][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+        if (iFile==2){
+            //akt
+            makePretty(hist[iFile][0][0]);
+            hist[iFile][0][0]->Draw("SAME HIST");
+            hist[iFile][0][0]->SetFillColorAlpha(Color[1],0.35);
+            hist[iFile][0][0]->SetFillStyle(3004);
+            hist[iFile][0][0]->SetLineColor(Color[1]);
+            hist[iFile][0][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
                 
-                //xcone
-                makePretty(hist[iFile][1][0]);
-                hist[iFile][1][0]->Draw("SAME");
-                hist[iFile][1][0]->SetMarkerStyle(20);
-                hist[iFile][1][0]->SetMarkerSize(0.5);
-                hist[iFile][1][0]->SetMarkerColor(Color[1]);
-                hist[iFile][1][0]->SetLineColor(Color[1]);
-                hist[iFile][1][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            //xcone
+            makePretty(hist[iFile][1][0]);
+            hist[iFile][1][0]->Draw("SAME HIST");
+            hist[iFile][1][0]->SetFillColorAlpha(Color[1],0.35);
+            hist[iFile][1][0]->SetFillStyle(3004);
+            hist[iFile][1][0]->SetLineColor(Color[1]);
+            hist[iFile][1][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+        }
+            
+        if (iFile==3){
+            //akt
+            makePretty(hist[iFile][0][0]);
+            hist[iFile][0][0]->Draw("SAME");
+            hist[iFile][0][0]->SetMarkerStyle(20);
+            hist[iFile][0][0]->SetMarkerSize(0.5);
+            hist[iFile][0][0]->SetMarkerColor(Color[1]);
+            hist[iFile][0][0]->SetLineColor(Color[1]);
+            hist[iFile][0][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            
+            //xcone
+            makePretty(hist[iFile][1][0]);
+            hist[iFile][1][0]->Draw("SAME");
+            hist[iFile][1][0]->SetMarkerStyle(20);
+            hist[iFile][1][0]->SetMarkerSize(0.5);
+            hist[iFile][1][0]->SetMarkerColor(Color[1]);
+            hist[iFile][1][0]->SetLineColor(Color[1]);
+            hist[iFile][1][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+
+        }
+    }
+        
+    TLegend *t2;
+    
+    if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
+    if (iCentr > 0){ t2=new TLegend(0.015,0.83,0.03,0.95);}
+    
+    t2->SetFillColor(0);
+    t2->SetBorderSize(0);
+    t2->SetFillStyle(0);
+    t2->SetTextFont(43);
+    t2->SetTextSize(19);
+    if ( nCentrBins != 1 ) {
+        t2->AddEntry(c2 ,CentrText .Data(),"");
+        t2->Draw("SAME");
+
+    }
+        
+    if (iCentr == 0){
+        drawText("CMS Preliminary",0.20,0.93,23);
+    }
+    if (iCentr == 1) {
+        drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
+    }
+    if (iCentr == 2){
+        drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
+    }
+        
+    for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
+        if (iCentr == nCentrBins-1 ){
+            if (iFile == 0 && nCentrBins != 1 ) {
+                t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
+            }
+            if (iFile == 1 && nCentrBins != 1 ) {
+                t3->AddEntry(hist[iFile][1] ,"XCone PbPb Data","p");
+            }
+            if (iFile == 2 && nCentrBins != 1 ){
+                t3->AddEntry(hist[iFile][1][0],"XCone pp PYTHIA","f");
+            }
+            if (iFile == 3 && nCentrBins != 1 ) {
+                t3->AddEntry(hist[iFile][1][0],"XCone pp Data","p");
 
             }
-        }
-        
-        TLegend *t2;
-        
-        if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
-        if (iCentr > 0){ t2=new TLegend(0.015,0.83,0.03,0.95);}
-        
-        t2->SetFillColor(0);
-        t2->SetBorderSize(0);
-        t2->SetFillStyle(0);
-        t2->SetTextFont(43);
-        t2->SetTextSize(19);
-        if ( nCentrBins != 1 ) {
-            t2->AddEntry(c2 ,CentrText[iCentr].Data(),"");
-            t2->Draw("SAME");
-
-        }
-        
-        if (iCentr == 0){
-            drawText("CMS Preliminary",0.20,0.93,23);
-        }
-        if (iCentr == 1) {
-            drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
-        }
-        if (iCentr == 2){
-            drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
-        }
-        
-        for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
-            if (iCentr == nCentrBins-1 ){
-                if (iFile == 0 && nCentrBins != 1 ) {
-                    t3->AddEntry(hist[iFile][1][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
-                }
-                if (iFile == 1 && nCentrBins != 1 ) {
-                    t3->AddEntry(hist[iFile][1][iCentr],"XCone PbPb Data","p");
-                }
-                if (iFile == 2 && nCentrBins != 1 ){
-                    t3->AddEntry(hist[iFile][1][0],"XCone pp PYTHIA","f");
-                }
-                if (iFile == 3 && nCentrBins != 1 ) {
-                    t3->AddEntry(hist[iFile][1][0],"XCone pp Data","p");
-
-                }
                 else{
-                    t3->AddEntry(hist[iFile][0][iCentr],"anti-k_{T} PbPb PYTHIA+HYDJET","f");
-                    t3->AddEntry(hist[iFile][1][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
+                    t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb PYTHIA+HYDJET","f");
+                    t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
                 }
             t3->Draw("SAME");
             }
@@ -285,9 +277,7 @@ void plots_XC_akT{
     c2->SaveAs(Form("PLOTALGO/algorithm%s.gif",XLabel[iVar].Data()));
     
     
-    
-    
-    
+    ***/
     
     
     
