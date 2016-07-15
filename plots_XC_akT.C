@@ -62,7 +62,7 @@ void plots_XC_akT(){
             file[iFile] = TFile::Open(Files[iFile].Data());
             
             if (iAlgo == 0){
-                tree[iFile][iAlgo]=(TTree*)file[iFile]->Get("akt4PF");
+                tree[iFile][iAlgo]=(TTree*)file[iFile]->Get("ak4PF");
             }
             if (iAlgo == 1){
                 tree[iFile][iAlgo]=(TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
