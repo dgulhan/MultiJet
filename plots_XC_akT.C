@@ -155,7 +155,7 @@ void plots_XC_akT(){
     
     
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
-    makeMultiPanelCanvas(c2[iVar][iN],3,1,0.0,0.0,0.22,0.22,0.02);
+    makeMultiPanelCanvas(c2,3,1,0.0,0.0,0.22,0.22,0.02);
 
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
     t3->SetFillColor(0);
@@ -165,6 +165,7 @@ void plots_XC_akT(){
     t3->SetTextSize(15);
     t3->SetTextAlign(13);
     
+    c2->cd(1);
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         
         
@@ -227,7 +228,7 @@ void plots_XC_akT(){
             hist[iFile][1]->SetFillColorAlpha(Color[1],0.35);
             hist[iFile][1]->SetFillStyle(3004);
             hist[iFile][1]->SetLineColor(Color[1]);
-            hist[iFile][1][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            hist[iFile][1]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
         }
             
         if (iFile==3){
@@ -252,35 +253,15 @@ void plots_XC_akT(){
         }
     }
         
-    TLegend *t2;
     
-    if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
-    if (iCentr > 0){ t2=new TLegend(0.015,0.83,0.03,0.95);}
     
-    t2->SetFillColor(0);
-    t2->SetBorderSize(0);
-    t2->SetFillStyle(0);
-    t2->SetTextFont(43);
-    t2->SetTextSize(19);
-    if ( nCentrBins != 1 ) {
-        t2->AddEntry(c2 ,CentrText .Data(),"");
-        t2->Draw("SAME");
-
-    }
-        
-    if (iCentr == 0){
         drawText("CMS Preliminary",0.20,0.93,23);
-    }
-    if (iCentr == 1) {
         drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
-    }
-    if (iCentr == 2){
         drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
-    }
+    
         
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
-        if (iCentr == nCentrBins-1 ){
-            if (iFile == 0 && nCentrBins != 1 ) {
+        if (iFile == 0 && nCentrBins != 1 ) {
                 t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
             }
             if (iFile == 1 && nCentrBins != 1 ) {
