@@ -157,6 +157,7 @@ void plots_XC_akT(){
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
     makeMultiPanelCanvas(c2,3,1,0.0,0.0,0.22,0.22,0.02);
 
+    /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
@@ -293,6 +294,7 @@ void plots_XC_akT(){
     c2->SaveAs(Form("PLOTALGO/algorithm%s.eps",XLabel[iVar].Data()));
     c2->SaveAs(Form("PLOTALGO/algorithm%s.gif",XLabel[iVar].Data()));
     
+    ***/
     
 
     
