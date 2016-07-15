@@ -50,9 +50,7 @@ void plots_XC_akT(){
     Double_t XMax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.,300};
     
     
-    TFile *file[nFiles];
-    TH1D *hist[nFiles][nAlgo];
-    TTree *tree[nFiles][nAlgo];
+    
     
     /***
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
@@ -80,6 +78,11 @@ void plots_XC_akT(){
     
     
     ***/
+    for ( int iVar = 0; iVar<9 ; iVar++){
+        TFile *file[nFiles];
+        TH1D *hist[nFiles][nAlgo];
+        TTree *tree[nFiles][nAlgo];
+    
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         cout<<iFile<<endl;
         
@@ -220,7 +223,7 @@ void plots_XC_akT(){
     c2->SaveAs(Form("PLOTALGO/MCPbPbalgorithm%s.png",XLabel[iVar].Data()));
     c2->SaveAs(Form("PLOTALGO/MCPbPbalgorithm%s.eps",XLabel[iVar].Data()));
     c2->SaveAs(Form("PLOTALGO/MCPbPbalgorithm%s.gif",XLabel[iVar].Data()));
-    
+}
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
     t3->SetFillColor(0);
