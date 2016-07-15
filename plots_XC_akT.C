@@ -54,7 +54,6 @@ void plots_XC_akT(){
     TH1D *hist[nFiles][nAlgo];
     TTree *tree[nFiles][nAlgo];
     
-    int Color[] = {kRed,kBlue};
     /***
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         for (int iAlgo = 0 ;  iAlgo<nAlgo ; iAlgo++){
@@ -153,8 +152,10 @@ void plots_XC_akT(){
         }
     }
     
-    
-    TCanvas * c2 = new TCanvas("c2","c2",450,450);
+    int ColorAK[] = {kRed,kGreen};
+    int ColorXC[] = {kMagenta,kBlue};
+
+    TCanvas * c2 = new TCanvas("c2","c2",650,450);
     makeMultiPanelCanvas(c2,1,1,0.0,0.0,0.22,0.22,0.02);
 
     c2->cd(1);
@@ -176,7 +177,7 @@ void plots_XC_akT(){
             
             hist[iFile][0]->Draw("SAME HIST");
             hist[iFile][0]->SetFillStyle(3005);
-            hist[iFile][0]->SetFillColorAlpha(Color[0],0.35);
+            hist[iFile][0]->SetFillColorAlpha(ColorAK[0],0.35);
             hist[iFile][0]->SetLineColor(Color[0]);
             t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb PYTHIA+HYDJET","f");
             //xcone
@@ -186,7 +187,7 @@ void plots_XC_akT(){
             
             hist[iFile][1]->Draw("SAME HIST");
             hist[iFile][1]->SetFillStyle(3005);
-            hist[iFile][1]->SetFillColorAlpha(Color[0],0.35);
+            hist[iFile][1]->SetFillColorAlpha(ColorXC[0],0.35);
             hist[iFile][1]->SetLineColor(Color[0]);
             t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
         }
