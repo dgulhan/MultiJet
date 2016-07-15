@@ -150,7 +150,7 @@ void plots_XC_akT(){
         }
     }
     
-    int ColorAK[] = {kRed,kGreen};
+    int ColorAK[] = {kGreen+1,kGreen};
     int ColorXC[] = {kMagenta,kBlue};
 
     TCanvas * c2 = new TCanvas("c2","c2",550,450);
@@ -184,7 +184,7 @@ void plots_XC_akT(){
             hist[iFile][1]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
             
             hist[iFile][1]->Draw("SAME HIST");
-            hist[iFile][1]->SetFillStyle(3005);
+            hist[iFile][1]->SetFillStyle(3004);
             hist[iFile][1]->SetFillColorAlpha(ColorXC[0],0.35);
             hist[iFile][1]->SetLineColor(ColorXC[0]);
             t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
