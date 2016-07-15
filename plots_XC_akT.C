@@ -217,6 +217,10 @@ void plots_XC_akT(){
     drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.18,0.74,16);
     drawText(Form("%s",TextCut[iVar].Data()),0.18,0.69,16);
     
+    c2->SaveAs(Form("PLOTALGO/MCPbPbalgorithm%s.png",XLabel[iVar].Data()));
+    c2->SaveAs(Form("PLOTALGO/MCPbPbalgorithm%s.eps",XLabel[iVar].Data()));
+    c2->SaveAs(Form("PLOTALGO/MCPbPbalgorithm%s.gif",XLabel[iVar].Data()));
+    
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
     t3->SetFillColor(0);
