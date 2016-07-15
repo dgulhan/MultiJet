@@ -156,7 +156,7 @@ void plots_XC_akT(){
     int ColorXC[] = {kMagenta,kBlue};
 
     TCanvas * c2 = new TCanvas("c2","c2",550,450);
-    makeMultiPanelCanvas(c2,1,1,0.5,0.5,0.12,0.16,0.02);
+    makeMultiPanelCanvas(c2,1,1,0.0,0.0,0.12,0.16,0.02);
 
     c2->cd(1);
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
