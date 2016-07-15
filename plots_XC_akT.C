@@ -178,7 +178,7 @@ void plots_XC_akT(){
             hist[iFile][0]->Draw("SAME HIST");
             hist[iFile][0]->SetFillStyle(3005);
             hist[iFile][0]->SetFillColorAlpha(ColorAK[0],0.35);
-            hist[iFile][0]->SetLineColor(Color[0]);
+            hist[iFile][0]->SetLineColor(ColorAK[0]);
             t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb PYTHIA+HYDJET","f");
             //xcone
             makePretty(hist[iFile][1]);
@@ -188,7 +188,7 @@ void plots_XC_akT(){
             hist[iFile][1]->Draw("SAME HIST");
             hist[iFile][1]->SetFillStyle(3005);
             hist[iFile][1]->SetFillColorAlpha(ColorXC[0],0.35);
-            hist[iFile][1]->SetLineColor(Color[0]);
+            hist[iFile][1]->SetLineColor(ColorXC[0]);
             t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
         }
         if (iFile==1){
