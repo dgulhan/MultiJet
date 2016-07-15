@@ -45,7 +45,7 @@ void plots_XC_akT(){
     
     TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " #Delta#phi_{1,2}> 2#pi/3" , "  " , " #Delta#phi_{1,2}> 2#pi/3" , " p_{T_1}^{gen}>0 p_{T_3}^{gen}>0"};
     
-    Double_t YMaxHist[] = {0.08,0.22,0.11,0.081,0.08,0.11,0.15,0.17,0.12,0.15};
+    Double_t YMaxHist[] = {0.08,0.22,0.11,0.081,0.08,0.11,0.11,0.12,0.10,0.15};
     Double_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,-110};
     Double_t XMax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.,300};
     
