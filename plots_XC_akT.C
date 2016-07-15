@@ -57,7 +57,7 @@ void plots_XC_akT(){
     int Color[] = {kRed,kBlue};
     
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
-        for (iAlgo = 0 ;  iAlgo<nAlgo ; iAlgo++){
+        for (int iAlgo = 0 ;  iAlgo<nAlgo ; iAlgo++){
             
             file[iFile] = TFile::Open(Files[iFile].Data());
             
@@ -66,6 +66,10 @@ void plots_XC_akT(){
             }
             if (iAlgo == 1){
                 tree[iFile][iAlgo]=(TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
+            }
+            
+            if (iFile == 0){
+                hist[iFile][iAlgo]=new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),"",50,XMin[iVar],XMax[iVar]);
             }
             
             
