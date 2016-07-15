@@ -20,9 +20,9 @@ void plots_XC_akT(){
     int nCentrBins = 1;
 
 
-    int iVar;
-    cout<<"Var number: ";
-    cin >> iVar;
+    //int iVar;
+    //cout<<"Var number: ";
+    //cin >> iVar;
     
     //acos(cos(phi1-phi2))> 2*TMath::Pi()/2
     
