@@ -197,8 +197,8 @@ void plots_XC_akT(){
             hist[iFile][0]->Draw("SAME");
             hist[iFile][0]->SetMarkerStyle(20);
             hist[iFile][0]->SetMarkerSize(0.5);
-            hist[iFile][0]->SetMarkerColor(Color[0]);
-            hist[iFile][0]->SetLineColor(Color[0]);
+            hist[iFile][0]->SetMarkerColor(ColorAK[0]);
+            hist[iFile][0]->SetLineColor(ColorAK[0]);
             hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
             
             //xcone
@@ -206,8 +206,8 @@ void plots_XC_akT(){
             hist[iFile][1]->Draw("SAME");
             hist[iFile][1]->SetMarkerStyle(20);
             hist[iFile][1]->SetMarkerSize(0.5);
-            hist[iFile][1]->SetMarkerColor(Color[0]);
-            hist[iFile][1]->SetLineColor(Color[0]);
+            hist[iFile][1]->SetMarkerColor(ColorXC[0]);
+            hist[iFile][1]->SetLineColor(ColorXC[0]);
             hist[iFile][1]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
             
         }
