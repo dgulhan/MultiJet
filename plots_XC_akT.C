@@ -157,7 +157,7 @@ void plots_XC_akT(){
     makeMultiPanelCanvas(c2,1,1,-0.12,0.0,0.15,0.16,0.02);
 
     c2->cd(1);
-    TLegend *t3=new TLegend(0.53,0.80,0.75,0.96);
+    TLegend *t3=new TLegend(0.60,0.80,0.75,0.96);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -198,7 +198,8 @@ void plots_XC_akT(){
             hist[iFile][0]->SetMarkerColor(ColorAK[0]);
             hist[iFile][0]->SetLineColor(ColorAK[0]);
             hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
-            
+            t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb Data","f");
+
             //xcone
             makePretty(hist[iFile][1] );
             hist[iFile][1]->Draw("SAME");
@@ -207,7 +208,8 @@ void plots_XC_akT(){
             hist[iFile][1]->SetMarkerColor(ColorXC[0]);
             hist[iFile][1]->SetLineColor(ColorXC[0]);
             hist[iFile][1]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
-            
+            t3->AddEntry(hist[iFile][1] ,"XCone PbPb Data","f");
+
         }
     }
     t3->Draw("SAME");
