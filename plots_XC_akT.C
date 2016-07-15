@@ -94,14 +94,12 @@ void plots_XC_akT(){
     
             
         if (iFile==0){
-            cout<<2<<endl;
-            cout<<iFile<<endl;
             //akt
             hist[iFile][0]= new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-            cout<<22<<endl;
+            
 
             tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0));
-            cout<<23<<endl;
+            
 
             hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
             hist[iFile][0]->SetStats(0);
@@ -114,7 +112,7 @@ void plots_XC_akT(){
         }
             
         if (iFile==1){
-            cout<<3<<endl;
+           
             //akt = 0
             hist[iFile][0]  = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
             tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCuts[iVar]);
@@ -159,7 +157,7 @@ void plots_XC_akT(){
     makeMultiPanelCanvas(c2,1,1,-0.12,0.0,0.15,0.16,0.02);
 
     c2->cd(1);
-    TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
+    TLegend *t3=new TLegend(0.53,0.80,0.75,0.96);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -213,6 +211,10 @@ void plots_XC_akT(){
         }
     }
     t3->Draw("SAME");
+    drawText("CMS Preliminary",0.20,0.93,23);
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
+    drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
+    
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
     t3->SetFillColor(0);
