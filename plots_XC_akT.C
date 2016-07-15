@@ -9,7 +9,7 @@
 
 
 
-void multi_plots(){
+void plots_XC_akT{
     TH1D::SetDefaultSumw2();
     
     
