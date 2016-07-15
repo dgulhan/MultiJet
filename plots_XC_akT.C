@@ -157,7 +157,7 @@ void plots_XC_akT(){
     makeMultiPanelCanvas(c2,1,1,-0.12,0.0,0.15,0.16,0.02);
 
     c2->cd(1);
-    TLegend *t3=new TLegend(0.17,0.75,0.27,0.90);
+    TLegend *t3=new TLegend(0.17,0.77,0.27,0.92);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -214,8 +214,8 @@ void plots_XC_akT(){
     }
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.17,0.93,23);
-    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.17,0.75,15);
-    drawText(Form("%s",TextCut[iVar].Data()),0.17,0.72,15);
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.17,0.74,15);
+    drawText(Form("%s",TextCut[iVar].Data()),0.17,0.69,15);
     
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
