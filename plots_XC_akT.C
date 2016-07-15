@@ -45,7 +45,7 @@ void plots_XC_akT(){
     
     TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , " " , "#Delta#phi_{1,2}> 2#pi/3", " #Delta#phi_{1,2}> 2#pi/3" , "  " , " #Delta#phi_{1,2}> 2#pi/3" , " p_{T_1}^{gen}>0 p_{T_3}^{gen}>0"};
     
-    Double_t YMaxHist[] = {0.10,0.22,0.12,0.095,0.09,0.13,0.15,0.17,0.12,0.15};
+    Double_t YMaxHist[] = {0.08,0.22,0.11,0.081,0.08,0.11,0.15,0.17,0.12,0.15};
     Double_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,-110};
     Double_t XMax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.,300};
     
@@ -98,7 +98,7 @@ void plots_XC_akT(){
             hist[iFile][0]= new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
             
 
-            tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0));
+            tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCutsMC[iVar]);
             
 
             hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
