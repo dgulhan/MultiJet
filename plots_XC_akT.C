@@ -214,8 +214,8 @@ void plots_XC_akT(){
     }
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.17,0.93,23);
-    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.93,0.78,15);
-    drawText(Form("%s",TextCut[iVar].Data()),0.95,0.73,15);
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.78,0.92,15);
+    drawText(Form("%s",TextCut[iVar].Data()),0.73,0.89,15);
     
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
