@@ -255,9 +255,9 @@ void plots_XC_akT(){
         
     
     
-        drawText("CMS Preliminary",0.20,0.93,23);
-        drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
-        drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
+    drawText("CMS Preliminary",0.20,0.93,23);
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
+    drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
     
         
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
@@ -274,19 +274,19 @@ void plots_XC_akT(){
                 t3->AddEntry(hist[iFile][1],"XCone pp Data","p");
 
             }
-                else{
-                    t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb PYTHIA+HYDJET","f");
-                    t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
-                }
-            t3->Draw("SAME");
-            }
+        else{
+            t3->AddEntry(hist[iFile][0] ,"anti-k_{T} PbPb PYTHIA+HYDJET","f");
+            t3->AddEntry(hist[iFile][1] ,"XCone PbPb PYTHIA+HYDJET","f");
+        }
+        t3->Draw("SAME");
+        
             
 
             
-        }
-        
-        
     }
+        
+        
+    
     
     
     c2->SaveAs(Form("PLOTALGO/algorithm%s.png",XLabel[iVar].Data()));
