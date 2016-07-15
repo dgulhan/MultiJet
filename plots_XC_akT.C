@@ -214,40 +214,40 @@ void plots_XC_akT(){
             
         if (iFile==2){
             //akt
-            makePretty(hist[iFile][0][0]);
-            hist[iFile][0][0]->Draw("SAME HIST");
-            hist[iFile][0][0]->SetFillColorAlpha(Color[1],0.35);
-            hist[iFile][0][0]->SetFillStyle(3004);
-            hist[iFile][0][0]->SetLineColor(Color[1]);
-            hist[iFile][0][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            makePretty(hist[iFile][0]);
+            hist[iFile][0]->Draw("SAME HIST");
+            hist[iFile][0]->SetFillColorAlpha(Color[1],0.35);
+            hist[iFile][0]->SetFillStyle(3004);
+            hist[iFile][0]->SetLineColor(Color[1]);
+            hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
                 
             //xcone
-            makePretty(hist[iFile][1][0]);
-            hist[iFile][1][0]->Draw("SAME HIST");
-            hist[iFile][1][0]->SetFillColorAlpha(Color[1],0.35);
-            hist[iFile][1][0]->SetFillStyle(3004);
-            hist[iFile][1][0]->SetLineColor(Color[1]);
+            makePretty(hist[iFile][1]);
+            hist[iFile][1]->Draw("SAME HIST");
+            hist[iFile][1]->SetFillColorAlpha(Color[1],0.35);
+            hist[iFile][1]->SetFillStyle(3004);
+            hist[iFile][1]->SetLineColor(Color[1]);
             hist[iFile][1][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
         }
             
         if (iFile==3){
             //akt
-            makePretty(hist[iFile][0][0]);
-            hist[iFile][0][0]->Draw("SAME");
-            hist[iFile][0][0]->SetMarkerStyle(20);
-            hist[iFile][0][0]->SetMarkerSize(0.5);
-            hist[iFile][0][0]->SetMarkerColor(Color[1]);
-            hist[iFile][0][0]->SetLineColor(Color[1]);
-            hist[iFile][0][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            makePretty(hist[iFile][0]);
+            hist[iFile][0]->Draw("SAME");
+            hist[iFile][0]->SetMarkerStyle(20);
+            hist[iFile][0]->SetMarkerSize(0.5);
+            hist[iFile][0]->SetMarkerColor(Color[1]);
+            hist[iFile][0]->SetLineColor(Color[1]);
+            hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
             
             //xcone
-            makePretty(hist[iFile][1][0]);
-            hist[iFile][1][0]->Draw("SAME");
-            hist[iFile][1][0]->SetMarkerStyle(20);
-            hist[iFile][1][0]->SetMarkerSize(0.5);
-            hist[iFile][1][0]->SetMarkerColor(Color[1]);
-            hist[iFile][1][0]->SetLineColor(Color[1]);
-            hist[iFile][1][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            makePretty(hist[iFile][1]);
+            hist[iFile][1]->Draw("SAME");
+            hist[iFile][1]->SetMarkerStyle(20);
+            hist[iFile][1]->SetMarkerSize(0.5);
+            hist[iFile][1]->SetMarkerColor(Color[1]);
+            hist[iFile][1]->SetLineColor(Color[1]);
+            hist[iFile][1]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
 
         }
     }
@@ -287,10 +287,10 @@ void plots_XC_akT(){
                 t3->AddEntry(hist[iFile][1] ,"XCone PbPb Data","p");
             }
             if (iFile == 2 && nCentrBins != 1 ){
-                t3->AddEntry(hist[iFile][1][0],"XCone pp PYTHIA","f");
+                t3->AddEntry(hist[iFile][1],"XCone pp PYTHIA","f");
             }
             if (iFile == 3 && nCentrBins != 1 ) {
-                t3->AddEntry(hist[iFile][1][0],"XCone pp Data","p");
+                t3->AddEntry(hist[iFile][1],"XCone pp Data","p");
 
             }
                 else{
