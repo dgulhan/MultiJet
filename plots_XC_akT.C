@@ -154,8 +154,8 @@ void plots_XC_akT(){
     }
     
     
-    TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
-    makeMultiPanelCanvas(c2,3,1,0.0,0.0,0.22,0.22,0.02);
+    TCanvas * c2 = new TCanvas("c2","c2",450,450);
+    makeMultiPanelCanvas(c2,1,1,0.0,0.0,0.22,0.22,0.02);
 
     c2->cd(1);
     
@@ -182,7 +182,26 @@ void plots_XC_akT(){
             hist[iFile][1]->SetFillColorAlpha(Color[0],0.35);
             hist[iFile][1]->SetLineColor(Color[0]);
         }
-        
+        if (iFile==1){
+            //akt
+            makePretty(hist[iFile][0] );
+            hist[iFile][0]->Draw("SAME");
+            hist[iFile][0]->SetMarkerStyle(20);
+            hist[iFile][0]->SetMarkerSize(0.5);
+            hist[iFile][0]->SetMarkerColor(Color[0]);
+            hist[iFile][0]->SetLineColor(Color[0]);
+            hist[iFile][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            
+            //xcone
+            makePretty(hist[iFile][1] );
+            hist[iFile][1]->Draw("SAME");
+            hist[iFile][1]->SetMarkerStyle(20);
+            hist[iFile][1]->SetMarkerSize(0.5);
+            hist[iFile][1]->SetMarkerColor(Color[0]);
+            hist[iFile][1]->SetLineColor(Color[0]);
+            hist[iFile][1]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
+            
+        }
     }
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
