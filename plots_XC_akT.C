@@ -69,7 +69,8 @@ void plots_XC_akT(){
             }
             
             if (iFile == 0){
-                hist[iFile][iAlgo]=new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),"",50,XMin[iVar],XMax[iVar]);
+                hist[iFile][iAlgo]=new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
+                tree[iFile][iAlgo]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0));
             }
             
             
