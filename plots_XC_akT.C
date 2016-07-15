@@ -55,7 +55,7 @@ void plots_XC_akT(){
     TTree *tree[nFiles][nAlgo];
     
     int Color[] = {kRed,kBlue};
-    
+    /***
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         for (int iAlgo = 0 ;  iAlgo<nAlgo ; iAlgo++){
             
@@ -80,7 +80,7 @@ void plots_XC_akT(){
     }
     
     
-    /***
+    ***/
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
         cout<<iFile<<endl;
         
@@ -89,7 +89,7 @@ void plots_XC_akT(){
         //if (iFile == 3 ){tree[iFile] = (TTree*)file[iFile]->Get("xc4PF");}
         //if (iFile  < 3 ){tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));}
         
-        tree[iFile][0] = (TTree*)file[iFile]->Get("akt4PF");
+        tree[iFile][0] = (TTree*)file[iFile]->Get("ak4PF");
         tree[iFile][1] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
         
     
@@ -153,6 +153,7 @@ void plots_XC_akT(){
         }
     }
     
+    /***    
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
     
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
