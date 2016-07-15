@@ -56,8 +56,17 @@ void plots_XC_akT(){
     
     int Color[] = {kRed,kBlue};
     
-    
-    
+    for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
+        for (iAlgo = 0 ;  iAlgo<nAlgo ; iAlgo++){
+            
+            file[iFile] = TFile::Open(Files[iFile].Data());
+            
+            if (iAlgo == 0){tree[iFile][iAlgo]->Get("akt4PF");}
+            if (iAlgo == 1){tree[iFile][iAlgo]->Get(Form("xc_R%i_N%i_PF",R,N));}
+            
+        }
+
+    }
     
     
     /***
