@@ -57,6 +57,8 @@ void plots_XC_akT(){
     int Color[] = {kRed,kBlue};
     
     for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
+        cout<<1<<endl;
+        
         file[iFile] = TFile::Open(Files[iFile].Data());
         
         //if (iFile == 3 ){tree[iFile] = (TTree*)file[iFile]->Get("xc4PF");}
@@ -68,6 +70,7 @@ void plots_XC_akT(){
     
             
         if (iFile==0){
+            cout<<2<<endl;
             //akt
             hist[iFile][0]= new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
             tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCutsMC[iVar]);
@@ -82,6 +85,7 @@ void plots_XC_akT(){
         }
             
         if (iFile==1){
+            cout<<3<<endl;
             //akt = 0
             hist[iFile][0]  = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
             tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCuts[iVar]);
@@ -99,6 +103,7 @@ void plots_XC_akT(){
             
         
         if (iFile == 2 || iFile==3) {
+            cout<<4<<endl;
             //For pp centrality is not computed !!
         
             //ak = 0
