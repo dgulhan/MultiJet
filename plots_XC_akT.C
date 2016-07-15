@@ -76,6 +76,7 @@ void plots_XC_akT(){
             tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCutsMC[iVar]);
             hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
             hist[iFile][0]->SetStats(0);
+            cout<<22<<endl;
             //xcone
             hist[iFile][1]  = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,1),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
             tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,1),PbPbCutsMC[iVar]);
