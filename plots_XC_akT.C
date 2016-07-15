@@ -153,7 +153,7 @@ void plots_XC_akT(){
         }
     }
     
-    /***    
+    
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
     
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
@@ -312,7 +312,7 @@ void plots_XC_akT(){
     c2->SaveAs(Form("PLOTALGO/algorithm%s.gif",XLabel[iVar].Data()));
     
     
-    ***/
+
     
     
     
