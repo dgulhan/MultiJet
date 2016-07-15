@@ -185,7 +185,7 @@ void multi_plots(){
             
             if (iFile==2){
                 //akt
-                makePretty(hist[iFile][0]);
+                makePretty(hist[iFile][0][0]);
                 hist[iFile][0][0]->Draw("SAME HIST");
                 hist[iFile][0][0]->SetFillColorAlpha(Color[1],0.35);
                 hist[iFile][0][0]->SetFillStyle(3004);
@@ -193,7 +193,7 @@ void multi_plots(){
                 hist[iFile][0][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
                 
                 //xcone
-                makePretty(hist[iFile][0]);
+                makePretty(hist[iFile][1][0]);
                 hist[iFile][1][0]->Draw("SAME HIST");
                 hist[iFile][1][0]->SetFillColorAlpha(Color[1],0.35);
                 hist[iFile][1][0]->SetFillStyle(3004);
@@ -204,7 +204,7 @@ void multi_plots(){
             
             if (iFile==3){
                 //akt
-                makePretty(hist[iFile][0]);
+                makePretty(hist[iFile][0][0]);
                 hist[iFile][0][0]->Draw("SAME");
                 hist[iFile][0][0]->SetMarkerStyle(20);
                 hist[iFile][0][0]->SetMarkerSize(0.5);
@@ -213,7 +213,7 @@ void multi_plots(){
                 hist[iFile][0][0]->GetXaxis()->SetLimits(XMin[iVar]+0.0001,XMax[iVar]-0.0001);
                 
                 //xcone
-                makePretty(hist[iFile][0]);
+                makePretty(hist[iFile][1][0]);
                 hist[iFile][1][0]->Draw("SAME");
                 hist[iFile][1][0]->SetMarkerStyle(20);
                 hist[iFile][1][0]->SetMarkerSize(0.5);
@@ -234,7 +234,7 @@ void multi_plots(){
         t2->SetFillStyle(0);
         t2->SetTextFont(43);
         t2->SetTextSize(19);
-        if ( nCentrBins =! 1 ) {
+        if ( nCentrBins != 1 ) {
             t2->AddEntry(c2 ,CentrText[iCentr].Data(),"");
             t2->Draw("SAME");
 
@@ -252,16 +252,16 @@ void multi_plots(){
         
         for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
             if (iCentr == nCentrBins-1 ){
-                if (iFile == 0 && nCentrBins =! 1 ) {
+                if (iFile == 0 && nCentrBins != 1 ) {
                     t3->AddEntry(hist[iFile][1][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
                 }
-                if (iFile == 1 && nCentrBins =! 1 ) {
+                if (iFile == 1 && nCentrBins != 1 ) {
                     t3->AddEntry(hist[iFile][1][iCentr],"XCone PbPb Data","p");
                 }
-                if (iFile == 2 && nCentrBins =! 1 ){
+                if (iFile == 2 && nCentrBins != 1 ){
                     t3->AddEntry(hist[iFile][1][0],"XCone pp PYTHIA","f");
                 }
-                if (iFile == 3 && nCentrBins =! 1 ) {
+                if (iFile == 3 && nCentrBins != 1 ) {
                     t3->AddEntry(hist[iFile][1][0],"XCone pp Data","p");
 
                 }
