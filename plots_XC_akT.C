@@ -15,7 +15,7 @@ void plots_XC_akT(){
     
     int R = 4;
     int N = 3;
-    int nFiles = 1;
+    int nFiles = 2;
     int nAlgo = 2;
     int nCentrBins = 1;
 
@@ -211,9 +211,9 @@ void plots_XC_akT(){
         }
     }
     t3->Draw("SAME");
-    drawText("CMS Preliminary",0.20,0.93,23);
-    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
-    drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
+    drawText("CMS Preliminary",0.17,0.93,23);
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.17,0.89,18);
+    drawText(Form("%s",TextCut[iVar].Data()),0.17,0.85,18);
     
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
