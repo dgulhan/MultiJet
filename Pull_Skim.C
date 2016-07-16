@@ -94,7 +94,10 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     // akPu3PF *t = new akPu3PF(infname.Data(),algo);
     pfChainVec * fpf = new pfChainVec(infname.Data(), PFcollection);
     genChain * fgen = new genChain(infname.Data());
+    
+
     bool doGen = true;
+    if(mode == "PbPbData" || mode == "ppData") doGen = false;
     
     int nentries = fpf->GetEntries();
     std::cout<<"nentries = "<<nentries<<std::endl;
