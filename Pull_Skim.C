@@ -95,7 +95,8 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     skimChain   *fskim = new skimChain(infname.Data());
     // akPu3PF *t = new akPu3PF(infname.Data(),algo);
     pfChainVec * fpf = new pfChainVec(infname.Data(), PFcollection);
-    genChain * fgen = new genChain(infname.Data());
+	genChain *fgen;
+    if(doGen)fgen = new genChain(infname.Data());
     
 
     int nentries = fpf->GetEntries();
@@ -226,7 +227,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         fskim->GetEntry(jentry);
         fpf->GetEntry(jentry);
 
-        if(mode == "ppMC" || mode == "PbPbMC") fgen->GetEntry(jentry);
+        if(doGen) fgen->GetEntry(jentry);
         
         
         if((mode == "ppData" || mode == "ppMC") && !(fskim->HBHENoiseFilterResultRun2Loose && fskim->pPAprimaryVertexFilter && fabs(fhi->vz)<15 && fskim->pBeamScrapingFilter)) continue;
