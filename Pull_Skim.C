@@ -87,18 +87,17 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     TString PFcollection = "pfcandAnalyzer";
     if(mode == "PbPbData" || mode == "PbPbMC") PFcollection = "pfcandAnalyzerCS";
     
+    bool doGen = true;
+    if(mode == "PbPbData" || mode == "ppData") doGen = false;
     
     hiChain   *fhi = new hiChain(infname.Data());
     hltChain   *fhlt = new hltChain(infname.Data());
     skimChain   *fskim = new skimChain(infname.Data());
     // akPu3PF *t = new akPu3PF(infname.Data(),algo);
     pfChainVec * fpf = new pfChainVec(infname.Data(), PFcollection);
-    genChain * fgen = new genChain(infname.Data());
+    if (mode == "PbPbMC" || mode == "ppMC") genChain * fgen = new genChain(infname.Data());
     
 
-    bool doGen = true;
-    if(mode == "PbPbData" || mode == "ppData") doGen = false;
-    
     int nentries = fpf->GetEntries();
     std::cout<<"nentries = "<<nentries<<std::endl;
     std::cout<<"Outfile: "<<outfname.Data()<<std::endl;
