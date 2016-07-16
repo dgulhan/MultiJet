@@ -218,7 +218,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     
     for (Long64_t jentry = 0; jentry < nentries; jentry++) {
 
-    //for (Long64_t jentry = 0; jentry < 100; jentry++) {
+    // for (Long64_t jentry = 0; jentry < 10; jentry++) {
         
         if(nentries%1000 == jentry)cout << jentry << endl;
      
@@ -229,7 +229,6 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
 
         if(doGen) fgen->GetEntry(jentry);
         
-        
         if((mode == "ppData" || mode == "ppMC") && !(fskim->HBHENoiseFilterResultRun2Loose && fskim->pPAprimaryVertexFilter && fabs(fhi->vz)<15 && fskim->pBeamScrapingFilter)) continue;
         
         if((mode == "PbPbData") && !(fhlt->HLT_HIPuAK4CaloJet80_Eta5p1_v1 && fskim->pprimaryVertexFilter && fskim->pclusterCompatibilityFilter && fskim->pcollisionEventSelection && fskim->HBHENoiseFilterResultRun2Loose)) continue;
@@ -238,7 +237,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         
         vector<PseudoJet> fjpfjets[nalgo][nR][nJet];
         vector<PseudoJet> fjgenjets[nalgo][nR][nJet];
-        
+
         // Cluster Secuence
         ClusterSequence *cspf_ak[nalgo][nR][nJet];
         ClusterSequence *cspf_xcone[nalgo][nR][nJet];
@@ -263,7 +262,6 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             particlespf.push_back(Particle);
         }
         
-        
         if(particlespf.size()>0){
             for(int iR = 0; iR < nR; iR++){
                 cspf_ak[0][iR][0] = new ClusterSequence (particlespf, *jet_def_antikt[iR]);
@@ -278,8 +276,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             }
         }
         particlespf.clear();
-        
-        
+                
         if(doGen){
             //cluster gen particles from signal
             vector<PseudoJet> particles;
@@ -318,7 +315,6 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
             particles.clear();
             
         }
-
         
         int njet[nalgo][nR][nJet];
         vector<Jet> jets[nalgo][nR][nJet];
@@ -446,17 +442,23 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                 evnt.reset();
             }
         }
-        
+        for(int iR = 0; iR < nR; iR++){
+            delete cspf_ak[0][iR][0];
+            for (int iN = 0; iN < nJet ; iN++){
+                delete cspf_xcone[1][iR][iN];
+                
+            }
+        }
     }
     
     fnt->cd();
     
     for(int iR = 0; iR < nR; iR++){
         treeMJ[0][iR][0]->Write();
-        //std::cout<<"Writing akt trees"<<std::endl;
+        std::cout<<"Writing akt trees"<<std::endl;
         for (int iN = 0; iN < nJet ; iN ++){
             treeMJ[1][iR][iN]->Write();
-            //std::cout<<"Writing xcone trees"<<std::endl;
+            std::cout<<"Writing xcone trees"<<std::endl;
         }
     }
     fnt->Close();
