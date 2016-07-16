@@ -280,7 +280,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         particlespf.clear();
         
         
-        if(mode == "ppMC" || mode == "PbPbMC"){
+        if(doGen){
             //cluster gen particles from signal
             vector<PseudoJet> particles;
             for(int ipart = 0; ipart < fgen->mult; ipart++){
@@ -401,7 +401,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
                         njet[ialgo][iR][iN]++;
                     }
                     if(doGen){
-                        cout << "ngen = " << fjgenjets[ialgo][iR][iN].size() << endl;
+                        // cout << "ngen = " << fjgenjets[ialgo][iR][iN].size() << endl;
                         for(unsigned int ijet = 0;  ijet < fjgenjets[ialgo][iR][iN].size(); ijet++){
                             
                             float geneta = fjgenjets[ialgo][iR][iN][ijet].eta();
@@ -437,12 +437,12 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
         for(int iR = 0; iR < nR; iR++){
             if(njet[0][iR][0] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[0][iR][0], &genjets[0][iR][0]);
             treeMJ[0][iR][0]->Fill();
-            std::cout<<"Filling akt trees"<<std::endl;
+            // std::cout<<"Filling akt trees"<<std::endl;
             evnt.reset();
             for (int iN = 0; iN < nJet ; iN ++){
                 if(njet[1][iR][iN] > 0) evnt.setEvent((int)fhi->run, (int)fhi->lumi, (int)fhi->evt, (int)fhi->hiBin, &jets[1][iR][iN], &genjets[1][iR][iN]);
                 treeMJ[1][iR][iN]->Fill();
-                std::cout<<"Filling xcone trees"<<std::endl;
+                // std::cout<<"Filling xcone trees"<<std::endl;
                 evnt.reset();
             }
         }
@@ -463,7 +463,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     std::cout<<"Closing file"<<std::endl;
 }
 
-
+ 
 
 
 
