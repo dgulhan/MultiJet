@@ -95,7 +95,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     skimChain   *fskim = new skimChain(infname.Data());
     // akPu3PF *t = new akPu3PF(infname.Data(),algo);
     pfChainVec * fpf = new pfChainVec(infname.Data(), PFcollection);
-    if (mode == "PbPbMC" || mode == "ppMC") genChain * fgen = new genChain(infname.Data());
+    genChain * fgen = new genChain(infname.Data());
     
 
     int nentries = fpf->GetEntries();
