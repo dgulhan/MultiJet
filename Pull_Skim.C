@@ -453,10 +453,10 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     
     for(int iR = 0; iR < nR; iR++){
         treeMJ[0][iR][0]->Write();
-        std::cout<<"Writing akt trees"<<std::endl;
+        //std::cout<<"Writing akt trees"<<std::endl;
         for (int iN = 0; iN < nJet ; iN ++){
             treeMJ[1][iR][iN]->Write();
-            std::cout<<"Writing xcone trees"<<std::endl;
+            //std::cout<<"Writing xcone trees"<<std::endl;
         }
     }
     fnt->Close();
