@@ -334,7 +334,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = ""){
                         for(unsigned int ijet = 0;  ijet < fjGenJets[ialgo][iR][iN].size(); ijet++){ //!loop over gen jets
                             
                             float genEta = fjGenJets[ialgo][iR][iN][ijet].eta();
-                            float genPhi = fjGenJets[ialgo][iR][iN][ijet].phi();
+                            float genPhi = fjGenJets[ialgo][iR][iN][ijet].phi() - 3.141592653589;
                             float genPt = fjGenJets[ialgo][iR][iN][ijet].perp();
                             if(fabs(genEta + R[iR]) > etacut) continue;
 
@@ -367,7 +367,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = ""){
                         float jtPt = fjPFjets[ialgo][iR][iN][ijet].perp();
                        
   					    if(jtPt < jetPtMin) continue;
-                        float jtPhi = fjPFjets[ialgo][iR][iN][ijet].phi();
+                        float jtPhi = fjPFjets[ialgo][iR][iN][ijet].phi() -  3.141592653589;
                         float jtEta = fjPFjets[ialgo][iR][iN][ijet].eta();
                         if(fabs(jtEta + R[iR]) > etacut) continue;
 
