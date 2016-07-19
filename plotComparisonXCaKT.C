@@ -105,7 +105,7 @@ void plotComparisonXCaKT(){
     
     
     ***/
-    for ( int iVar = 0; iVar<8 ; iVar++){
+    for ( int iVar = 0; iVar<9 ; iVar++){
         TFile *file[nFiles];
         TH1D *hist[nFiles][nAlgo];
         TTree *tree[nFiles][nAlgo];
