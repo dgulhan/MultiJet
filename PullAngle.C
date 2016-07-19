@@ -56,8 +56,8 @@ void PullAngle(){
     TH1D *h[nFiles][6];
     int Colors[] = {kGreen,kMagenta}; //kGreen for XCone kMagenta anit-kT
     
-    TCanvas * c2 = new TCanvas("c2","c2",750,750);
-    makeMultiPanelCanvas(c2,1,3,0.0,0.0,0.17,0.17,0.02);
+    TCanvas * c2 = new TCanvas("c2","c2",4*450,450);
+    makeMultiPanelCanvas(c2,3,1,0.0,0.0,0.17,0.17,0.02);
     
     for ( int iFile = 0 ; iFile < nFiles; iFile++ ) {
         
