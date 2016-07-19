@@ -87,7 +87,7 @@ void mean_pull(){
     for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
         
         h[iFile][iPoint] = new TH1D(Form("h%i%i",iFile,iPoint),"",50,0,3.5);
-        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutsR[iPoint] && CutSeePull[0]);
+        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint] );
         Y0[iPoint] = h[iFile][iPoint]->GetMean();
         cout<<h[iFile][iPoint]->GetMean()<<endl;
         Y0err[iPoint] = h[iFile][iPoint]->GetMeanError();
@@ -101,7 +101,7 @@ void mean_pull(){
     for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
         
         h[iFile][iPoint] = new TH1D(Form("h%i%i",iFile,iPoint),"",50,0,3.5);
-        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutsR[iPoint] && CutSeePull[0]);
+        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint] );
         Y1[iPoint] = h[iFile][iPoint]->GetMean();
         cout<<h[iFile][iPoint]->GetMean()<<endl;
         Y1err[iPoint] = h[iFile][iPoint]->GetMeanError();
@@ -115,7 +115,7 @@ void mean_pull(){
     for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
         
         h[iFile][iPoint] = new TH1D(Form("h%i%i",iFile,iPoint),"",50,0,3.5);
-        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutsR[iPoint] && CutSeePull[0]);
+        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint] );
         Y2[iPoint] = h[iFile][iPoint]->GetMean();
         cout<<h[iFile][iPoint]->GetMean()<<endl;
         Y2err[iPoint] = h[iFile][iPoint]->GetMeanError();
@@ -129,7 +129,7 @@ void mean_pull(){
     for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
         
         h[iFile][iPoint] = new TH1D(Form("h%i%i",iFile,iPoint),"",50,0,3.5);
-        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutsR[iPoint] && CutSeePull[0]);
+        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint] );
         Y3[iPoint] = h[iFile][iPoint]->GetMean();
         cout<<h[iFile][iPoint]->GetMean()<<endl;
         Y3err[iPoint] = h[iFile][iPoint]->GetMeanError();
