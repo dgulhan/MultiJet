@@ -36,7 +36,7 @@ using namespace std;
 
 
 
-void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", Bool_t doMatchAK = 0){
+void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", Bool_t doMatchAK = ""){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
 	
