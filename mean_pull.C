@@ -145,7 +145,7 @@ void mean_pull(){
     gr[0]->GetYaxis()->SetTitle("#LT | #vec{t} | #GT ");
     gr[0]->SetFillColor(Color[0]);
     gr[0]->SetLineColor(Color[0]);
-    gr[0]->Draw("SAME");
+    gr[0]->Draw();
 
     gr[1] = new TGraphErrors(nPoints,X,Y1,Xerr,Y1err);
     gr[1]->SetFillColor(Color[1]);
