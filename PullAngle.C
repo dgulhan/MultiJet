@@ -47,7 +47,7 @@ void PullAngle(){
     
     TCut Cut1b = "pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5" ;
     
-    TCut Cut1c = "pt1>120 && pt3>30 && rawpt[3]>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(rawphi[3],phi2),2.)+pow(eta2-raweta[3],2.))<0.5" ;
+    TCut Cut1c = "pt1>120 && pt3>30 && rawPt[3]>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(rawPhi[3],phi2),2.)+pow(eta2-rawEta[3],2.))<0.5" ;
     
     
     //TCut GenCut1 = "genPt1>120 && genPt3>30 && acos(cos(genPhi1-genPhi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(genPhi3,genPhi2),2.)+pow(genEta2-genEta3,2.))<0.5" ;
@@ -97,14 +97,14 @@ void PullAngle(){
         
         
         h[iFile][4] = new TH1D(Form("h4%i",iFile),";#theta_{Pull 2,3};Event fraction",50,0,3.5);
-        xcR4N4PF[iFile]->Draw(Form("acos((pullEta2*(raweta[3]-eta2)+pullPhi2*deltaPhi(rawphi[3],phi2))/( mag(pullEta2,pullPhi2)*mag(raweta[3]-eta2,deltaPhi(rawphi[3],phi2)) ))>>h4%i",iFile),Cut1c);
+        xcR4N4PF[iFile]->Draw(Form("acos((pullEta2*(rawEta[3]-eta2)+pullPhi2*deltaPhi(rawPhi[3],phi2))/( mag(pullEta2,pullPhi2)*mag(rawEta[3]-eta2,deltaPhi(rawPhi[3],phi2)) ))>>h4%i",iFile),Cut1c);
         h[iFile][4]->Scale(1./h[iFile][4]->Integral());
         h[iFile][4]->SetLineColor(Colors[0]);
         makePretty(h[iFile][4]);
         
         
         h[iFile][5] = new TH1D(Form("h5%i",iFile),";#theta_{Pull 2,3};Event fraction",50,0,3.5);
-        akR4PF[iFile]->Draw(Form("acos((pullEta2*(raweta[3]-eta2)+pullPhi2*deltaPhi(rawphi[3],phi2))/( mag(pullEta2,pullPhi2)*mag(raweta[3]-eta2,deltaPhi(rawphi[3],phi2)) ))>>h5%i",iFile),Cut1c);
+        akR4PF[iFile]->Draw(Form("acos((pullEta2*(rawEta[3]-eta2)+pullPhi2*deltaPhi(rawPhi[3],phi2))/( mag(pullEta2,pullPhi2)*mag(rawEta[3]-eta2,deltaPhi(rawPhi[3],phi2)) ))>>h5%i",iFile),Cut1c);
         h[iFile][5]->Scale(1./h[iFile][5]->Integral());
         h[iFile][5]->SetLineColor(Colors[1]);
         makePretty(h[iFile][5]);
