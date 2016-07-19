@@ -12,10 +12,12 @@ float deltaPhi( float phi1, float phi2) {
     
     if ( dphi > 3.141592653589 ){
         dphi = dphi - 2. * 3.141592653589;
-        //cout<<"dphi > 3.14 "<< dphi<<endl;}
+        //cout<<"dphi > 3.14 "<< dphi<<endl;
+    }
     if ( dphi <= -3.141592653589 ){
         dphi = dphi + 2. * 3.141592653589;
-        //cout<<"dphi <= -3.14 "<<dphi<<endl;}
+        //cout<<"dphi <= -3.14 "<<dphi<<endl;
+    }
     if ( TMath::Abs(dphi) > 3.141592653589 ) {
         //cout<<"abs(dphi)"<<TMath::Abs(dphi)<<endl;
         cout << " commonUtility::getDPHI error!!! dphi is bigger than 3.141592653589 " << endl;
