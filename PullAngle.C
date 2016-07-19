@@ -45,7 +45,7 @@ void PullAngle(){
     
     TCut Cut1b = "pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5" ;
     
-    TCut Cut1c = "pt1>120 && pt3>30 rawpt[3]>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(rawphi[3],phi2),2.)+pow(eta2-raweta[3],2.))<0.5" ;
+    TCut Cut1c = "pt1>120 && pt3>30 && rawpt[3]>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(rawphi[3],phi2),2.)+pow(eta2-raweta[3],2.))<0.5" ;
     
     
     //TCut GenCut1 = "genPt1>120 && genPt3>30 && acos(cos(genPhi1-genPhi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(genPhi3,genPhi2),2.)+pow(genEta2-genEta3,2.))<0.5" ;
