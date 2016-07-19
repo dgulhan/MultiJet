@@ -1,6 +1,6 @@
 
 WD=/afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet
-g++ /afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/Pull_Skim_AK.C  `fastjet-install/bin/fastjet-config --cxxflags --libs --plugins` $(root-config --cflags --libs) -lNsubjettiness -Wall -O2 -o /afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/dijetPull_AK
+g++ /afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/Pull_Skim.C  `fastjet-install/bin/fastjet-config --cxxflags --libs --plugins` $(root-config --cflags --libs) -lNsubjettiness -Wall -O2 -o /afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/dijetPull
 
 chmod 755 $WD/run_pull.sh
 
