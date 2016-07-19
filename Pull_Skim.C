@@ -36,11 +36,11 @@ using namespace std;
 
 
 
-void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
+void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", bool doMatchAK = false  ){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
 	
-    bool doMatchAK = true;
+    //bool doMatchAK = true;
 	float etacut = 2;
     float jetPtMin = 10;
     
@@ -98,10 +98,12 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     std::cout<<"nentries = "<<nentries<<std::endl;
     std::cout<<"Outfile: "<<outfname.Data()<<std::endl;
     std::cout<<"Mode: "<<mode.Data()<<std::endl;
+    std::cout<<"Matching akt: "<<doMatchAK<<std::endl;
     
     TFile * fnt;
+    
     if(doMatchAK){
-	    fnt = new TFile(Form("AKmatched/%s",outfname.Data()),"recreate");
+	    fnt = new TFile(Form("AKmatched+%s",outfname.Data()),"recreate");
     }else{
  	    fnt = new TFile(outfname.Data(),"recreate");
 	}

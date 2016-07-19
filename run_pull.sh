@@ -4,6 +4,7 @@ indir=
 infile=
 inlabel=
 inmode=
+inmatch=
 
 until [ -z "$1" ]; do
 case "$1" in
@@ -11,7 +12,8 @@ case "$1" in
 -d|--dir) shift; indir="$1"; shift;;
 -l|--label) shift; inlabel="$1"; shift;;
 -m|--mode) shift; inmode="$1"; shift;;
--h|--help) shift; echo "sh run_pull.sh -d(--dir) your/directory -i(--input) HiForest_0.root -l(--label) label for output name -m ppMC or PbPbData f.e "; shift;;
+-a|--akmatch) shift; inmatch="$1"; shift;;
+-h|--help) shift; echo "sh run_pull.sh -d(--dir) your/directory -i(--input) HiForest_0.root -l(--label) label for output name -m ppMC or PbPbData f.e -a true or false for match to akt "; shift;;
 -*) shift ;;
 *) break ;;
 esac
@@ -27,4 +29,4 @@ dir=root://eoscms//eos/cms$indir
 
 out=$WD/$inlabel$infile
 
-./dijetPull $dir/$infile $out $inmode
+./dijetPull $dir/$infile $out $inmode $inmatch
