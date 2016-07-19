@@ -102,8 +102,8 @@ void multi_plots(){
         //if (iFile == 3 ){tree[iFile] = (TTree*)file[iFile]->Get("xc4PF");}
         //if (iFile  < 3 ){tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));}
         
-        //tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
-        tree[iFile] = (TTree*)file[iFile]->Get(Form("ak4PF",R,N));
+        tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
+        //tree[iFile] = (TTree*)file[iFile]->Get(Form("ak4PF",R,N));
 
         for ( int iCentr = 0 ; iCentr < nCentrBins ; iCentr++ ) {
             
@@ -129,7 +129,7 @@ void multi_plots(){
                 //For pp centrality is not computed.
                 cout<<"Reading pp"<<endl;
                 hist[iFile][0] = new TH1D(Form("hist_F%iV%iC%i",iFile,iVar,iCentr),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-                tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),PPCuts[iVar]);
+                tree[iFile]->Draw(Form("%s>>hist_F%iV%iC%i",XAxis[iVar].Data(),iFile,iVar,iCentr),ppCuts[iVar]);
                 hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
                 hist[iFile][0]->SetStats(0);
                 
