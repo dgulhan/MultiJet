@@ -30,12 +30,12 @@ void PullAngle(){
     
     int nFiles = 1;
     
-    TString Files[] = { "ppMCpthat80+pullHiForestAOD_ALL.root" };
+    TString Files[] = { "ppMCpthat80+pullHiForestAOD_1.root" };
     
     TFile *file[nFiles];
     TTree *xcR4N3PF[nFiles];
     
-    TCut cut1 = "sqrt(pow(acos(cos(deltaPhi(phi3,phi2))),2.)+pow(eta2-eta3,2.))<0.5 && pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" ;
+    TCut cut1 = "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5 && pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" ;
     
     
     TH1D *h[nFiles];
