@@ -39,7 +39,8 @@ using namespace std;
 void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
-    
+	
+    bool doMatchAK = true;
 	float etacut = 2;
     float jetPtMin = 10;
     
@@ -98,8 +99,14 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     std::cout<<"Outfile: "<<outfname.Data()<<std::endl;
     std::cout<<"Mode: "<<mode.Data()<<std::endl;
     
-    TFile * fnt = new TFile(outfname.Data(),"recreate");
-    newEvent evnt(doGen);
+    TFile * fnt;
+    if(doMatchAK){
+ 	    fnt = new TFile(outfname.Data(),"recreate");
+    }else{
+	    fnt = new TFile(Form("AKMatched_%s",outfname.Data()),"recreate");
+	}
+	
+	newEvent evnt(doGen);
     
     int nalgo = 2;
     TTree * treeMJ[2][nR][nJet];
@@ -381,26 +388,44 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
 						    for(unsigned int igen = 0; igen < genjets[ialgo][iR][iN].size(); igen++){
 						       float matchEta = genjets[ialgo][iR][iN][igen].eta;
 						       float matchPhi = genjets[ialgo][iR][iN][igen].phi;
-						       bool matched = genjets[ialgo][iR][iN][igen].matched;
-							   if(deltaR(jtEta, jtPhi, matchEta, matchPhi) < R[iR] && !matched){
+							   bool matched = genjets[ialgo][iR][iN][igen].matched;
+							   if(doMatchAK && ialgo > 0){
+							       matchEta = genjets[0][iR][0][igen].eta;
+						           matchPhi = genjets[0][iR][0][igen].phi;
+							       matched = genjets[0][iR][0][igen].matched;
+							   }
+						       if(deltaR(jtEta, jtPhi, matchEta, matchPhi) < R[iR] && !matched){
 							       refIndex = igen;
-								   
-								   refPt = genjets[ialgo][iR][iN][igen].pt;
 								   refEta = matchEta; 
 								   refPhi = matchPhi; 
-								   
+								   refPt = genjets[ialgo][iR][iN][igen].pt;
 								   refPullEta = genjets[ialgo][iR][iN][igen].pullEta;
 								   refPullPhi = genjets[ialgo][iR][iN][igen].pullPhi;
 								   genjets[ialgo][iR][iN][igen].matched = true;
+								   if(doMatchAK && ialgo > 0){
+								       refPt = genjets[0][iR][0][igen].pt;
+								       refPullEta = genjets[0][iR][0][igen].pullEta;
+								       refPullPhi = genjets[0][iR][0][igen].pullPhi;
+								       genjets[0][iR][0][igen].matched = true;
+								   }
 								   hasRef = true;
 								   break;
 							   }
-						    }						   
+						    }
+							
                         }
                         Jet jet(jtPt, jtEta, jtPhi, jtPullEta, jtPullPhi, hasRef, refPt, refEta, refPhi, refPullEta, refPullPhi, refIndex);
                         jets[ialgo][iR][iN].push_back(jet);
                         njet[ialgo][iR][iN]++;
                     }
+					
+					if(doMatchAK){//!after one algo is done the matched bool needs to be set to false for AK
+					//!jets as they are going to be reused
+					    for(unsigned int igen = 0; igen < genjets[ialgo][iR][iN].size(); igen++){
+						    genjets[0][iR][0][igen].matched = false;
+					    }
+					}
+					
                     if(doGen){ //!gen to reco matching
                     // if(0){ //!gen to reco matching
 					    for(unsigned int igen = 0; igen < genjets[ialgo][iR][iN].size(); igen++){
@@ -418,7 +443,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
 						            float refPt = jets[ialgo][iR][iN][ijet].refPt;
 								    if(deltaR(jtEta, jtPhi, genEta, genPhi) < R[iR]){
 									   if(((int)igen)!=jets[ialgo][iR][iN][ijet].refIndex){
-									       if(deltaR(jtEta, jtPhi, genEta, genPhi) < deltaR(jtEta, jtPhi, refEta, refPhi) && fabs(jtPt-genPt) < fabs(jtpt-refPt)){
+									       if(deltaR(jtEta, jtPhi, genEta, genPhi) < deltaR(jtEta, jtPhi, refEta, refPhi) && fabs(jtPt-genPt) < fabs(jtPt-refPt)){
 									           jets[ialgo][iR][iN][ijet].refEta = genEta;
 									           jets[ialgo][iR][iN][ijet].refPhi = genPhi; 
 									           jets[ialgo][iR][iN][ijet].refPt = genPt;
