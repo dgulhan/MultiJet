@@ -13,7 +13,6 @@
 #include <math.h>
 // #include <time.h>
 
-
 float deltaPhi( float phi1, float phi2) {
     float dphi = phi1 - phi2;
     
@@ -29,7 +28,11 @@ float deltaPhi( float phi1, float phi2) {
     return dphi;
 }
 
-
+float deltaR( float eta1, float phi1, float eta2, float phi2){
+    float theDphi = deltaPhi( phi1, phi2);
+    float theDeta = eta1 - eta2;
+    return sqrt( theDphi*theDphi + theDeta*theDeta);
+}
 
 float Pull1_i( float Jy , float Jphi, float JpT, float pY, float pphi, float ppT  ){
     // input is Jy (pseudorapidity of Jet)
@@ -70,34 +73,41 @@ public :
   float pt;
   float eta;
   float phi;
-  float refpt; 
-  float refeta; 
-  float refphi;
-  // pull
-  float pull_y;
-  float pull_phi;
-    // pull
-  float refpull_y;
-  float refpull_phi;
+  float refPt; 
+  float refEta; 
+  float refPhi;
+  //!pull
+  float pullEta;
+  float pullPhi;
+  float refPullEta;
+  float refPullPhi;
+  //!matching to reco jet
+  bool matched;
+  int refIndex;
   
   void reset(){
     pt = eta = phi = -99;
-	refpt = refeta = refphi = -99;
-    pull_y = pull_phi = -99;
-    refpull_y = refpull_phi = -99;
+	refPt = refEta = refPhi = -99;
+    pullEta = pullPhi = -99;
+    refPullEta = refPullPhi = -99;
+	refIndex = -99;
+	matched = false;
   }
-  Jet(float pt, float eta, float phi, float pull_y = -99, float pull_phi = -99, float refpt = -99, float refeta = -99, float refphi = -99, float refpull_y = -99 , float refpull_phi = -99){
+
+  Jet(float pt, float eta, float phi, float pullEta = -99, float pullPhi = -99, bool matched = false, float refPt = -99, float refEta = -99, float refPhi = -99, float refPullEta = -99 , float refPullPhi = -99, int refIndex = -99){
     reset();
     this->pt = pt; 
 	this->eta = eta;
 	this->phi = phi;
-      this->pull_y = pull_y;
-      this->pull_phi = pull_phi;
-    this->refpt = refpt; 
-	this->refeta = refeta;
-	this->refphi = refphi;
-      this->refpull_y = refpull_y;
-      this->refpull_phi = refpull_phi;
+    this->pullEta = pullEta;
+    this->pullPhi = pullPhi;
+    this->refPt = refPt; 
+	this->refEta = refEta;
+	this->refPhi = refPhi;
+    this->refPullEta = refPullEta;
+    this->refPullPhi = refPullPhi;
+	this->matched = matched;
+	this->refIndex = refIndex;
   }
 
 public:
@@ -116,6 +126,8 @@ public :
    int            lumi;
    int            evt;
    int            hiBin;
+   
+   //!reconstructed properties
    float          pthat;
    float          pt1;
    float          pt2;
@@ -126,103 +138,106 @@ public :
    float          phi1;
    float          phi2;
    float          phi3;
-   //pull for leading, subleading and third jet.
-    float          pull_y1;
-    float          pull_phi1;
-    float          pull_y2;
-    float          pull_phi2;
-    float          pull_y3;
-    float          pull_phi3;
-   float          refpt1;
-   float          refpt2;
-   float          refpt3;
-   float          refeta1;
-   float          refeta2;
-   float          refeta3;
-   float          refphi1;
-   float          refphi2;
-   float          refphi3;
-    float          refpull_y1;
-    float          refpull_phi1;
-    float          refpull_y2;
-    float          refpull_phi2;
-    float          refpull_y3;
-    float          refpull_phi3;
-   float          genpt1;
-   float          genpt2;
-   float          genpt3;
-   float          geneta1;
-   float          geneta2;
-   float          geneta3;
-   float          genphi1;
-   float          genphi2;
-   float          genphi3;
-    float          genpull_y1;
-    float          genpull_phi1;
-    float          genpull_y2;
-    float          genpull_phi2;
-    float          genpull_y3;
-    float          genpull_phi3;
+    float          pullEta1;
+    float          pullPhi1;
+    float          pullEta2;
+    float          pullPhi2;
+    float          pullEta3;
+    float          pullPhi3;
+	
+   //! matched properties
+   float          refPt1;
+   float          refPt2;
+   float          refPt3;
+   float          refEta1;
+   float          refEta2;
+   float          refEta3;
+   float          refPhi1;
+   float          refPhi2;
+   float          refPhi3;
+    float          refPullEta1;
+    float          refPullPhi1;
+    float          refPullEta2;
+    float          refPullPhi2;
+    float          refPullEta3;
+    float          refPullPhi3;
+	
+	
+	//!gen properties
+   float          genPt1;
+   float          genPt2;
+   float          genPt3;
+   float          genEta1;
+   float          genEta2;
+   float          genEta3;
+   float          genPhi1;
+   float          genPhi2;
+   float          genPhi3;
+   float          genPullEta1;
+   float          genPullPhi1;
+   float          genPullEta2;
+   float          genPullPhi2;
+   float          genPullEta3;
+   float          genPullPhi3;
+   //!inclusive jets
    int            nref;
-   float          rawpt[100]; 
-   float          rawphi[100]; 
-   float          raweta[100]; 
-   float          refpt[100]; 
-   float          refphi[100]; 
-   float          refeta[100]; 
+   float          rawPt[100]; 
+   float          rawPhi[100]; 
+   float          rawEta[100]; 
+   float          pullEta[100];
+   float          pullPhi[100];
+   float          refPt[100]; 
+   float          refPhi[100]; 
+   float          refEta[100]; 
+   float          refPullEta[100];
+   float          refPullPhi[100];
    int            ngen;
-   float          genpt[100]; 
-   float          genphi[100]; 
-   float          geneta[100];
-    float           genpull_y[100];
-    float           genpull_phi[100];
-    float           refpull_y[100];
-    float           refpull_phi[100];
+   float          genPt[100]; 
+   float          genPhi[100]; 
+   float          genEta[100];
+   float          genPullEta[100];
+   float          genPullPhi[100];
    //variables for pull(x,y)
-    float          pull_y[100];
-    float          pull_phi[100];
     
    void reset(){
     evt = lumi = run = -99;
  	pt1 = pt2 = pt3 = eta1 = eta2 = eta3 = phi1 = phi2 = phi3 = pthat = -99;
-	refpt1 = refpt2 = refpt3 = refeta1 = refeta2 = refeta3 = refphi1 = refphi2 = refphi3 = -99;
-	genpt1 = genpt2 = genpt3 = geneta1 = geneta2 = geneta3 = genphi1 = genphi2 = genphi3 = -99;
+	refPt1 = refPt2 = refPt3 = refEta1 = refEta2 = refEta3 = refPhi1 = refPhi2 = refPhi3 = -99;
+	genPt1 = genPt2 = genPt3 = genEta1 = genEta2 = genEta3 = genPhi1 = genPhi2 = genPhi3 = -99;
 	nref = -99;
 	ngen = -99;
        
-       pull_y1 = pull_phi1 = -99;
-       pull_y1 = pull_phi1 = -99;
-       pull_y1 = pull_phi1 = -99;
+    pullEta1 = pullPhi1 = -99;
+    pullEta1 = pullPhi1 = -99;
+    pullEta1 = pullPhi1 = -99;
 
        
-       refpull_y1 = refpull_phi1 = -99;
-       refpull_y2 = refpull_phi2 = -99;
-       refpull_y3 = refpull_phi3 = -99;
+    refPullEta1 = refPullPhi1 = -99;
+    refPullEta2 = refPullPhi2 = -99;
+    refPullEta3 = refPullPhi3 = -99;
        
-       genpull_y1 = genpull_phi1 = -99;
-       genpull_y1 = genpull_phi1 = -99;
-       genpull_y1 = genpull_phi1 = -99;
+    genPullEta1 = genPullPhi1 = -99;
+    genPullEta1 = genPullPhi1 = -99;
+    genPullEta1 = genPullPhi1 = -99;
     
     for(int i = 0; i < 100; i++){
-     rawpt[i] = -99;
-     rawphi[i] = -99;
-     raweta[i] = -99;
-     refpt[i] = -99;
-     refphi[i] = -99;
-     refeta[i] = -99;
-        
-    //PUll
-     pull_y[i] = -99;
-     pull_phi[i] = -99;
-        refpull_y[i] = -99;
-        refpull_phi[i] = -99;
-    }
-    for(int i = 0; i < 100; i++){
-     genpt[i] = -99;
-     genphi[i] = -99;
-     geneta[i] = -99;
-        genpull_y[i] = -99;
-        genpull_phi[i] = -99;
+     rawPt[i] = -99;
+     rawPhi[i] = -99;
+     rawEta[i] = -99;
+	 pullEta[i] = -99;
+     pullPhi[i] = -99;
+	 
+     refPt[i] = -99;
+     refPhi[i] = -99;
+     refEta[i] = -99;       
+     refPullEta[i] = -99;
+     refPullPhi[i] = -99;
+    
+     genPt[i] = -99;
+     genPhi[i] = -99;
+     genEta[i] = -99;
+     genPullEta[i] = -99;
+     genPullPhi[i] = -99;
     }
    }
    newEvent(bool doGen){
@@ -238,53 +253,59 @@ public :
     this->hiBin = hiBin; 
     nref = jets->size();
 	for(int i = 0; i < nref; i++){
-	  rawpt[i] = jets->at(i).pt;
-	  raweta[i] = jets->at(i).eta;
-	  rawphi[i] = jets->at(i).phi;
-        pull_y[i] = jets->at(i).pull_y;
-        pull_phi[i] = jets->at(i).pull_phi;
-	  refpt[i] = jets->at(i).refpt;
-	  refeta[i] = jets->at(i).refeta;
-	  refphi[i] = jets->at(i).refphi;
-        refpull_y[i] = jets->at(i).refpull_y;
-        refpull_phi[i] = jets->at(i).refpull_phi;
+	  rawPt[i] = jets->at(i).pt;
+	  rawEta[i] = jets->at(i).eta;
+	  rawPhi[i] = jets->at(i).phi;
+      pullEta[i] = jets->at(i).pullEta;
+      pullPhi[i] = jets->at(i).pullPhi;
+	  refPt[i] = jets->at(i).refPt;
+	  refEta[i] = jets->at(i).refEta;
+	  refPhi[i] = jets->at(i).refPhi;
+      refPullEta[i] = jets->at(i).refPullEta;
+      refPullPhi[i] = jets->at(i).refPullPhi;
+	  
 	}
 	std::sort(jets->begin(), jets->end());
 	if(nref > 0){
       pt1 = jets->at(nref-1).pt;
       eta1 = jets->at(nref-1).eta;
       phi1 = jets->at(nref-1).phi;
-	  refpt1 = jets->at(nref-1).refpt;
-	  refeta1 = jets->at(nref-1).refeta;
-	  refphi1 = jets->at(nref-1).refphi;
-        pull_y1 = jets->at(nref-1).pull_y;
-        pull_phi1 = jets->at(nref-1).pull_phi;
-        refpull_y1 = jets->at(nref-1).refpull_y;
-        refpull_phi1 = jets->at(nref-1).refpull_phi;
+	  pullEta1 = jets->at(nref-1).pullEta;
+      pullPhi1 = jets->at(nref-1).pullPhi;
+	  
+	  refPt1 = jets->at(nref-1).refPt;
+	  refEta1 = jets->at(nref-1).refEta;
+	  refPhi1 = jets->at(nref-1).refPhi;
+      refPullEta1 = jets->at(nref-1).refPullEta;
+      refPullPhi1 = jets->at(nref-1).refPullPhi;
+      
         
 	  if(nref > 1){
         pt2 = jets->at(nref-2).pt;
         eta2 = jets->at(nref-2).eta;
         phi2 = jets->at(nref-2).phi;
-        refpt2 = jets->at(nref-2).refpt;
-        refeta2 = jets->at(nref-2).refeta;
-        refphi2 = jets->at(nref-2).refphi;
-          pull_y2 = jets->at(nref-2).pull_y;
-          pull_phi2 = jets->at(nref-2).pull_phi;
-          refpull_y2 = jets->at(nref-2).refpull_y;
-          refpull_phi2 = jets->at(nref-2).refpull_phi;
-          
+        pullEta2 = jets->at(nref-2).pullEta;
+        pullPhi2 = jets->at(nref-2).pullPhi;
+        
+		refPt2 = jets->at(nref-2).refPt;
+        refEta2 = jets->at(nref-2).refEta;
+        refPhi2 = jets->at(nref-2).refPhi;
+        refPullEta2 = jets->at(nref-2).refPullEta;
+        refPullPhi2 = jets->at(nref-2).refPullPhi;
+       	
 	    if(nref > 2){
           pt3 = jets->at(nref-3).pt;
           eta3 = jets->at(nref-3).eta;
           phi3 = jets->at(nref-3).phi;
-          refpt3 = jets->at(nref-3).refpt;
-          refeta3 = jets->at(nref-3).refeta;
-          refphi3 = jets->at(nref-3).refphi;
-            pull_y3 = jets->at(nref-3).pull_y;
-            pull_phi3 = jets->at(nref-3).pull_phi;
-            refpull_y3 = jets->at(nref-3).refpull_y;
-            refpull_phi3 = jets->at(nref-3).refpull_phi;
+          pullEta3 = jets->at(nref-3).pullEta;
+          pullPhi3 = jets->at(nref-3).pullPhi;
+		  
+          refPt3 = jets->at(nref-3).refPt;
+          refEta3 = jets->at(nref-3).refEta;
+          refPhi3 = jets->at(nref-3).refPhi;
+          refPullEta3 = jets->at(nref-3).refPullEta;
+          refPullPhi3 = jets->at(nref-3).refPullPhi;
+		             
 	    }
 	  }
 	}
@@ -294,32 +315,32 @@ public :
 	if(doGen){
 	  ngen = genjets->size();
 	  for(int i = 0; i < ngen; i++){
-	    genpt[i] = genjets->at(i).pt;
-	    geneta[i] = genjets->at(i).eta;
-	    genphi[i] = genjets->at(i).phi;
-        genpull_y[i] = genjets->at(i).pull_y;
-        genpull_phi[i] = genjets->at(i).pull_phi;
+	    genPt[i] = genjets->at(i).pt;
+	    genEta[i] = genjets->at(i).eta;
+	    genPhi[i] = genjets->at(i).phi;
+        genPullEta[i] = genjets->at(i).pullEta;
+        genPullPhi[i] = genjets->at(i).pullPhi;
 	  }
       std::sort(genjets->begin(), genjets->end());
 	  if(ngen > 0){
-        genpt1 = genjets->at(ngen-1).pt;
-        geneta1 = genjets->at(ngen-1).eta;
-        genphi1 = genjets->at(ngen-1).phi;
-        genpull_phi1 = genjets->at(ngen-1).pull_phi;
-        genpull_y1 = genjets->at(ngen-1).pull_y;
+        genPt1 = genjets->at(ngen-1).pt;
+        genEta1 = genjets->at(ngen-1).eta;
+        genPhi1 = genjets->at(ngen-1).phi;
+        genPullPhi1 = genjets->at(ngen-1).pullPhi;
+        genPullEta1 = genjets->at(ngen-1).pullEta;
 
 	    if(ngen > 1){
-          genpt2 = genjets->at(ngen-2).pt;
-          geneta2 = genjets->at(ngen-2).eta;
-          genphi2 = genjets->at(ngen-2).phi;
-            genpull_phi2 = genjets->at(ngen-2).pull_phi;
-            genpull_y2 = genjets->at(ngen-2).pull_y;
+          genPt2 = genjets->at(ngen-2).pt;
+          genEta2 = genjets->at(ngen-2).eta;
+          genPhi2 = genjets->at(ngen-2).phi;
+            genPullPhi2 = genjets->at(ngen-2).pullPhi;
+            genPullEta2 = genjets->at(ngen-2).pullEta;
 	      if(ngen > 2){
-            genpt3 = genjets->at(ngen-3).pt;
-            geneta3 = genjets->at(ngen-3).eta;
-            genphi3 = genjets->at(ngen-3).phi;
-              genpull_phi3 = genjets->at(ngen-3).pull_phi;
-              genpull_y3 = genjets->at(ngen-3).pull_y;
+            genPt3 = genjets->at(ngen-3).pt;
+            genEta3 = genjets->at(ngen-3).eta;
+            genPhi3 = genjets->at(ngen-3).phi;
+              genPullPhi3 = genjets->at(ngen-3).pullPhi;
+              genPullEta3 = genjets->at(ngen-3).pullEta;
 	      }
 	    }
 	  }
