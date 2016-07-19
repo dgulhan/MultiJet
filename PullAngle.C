@@ -28,9 +28,9 @@ float mag(float x, float y){
 
 void PullAngle(){
     
-    int nFiles = 2;
+    int nFiles = 1;
     
-    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/PbPbMCpthat80+pullHiForestAOD_ALL.root","ppMCpthat80+pullHiForestAOD_ALL.root" };
+    TString Files[] = { "ppMCpthat80+pullHiForestAOD_ALL.root" };
     
     TFile *file[nFiles];
     TTree *xcR4N3PF[nFiles];
@@ -47,7 +47,7 @@ void PullAngle(){
         file[iFile] = TFile::Open(Files[iFile].Data());
         xcR4N3PF[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
         h[iFile] = new TH1D(Form("h%i",iFile),";#theta_{Pull 2,3};Event fraction",50,0,3.5);
-        xcR4N3PF[iFile]->Draw(Form("acos((pull_y2*(eta3-eta2)+pull_phi2*deltaPhi(phi3,phi2))/( mag(pull_y2,pull_phi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h%i",iFile),cut1);
+        xcR4N3PF[iFile]->Draw(Form("acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( mag(pullEta2,pullPhi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h%i",iFile),cut1);
         h[iFile]->Scale(1./h[iFile]->Integral());
         h[iFile]->SetLineColor(Colors[iFile]);
         makePretty(h[iFile]);
