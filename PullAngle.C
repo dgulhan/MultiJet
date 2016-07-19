@@ -110,7 +110,7 @@ void PullAngle(){
         
     }
     
-    int iFile==0;
+    int iFile=0;
     c2->cd(1);
     h[iFile][0]->Draw();
     h[iFile][1]->Draw("SAME");
