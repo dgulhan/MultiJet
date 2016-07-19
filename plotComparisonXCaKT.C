@@ -26,25 +26,51 @@ void plotComparisonXCaKT(){
     
     //acos(cos(phi1-phi2))> 2*TMath::Pi()/2
     
-    TString XAxis[] = {"acos(cos(phi1-phi3))","acos(cos(phi1-phi2))","acos(cos(phi2-phi3))","sign(eta1)*(eta3-eta1)","sign(eta1)*(eta2-eta1)","sign(eta2)*(eta3-eta2)","sqrt(pow(acos(cos(phi1-phi3)),2.)+pow(eta1-eta3,2.))","sqrt(pow(acos(cos(phi1-phi2)),2.)+pow(eta1-eta2,2.))","sqrt(pow(acos(cos(phi2-phi3)),2.)+pow(eta2-eta3,2.))" , "refpt "};
+    TString XAxis[] = {"acos(cos(phi1-phi3))","acos(cos(phi1-phi2))","acos(cos(phi2-phi3))","sign(eta1)*(eta3-eta1)","sign(eta1)*(eta2-eta1)","sign(eta2)*(eta3-eta2)","sqrt(pow(acos(cos(phi1-phi3)),2.)+pow(eta1-eta3,2.))","sqrt(pow(acos(cos(phi1-phi2)),2.)+pow(eta1-eta2,2.))","sqrt(pow(acos(cos(phi2-phi3)),2.)+pow(eta2-eta3,2.))" };
     
-    TString XLabel[] = {"#Delta#phi_{1,3}" , "#Delta#phi_{1,2}" , "#Delta#phi_{2,3}" , "#Delta#eta_{1,3}" , "#Delta#eta_{1,2}" , "#Delta#eta_{2,3}" , "#Delta R_{1,3}" , "#Delta R_{1,2}" , "#Delta R_{2,3}","p_{T}^{gen}" };
+    TString XLabel[] = {"#Delta#phi_{1,3}" , "#Delta#phi_{1,2}" , "#Delta#phi_{2,3}" , "#Delta#eta_{1,3}" , "#Delta#eta_{1,2}" , "#Delta#eta_{2,3}" , "#Delta R_{1,3}" , "#Delta R_{1,2}" , "#Delta R_{2,3}" };
     
     TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "ALL/ppPy8hat80HiForestAOD_ALL.root","ALL/ppDatahat80HiForest_ALL.root"};
     
     
     
-    TCut PPCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3", " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" };
+    TCut PPCuts[] = { " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" ,
+                      " pt1>100 && pt3>50 " ,
+                      " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " ,
+                      " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" ,
+                      " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " ,
+                      " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " ,
+                      " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " ,
+                      " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" ,
+                      " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3",
+                       };
     
     //TCut PbPbCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3", " pt1>100 && pt3>30" };
-    TCut PbPbCuts[] = { " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" , " pt1>100 && pt3>50 && abs(eta1-eta2)>0.2" , " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" , " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" , " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" , " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2", " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" };
     
-    //refpt><0 in here
-    TCut PbPbCutsMC[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3", " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" };
+    TCut PbPbCuts[] = { " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>100 && pt3>50 && abs(eta1-eta2)>0.2" ,
+                        " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>100 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+                         };
+    
     
 
     
-    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" , " |#Delta#eta_{1,2}|>0.2" , "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3" , "#Delta#phi_{1,2}> 2#pi/3", " #Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" , "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" , "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" , "p_{T_1}^{gen}>0 p_{T_3}^{gen}>0 #Delta#phi_{1,2}> 2#pi/3"};
+    TString TextCut[] = {"#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
+                         "|#Delta#eta_{1,2}|>0.2" ,
+                         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
+                         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
+                         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
+                         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2",
+                         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
+                         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
+                         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2"
+                        };
     
     Double_t YMaxHist[] = {0.08,0.22,0.11,0.081,0.08,0.11,0.11,0.12,0.10,0.15};
     Double_t XMin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.,-110};
@@ -79,7 +105,7 @@ void plotComparisonXCaKT(){
     
     
     ***/
-    for ( int iVar = 0; iVar<9 ; iVar++){
+    for ( int iVar = 0; iVar<8 ; iVar++){
         TFile *file[nFiles];
         TH1D *hist[nFiles][nAlgo];
         TTree *tree[nFiles][nAlgo];
@@ -102,14 +128,14 @@ void plotComparisonXCaKT(){
             hist[iFile][0]= new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,0),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
             
 
-            tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCutsMC[iVar]);
+            tree[iFile][0]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,0),PbPbCuts[iVar]);
             
 
             hist[iFile][0]->Scale(1./hist[iFile][0]->Integral());
             hist[iFile][0]->SetStats(0);
             //xcone
             hist[iFile][1]  = new TH1D(Form("hist_F%iV%iA%i",iFile,iVar,1),Form(";%s;Event fraction",XLabel[iVar].Data()),50,XMin[iVar],XMax[iVar]);
-            tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,1),PbPbCutsMC[iVar]);
+            tree[iFile][1]->Draw(Form("%s>>hist_F%iV%iA%i",XAxis[iVar].Data(),iFile,iVar,1),PbPbCuts[iVar]);
             hist[iFile][1]->Scale(1./hist[iFile][1]->Integral());
             hist[iFile][1]->SetStats(0);
             
