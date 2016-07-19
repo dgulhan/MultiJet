@@ -47,15 +47,15 @@ void plotComparisonXCaKT(){
     
     //TCut PbPbCuts[] = { " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " , " pt1>100 && pt3>30 " , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" , " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3", " pt1>100 && pt3>30" };
     
-    TCut PbPbCuts[] = { " pt1>200 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                        " pt1>200 && pt3>70 && abs(eta1-eta2)>0.2" ,
-                        " pt1>200 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                        " pt1>200 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                        " pt1>200 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                        " pt1>200 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                        " pt1>200 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                        " pt1>200 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                        " pt1>200 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+    TCut PbPbCuts[] = { " pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>180 && pt3>70 && abs(eta1-eta2)>0.2" ,
+                        " pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                        " pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
                          };
     
     
@@ -244,12 +244,12 @@ void plotComparisonXCaKT(){
     }
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.17,0.93,23);
-    drawText("p_{T,1}>200 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.18,0.74,16);
+    drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.18,0.74,16);
     drawText(Form("%s",TextCut[iVar].Data()),0.18,0.69,16);
     
-    c2->SaveAs(Form("PLOTALGO/pt200MCPbPbalgorithm%s.png",XLabel[iVar].Data()));
-    c2->SaveAs(Form("PLOTALGO/pt200MCPbPbalgorithm%s.eps",XLabel[iVar].Data()));
-    c2->SaveAs(Form("PLOTALGO/pt200MCPbPbalgorithm%s.gif",XLabel[iVar].Data()));
+    c2->SaveAs(Form("PLOTALGO/pt180MCPbPbalgorithm%s.png",XLabel[iVar].Data()));
+    c2->SaveAs(Form("PLOTALGO/pt180MCPbPbalgorithm%s.eps",XLabel[iVar].Data()));
+    c2->SaveAs(Form("PLOTALGO/pt180MCPbPbalgorithm%s.gif",XLabel[iVar].Data()));
 }
     /***
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
