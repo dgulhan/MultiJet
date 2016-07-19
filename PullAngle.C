@@ -30,7 +30,7 @@ void PullAngle(){
     
     int nFiles = 2;
     
-    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/PbPbMCpthat80+pullHiForestAOD_ALL.root","root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/ppMCpthat80+pullHiForestAOD_ALL.root" };
+    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/PbPbMCpthat80+pullHiForestAOD_ALL.root","ppMCpthat80+pullHiForestAOD_ALL.root" };
     
     TFile *file[nFiles];
     TTree *xcR4N3PF[nFiles];
