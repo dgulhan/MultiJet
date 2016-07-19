@@ -1,6 +1,6 @@
 
 WD=/afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet
-g++ /afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/Pull_Skim.C  `fastjet-install/bin/fastjet-config --cxxflags --libs --plugins` $(root-config --cflags --libs) -lNsubjettiness -Wall -O2 -o /afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/dijetPull
+g++ /afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/Pull_Skim_AK.C  `fastjet-install/bin/fastjet-config --cxxflags --libs --plugins` $(root-config --cflags --libs) -lNsubjettiness -Wall -O2 -o /afs/cern.ch/work/e/eruizvel/private/MultiJetEdna/MultiJet/dijetPull_AK
 
 chmod 755 $WD/run_pull.sh
 
@@ -30,7 +30,7 @@ FILES=$(eos ls $indir/*.root)
 for f in ${FILES[@]}
 do
     echo "bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode"
-    bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode #-a $doMatchAK
+    bsub -q 1nh $WD/run_pull.sh -d $indir -i $f -l $label -m $mode #-a $doMatchAK
 done
 
 bjobs

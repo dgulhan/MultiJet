@@ -29,4 +29,4 @@ dir=root://eoscms//eos/cms$indir
 
 out=$WD/$inlabel$infile
 
-./dijetPull $dir/$infile $out $inmode #$inmatch
+./dijetPull_AK $dir/$infile $out $inmode #$inmatch
