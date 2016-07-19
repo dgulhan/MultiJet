@@ -21,7 +21,7 @@ label=ppMCpthat80+pull
 
 mode=ppMC
 
-doMatchAK="true" #false / true
+#doMatchAK=1 #false / true
 
 #######
 
@@ -29,8 +29,8 @@ FILES=$(eos ls $indir/*.root)
 
 for f in ${FILES[@]}
 do
-    echo "bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode -a $doMatchAK"
-    bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode -a $doMatchAK
+    echo "bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode"
+    bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode #-a $doMatchAK
 done
 
 bjobs
