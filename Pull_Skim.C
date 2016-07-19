@@ -101,9 +101,9 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
     
     TFile * fnt;
     if(doMatchAK){
- 	    fnt = new TFile(outfname.Data(),"recreate");
+	    fnt = new TFile(Form("AKmatched/%s",outfname.Data()),"recreate");
     }else{
-	    fnt = new TFile(Form("AKMatched_%s",outfname.Data()),"recreate");
+ 	    fnt = new TFile(outfname.Data(),"recreate");
 	}
 	
 	newEvent evnt(doGen);
@@ -385,33 +385,42 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "" ){
 						bool hasRef = false;
 						int refIndex = -99;
                         if(doGen){ //! reco to gen matchin
-						    for(unsigned int igen = 0; igen < genjets[ialgo][iR][iN].size(); igen++){
-						       float matchEta = genjets[ialgo][iR][iN][igen].eta;
-						       float matchPhi = genjets[ialgo][iR][iN][igen].phi;
-							   bool matched = genjets[ialgo][iR][iN][igen].matched;
-							   if(doMatchAK && ialgo > 0){
-							       matchEta = genjets[0][iR][0][igen].eta;
-						           matchPhi = genjets[0][iR][0][igen].phi;
-							       matched = genjets[0][iR][0][igen].matched;
-							   }
-						       if(deltaR(jtEta, jtPhi, matchEta, matchPhi) < R[iR] && !matched){
-							       refIndex = igen;
-								   refEta = matchEta; 
-								   refPhi = matchPhi; 
-								   refPt = genjets[ialgo][iR][iN][igen].pt;
-								   refPullEta = genjets[ialgo][iR][iN][igen].pullEta;
-								   refPullPhi = genjets[ialgo][iR][iN][igen].pullPhi;
-								   genjets[ialgo][iR][iN][igen].matched = true;
-								   if(doMatchAK && ialgo > 0){
-								       refPt = genjets[0][iR][0][igen].pt;
-								       refPullEta = genjets[0][iR][0][igen].pullEta;
-								       refPullPhi = genjets[0][iR][0][igen].pullPhi;
-								       genjets[0][iR][0][igen].matched = true;
+						    if(doMatchAK && ialgo > 0){
+  							    for(unsigned int igen = 0; igen < genjets[0][iR][0].size(); igen++){
+							        float matchEta = genjets[0][iR][0][igen].eta;
+						            float matchPhi = genjets[0][iR][0][igen].phi;
+									bool matched = genjets[0][iR][0][igen].matched;
+									if(deltaR(jtEta, jtPhi, matchEta, matchPhi) < R[iR] && !matched){
+									   refIndex = igen;
+									   refEta = matchEta; 
+									   refPhi = matchPhi; 
+									   refPt = genjets[0][iR][0][igen].pt;
+									   refPullEta = genjets[0][iR][0][igen].pullEta;
+									   refPullPhi = genjets[0][iR][0][igen].pullPhi;
+									   genjets[0][iR][0][igen].matched = true;
+									   hasRef = true;
+									   break;
 								   }
-								   hasRef = true;
-								   break;
-							   }
-						    }
+								}						
+							}
+							else{
+								for(unsigned int igen = 0; igen < genjets[ialgo][iR][iN].size(); igen++){
+								   float matchEta = genjets[ialgo][iR][iN][igen].eta;
+								   float matchPhi = genjets[ialgo][iR][iN][igen].phi;
+								   bool matched = genjets[ialgo][iR][iN][igen].matched;
+								   if(deltaR(jtEta, jtPhi, matchEta, matchPhi) < R[iR] && !matched){
+									   refIndex = igen;
+									   refEta = matchEta; 
+									   refPhi = matchPhi; 
+									   refPt = genjets[ialgo][iR][iN][igen].pt;
+									   refPullEta = genjets[ialgo][iR][iN][igen].pullEta;
+									   refPullPhi = genjets[ialgo][iR][iN][igen].pullPhi;
+									   genjets[ialgo][iR][iN][igen].matched = true;
+									   hasRef = true;
+									   break;
+								   }
+								}
+							}
 							
                         }
                         Jet jet(jtPt, jtEta, jtPhi, jtPullEta, jtPullPhi, hasRef, refPt, refEta, refPhi, refPullEta, refPullPhi, refIndex);
