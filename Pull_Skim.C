@@ -36,14 +36,12 @@ using namespace std;
 
 
 
-void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", TString doMatchStr= ""){
+void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", TString doMatchAK= ""){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
 	
-    cout<<"string match: "<<doMatchStr<<endl;
-    bool doMatchAK = false;
+    cout<<"string match: "<<doMatchAK<<endl;
     
-    if (doMatchStr.Data() == "true" ) doMatchAK = true;
     
 	float etacut = 2;
     float jetPtMin = 10;
@@ -395,7 +393,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
 						bool hasRef = false;
 						int refIndex = -99;
                         if(doGen){ //! reco to gen matchin
-						    if(doMatchAK && ialgo > 0){
+						    if(doMatchAK=="true" && ialgo > 0){
   							    for(unsigned int igen = 0; igen < genjets[0][iR][0].size(); igen++){
 							        float matchEta = genjets[0][iR][0][igen].eta;
 						            float matchPhi = genjets[0][iR][0][igen].phi;
@@ -438,7 +436,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
                         njet[ialgo][iR][iN]++;
                     }
 					
-					if(doMatchAK){//!after one algo is done the matched bool needs to be set to false for AK
+					if(doMatchAK == "true"){//!after one algo is done the matched bool needs to be set to false for AK
 					//!jets as they are going to be reused
 					    for(unsigned int igen = 0; igen < genjets[ialgo][iR][iN].size(); igen++){
 						    genjets[0][iR][0][igen].matched = false;
