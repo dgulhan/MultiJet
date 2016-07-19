@@ -11,7 +11,7 @@ chmod 755 $WD/run_pull.sh
 
 indir=/store/group/cmst3/group/hintt/mverweij/CS/MC/PbPb/Pythia8_Dijet80_pp_TuneCUETP8M1_Hydjet_Min_Bias_5020GeV/crab_HiForestDijet80V3/160701_225507/0000
 
-label=PbPbMCpthat80+pull
+label=PbPbMCpthat80+pull+akMatch
 
 #indir=/store/group/cmst3/group/hintt/mverweij/PP5TeV/data/HighPtJet80/crab_HighPtJet80_v2/160525_095945/mergePartialV2
 #label=ppDataHighPt80+pull
@@ -21,7 +21,7 @@ label=PbPbMCpthat80+pull
 
 mode=PbPbMC
 
-doMatchAK=false#false / true
+doMatchAK="true" #false / true
 
 #######
 
@@ -29,8 +29,8 @@ FILES=$(eos ls $indir/*.root)
 
 for f in ${FILES[@]}
 do
-    echo "bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode"
-    bsub -q 1nh $WD/run_pull.sh -d $indir -i $f -l $label -m $mode -a $doMatchAK
+    echo "bsub -q 1nd $WD/run_pull.sh -d $indir -i $f -l $label -m $mode -a $doMatchAK"
+    bsub -q 8nh $WD/run_pull.sh -d $indir -i $f -l $label -m $mode -a $doMatchAK
 done
 
 bjobs

@@ -29,4 +29,5 @@ dir=root://eoscms//eos/cms$indir
 
 out=$WD/$inlabel$infile
 
+echo "./dijetPull $dir/$infile $out $inmode $inmatch"
 ./dijetPull $dir/$infile $out $inmode $inmatch
