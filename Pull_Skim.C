@@ -40,10 +40,10 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
 	
+    cout<<"string match: "<<doMatchStr<<endl;
     bool doMatchAK = false;
     
     if (doMatchStr == "true" ) doMatchAK = true;
-    doMatchAK = true;
     
 	float etacut = 2;
     float jetPtMin = 10;
