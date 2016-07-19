@@ -73,7 +73,7 @@ void mean_pull(){
     Double_t Y3err[nPoints];
     
     
-    
+    int Color[]={kRed,kBlue,kGreen.kMagenta};
     TH1D * h[nFiles][nPoints];
     
 
