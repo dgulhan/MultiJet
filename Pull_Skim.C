@@ -36,11 +36,14 @@ using namespace std;
 
 
 
-void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = ""){
+void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", TString doMatchStr= ""){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
 	
     bool doMatchAK = false;
+    
+    if (doMatchStr == "true" ) doMatchAK = true;
+    
 	float etacut = 2;
     float jetPtMin = 10;
     
@@ -520,7 +523,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = ""){
 
 int main(int argc, char *argv[])
 {
-    Pull_Skim(argv[1],argv[2],argv[3]);
+    Pull_Skim(argv[1],argv[2],argv[3],argv[4]);
     return 0;
 }
 
