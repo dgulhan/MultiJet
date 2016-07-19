@@ -106,11 +106,9 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
     
     TFile * fnt;
     
-    if(doMatchAK){
-	    fnt = new TFile(Form("AKmatched+%s",outfname.Data()),"recreate");
-    }else{
+    
  	    fnt = new TFile(outfname.Data(),"recreate");
-	}
+	
 	
 	newEvent evnt(doGen);
     
