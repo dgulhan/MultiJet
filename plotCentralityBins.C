@@ -30,7 +30,11 @@ void multi_plots(){
     
 
     
-    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root", "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root", "./ALL/ppPy8hat80HiForestAOD_ALL.root","./ALL/ppDatahat80HiForest_ALL.root"};
+    TString Files[] = {
+        "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root",
+        "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root",
+        "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/ppPy8hat80HiForestAOD_ALL.root" ,
+        "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/ppDatahat80HiForest_ALL.root"};
     
     int nFiles = 4;
     
