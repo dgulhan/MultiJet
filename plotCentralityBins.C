@@ -9,7 +9,7 @@
 
 
 
-void multi_plots(){
+void plotCentralityBins(){
     TH1D::SetDefaultSumw2();
     
     
