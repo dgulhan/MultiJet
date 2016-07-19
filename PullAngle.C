@@ -32,7 +32,7 @@ void PullAngle(){
     
     int nFiles = 1;
     
-    TString Files[] = { "ppMCpthat80+pullHiForestAOD_1.root" };
+    TString Files[] = { "ppMCpthat80+pullHiForestAOD_ALL.root" };
     
     TFile *file[nFiles];
     TTree *xcR4N3PF[nFiles];
