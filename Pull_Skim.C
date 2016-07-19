@@ -43,6 +43,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
     bool doMatchAK = false;
     
     if (doMatchStr == "true" ) doMatchAK = true;
+    doMatchAK = true;
     
 	float etacut = 2;
     float jetPtMin = 10;
