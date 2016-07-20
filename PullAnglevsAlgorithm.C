@@ -70,6 +70,10 @@ void PullAnglevsAlgorithm(){
         xcR5N3PF[iFile]->Draw(Form("acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( mag(pullEta2,pullPhi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h0%i",iFile),Cut1a);
         h[iFile][0]->Scale(1./h[iFile][0]->Integral());
         h[iFile][0]->SetLineColor(Colors[0]);
+        h[iFile][0]->SetFillColorAlpha(Colors[0],0.35);
+        h[iFile][0]->SetFillStyle(3005);
+        
+
         makePretty(h[iFile][0]);
         
         
@@ -78,6 +82,8 @@ void PullAnglevsAlgorithm(){
         h[iFile][1]->Scale(1./h[iFile][1]->Integral());
         h[iFile][1]->SetLineColor(Colors[1]);
         makePretty(h[iFile][1]);
+        h[iFile][0]->SetFillColorAlpha(Colors[1],0.35);
+        h[iFile][0]->SetFillStyle(3004);
         
         
         h[iFile][2] = new TH1D(Form("h2%i",iFile),";#theta_{Pull 2,3};Event fraction",25,0,3.5);
@@ -85,6 +91,8 @@ void PullAnglevsAlgorithm(){
         h[iFile][2]->Scale(1./h[iFile][2]->Integral());
         h[iFile][2]->SetLineColor(Colors[0]);
         makePretty(h[iFile][2]);
+        h[iFile][2]->SetFillColorAlpha(Colors[0],0.35);
+        h[iFile][2]->SetFillStyle(3005);
         
         
         h[iFile][3] = new TH1D(Form("h3%i",iFile),";#theta_{Pull 2,3};Event fraction",25,0,3.5);
@@ -92,6 +100,8 @@ void PullAnglevsAlgorithm(){
         h[iFile][3]->Scale(1./h[iFile][3]->Integral());
         h[iFile][3]->SetLineColor(Colors[1]);
         makePretty(h[iFile][3]);
+        h[iFile][3]->SetFillColorAlpha(Colors[1],0.35);
+        h[iFile][3]->SetFillStyle(3004);
         
         
         h[iFile][4] = new TH1D(Form("h4%i",iFile),";#theta_{Pull 2,3};Event fraction",25,0,3.5);
@@ -99,6 +109,8 @@ void PullAnglevsAlgorithm(){
         h[iFile][4]->Scale(1./h[iFile][4]->Integral());
         h[iFile][4]->SetLineColor(Colors[0]);
         makePretty(h[iFile][4]);
+        h[iFile][4]->SetFillColorAlpha(Colors[0],0.35);
+        h[iFile][4]->SetFillStyle(3005);
         
         
         h[iFile][5] = new TH1D(Form("h5%i",iFile),";#theta_{Pull 2,3};Event fraction",25,0,3.5);
@@ -106,13 +118,15 @@ void PullAnglevsAlgorithm(){
         h[iFile][5]->Scale(1./h[iFile][5]->Integral());
         h[iFile][5]->SetLineColor(Colors[1]);
         makePretty(h[iFile][5]);
+        h[iFile][5]->SetFillColorAlpha(Colors[1],0.35);
+        h[iFile][5]->SetFillStyle(3004);
         
         
     }
     
     int iFile=0;
     c2->cd(1);
-    
+    h[iFile][0]->SetMaximum(0.8);
     h[iFile][0]->SetStats(0);
     h[iFile][1]->SetStats(0);
 
@@ -120,16 +134,32 @@ void PullAnglevsAlgorithm(){
     h[iFile][1]->Draw("SAME");
     
     c2->cd(2);
+    h[iFile][2]->SetMaximum(0.8);
+
     h[iFile][2]->SetStats(0);
     h[iFile][3]->SetStats(0);
     h[iFile][2]->Draw();
     h[iFile][3]->Draw("SAME");
 
     c2->cd(3);
+    TLegend *t3;
+    t3->SetFillColor(0);
+    t3->SetBorderSize(0);
+    t3->SetFillStyle(0);
+    t3->SetTextFont(43);
+    t3->SetTextSize(20);
+    //t3->AddEntry(histPbPb[0][iVar][iR][0],"anti k_{T} PbPb MC","l");
+    //t3->AddEntry(histPbPb[1][iVar][iR][iN],Form("XCone PbPb MC N=%d",N[iN]),"l");
+    t3->AddEntry(h[iFile][0],"XCone PbPb PYTHIA+HYDJET","f");
+    t3->AddEntry(h[iFile][0],"XCone PbPb PYTHIA+HYDJET","f");
+    t3=new TLegend(0.30,0.78,0.50,0.90);
+    h[iFile][4]->SetMaximum(0.8);
+
     h[iFile][4]->SetStats(0);
     h[iFile][5]->SetStats(0);
     h[iFile][4]->Draw();
     h[iFile][5]->Draw("SAME");
+    t3->Draw("SAME");
 
 
 
