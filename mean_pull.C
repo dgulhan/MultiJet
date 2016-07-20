@@ -41,7 +41,10 @@ void mean_pull(){
         
     };
     
-    TCut CutSeePull[] = {"pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && 0 < hiBin/2 && hiBin/2 < 30" }; //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
+    TCut CutSeePull[] = {"pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " };
+    TCut centrality = "0 < hiBin/2 && hiBin/2 < 30";
+    
+    //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
     
     Double_t X[]={0.2,0.4,0.6,0.8,1.0,1.2};
     Double_t Xerr[]={0.01,0.01,0.01,0.01,0.01,0.01};
@@ -78,11 +81,12 @@ void mean_pull(){
     
     file[iFile] = TFile::Open(Files[iFile].Data());
     xc_R4_N3_PF[iFile]= (TTree*)file[iFile]->Get("xc_R4_N3_PF");
+    //xc_R4_N3_PF[iFile]= (TTree*)file[iFile]->Get("ak4PF");
 
     for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
         
         h[iFile][iPoint] = new TH1D(Form("h%i%i",iFile,iPoint),"",50,0,3.5);
-        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint] );
+        xc_R4_N3_PF[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint] && centrality);
         Y0[iPoint] = h[iFile][iPoint]->GetMean();
         cout<<h[iFile][iPoint]->GetMean()<<endl;
         Y0err[iPoint] = h[iFile][iPoint]->GetMeanError();
@@ -92,7 +96,8 @@ void mean_pull(){
     
     file[iFile] = TFile::Open(Files[iFile].Data());
     xc_R4_N3_PF[iFile]= (TTree*)file[iFile]->Get("xc_R4_N3_PF");
-    
+    //xc_R4_N3_PF[iFile]= (TTree*)file[iFile]->Get("ak4PF");
+
     for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
         
         h[iFile][iPoint] = new TH1D(Form("h%i%i",iFile,iPoint),"",50,0,3.5);
@@ -106,7 +111,8 @@ void mean_pull(){
     
     file[iFile] = TFile::Open(Files[iFile].Data());
     xc_R4_N3_PF[iFile]= (TTree*)file[iFile]->Get("xc_R4_N3_PF");
-    
+    //xc_R4_N3_PF[iFile]= (TTree*)file[iFile]->Get("ak4PF");
+
     for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
         
         h[iFile][iPoint] = new TH1D(Form("h%i%i",iFile,iPoint),"",50,0,3.5);
@@ -120,7 +126,8 @@ void mean_pull(){
     
     file[iFile] = TFile::Open(Files[iFile].Data());
     xc_R4_N3_PF[iFile]= (TTree*)file[iFile]->Get("xc_R4_N3_PF");
-    
+    //xc_R4_N3_PF[iFile]= (TTree*)file[iFile]->Get("ak4PF");
+
     for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
         
         h[iFile][iPoint] = new TH1D(Form("h%i%i",iFile,iPoint),"",50,0,3.5);
