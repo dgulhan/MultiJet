@@ -278,11 +278,10 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", b
                 }
             }
         }
-        particlespf.clear();
                 
+        vector<PseudoJet> particles;
         if(doGen){
             //!cluster gen particles from signal
-            vector<PseudoJet> particles;
             for(int ipart = 0; ipart < fgen->mult; ipart++){
                 //cout << "Ipart loop: "<<ipart<<"of "<<fpf->nPFpart<<endl;
                 // cout << ipart << endl;
@@ -314,9 +313,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", b
                         
                     }
                 }
-            }
-            particles.clear();
-            
+            }            
         }
         
         int njet[nalgo][nR][nJet];
@@ -500,17 +497,20 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", b
 				}
 			}
 		}
-		if(doGen){
+		if(doGen){	
 			if(particles.size()>0){
 				for(int iR = 0; iR < nR; iR++){
 					delete csGenAK[0][iR][0];
 					for (int iN = 0; iN < nJet ; iN++){
 						delete csGenXCone[1][iR][iN];
-					
+						
 					}
 				}
 			}
 		}
+		particlespf.clear();
+		particles.clear();
+
     } 
     
     fnt->cd();
