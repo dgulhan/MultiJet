@@ -211,11 +211,12 @@ void plotRdepmPPMC(){
                 histpp[0][iVar][iR][0]->SetStats(0);
                 histpp[1][iVar][iR][iN]->SetStats(0);
                 
+                TLegend *t3;
                 if (iR == 0) {
-                    TLegend *t3=new TLegend(0.20,0.75,0.50,0.95);
+                    t3=new TLegend(0.20,0.75,0.50,0.95);
                     drawText("CMS Preliminary",0.20,0.93,23);
                 }
-            if (iR > 0)  TLegend *t3=new TLegend(0.20,0.75,0.50,0.95);
+            if (iR > 0)  t3=new TLegend(0.20,0.75,0.50,0.95);
             t3->SetFillColor(0);
             t3->SetBorderSize(0);
             t3->SetFillStyle(0);
