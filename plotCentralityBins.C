@@ -251,9 +251,9 @@ void plotCentralityBins(){
     }
     
     
-    c2->SaveAs(Form("CentrPt100%s.png",XLabel[iVar].Data()));
-    c2->SaveAs(Form("CentrPt100%s.eps",XLabel[iVar].Data()));
-    c2->SaveAs(Form("CentrPt100%s.gif",XLabel[iVar].Data()));
+    c2->SaveAs(Form("aktCentrPt100%s.png",XLabel[iVar].Data()));
+    c2->SaveAs(Form("aktCentrPt100%s.eps",XLabel[iVar].Data()));
+    c2->SaveAs(Form("aktCentrPt100%s.gif",XLabel[iVar].Data()));
     
     
     
