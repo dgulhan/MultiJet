@@ -500,6 +500,17 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", b
 				}
 			}
 		}
+		if(doGen){
+			if(particles.size()>0){
+				for(int iR = 0; iR < nR; iR++){
+					delete csGenAK[0][iR][0];
+					for (int iN = 0; iN < nJet ; iN++){
+						delete csGenXCone[1][iR][iN];
+					
+					}
+				}
+			}
+		}
     } 
     
     fnt->cd();
