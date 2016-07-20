@@ -55,7 +55,7 @@ void PullAnglevsAlgorithm(){
     int Colors[] = {kMagenta,kGreen}; //kGreen for XCone kMagenta anit-kT
     
     TCanvas * c2 = new TCanvas("c2","c2",4*450,450);
-    makeMultiPanelCanvas(c2,1,1,0.0,0.0,0.17,0.17,0.02);
+    makeMultiPanelCanvas(c2,3,1,0.0,0.0,0.17,0.17,0.02);
     
     for ( int iFile = 0 ; iFile < nFiles; iFile++ ) {
         
