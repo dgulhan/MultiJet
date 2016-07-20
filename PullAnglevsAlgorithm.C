@@ -51,7 +51,7 @@ void PullAnglevsAlgorithm(){
     TCut Cut1c = "pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.7 && 0 < hiBin/2 && hiBin/2 < 30" ;
     
     
-    TH1D *h[nFiles][2];
+    TH1D *h[nFiles][6];
     int Colors[] = {kGreen,kMagenta}; //kGreen for XCone kMagenta anit-kT
     
     TCanvas * c2 = new TCanvas("c2","c2",4*450,450);
