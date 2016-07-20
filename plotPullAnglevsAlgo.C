@@ -56,10 +56,9 @@ void plotPullAnglevsAlgo(){
         tree[iFile]= (TTree*)file[iFile]->Get(Form("xc_R4_N3"));
         cout<<"b"<<endl;
         
-        h[iFile] = new TH1D(Form("h%i",iFile),";#theta_{2,3 Pull};Event Fraction",50,0,TMath::Pi());
-        cout<<"c"<<endl;
-
+        h[iFile] = new TH1D(Form("h%i",iFile),50,0,3.1416);
         tree[iFile]->Draw("pt1");
+        
     }
         //"acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( mag(pullEta2,pullPhi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h%i"
         /***
