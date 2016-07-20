@@ -151,7 +151,7 @@ void PullAnglevsAlgorithm(){
     //t3->AddEntry(histPbPb[0][iVar][iR][0],"anti k_{T} PbPb MC","l");
     //t3->AddEntry(histPbPb[1][iVar][iR][iN],Form("XCone PbPb MC N=%d",N[iN]),"l");
     t3->AddEntry(h[iFile][0],"XCone PbPb PYTHIA+HYDJET","f");
-    t3->AddEntry(h[iFile][0],"XCone PbPb PYTHIA+HYDJET","f");
+    t3->AddEntry(h[iFile][0],"anti-k_{T} PbPb PYTHIA+HYDJET","f");
     t3=new TLegend(0.30,0.78,0.50,0.90);
     h[iFile][4]->SetMaximum(0.8);
 
