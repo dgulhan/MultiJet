@@ -30,26 +30,21 @@ float mag(float x, float y){
 
 
 void mean_pull(){
-    int nPoints = 12;
+    int nPoints = 6;
     
-    TCut CutsR[] = {"sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.1",
-                    "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.2",
-                    "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.3",
+    TCut CutsR[] = {"sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.2",
                     "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.4",
-                    "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5",
                     "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.6",
-                    "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.7",
                     "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.8",
-                    "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.9",
                     "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.0",
-                    "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.1",
-                    "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.2"
+                    "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.2",
+        
     };
     
-    TCut CutSeePull[] = {"pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3" }; //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
+    TCut CutSeePull[] = {"pt1>180 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && 0 < hiBin/2 && hiBin/2 < 30" }; //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
     
-    Double_t X[]={0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2};
-    Double_t Xerr[]={0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01};
+    Double_t X[]={0.2,0.4,0.6,0.8,1.0,1.2};
+    Double_t Xerr[]={0.01,0.01,0.01,0.01,0.01,0.01};
 
     
     
@@ -172,9 +167,9 @@ void mean_pull(){
     t2->SetTextFont(43);
     t2->SetTextSize(19);
     t2->AddEntry(gr[0],"PbPb PYTHIA+HYDJET","l");
-    t2->AddEntry(gr[1],"PbPb Data","l");
+    //t2->AddEntry(gr[1],"PbPb Data","l");
     t2->AddEntry(gr[2],"pp PYTHIA","l");
-    t2->AddEntry(gr[3],"pp Data","l");
+    //t2->AddEntry(gr[3],"pp Data","l");
     t2->Draw("SAME");
     drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV |#Delta#phi_{1,2}|>2/3 #pi",0.25,0.20,15);
 
