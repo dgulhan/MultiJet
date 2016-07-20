@@ -56,7 +56,7 @@ void plot_vs_centrality(){
         //c1[iFile] = new TCanvas(Form("c1%i",iFile),"",600,600);
         
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
-        file[iFile] = new TFile ( Files[iFile].Data() );
+        file[iFile] = TFile::Open( Files[iFile].Data() );
         TH1D * histHiBin[nBinsCentr];
         TH1D * histNjet[nBinsCentr];
         TTree* tree[1];
