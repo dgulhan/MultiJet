@@ -33,19 +33,22 @@ float mag(float x, float y){
 
 void PullAnglevsAlgorithm(){
     
-    int nFiles = 4;
+    int nFiles = 1;
     
-    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root" };
-    
-    TCut CutCentr = "0 < hiBin/2 && hiBin/2 < 30";
-    TString CentrText = "Centr. 30 - 0 %";
+    TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root"}
+        //"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root"};
+
     
     TFile *file[nFiles];
     
-    TTree *xc[nFiles];
-    TTree *ak[nFiles];
+    TTree *xcR5N3PF[nFiles];
+    TTree *akR5PF[nFiles];
+    TTree *xcR4N4PF[nFiles];
+    TTree *akR4PF[nFiles];
     
-    TCut Cut1 = "pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.7" ;
+    TCut Cut1a = "pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.7 && 0 < hiBin/2 && hiBin/2 < 30" ;
+    TCut Cut1b = "pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.7 && 0 < hiBin/2 && hiBin/2 < 30" ;
+    TCut Cut1c = "pt1>120 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.7 && 0 < hiBin/2 && hiBin/2 < 30" ;
     
     
     TH1D *h[nFiles][2];
