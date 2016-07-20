@@ -59,8 +59,10 @@ void plotPullAnglevsAlgo(){
         h[iFile] = new TH1D(Form("h%i",iFile),";#theta_{2,3 Pull};Event Fraction",50,0,TMath::Pi());
         cout<<"c"<<endl;
 
-        tree[iFile]->Draw(Form("pt1>>h%i",iFile));
+        tree[iFile]->Draw("pt1");
+    }
         //"acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( mag(pullEta2,pullPhi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h%i"
+        /***
         cout<<"d"<<endl;
 
         h[iFile]->Scale(1./h[iFile]->Integral());
@@ -122,7 +124,8 @@ void plotPullAnglevsAlgo(){
     drawText("CMS Preliminary",0.17,0.93,23);
     drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.18,0.74,16);
     drawText("Centr. 30 - 0 %",0.18,0.70,16);
-    
+    ***/
+        
     
 }
    
