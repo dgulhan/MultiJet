@@ -126,7 +126,7 @@ void PullAnglevsAlgorithm(){
     
     int iFile=0;
     c2->cd(1);
-    h[iFile][0]->SetMaximum(0.8);
+    h[iFile][0]->SetMaximum(0.08);
     h[iFile][0]->SetStats(0);
     h[iFile][1]->SetStats(0);
 
@@ -134,7 +134,7 @@ void PullAnglevsAlgorithm(){
     h[iFile][1]->Draw("SAME");
     
     c2->cd(2);
-    h[iFile][2]->SetMaximum(0.8);
+    h[iFile][2]->SetMaximum(0.08);
 
     h[iFile][2]->SetStats(0);
     h[iFile][3]->SetStats(0);
@@ -154,7 +154,7 @@ void PullAnglevsAlgorithm(){
     t3->AddEntry(h[iFile][0],"XCone PbPb PYTHIA+HYDJET","f");
     t3->AddEntry(h[iFile][0],"anti-k_{T} PbPb PYTHIA+HYDJET","f");
     t3=new TLegend(0.30,0.78,0.50,0.90);
-    h[iFile][4]->SetMaximum(0.8);
+    h[iFile][4]->SetMaximum(0.08);
 
     h[iFile][4]->SetStats(0);
     h[iFile][5]->SetStats(0);
