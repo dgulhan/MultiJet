@@ -31,7 +31,7 @@ float mag(float x, float y){
 void plotPullAnglevsAlgo(){
     TH1D::SetDefaultSumw2();
     
-    int nFiles = 4;
+    int nFiles = 1;
     
     TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
         "/afs/cern.ch/work/e/eruizvel/public/PbPbDataHIHardProbes+pullHiForest_ALL.root",
@@ -59,7 +59,7 @@ void plotPullAnglevsAlgo(){
         h[iFile] = new TH1D(Form("h%i",iFile),";#theta_{2,3}^{Pull};EventFraction",50,0,TMath::Pi());
         cout<<"c"<<endl;
 
-        tree[iFile]->Draw(Form("acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( mag(pullEta2,pullPhi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h%i",iFile), cut && CutCentr);
+        tree[iFile]->Draw(Form("acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( mag(pullEta2,pullPhi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h%i",iFile));
         cout<<"d"<<endl;
 
         h[iFile]->Scale(1./h[iFile]->Integral());
