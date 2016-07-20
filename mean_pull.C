@@ -54,10 +54,10 @@ void mean_pull(){
     
     
     int nFiles = 4;
-    TString Files[] = {"/afs/cern.ch/work/e/eruizvel/public/PbPbMCpthat80+pullHiForestAOD_ALL.root",
-                       "/afs/cern.ch/work/e/eruizvel/public/PbPbMCpthat80+pullHiForestAOD_ALL.root",
-                       "/afs/cern.ch/work/e/eruizvel/public/ppMCpthat80+pullHiForestAOD_ALL.root",
-                        "/afs/cern.ch/work/e/eruizvel/public/ppMCpthat80+pullHiForestAOD_ALL.root"};
+    TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
+                       "/afs/cern.ch/work/e/eruizvel/public/PbPbDataHIHardProbes+pullHiForest_ALL.root",
+                       "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root",
+                        "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root"};
     
     TTree *xc_R4_N3_PF[nFiles];
     TFile *file[nFiles];
