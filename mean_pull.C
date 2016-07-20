@@ -170,10 +170,10 @@ void mean_pull(){
     t2->SetFillStyle(0);
     t2->SetTextFont(43);
     t2->SetTextSize(19);
-    t3->AddEntry(gr[0],"PbPb PYTHIA+HYDJET","l");
-    t3->AddEntry(gr[1],"PbPb Data","l");
-    t3->AddEntry(gr[2],"pp PYTHIA","l");
-    t3->AddEntry(gr[2],"pp Data","l");
+    t2->AddEntry(gr[0],"PbPb PYTHIA+HYDJET","l");
+    t2->AddEntry(gr[1],"PbPb Data","l");
+    t2->AddEntry(gr[2],"pp PYTHIA","l");
+    t2->AddEntry(gr[2],"pp Data","l");
     drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV |#Delta#phi_{1,2}|>2/3 #pi",0.03,0.93,18);
 
 
