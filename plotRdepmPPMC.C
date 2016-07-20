@@ -68,7 +68,7 @@ void plotRdepmPPMC(){
     
     TFile*  filepp = TFile::Open("root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/ppPy8hat80HiForestAOD_ALL.root");
     
-    int colpp[] = {kBlue-3, kRed+1};
+    int colpp[] = {kGreen, kMagenta};
     
     
     for (int iR = 0 ; iR < nR ; iR++ ){
@@ -90,6 +90,7 @@ void plotRdepmPPMC(){
             histpp[0][iVar][iR][0]->Scale(1./histpp[0][iVar][iR][0]->Integral());
             histpp[0][iVar][iR][0]->SetLineColor(colpp[0]);
             histpp[0][iVar][iR][0]->SetLineWidth(2);
+            histpp[0][iVar][iR][0]->GetXaxis()->SetLimits(histoxmin[iVar]+0.0001,histoxmax[iVar]-0.0001);
             
             for (int iN = 0; iN < nN ; iN++) {
                 
@@ -98,7 +99,7 @@ void plotRdepmPPMC(){
                 histpp[1][iVar][iR][iN]->Scale(1./histpp[1][iVar][iR][iN]->Integral());
                 histpp[1][iVar][iR][iN]->SetLineColor(colpp[1]);
                 histpp[1][iVar][iR][iN]->SetLineWidth(2);
-                
+                histpp[1][iVar][iR][iN]->GetXaxis()->SetLimits(histoxmin[iVar]+0.0001,histoxmax[iVar]-0.0001);
                 
             }
             
@@ -210,7 +211,11 @@ void plotRdepmPPMC(){
                 histpp[0][iVar][iR][0]->SetStats(0);
                 histpp[1][iVar][iR][iN]->SetStats(0);
                 
-            TLegend *t3=new TLegend(0.10,0.75,0.50,0.95);
+                if (iR == 0) {
+                    TLegend *t3=new TLegend(0.20,0.75,0.50,0.95);
+                    drawText("CMS Preliminary",0.20,0.93,23);
+                }
+            if (iR > 0)  TLegend *t3=new TLegend(0.20,0.75,0.50,0.95);
             t3->SetFillColor(0);
             t3->SetBorderSize(0);
             t3->SetFillStyle(0);
