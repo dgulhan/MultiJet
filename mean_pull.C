@@ -138,10 +138,11 @@ void mean_pull(){
         
     
     
-    TCanvas *c2 = new TCanvas ("c2","",600,600);
+    TCanvas *c2 = new TCanvas ("c2","",610,600);
 
     gr[0] = new TGraphErrors(nPoints,X,Y0,Xerr,Y0err);
     gr[0]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
+    gr[0]->GetYaxis()->SetTitleOffset(1.4);
     gr[0]->GetYaxis()->SetTitle("#LT | #vec{t} | #GT ");
     gr[0]->SetFillColor(Color[0]);
     gr[0]->SetLineColor(Color[0]);
