@@ -219,10 +219,10 @@ void plotRdepmPPMC(){
                 
                 TLegend *t3;
                 if (iR == 0) {
-                    t3=new TLegend(0.40,0.78,0.50,0.95);
+                    t3=new TLegend(0.40,0.78,0.50,0.90);
                     drawText("CMS Preliminary",0.23,0.93,23);
                 }
-            if (iR > 0)  t3=new TLegend(0.30,0.78,0.50,0.95);
+            if (iR > 0)  t3=new TLegend(0.30,0.78,0.50,0.90);
             t3->SetFillColor(0);
             t3->SetBorderSize(0);
             t3->SetFillStyle(0);
