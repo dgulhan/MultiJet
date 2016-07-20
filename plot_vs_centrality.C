@@ -93,7 +93,7 @@ void plot_vs_centrality(){
     
     TCanvas *c2 = new TCanvas ("c2","",600,600);
     gr[1]->SetMinimum(-2);
-    gr[1]->SetMaximum(50);
+    gr[1]->SetMaximum(10);
     gr[1]->GetXaxis()->SetLimits(0,80);
     gr[1]->GetXaxis()->SetTitle("% Centrality ");
     gr[1]->GetYaxis()->SetTitle("#LT N_{jet} #GT");
