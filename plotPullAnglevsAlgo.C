@@ -51,7 +51,7 @@ void plotPullAnglevsAlgo(){
     
     for (int iFile=0; iFile<nFiles ; iFile++ ){
         
-        TFile *file[iFile] = TFile::Open(Files[iFile].Data());
+        file[iFile] = TFile::Open(Files[iFile].Data());
         
         tree[iFile]= (TTree*)file[iFile]->Get(Form("xc_R4_N3"));
         
