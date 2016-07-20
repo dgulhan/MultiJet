@@ -6,7 +6,7 @@
 #define sign(a) ( ( (a) < 0 )  ?  -1   : ( (a) > 0 ) )
 
 
-void plotDR_ppvsPbPb_MC(){
+void plotRdepmPPMC(){
     
     TH1D::SetDefaultSumw2();
     
