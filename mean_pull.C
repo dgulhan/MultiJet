@@ -164,7 +164,7 @@ void mean_pull(){
 
     
     
-    TLegend *t2=new TLegend(0.19,0.83,0.26,0.95);
+    TLegend *t2=new TLegend(0.15,0.75,0.25,0.88);
     t2->SetFillColor(0);
     t2->SetBorderSize(0);
     t2->SetFillStyle(0);
@@ -175,7 +175,7 @@ void mean_pull(){
     t2->AddEntry(gr[2],"pp PYTHIA","l");
     t2->AddEntry(gr[2],"pp Data","l");
     t2->Draw("SAME");
-    drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV |#Delta#phi_{1,2}|>2/3 #pi",0.15,0.10,15);
+    drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV |#Delta#phi_{1,2}|>2/3 #pi",0.25,0.20,15);
 
 
     
