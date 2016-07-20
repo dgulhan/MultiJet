@@ -56,7 +56,7 @@ void plotPullAnglevsAlgo(){
         tree[iFile]= (TTree*)file[iFile]->Get(Form("xc_R4_N3"));
         cout<<"b"<<endl;
         
-        h[iFile] = new TH1D(Form("h%i",iFile),50,0,3.1416);
+        h[iFile] = new TH1D(Form("h%i",iFile),"",50,0,3.1416);
         tree[iFile]->Draw("pt1");
         
     }
