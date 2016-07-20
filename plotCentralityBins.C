@@ -100,8 +100,8 @@ void plotCentralityBins(){
         //if (iFile == 3 ){tree[iFile] = (TTree*)file[iFile]->Get("xc4PF");}
         //if (iFile  < 3 ){tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));}
         
-        tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
-        //tree[iFile] = (TTree*)file[iFile]->Get(Form("ak4PF",R,N));
+        //tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
+        tree[iFile] = (TTree*)file[iFile]->Get(Form("ak4PF",R,N));
 
         for ( int iCentr = 0 ; iCentr < nCentrBins ; iCentr++ ) {
             
@@ -228,16 +228,16 @@ void plotCentralityBins(){
         for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
             if (iCentr == nCentrBins-1 ){
                 if (iFile == 0 ) {
-                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
+                    t3->AddEntry(hist[iFile][iCentr],"anti-k_{T} PbPb PYTHIA+HYDJET","f");
                 }
                 if (iFile == 1) {
-                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb Data","p");
+                    t3->AddEntry(hist[iFile][iCentr],"anti-k_{T} PbPb Data","p");
                 }
                 if (iFile == 2 ){
-                    t3->AddEntry(hist[iFile][0],"XCone pp PYTHIA","f");
+                    t3->AddEntry(hist[iFile][0],"anti-k_{T} pp PYTHIA","f");
                 }
                 if (iFile == 3) {
-                    t3->AddEntry(hist[iFile][0],"XCone pp Data","p");
+                    t3->AddEntry(hist[iFile][0],"anti-k_{T} pp Data","p");
 
                 }
             t3->Draw("SAME");
