@@ -49,11 +49,11 @@ void plotDR_ppvsPbPb_MC(){
     };
     //{"pt1>120 && pt2>30 && (acos(cos(phi1-phi2)))>2*TMath::Pi()/3 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120","pt1>120 && pt2>30 && (acos(cos(phi1-phi2)))>2*TMath::Pi()/3 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10","pt1>120 && pt2>30 && pt3>10 && abs(eta2)<0.5" };
     
-    Float_t histoxmin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.};
+    Double_t histoxmin[] = {0,0,0,-2.,-2.,-2.,0.,0.,0.};
     
     //{0,0,0,0,0,-3,0.0,0,-200,-200,-2,-2,-2,0,-2};
     
-    Float_t histoxmax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.};
+    Double_t histoxmax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.};
     
 
     //{1,TMath::Pi(),TMath::Pi(),TMath::Pi(),TMath::Pi(),2,20.,1.0,200,200,2,2,2,1,2};
