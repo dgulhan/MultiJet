@@ -49,17 +49,11 @@ void plotPullAnglevsAlgo(){
 
 
     
-    for (int iFile=0; iFile<nFiles ; iFile++ ){
+    
+    file[0] = TFile::Open(Files[0].Data());
+    tree[0]= (TTree*)file[0]->Get(Form("xc_R4_N3"));
+    tree[0]->Draw("pt1");
         
-        file[iFile] = TFile::Open(Files[iFile].Data());
-        cout<<"a"<<endl;
-        tree[iFile]= (TTree*)file[iFile]->Get(Form("xc_R4_N3"));
-        cout<<"b"<<endl;
-        
-        h[iFile] = new TH1D(Form("h%i",iFile),"",50,0,3.1416);
-        tree[iFile]->Draw("pt1");
-        
-    }
         //"acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( mag(pullEta2,pullPhi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h%i"
         /***
         cout<<"d"<<endl;
