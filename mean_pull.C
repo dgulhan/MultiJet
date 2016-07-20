@@ -173,7 +173,7 @@ void mean_pull(){
     t2->AddEntry(gr[0],"PbPb PYTHIA+HYDJET","l");
     t2->AddEntry(gr[1],"PbPb Data","l");
     t2->AddEntry(gr[2],"pp PYTHIA","l");
-    t2->AddEntry(gr[2],"pp Data","l");
+    t2->AddEntry(gr[3],"pp Data","l");
     t2->Draw("SAME");
     drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV |#Delta#phi_{1,2}|>2/3 #pi",0.25,0.20,15);
 
