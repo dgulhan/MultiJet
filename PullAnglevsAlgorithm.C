@@ -143,7 +143,6 @@ void PullAnglevsAlgorithm(){
 
     c2->cd(3);
     TLegend *t3;
-    t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
     t3->SetTextFont(43);
