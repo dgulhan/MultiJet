@@ -54,8 +54,8 @@ void mean_pull(){
     
     
     int nFiles = 4;
-    TString Files[] = {"/afs/cern.ch/work/e/eruizvel/public/ppMCpthat80+pullHiForestAOD_ALL.root",
-                       "/afs/cern.ch/work/e/eruizvel/public/ppMCpthat80+pullHiForestAOD_ALL.root",
+    TString Files[] = {"/afs/cern.ch/work/e/eruizvel/public/PbPbMCpthat80+pullHiForestAOD_ALL.root",
+                       "/afs/cern.ch/work/e/eruizvel/public/PbPbMCpthat80+pullHiForestAOD_ALL.root",
                        "/afs/cern.ch/work/e/eruizvel/public/ppMCpthat80+pullHiForestAOD_ALL.root",
                         "/afs/cern.ch/work/e/eruizvel/public/ppMCpthat80+pullHiForestAOD_ALL.root"};
     
