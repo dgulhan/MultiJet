@@ -70,8 +70,6 @@ void PullAnglevsAlgorithm(){
         xcR5N3PF[iFile]->Draw(Form("acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( mag(pullEta2,pullPhi2)*mag(eta3-eta2,deltaPhi(phi3,phi2)) ))>>h0%i",iFile),Cut1a);
         h[iFile][0]->Scale(1./h[iFile][0]->Integral());
         h[iFile][0]->SetLineColor(Colors[0]);
-        h[iFile][0]->SetFillColorAlpha(Colors[0],0.35);
-        h[iFile][0]->SetFillStyle(3005);
         
 
         makePretty(h[iFile][0]);
@@ -82,8 +80,6 @@ void PullAnglevsAlgorithm(){
         h[iFile][1]->Scale(1./h[iFile][1]->Integral());
         h[iFile][1]->SetLineColor(Colors[1]);
         makePretty(h[iFile][1]);
-        h[iFile][0]->SetFillColorAlpha(Colors[1],0.35);
-        h[iFile][0]->SetFillStyle(3004);
         
         
         h[iFile][2] = new TH1D(Form("h2%i",iFile),";#theta_{Pull 2,3};Event fraction",25,0,3.5);
@@ -91,8 +87,6 @@ void PullAnglevsAlgorithm(){
         h[iFile][2]->Scale(1./h[iFile][2]->Integral());
         h[iFile][2]->SetLineColor(Colors[0]);
         makePretty(h[iFile][2]);
-        h[iFile][2]->SetFillColorAlpha(Colors[0],0.35);
-        h[iFile][2]->SetFillStyle(3005);
         
         
         h[iFile][3] = new TH1D(Form("h3%i",iFile),";#theta_{Pull 2,3};Event fraction",25,0,3.5);
@@ -100,8 +94,6 @@ void PullAnglevsAlgorithm(){
         h[iFile][3]->Scale(1./h[iFile][3]->Integral());
         h[iFile][3]->SetLineColor(Colors[1]);
         makePretty(h[iFile][3]);
-        h[iFile][3]->SetFillColorAlpha(Colors[1],0.35);
-        h[iFile][3]->SetFillStyle(3004);
         
         
         h[iFile][4] = new TH1D(Form("h4%i",iFile),";#theta_{Pull 2,3};Event fraction",25,0,3.5);
@@ -109,8 +101,6 @@ void PullAnglevsAlgorithm(){
         h[iFile][4]->Scale(1./h[iFile][4]->Integral());
         h[iFile][4]->SetLineColor(Colors[0]);
         makePretty(h[iFile][4]);
-        h[iFile][4]->SetFillColorAlpha(Colors[0],0.35);
-        h[iFile][4]->SetFillStyle(3005);
         
         
         h[iFile][5] = new TH1D(Form("h5%i",iFile),";#theta_{Pull 2,3};Event fraction",25,0,3.5);
@@ -118,8 +108,6 @@ void PullAnglevsAlgorithm(){
         h[iFile][5]->Scale(1./h[iFile][5]->Integral());
         h[iFile][5]->SetLineColor(Colors[1]);
         makePretty(h[iFile][5]);
-        h[iFile][5]->SetFillColorAlpha(Colors[1],0.35);
-        h[iFile][5]->SetFillStyle(3004);
         
         
     }
@@ -160,7 +148,7 @@ void PullAnglevsAlgorithm(){
     h[iFile][5]->SetStats(0);
     h[iFile][4]->Draw();
     h[iFile][5]->Draw("SAME");
-    t3->Draw("SAME");
+    //t3->Draw("SAME");
 
 
 
