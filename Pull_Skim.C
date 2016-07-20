@@ -36,7 +36,7 @@ using namespace std;
 
 
 
-void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", TString doMatchAK= ""){
+void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", bool doMatchAK = false){
     TH2D::SetDefaultSumw2(true);
     TH1D::SetDefaultSumw2();
 	
@@ -393,7 +393,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
 						bool hasRef = false;
 						int refIndex = -99;
                         if(doGen){ //! reco to gen matchin
-						    if(doMatchAK=="true" && ialgo > 0){
+						    if(doMatchAK && ialgo > 0){
   							    for(unsigned int igen = 0; igen < genjets[0][iR][0].size(); igen++){
 							        float matchEta = genjets[0][iR][0][igen].eta;
 						            float matchPhi = genjets[0][iR][0][igen].phi;
@@ -436,7 +436,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
                         njet[ialgo][iR][iN]++;
                     }
 					
-					if(doMatchAK == "true"){//!after one algo is done the matched bool needs to be set to false for AK
+					if(doMatchAK && doGen){//!after one algo is done the matched bool needs to be set to false for AK
 					//!jets as they are going to be reused
 					    for(unsigned int igen = 0; igen < genjets[ialgo][iR][iN].size(); igen++){
 						    genjets[0][iR][0][igen].matched = false;
@@ -491,13 +491,15 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
                 evnt.reset();
             }
         }
-        for(int iR = 0; iR < nR; iR++){
-            delete csPFAK[0][iR][0];
-            for (int iN = 0; iN < nJet ; iN++){
-                delete csPFXCone[1][iR][iN];
-                
-            }
-        }
+		if(particlespf.size()>0){
+			for(int iR = 0; iR < nR; iR++){
+				delete csPFAK[0][iR][0];
+				for (int iN = 0; iN < nJet ; iN++){
+					delete csPFXCone[1][iR][iN];
+					
+				}
+			}
+		}
     } 
     
     fnt->cd();
@@ -520,7 +522,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", T
 
 int main(int argc, char *argv[])
 {
-    Pull_Skim(argv[1],argv[2],argv[3],argv[4]);
+    Pull_Skim(argv[1], argv[2], argv[3], ((bool)atoi(argv[4])));
     return 0;
 }
 
