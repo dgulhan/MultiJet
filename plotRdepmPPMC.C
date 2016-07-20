@@ -55,6 +55,7 @@ void plotRdepmPPMC(){
     
     Double_t histoxmax[] = {TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.};
     
+    Double_t YMaxHist[] = {0.12,0.25,0.12,0.095,0.09,0.13,0.15,0.17,0.12};
 
     //{1,TMath::Pi(),TMath::Pi(),TMath::Pi(),TMath::Pi(),2,20.,1.0,200,200,2,2,2,1,2};
     
@@ -194,12 +195,16 @@ void plotRdepmPPMC(){
                 c2[iVar][iN]->cd(iR+1);
                 
                 makePretty(histpp[0][iVar][iR][0]);
+                histpp[0][iVar][iR][0]->SetFillStyle(3005);
+                histpp[0][iVar][iR][0]->SetFillColorAlpha(colpp[0],0.35);
                 makePretty(histpp[1][iVar][iR][iN]);
+                histpp[1][iVar][iR][iN]->SetFillStyle(3004);
+                histpp[1][iVar][iR][iN]->SetFillColorAlpha(colpp[1],0.35);
                 //makePretty(histPbPb[0][iVar][iR][0]);
                 //makePretty(histPbPb[1][iVar][iR][iN]);
                 
                 Double_t max = histpp[1][iVar][0][1]->GetMaximum();
-                histpp[1][iVar][iR][iN]->SetMaximum(max+0.03);
+                histpp[1][iVar][iR][iN]->SetMaximum(YMaxHist[iVar]);
                 histpp[1][iVar][iR][iN]->GetXaxis()->SetNdivisions(505);
                 histpp[1][iVar][iR][iN]->Draw("HIST SAME");
                 histpp[0][iVar][iR][0]->Draw("HIST SAME");
