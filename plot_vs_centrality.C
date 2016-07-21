@@ -43,7 +43,6 @@ void plot_vs_centrality(){
     
     
     TCanvas *c = new TCanvas ("c","",600,600);
-    makeMultiPanelCanvas(c,1,1,-0.12,0.0,0.15,0.16,0.02);
     
     TLegend *t3=new TLegend(0.60,0.75,0.90,0.85);
     t3->SetFillColor(0);
