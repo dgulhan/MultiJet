@@ -33,7 +33,7 @@ void plot_vs_centrality(){
     TGraphErrors * gr [nFiles];
     
     Double_t X[] = {5.0 , 20. , 30.0 , 75.0 };
-    Double_t Xerr = { 0.1 , 0.1 , 0.1 , 0.1 };
+    Double_t Xerr[] = { 0.1 , 0.1 , 0.1 , 0.1 };
     
     Double_t Y[nFiles][nBinsCentr];
     Double_t Yerr[nFiles][nBinsCentr];
