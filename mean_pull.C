@@ -72,8 +72,7 @@ void mean_pull(){
     
     int Color [] = { kRed , kBlue, kGreen, kMagenta };
     
-    TH1D * Hist[nFiles][nBinsCentr];
-    TTree * tree[nFiles];
+    TH1D * Hist[nFiles][nPoints];
 
     
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
@@ -96,8 +95,8 @@ void mean_pull(){
                 tree[iFile]->Draw(Form("sqrt( pow(pullEta2,2.0) + pow(pullPhi2,2.0) )>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint]);
             }
             
-            Y[iFile][iPoint] = Histl[iFile][iPoint]->GetMean();
-            Yerr[iFile][iPoint] = Histl[iFile][iPoint]->GetMeanError();
+            Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
+            Yerr[iFile][iPoint] = Hist[iFile][iPoint]->GetMeanError();
         }
     }
     

@@ -71,7 +71,8 @@ void plot_vs_centrality(){
             
         }
         
-            }
+
+    }
     
     
     TCanvas *c = new TCanvas ("c","",600,600);
@@ -121,61 +122,5 @@ void plot_vs_centrality(){
     
 }
 
-    
- /***
-         for (int iCentr = 0 ; iCentr < nBinsCentr ; iCentr++) {
- 
-            
-            histHiBin[iCentr] = new TH1D(Form("histHiBin%i",iCentr),"",100,0,200);
-            histNjet[iCentr] = new TH1D(Form("histNjet%i",iCentr),"",100,0,200);
-            
-            tree[0]->Draw(Form("hiBin>>histHiBin%i",iCentr),CentralityBinsCuts[iCentr].Data());
-            tree[0]->Draw(Form("sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3)>>histNjet%i",iCentr),CentralityBinsCuts[iCentr].Data());
-            
-            
-            X[iCentr] = histHiBin[iCentr]->GetMean(1)/2.0;
-            cout<<"mean x: "<<X[iCentr]<<endl;
-            Xerr[iCentr] = histHiBin[iCentr]->GetMeanError()/2.0;
-            Y[iCentr] = histNjet[iCentr]->GetMean();
-            cout<<"mean y: "<<Y[iCentr]<<endl;
-            Yerr[iCentr] = histNjet[iCentr]->GetMeanError();
-            
-        }
-        if (X[0] == 0.0 ) { gr[iFile] = new TGraphErrors(nBinsCentr,Xpp,Y,Xpperr,Yerr);}
-        if (X[0] > 0.0 ) { gr[iFile] = new TGraphErrors(nBinsCentr,X,Y,Xerr,Yerr); }
 
-        //gr[iFile]->Draw();
-        gr[iFile]->SetLineColor(Color[iFile]);
-        
-    }
-    
-    TCanvas *c2 = new TCanvas ("c2","",600,600);
-    gr[1]->SetMinimum(-0.05);
-    gr[1]->SetMaximum(1);
-    gr[1]->GetXaxis()->SetLimits(0,80);
-    gr[1]->GetXaxis()->SetTitle("% Centrality ");
-    gr[1]->GetYaxis()->SetTitle("#LT P_{T} Balance #GT");
-
-    gr[1]->Draw();
-    gr[0]->Draw("SAME");
-    gr[2]->Draw("SAME"); //pp data
-    gr[3]->Draw("SAME"); //pp MC
-    
-    TLegend *t3=new TLegend(0.60,0.75,0.90,0.85);
-    t3->SetFillColor(0);
-    t3->SetBorderSize(0);
-    t3->SetFillStyle(0);
-    t3->SetTextFont(43);
-    t3->SetTextSize(20);
-    t3->AddEntry(gr[1],"PbPb Data","l");
-    gr[1]->SetLineStyle(9);
-    t3->AddEntry(gr[0],"PbPb MC","l");
-    t3->AddEntry(gr[2],"pp Data","l");
-    gr[2]->SetLineStyle(9);
-    t3->AddEntry(gr[3],"pp MC","l");
-    t3->Draw("SAME");
-  
-}
-
-***/
 
