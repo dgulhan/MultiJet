@@ -73,8 +73,8 @@ void plot_vs_centrality(){
                 tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),Cut[0]);
             }
         
-            Y[iFile][iCentr] = HistTotBal->GetMean();
-            Yerr[iFile][iCentr] = HistTotBal->GetMeanError();
+            Y[iFile][iCentr] = HistTotBal[iFile][iCentr]->GetMean();
+            Yerr[iFile][iCentr] = HistTotBal[iFile][iCentr]->GetMeanError();
             
         }
         
