@@ -65,7 +65,7 @@ void plot_vs_centrality(){
             }
             
             Y[iFile][iCentr] = HistTotBal[iFile][iCentr]->GetMean();
-            cout<<"mean stored"<<endl;
+            cout<<"mean stored "<< Y[iFile][iCentr] << endl;
             Yerr[iFile][iCentr] = HistTotBal[iFile][iCentr]->GetMeanError();
             cout<<"meanerror"<<endl;
             
