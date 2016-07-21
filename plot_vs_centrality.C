@@ -76,7 +76,7 @@ void plot_vs_centrality(){
     
     TCanvas *c = new TCanvas ("c","",600,600);
     
-    TLegend *t3=new TLegend(0.48,0.73,0.83,0.89);
+    TLegend *t3=new TLegend(0.50,0.64,0.83,0.77);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -110,15 +110,15 @@ void plot_vs_centrality(){
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.12,0.85,23);
     drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.13,0.82,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.79,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
 
 
     
-    /***
-    c2->SaveAs("centrality.png");
-    c2->SaveAs("centrality.pdf");
-    c2->SaveAs("centrality.gif");
-     ***/
+    
+    c2->SaveAs("totbalvscentrality.png");
+    c2->SaveAs("totbalvscentrality.pdf");
+    c2->SaveAs("totbalvscentrality.gif");
+    
 }
 
     
