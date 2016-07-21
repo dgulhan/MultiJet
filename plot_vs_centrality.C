@@ -93,8 +93,8 @@ void plot_vs_centrality(){
         gr[iFile]->SetLineStyle(9);
         
         if (iFile == 0) {
-            gr[iFile]->SetMinimum(0.54);
-            gr[iFile]->SetMaximum(1.18);
+            gr[iFile]->SetMinimum(0.11);
+            gr[iFile]->SetMaximum(0.26);
             gr[iFile]->Draw();
         } else {
             gr[iFile]->Draw("SAME");
@@ -106,9 +106,9 @@ void plot_vs_centrality(){
     
 
     t3->Draw("SAME");
-    drawText("CMS Preliminary",0.15,0.95,23);
-    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.18,0.85,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.18,0.75,16);
+    drawText("CMS Preliminary",0.15,0.85,23);
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.18,0.79,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.18,0.73,16);
 
 
     
