@@ -115,9 +115,9 @@ void plot_vs_centrality(){
 
     
     
-    c2->SaveAs("totbalvscentrality.png");
-    c2->SaveAs("totbalvscentrality.pdf");
-    c2->SaveAs("totbalvscentrality.gif");
+    c->SaveAs("totbalvscentrality.png");
+    c->SaveAs("totbalvscentrality.pdf");
+    c->SaveAs("totbalvscentrality.gif");
     
 }
 
