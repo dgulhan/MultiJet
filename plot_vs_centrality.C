@@ -17,7 +17,7 @@ void plot_vs_centrality(){
     int nBinsCentr = 4;
     
     TCut CentralityBinsCuts[] = { "0 < hiBin/2 && hiBin/2 < 10","10 < hiBin/2 && hiBin/2 < 30 ","30 < hiBin/2 && hiBin/2 < 50" ,"50 < hiBin/2 && hiBin/2 < 100" };
-    TCut Cut[] = {};
+    TCut Cut[] = {"pt1>100"};
     
     int Color [] = { kRed , kBlue, kGreen, kYellow };
     
@@ -63,18 +63,23 @@ void plot_vs_centrality(){
         tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R[0],N[0]));
         
         for (int iCentr = 0 ; iCentr < nBinsCentr ; iCentr++) {
-
+            cout<<"def hist"<<endl;
             HistTotBal[iFile][iCentr] = new TH1D(Form("TotBal%i%i",iFile,iCentr),"",100,0,200);
+            cout<<"hist defined"<<endl;
             if (iFile == 0 || iFile ==1 ) {
                 tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),CentralityBinsCuts[iCentr] && Cut[0]);
 
             }
             if (iFile == 2 || iFile == 3) {
+                cout<<"accessing file: "<<iFile<<endl;
                 tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),Cut[0]);
+                cout<<"histo drawn"<<endl;
             }
-        
+            
             Y[iFile][iCentr] = HistTotBal[iFile][iCentr]->GetMean();
+            cout<<"mean stored"<<endl;
             Yerr[iFile][iCentr] = HistTotBal[iFile][iCentr]->GetMeanError();
+            cout<<"meanerror"<<endl;
             
         }
         
