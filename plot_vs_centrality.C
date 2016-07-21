@@ -91,8 +91,13 @@ void plot_vs_centrality(){
         gr[iFile]->GetXaxis()->SetTitle("% Centrality ");
         gr[iFile]->GetYaxis()->SetTitle("#LT P_{T} Balance #GT");
         gr[iFile]->SetLineStyle(9);
-        gr[iFile]->Draw("SAME");
-
+        
+        if (iFile == 0) {
+            gr[iFile]->Draw();
+        } else {
+            gr[iFile]->Draw("SAME");
+        }
+        
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
 
     }
