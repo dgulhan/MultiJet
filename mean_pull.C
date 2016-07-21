@@ -138,13 +138,14 @@ void mean_pull(){
     drawText("CMS Preliminary",0.12,0.85,23);
     drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.13,0.82,16);
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
+    drawText("0 -30% Centrality",0.13,0.74,16);
     
     
     
     
-    c2->SaveAs("totbalvscentrality.png");
-    c2->SaveAs("totbalvscentrality.pdf");
-    c2->SaveAs("totbalvscentrality.gif");
+    c2->SaveAs("meanpull.png");
+    c2->SaveAs("meanpull.pdf");
+    c2->SaveAs("meanpull.gif");
     
     
 
