@@ -17,7 +17,7 @@ void plot_vs_centrality(){
     int nBinsCentr = 4;
     
     TCut CentralityBinsCuts[] = { "0 < hiBin/2 && hiBin/2 < 10","10 < hiBin/2 && hiBin/2 < 30 ","30 < hiBin/2 && hiBin/2 < 50" ,"50 < hiBin/2 && hiBin/2 < 100" };
-    TCut Cut[] = {"pt1>100"};
+    TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"};
     
     int Color [] = { kRed , kBlue, kGreen, kYellow };
     
@@ -76,12 +76,12 @@ void plot_vs_centrality(){
     
     TCanvas *c = new TCanvas ("c","",600,600);
     
-    TLegend *t3=new TLegend(0.60,0.75,0.90,0.85);
+    TLegend *t3=new TLegend(0.50,0.75,0.90,0.85);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
     t3->SetTextFont(43);
-    t3->SetTextSize(20);
+    t3->SetTextSize(18);
     TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"};
     
     for (int iFile = 0; iFile<nFiles; iFile++) {
@@ -93,8 +93,8 @@ void plot_vs_centrality(){
         gr[iFile]->SetLineStyle(9);
         
         if (iFile == 0) {
-            gr[iFile]->SetMinimum(1.2);
-            gr[iFile]->SetMaximum(1);
+            gr[iFile]->SetMinimum(0.54);
+            gr[iFile]->SetMaximum(1.18);
             gr[iFile]->Draw();
         } else {
             gr[iFile]->Draw("SAME");
@@ -106,6 +106,11 @@ void plot_vs_centrality(){
     
 
     t3->Draw("SAME");
+    drawText("CMS Preliminary",0.15,0.95,23)
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.18,0.85,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.18,0.75,16);
+
+
     
     /***
     c2->SaveAs("centrality.png");
