@@ -96,7 +96,7 @@ void mean_pull(){
             }
             
             Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
-            if (Hist[iFile][iPoint]->GetMean() == 0) Y[iFile][iPoint] = nan;
+            if (Hist[iFile][iPoint]->GetMean() == 0) Y[iFile][iPoint] = sqrt(-1);;
             cout<<"Mean: "<<Y[iFile][iPoint]<<endl;
             Yerr[iFile][iPoint] = Hist[iFile][iPoint]->GetMeanError();
         }
