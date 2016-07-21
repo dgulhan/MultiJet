@@ -38,7 +38,7 @@ void mean_pull(){
     
     int nPoints = 6;
     
-    TCut CutsR[] = {"sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.2",
+    TCut CutsR[] = {"sqrt(pow(acos(cos(phi3-phi2)),2.)+pow(eta2-eta3,2.))<0.2",
                     "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.4",
                     "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.6",
                     "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.8",
@@ -96,6 +96,7 @@ void mean_pull(){
             }
             
             Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
+            cout<<"Mean: "<<Y[iFile][iPoint]<<endl;
             Yerr[iFile][iPoint] = Hist[iFile][iPoint]->GetMeanError();
         }
     }
