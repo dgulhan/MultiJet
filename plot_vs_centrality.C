@@ -32,13 +32,13 @@ void plot_vs_centrality(){
     
     TGraphErrors * gr [nFiles];
     
-    Double_t X[ 5.0 , 20. , 30.0 , 75.0 ];
-    Double_t Xerr[ 0.1 , 0.1 , 0.1 , 0.1 ];
+    Double_t X[] = {5.0 , 20. , 30.0 , 75.0 };
+    Double_t Xerr = { 0.1 , 0.1 , 0.1 , 0.1 };
     
     Double_t Y[nFiles][nBinsCentr];
     Double_t Yerr[nFiles][nBinsCentr];
 
-    TH1D * TotBal[nFiles][nBinsCentr];
+    TH1D * HistTotBal[nFiles][nBinsCentr];
     TTree * tree[nFiles];
     
     
@@ -51,7 +51,7 @@ void plot_vs_centrality(){
     t3->SetFillStyle(0);
     t3->SetTextFont(43);
     t3->SetTextSize(20);
-    TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"}:
+    TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"};
     
     c->cd(1);
 
@@ -69,7 +69,7 @@ void plot_vs_centrality(){
                 tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),CentralityBinsCuts[iCentr] && Cut[0]);
 
             }
-            if (iFile == 2 || iFile = 3) {
+            if (iFile == 2 || iFile == 3) {
                 tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),Cut[0]);
             }
         
@@ -79,14 +79,14 @@ void plot_vs_centrality(){
         }
         
         gr[iFile] = new TGraphErrors(nBinsCentr,X,Y[iFile],Xerr,Yerr[iFile]);
-        gr[iFIle]->SetLineColor(Color[iFIle]);
+        gr[iFile]->SetLineColor(Color[iFile]);
         gr[iFile]->GetXaxis()->SetLimits(0,100);
         gr[iFile]->GetXaxis()->SetTitle("% Centrality ");
         gr[iFile]->GetYaxis()->SetTitle("#LT P_{T} Balance #GT");
         gr[iFile]->SetLineStyle(9);
         
-        t3->AddEntry(gr[iFile],gr[iFile],"l");
-        gr[iFile]->Draw("SAME")
+        t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
+        gr[iFile]->Draw("SAME");
         
     }
     t3->Draw("SAME");
