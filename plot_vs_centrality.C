@@ -93,6 +93,8 @@ void plot_vs_centrality(){
         gr[iFile]->SetLineStyle(9);
         
         if (iFile == 0) {
+            gr[iFile]->SetMinimum(1.2);
+            gr[iFile]->SetMaximum(1);
             gr[iFile]->Draw();
         } else {
             gr[iFile]->Draw("SAME");
