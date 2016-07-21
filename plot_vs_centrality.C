@@ -42,18 +42,7 @@ void plot_vs_centrality(){
     TTree * tree[nFiles];
     
     
-    TCanvas *c = new TCanvas ("c","",600,600);
     
-    TLegend *t3=new TLegend(0.60,0.75,0.90,0.85);
-    t3->SetFillColor(0);
-    t3->SetBorderSize(0);
-    t3->SetFillStyle(0);
-    t3->SetTextFont(43);
-    t3->SetTextSize(20);
-    TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"};
-    
-    c->cd(1);
-
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
         
         
@@ -82,18 +71,35 @@ void plot_vs_centrality(){
             
         }
         
+            }
+    
+    
+    TCanvas *c = new TCanvas ("c","",600,600);
+    
+    TLegend *t3=new TLegend(0.60,0.75,0.90,0.85);
+    t3->SetFillColor(0);
+    t3->SetBorderSize(0);
+    t3->SetFillStyle(0);
+    t3->SetTextFont(43);
+    t3->SetTextSize(20);
+    TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"};
+    
+    for (int iFile = 0; iFile<nFiles; iFile++) {
         gr[iFile] = new TGraphErrors(nBinsCentr,X,Y[iFile],Xerr,Yerr[iFile]);
         gr[iFile]->SetLineColor(Color[iFile]);
         gr[iFile]->GetXaxis()->SetLimits(0,100);
         gr[iFile]->GetXaxis()->SetTitle("% Centrality ");
         gr[iFile]->GetYaxis()->SetTitle("#LT P_{T} Balance #GT");
         gr[iFile]->SetLineStyle(9);
-        
-        t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
         gr[iFile]->Draw("SAME");
-        
+
+        t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
+
     }
+    
+
     t3->Draw("SAME");
+    
     /***
     c2->SaveAs("centrality.png");
     c2->SaveAs("centrality.pdf");
