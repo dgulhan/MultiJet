@@ -76,7 +76,7 @@ void plot_vs_centrality(){
     
     TCanvas *c = new TCanvas ("c","",600,600);
     
-    TLegend *t3=new TLegend(0.48,0.73,0.80,0.85);
+    TLegend *t3=new TLegend(0.48,0.73,0.83,0.89);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -95,8 +95,10 @@ void plot_vs_centrality(){
         if (iFile == 0) {
             gr[iFile]->SetMinimum(0.11);
             gr[iFile]->SetMaximum(0.30);
+            gr[iFile]->GetYaxis()->SetTitleOffset(1.4);
             gr[iFile]->Draw();
         } else {
+            gr[iFile]->GetYaxis()->SetTitleOffset(1.4);
             gr[iFile]->Draw("SAME");
         }
         
@@ -106,9 +108,9 @@ void plot_vs_centrality(){
     
 
     t3->Draw("SAME");
-    drawText("CMS Preliminary",0.12,0.82,23);
-    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.13,0.80,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
+    drawText("CMS Preliminary",0.12,0.85,23);
+    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.13,0.82,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.79,16);
 
 
     
