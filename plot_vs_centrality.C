@@ -12,61 +12,95 @@ void plot_vs_centrality(){
     Int_t N[] = {3};
     int nR=1;
     int nN=1; //XCone
-    int nAlgo=2;//XCone and antiKt
+
     
     int nBinsCentr = 4;
-    TString CentralityBinsCuts[] = { "0 < hiBin/2 && hiBin/2 < 10 && pt3>0 ","10 < hiBin/2 && hiBin/2 < 30 && pt3>0","30 < hiBin/2 && hiBin/2 < 50 && pt3>0 " ,"50 < hiBin/2 && hiBin/2 < 100 && pt3>0" };
+    
+    TCut CentralityBinsCuts[] = { "0 < hiBin/2 && hiBin/2 < 10","10 < hiBin/2 && hiBin/2 < 30 ","30 < hiBin/2 && hiBin/2 < 50" ,"50 < hiBin/2 && hiBin/2 < 100" };
+    TCut Cut[] = {};
     
     int Color [] = { kRed , kBlue, kGreen, kYellow };
     
-    
-    // the value 4 in this vectors goes for 2 datasets of Data and 2 of MC (pp,PbPb)
-    Double_t X[nBinsCentr];
-    Double_t Xerr[nBinsCentr];
-    
-    Double_t Y[nBinsCentr];
-    Double_t Yerr[nBinsCentr];
-
-    
-    // Four files ppMC PbPbData ppData PbPbMC
-    
-    
-    
+    int nFiles = 4;
+    TFile *file[nFiles];
     TString Files[] = {
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root",
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/MJSkim_PbPb_data.root",
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/ppPy8hat80HiForestAOD_ALL.root" ,
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/ppDatahat80HiForest_ALL.root"};
-    
-    
-    
-    int nFiles = 4;
-    
-    TFile *file[nFiles];
-    
+
     
     TGraphErrors * gr [nFiles];
     
-    TCanvas *c1[nFiles];
-   
-    Double_t Xpp[] = {5.0,20.0,40,75} ;
-    Double_t Xpperr[] = {0,0.0,0,0} ;
+    Double_t X[ 5.0 , 20. , 30.0 , 75.0 ];
+    Double_t Xerr[ 0.1 , 0.1 , 0.1 , 0.1 ];
+    
+    Double_t Y[nFiles][nBinsCentr];
+    Double_t Yerr[nFiles][nBinsCentr];
+
+    TH1D * TotBal[nFiles][nBinsCentr];
+    TTree * tree[nFiles];
+    
+    
+    TCanvas *c = new TCanvas ("c","",600,600);
+    makeMultiPanelCanvas(c,1,1,-0.12,0.0,0.15,0.16,0.02);
+    
+    TLegend *t3=new TLegend(0.60,0.75,0.90,0.85);
+    t3->SetFillColor(0);
+    t3->SetBorderSize(0);
+    t3->SetFillStyle(0);
+    t3->SetTextFont(43);
+    t3->SetTextSize(20);
+    TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"}:
+    
+    c->cd(1);
+
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
         
-        //c1[iFile] = new TCanvas(Form("c1%i",iFile),"",600,600);
         
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        TH1D * histHiBin[nBinsCentr];
-        TH1D * histNjet[nBinsCentr];
-        TTree* tree[1];
-        tree[0] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R[0],N[0]));
-        //tree[0] = (TTree*)file[iFile]->Get(Form("ak%iPF",R[0],N[0]));
-
-      
+        tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R[0],N[0]));
         
         for (int iCentr = 0 ; iCentr < nBinsCentr ; iCentr++) {
+
+            HistTotBal[iFile][iCentr] = new TH1D(Form("TotBal%i%i",iFile,iCentr),"",100,0,200);
+            if (iFile == 0 || iFile ==1 ) {
+                tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),CentralityBinsCuts[iCentr] && Cut[0]);
+
+            }
+            if (iFile == 2 || iFile = 3) {
+                tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),Cut[0]);
+            }
+        
+            Y[iFile][iCentr] = HistTotBal->GetMean();
+            Yerr[iFile][iCentr] = HistTotBal->GetMeanError();
             
+        }
+        
+        gr[iFile] = new TGraphErrors(nBinsCentr,X,Y[iFile],Xerr,Yerr[iFile]);
+        gr[iFIle]->SetLineColor(Color[iFIle]);
+        gr[iFile]->GetXaxis()->SetLimits(0,100);
+        gr[iFile]->GetXaxis()->SetTitle("% Centrality ");
+        gr[iFile]->GetYaxis()->SetTitle("#LT P_{T} Balance #GT");
+        gr[iFile]->SetLineStyle(9);
+        
+        t3->AddEntry(gr[iFile],gr[iFile],"l");
+        gr[iFile]->Draw("SAME")
+        
+    }
+    t3->Draw("SAME");
+    /***
+    c2->SaveAs("centrality.png");
+    c2->SaveAs("centrality.pdf");
+    c2->SaveAs("centrality.gif");
+     ***/
+}
+
+    
+ /***
+         for (int iCentr = 0 ; iCentr < nBinsCentr ; iCentr++) {
+ 
             
             histHiBin[iCentr] = new TH1D(Form("histHiBin%i",iCentr),"",100,0,200);
             histNjet[iCentr] = new TH1D(Form("histNjet%i",iCentr),"",100,0,200);
@@ -116,16 +150,8 @@ void plot_vs_centrality(){
     gr[2]->SetLineStyle(9);
     t3->AddEntry(gr[3],"pp MC","l");
     t3->Draw("SAME");
-    
-    
-    c2->SaveAs("centrality.png");
-    c2->SaveAs("centrality.pdf");
-    c2->SaveAs("centrality.gif");
-    
-    
-    
-
-    
-
-    
+  
 }
+
+***/
+
