@@ -122,7 +122,7 @@ void mean_pull(){
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
             gr[iFile]->GetYaxis()->SetTitleOffset(2.4);
             gr[iFile]->SetMinimum(0.01);
-            gr[iFile]->SetMaximum(0.0.0055+0.000001);
+            gr[iFile]->SetMaximum(0.0055+0.000001);
             gr[iFile]->GetYaxis()->SetTitle("#LT | #vec{t} | #GT ");
             gr[iFile]->SetMinimum(0.11);
             gr[iFile]->SetMaximum(0.30);
