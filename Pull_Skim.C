@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 
 #include "TCanvas.h"
 #include "TString.h"
@@ -535,7 +536,7 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", i
 
 int main(int argc, char *argv[])
 {
-    Pull_Skim(argv[1], argv[2], argv[3], argv[4]);
+    Pull_Skim(argv[1], argv[2], argv[3], stoi(argv[4]));
     return 0;
 }
 
