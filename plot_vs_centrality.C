@@ -19,7 +19,7 @@ void plot_vs_centrality(){
     TCut CentralityBinsCuts[] = { "0 < hiBin/2 && hiBin/2 < 10","10 < hiBin/2 && hiBin/2 < 30 ","30 < hiBin/2 && hiBin/2 < 50" ,"50 < hiBin/2 && hiBin/2 < 100" };
     TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"};
     
-    int Color [] = { kRed , kBlue, kGreen, kYellow };
+    int Color [] = { kRed , kBlue, kGreen, kMagenta };
     
     int nFiles = 4;
     TFile *file[nFiles];
@@ -106,7 +106,7 @@ void plot_vs_centrality(){
     
 
     t3->Draw("SAME");
-    drawText("CMS Preliminary",0.15,0.95,23)
+    drawText("CMS Preliminary",0.15,0.95,23);
     drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.18,0.85,16);
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.18,0.75,16);
 
