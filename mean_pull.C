@@ -80,7 +80,7 @@ void mean_pull(){
         
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R[0],N[0]));
+        tree[iFile] = (TTree*)file[iFile]->Get(Form("ak4PF",R[0],N[0]));
         
         for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
             
