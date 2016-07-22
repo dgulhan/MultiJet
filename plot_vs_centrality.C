@@ -17,8 +17,8 @@ void plot_vs_centrality(){
     int nBinsCentr = 4;
     
     TCut CentralityBinsCuts[] = { "0 < hiBin/2 && hiBin/2 < 10","10 < hiBin/2 && hiBin/2 < 30 ","30 < hiBin/2 && hiBin/2 < 50" ,"50 < hiBin/2 && hiBin/2 < 100" };
-    TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"};
-    
+    TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2","pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 refpt1>0 && refpt2 > 0 && refpt3 > 0", "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" , "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"}
+
     int Color [] = { kRed , kBlue, kGreen, kMagenta };
     
     int nFiles = 4;
@@ -55,12 +55,12 @@ void plot_vs_centrality(){
             HistTotBal[iFile][iCentr] = new TH1D(Form("TotBal%i%i",iFile,iCentr),"",100,0,200);
             cout<<"hist defined"<<endl;
             if (iFile == 0 || iFile ==1 ) {
-                tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),CentralityBinsCuts[iCentr] && Cut[0]);
+                tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),CentralityBinsCuts[iCentr] && Cut[iFile]);
 
             }
             if (iFile == 2 || iFile == 3) {
                 cout<<"accessing file: "<<iFile<<endl;
-                tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),Cut[0]);
+                tree[iFile]->Draw(Form("(sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3))>>TotBal%i%i",iFile,iCentr),Cut[iFile]);
                 cout<<"histo drawn"<<endl;
             }
             
