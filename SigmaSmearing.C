@@ -53,7 +53,7 @@ void SigmaSmearing(){
     int iFile = 0;
     //func[iFile]->Draw("SAME");
     hist[iFile]->Draw("SAME");
-    
+    hist[iFile+1]->Draw("SAME");
     
     
     
