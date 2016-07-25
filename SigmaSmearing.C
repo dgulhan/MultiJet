@@ -30,7 +30,7 @@ void SigmaSmearing(){
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (*TTree)file[iFile]->Get("xc_R4_N3_P");
+        tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_P");
         
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-4.0,4.0);
         
