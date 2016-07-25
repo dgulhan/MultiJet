@@ -92,7 +92,7 @@ void SigmaSmearing(){
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         
-        corr[iFile] = new TH2D (Form("corr%i",iFile),"",50,0,TMath::Pi(),50,0.0,0.02);
+        corr[iFile] = new TH2D (Form("corr%i",iFile),"",50,-TMath::Pi(),TMath::Pi(),50,0.0,0.02);
         tree[iFile]->Draw(Form("dt:(theta23-reftheta23)>>corr%i",iFile),Cut[iFile]);
         
         
