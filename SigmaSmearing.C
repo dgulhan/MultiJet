@@ -101,7 +101,7 @@ void SigmaSmearing(){
     
     TCanvas *c5;
     
-    c5 = new TCanvas(Form("c5%i",0),"",4*450,400);
+    c5 = new TCanvas(Form("c5%i",0),"",4*451,450);
     makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
 
     TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
