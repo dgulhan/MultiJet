@@ -104,7 +104,7 @@ void SigmaSmearing(){
     c5 = new TCanvas(Form("c5%i",0),"",4*451,450);
     makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
 
-    TLegend *t3=new TLegend(0.33,0.70,0.49,0.86);
+    TLegend *t3=new TLegend(0.38,0.80,0.54,0.88);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -131,9 +131,7 @@ void SigmaSmearing(){
             t2->SetTextFont(43);
             t2->SetTextSize(19);
             t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
-            if (iFile==0 )  t3->AddEntry(hist[iFile][iCentr],"XCone PYTHIA+HYDJET","l");
-            if (iFile==1 )  t3->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
-
+            
             t2->Draw("SAME");
             t3->Draw("SAME");
             
@@ -143,7 +141,12 @@ void SigmaSmearing(){
             if (iCentr == 1) {
                 drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.03,0.93,18);
             }
-                
+            if (iCentr == nCentr-1) {
+                if (iFile==0 )  t3->AddEntry(hist[iFile][iCentr],"XCone PYTHIA+HYDJET","l");
+                if (iFile==1 )  t3->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
+
+            }
+            
         }
             
     }
