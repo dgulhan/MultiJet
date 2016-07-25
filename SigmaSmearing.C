@@ -27,27 +27,23 @@ void SigmaSmearing(){
                  };
     
     TH1D *hist[nFiles];
-    TF1 *func[nFiles]
+    TF1 *func[nFiles];
     TF1 f1("f1","gaus",-0.02,0.02);
     
     int Color[] = {kRed,kBlue};
     
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
-        cout<<"read file"<<endl;
         
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        
-        cout<<"load tree"<<endl;
         tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
-        cout<<"load histo"<<endl;
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-0.025,0.025);
-        cout<<"def histo"<<endl;
         tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)>>hist%i",iFile),Cut[iFile]);
-        cout<<"proj histo"<<endl;
         hist[iFile]->Fit("gaus","0");
+        
         func[iFile] = (TF1*)hist[iFile]->GetFunction("gaus");
         func[iFile]->SetLineColor(Color[iFile]);
+        hist[iFile]->SetLineColor(Color[iFile]);
         cout<<"fit"<<endl;
     }
     
