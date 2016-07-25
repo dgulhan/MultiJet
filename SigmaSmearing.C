@@ -93,17 +93,17 @@ void SigmaSmearing(){
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         
         corr[iFile] = new TH2D (Form("corr%i",iFile),"",50,0,TMath::Pi(),50,0.0,0.02);
-        tree[iFile]->Draw(Form("magnitude(pullEta2,pullPhi2):theta23>>corr%i",iFile),Cut[iFile]);
+        tree[iFile]->Draw(Form("dt:(theta23-reftheta23)>>corr%i",iFile),Cut[iFile]);
         
         
     }
     
-    /***
+    
     TCanvas *c3 = new TCanvas("c3","",600,600);
-    tree[0]->Draw("magnitude(pullEta2,pullPhi2)",Cut[0]);
+    tree[0]->Draw("dt",Cut[0]);
     TCanvas *c4 = new TCanvas("c4","",600,600);
-    tree[0]->Draw("theta23",Cut[0]);
-    ***/
+    tree[0]->Draw("theta23-reftheta23",Cut[0]);
+    
     
     TCanvas *c2 = new TCanvas("c2","",600,600);
     
