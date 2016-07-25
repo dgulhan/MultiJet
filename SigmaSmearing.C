@@ -93,7 +93,7 @@ void SigmaSmearing(){
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         
         corr[iFile] = new TH2D (Form("corr%i",iFile),"",50,-0.1,0.1,50,-0.01,0.01);
-        tree[iFile]->Draw(Form("dt:(theta23-reftheta23)>>corr%i",iFile),Cut[iFile]);
+        tree[iFile]->Draw(Form("magnitude(pullEta2,pullPhi2):(theta23-reftheta23)>>corr%i",iFile),Cut[iFile]);
         
         
     }
