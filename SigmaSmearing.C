@@ -83,6 +83,7 @@ void SigmaSmearing(){
             func[iFile][iCentr]->SetLineColor(Color[iFile]);
             hist[iFile][iCentr]->SetLineColor(Color[iFile]);
             hist[iFile][iCentr]->SetStats(0);
+            makePretty(hist[iFile][iCentr]);
             cout<<"fit"<<endl;
             SigmaFit[nFiles][iCentr] = func[iFile][iCentr]->GetParameter(2);
                 
@@ -101,7 +102,8 @@ void SigmaSmearing(){
                 
                 c5->cd(iCentr+1);
                 hist[iFile][iCentr]->Draw("SAME");
-                
+                hist[iFile][iCentr]->SetMaximum(0.35);
+            
                 
         }
             
