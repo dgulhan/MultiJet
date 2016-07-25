@@ -108,7 +108,10 @@ void SigmaSmearing(){
     TCanvas *c2 = new TCanvas("c2","",600,600);
     
     corr[0]->Draw("COLZ");
-        
+    
+    TCanvas *c3 = new TCanvas("c3","",600,600);
+    
+    corr[1]->Draw("COLZ");
     
     
     
