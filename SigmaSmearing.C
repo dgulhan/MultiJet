@@ -98,6 +98,11 @@ void SigmaSmearing(){
         
     }
     
+    TCanvas *c3 = new TCanvas("c3","",600,600);
+    tree[0]->Draw("magnitude(pullEta2,pullPhi2)",Cut[0]);
+    TCanvas *c4 = new TCanvas("c4","",600,600);
+    tree[0]->Draw("theta23",Cut[0]);
+    
     
     TCanvas *c2 = new TCanvas("c2","",600,600);
     
