@@ -61,6 +61,7 @@ void SigmaSmearing(){
         
         tree[iFile]->SetAlias("dt","magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)");
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
+        tree[iFile]->SetAlias( "reftheta23" , "acos((refPullEta2*(refeta3-refeta2)+refPullPhi2*deltaPhi(refphi3,refphi2))/( magnitude(refPullEta2,refPullPhi2)*magnitude(refeta3-refeta2,deltaPhi(refphi3,refphi2)) ))");
         
         tree[iFile]->Draw(Form("dt>>hist%i",iFile),Cut[iFile]);
         hist[iFile]->Scale(1.0/hist[iFile]->Integral());
@@ -91,8 +92,8 @@ void SigmaSmearing(){
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         
-        corr[iFile] = new TH2D (Form("corr%i",iFile),"",200,-20,20,200,-20,20);
-        tree[iFile]->Draw(Form("dt:theta23>>corr%i",iFile),Cut[iFile]);
+        corr[iFile] = new TH2D (Form("corr%i",iFile),"",200,-0.05,0.05,200,-0.05,0.05);
+        tree[iFile]->Draw(Form("dt:(theta23-reftheta23)>>corr%i",iFile),Cut[iFile]);
         
         
     }
