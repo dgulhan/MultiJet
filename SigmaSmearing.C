@@ -11,6 +11,25 @@ float magnitude(float x, float y){
     
 }
 
+float deltaPhi( float phi1, float phi2) {
+    float dphi = phi1 - phi2;
+    
+    if ( dphi > 3.141592653589 ){
+        dphi = dphi - 2. * 3.141592653589;
+        //cout<<"dphi > 3.14 "<< dphi<<endl;
+    }
+    if ( dphi <= -3.141592653589 ){
+        dphi = dphi + 2. * 3.141592653589;
+        //cout<<"dphi <= -3.14 "<<dphi<<endl;
+    }
+    if ( TMath::Abs(dphi) > 3.141592653589 ) {
+        //cout<<"abs(dphi)"<<TMath::Abs(dphi)<<endl;
+        cout << " commonUtility::getDPHI error!!! dphi is bigger than 3.141592653589 " << endl;
+    }
+    
+    return dphi;
+}
+
 void SigmaSmearing(){
     
     TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
@@ -39,7 +58,11 @@ void SigmaSmearing(){
         file[iFile] = TFile::Open( Files[iFile].Data() );
         tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-0.025,0.025);
-        tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)>>hist%i",iFile),Cut[iFile]);
+        
+        tree[iFile]->SetAlias("dt","magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)");
+        tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
+        
+        tree[iFile]->Draw(Form("dt>>hist%i",iFile),Cut[iFile]);
         hist[iFile]->Scale(1.0/hist[iFile]->Integral());
         hist[iFile]->Fit("gaus");
         
@@ -59,6 +82,26 @@ void SigmaSmearing(){
     }
     
     float SigmaDiff = sqrt( pow(SigmaFit[0],2.0) - pow(SigmaFit[1],2.0) );
+    
+    
+    //////////// -------------------- 2D CORRELATION PLOTS ------------ //////////////
+    
+    
+    TH2D *corr[nFiles];
+    
+    for (int iFile = 0; iFile < nFiles ; iFile++ ) {
+        
+        corr[iFile] = new TH2D (Form("corr%i",iFile),"",200,-20,20,200,-20,20);
+        tree[iFile]->Draw(Form("dt:theta23>>corr%i",iFile),Cut[iFile]);
+        
+        
+    }
+    
+    
+    TCanvas *c2 = new TCanvas("c2","",600,600);
+    
+    corr[0]->Draw("COLZ");
+        
     
     
     
