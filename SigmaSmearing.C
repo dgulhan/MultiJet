@@ -45,6 +45,13 @@ void SigmaSmearing(){
                   "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5"
                  };
     
+    TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ",
+                                  " 30 < hiBin/2 && hiBin/2 < 50 " ,
+                                  " 10 < hiBin/2 && hiBin/2 < 30 " ,
+                                  " 0 < hiBin/2 && hiBin/2 < 10"
+                                };
+    int nCentr = 4;
+    
     TH1D *hist[nFiles];
     TF1 *func[nFiles];
     TF1 f1("f1","gaus",-0.02,0.02);
@@ -88,31 +95,52 @@ void SigmaSmearing(){
     //////////// -------------------- 2D CORRELATION PLOTS ------------ //////////////
     
     
-    TH2D *corr[nFiles];
+    TH2D *corr[nFiles][iCentr];
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
-        
-        corr[iFile] = new TH2D (Form("corr%i",iFile),"",50,-TMath::Pi(),TMath::Pi(),50,-0.02,0.02);
-        tree[iFile]->Draw(Form("dt:(theta23-reftheta23)>>corr%i",iFile),Cut[iFile]);
-        
+        for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
+            corr[iFile][iCentr] = new TH2D (Form("corr%i%i",iFile,iCentr),"",50,-TMath::Pi(),TMath::Pi(),50,-0.02,0.02);
+            if (iFile==0) tree[iFile]->Draw(Form("dt:(theta23-reftheta23)>>corr%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
+            if (iFile==1) tree[iFile]->Draw(Form("dt:(theta23-reftheta23)>>corr%i%i",iFile,iCentr),Cut[iFile]);
+
+                }
         
     }
     
     
     TCanvas *c3 = new TCanvas("c3","",600,600);
-    tree[0]->Draw("dt",Cut[0]);
+    tree[0]->Draw("dt",Cut[0] && "dt>-20");
+    TCanvas *c3 = new TCanvas("c3","",600,600);
+    tree[0]->Draw("dt",Cut[0] && "dt>-20");
+
+    
     TCanvas *c4 = new TCanvas("c4","",600,600);
     tree[0]->Draw("theta23-reftheta23",Cut[0]);
+    TCanvas *c4 = new TCanvas("c4","",600,600);
+    tree[0]->Draw("theta23-reftheta23",Cut[0]);
+
     
+    TCanvas *c5[nFiles];
+
+    int iFile=0
+    c5[iFile] = new TCanvas(Form("c5%i",iFile),600,600);
+    makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
+
     
-    TCanvas *c5 = new TCanvas("c5","",600,600);
+    for (int iCentr = 0 ; iCentr < nCentrBins ; iCentr++) {
+        
+        c5->cd(iCentr+1);
+        corr[iFile][iCentr]->Draw("COLZ");
+
+            
+    }
     
-    corr[0]->Draw("COLZ");
-    
-    TCanvas *c6 = new TCanvas("c6","",600,600);
-    
-    corr[1]->Draw("COLZ");
-    
+    int iFile=1
+    c5[iFile] = new TCanvas(Form("c5%i",iFile),600,600);
+
+    corr[iFile][0]->Draw("COLZ");
+
+
     
     
     
