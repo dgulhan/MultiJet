@@ -110,35 +110,43 @@ void SigmaSmearing(){
     
     TCanvas *c3 = new TCanvas("c3","",600,600);
     tree[0]->Draw("dt",Cut[0] && "dt>-20");
-    TCanvas *c3 = new TCanvas("c3","",600,600);
-    tree[0]->Draw("dt",Cut[0] && "dt>-20");
+    TCanvas *c31 = new TCanvas("c31","",600,600);
+    tree[1]->Draw("dt",Cut[1] && "dt>-20");
 
     
     TCanvas *c4 = new TCanvas("c4","",600,600);
     tree[0]->Draw("theta23-reftheta23",Cut[0]);
-    TCanvas *c4 = new TCanvas("c4","",600,600);
-    tree[0]->Draw("theta23-reftheta23",Cut[0]);
+    TCanvas *c41 = new TCanvas("c41","",600,600);
+    tree[1]->Draw("theta23-reftheta23",Cut[1]);
 
     
     TCanvas *c5[nFiles];
 
-    int iFile=0;
-    c5[iFile] = new TCanvas(Form("c5%i",iFile),600,600);
-    makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
-
-    
-    for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
-        
-        c5[iFile]->cd(iCentr+1);
-        corr[iFile][iCentr]->Draw("COLZ");
-
+    for (int iFile = 0 ; iFile<nFiles; iFile++) {
+        if (iFile==0) {
+            c5[iFile] = new TCanvas(Form("c5%i",iFile),600,600);
+            makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
             
+            
+            for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
+                
+                c5[iFile]->cd(iCentr+1);
+                corr[iFile][iCentr]->Draw("COLZ");
+                
+                
+            }
+
+        }
+        if (iFile==1) {
+            c5[iFile] = new TCanvas(Form("c5%i",iFile),600,600);
+            
+            corr[iFile][0]->Draw("COLZ");
+        }
     }
+    int iFile=0;
     
     int iFile=1;
-    c5[iFile] = new TCanvas(Form("c5%i",iFile),600,600);
-
-    corr[iFile][0]->Draw("COLZ");
+    
 
 
     
