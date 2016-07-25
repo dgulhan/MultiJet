@@ -104,7 +104,7 @@ void SigmaSmearing(){
     c5 = new TCanvas(Form("c5%i",0),"",4*451,450);
     makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
 
-    TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
+    TLegend *t3=new TLegend(0.33,0.70,0.49,0.86);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -117,7 +117,7 @@ void SigmaSmearing(){
                 
             c5->cd(iCentr+1);
             hist[iFile][iCentr]->Draw("SAME");
-            hist[iFile][iCentr]->SetMaximum(0.35);
+            hist[iFile][iCentr]->SetMaximum(0.45);
             
             TLegend *t2;
             
@@ -131,7 +131,7 @@ void SigmaSmearing(){
             t2->SetTextSize(19);
             t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
             if (iFile==0 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA+HYDJET","l");
-            if (iFile==0 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
+            if (iFile==1 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
 
             t2->Draw("SAME");
             
