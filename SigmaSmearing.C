@@ -56,17 +56,9 @@ void SigmaSmearing(){
     
     int iFile = 0;
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
-        sprintf(text[iFile],"f%i = %g*e^{#frac{x%g}{%g}}",iFile,
-                func[iFile]->GetParameter(0),
-                func[iFile]->GetParameter(1),
-                func[iFile]->GetParameter(2));
-        latex[iFile]= new TLatex(-1.7,60,text[iFile]);
-        latex[iFile]->SetTextSize(0.04);
-        latex[iFile]->SetTextFont(72);
-        latex[iFile]->SetTextColor(Color[iFile]);
-        latex[iFile]->Draw("SAME");
         hist[iFile]->Draw("SAME");
         hist[iFile+1]->Draw("SAME");
+        
     }
     
     
