@@ -50,11 +50,7 @@ void SigmaSmearing(){
     
     
     TCanvas *c1 = new TCanvas("c1","",600,600);
-    TLatex *latex[nFiles];
-    char text[nFiles][100];
-
     
-    int iFile = 0;
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         hist[iFile]->Draw("SAME");
         hist[iFile+1]->Draw("SAME");
