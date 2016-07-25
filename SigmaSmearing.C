@@ -36,7 +36,7 @@ void SigmaSmearing(){
         cout<<"load tree"<<endl;
         tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
         cout<<"load histo"<<endl;
-        hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-0.25,0.25);
+        hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-0.025,0.025);
         cout<<"def histo"<<endl;
         tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)>>hist%i",iFile),Cut[iFile]);
         cout<<"proj histo"<<endl;
