@@ -105,11 +105,11 @@ void SigmaSmearing(){
     tree[0]->Draw("theta23-reftheta23",Cut[0]);
     
     
-    TCanvas *c2 = new TCanvas("c2","",600,600);
+    TCanvas *c5 = new TCanvas("c5","",600,600);
     
     corr[0]->Draw("COLZ");
     
-    TCanvas *c3 = new TCanvas("c3","",600,600);
+    TCanvas *c6 = new TCanvas("c6","",600,600);
     
     corr[1]->Draw("COLZ");
     
