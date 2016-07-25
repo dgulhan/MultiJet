@@ -39,6 +39,7 @@ void SigmaSmearing(){
         tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-0.025,0.025);
         tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)>>hist%i",iFile),Cut[iFile]);
+        hist[iFile]->Scale(1.0/hist[iFile]->Integral());
         hist[iFile]->Fit("gaus");
         
         func[iFile] = (TF1*)hist[iFile]->GetFunction("gaus");
