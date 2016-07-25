@@ -143,9 +143,7 @@ void SigmaSmearing(){
             corr[iFile][0]->Draw("COLZ");
         }
     }
-    int iFile=0;
-    
-    int iFile=1;
+
     
 
 
