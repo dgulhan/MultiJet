@@ -51,7 +51,7 @@ void SigmaSmearing(){
     TCanvas *c1 = new TCanvas("c1","",600,600);
     
     int iFile = 0;
-    func[iFile]->Draw("SAME");
+    //func[iFile]->Draw("SAME");
     hist[iFile]->Draw("SAME");
     
     
