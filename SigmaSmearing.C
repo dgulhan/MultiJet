@@ -13,8 +13,8 @@ float magnitude(float x, float y){
 
 void SigmaSmearing(){
     
-    TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root",
-                       "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/ppPy8hat80HiForestAOD_ALL.root"
+    TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
+                       "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root"
                       };
     
     int  nFiles = 2;
@@ -38,9 +38,9 @@ void SigmaSmearing(){
         cout<<"load histo"<<endl;
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-4.0,4.0);
         cout<<"def histo"<<endl;
-        tree[iFile]->Draw("pullEta");
+        tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refpullEta,refpullPhi)>>hist%i",iFile),Cut[iFile]);
         cout<<"proj histo"<<endl;
-        //hist[iFile]->Fit("gaus");
+        hist[iFile]->Fit("gaus");
         cout<<"fit"<<endl;
     }
     
