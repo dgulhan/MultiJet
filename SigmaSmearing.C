@@ -13,13 +13,18 @@ float magnitude(float x, float y){
 
 void SigmaSmearing(){
     
-    TString Files[] = {};
-    int  nFiles =  ;
+    TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160712/PbPbPy8hat80HiForestAOD_ALL.root",
+                       "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160716/ppPy8hat80HiForestAOD_ALL.root"
+                      };
+    
+    int  nFiles = 2;
     
     TFile *file[nFiles];
     TTree *tree[nFiles];
     
-    TCut Cut[] = {};
+    TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"
+                 };
     
     TH1D *hist[nFiles];
     
@@ -31,6 +36,7 @@ void SigmaSmearing(){
         
         tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refpullEta,refpullPhi)>>hist%i",iFile),Cut[iFile])
         
+        hist[iFile]->Fit("gaus");
         
     }
     
