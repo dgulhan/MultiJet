@@ -32,7 +32,8 @@ void SigmaSmearing(){
     
     int Color[] = {kRed,kBlue};
     
-    
+    float SigmaFit[nFiles];
+
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         
         file[iFile] = TFile::Open( Files[iFile].Data() );
@@ -46,6 +47,7 @@ void SigmaSmearing(){
         func[iFile]->SetLineColor(Color[iFile]);
         hist[iFile]->SetLineColor(Color[iFile]);
         cout<<"fit"<<endl;
+        SigmaFit[nFiles] = func[iFile]->GetParameter(2);
     }
     
     
@@ -53,9 +55,12 @@ void SigmaSmearing(){
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         hist[iFile]->Draw("SAME");
-        hist[iFile+1]->Draw("SAME");
         
     }
+    
+    float SigmaDiff = sqrt( pow(SigmaFit[0],2.0) - pow(SigmaFit[1],2.0) );
+    
+    
     
     
     
