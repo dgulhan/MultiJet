@@ -125,7 +125,7 @@ void SigmaSmearing(){
     for (int iFile = 0 ; iFile<nFiles; iFile++) {
         if (iFile==0) {
             c5[iFile] = new TCanvas(Form("c5%i",iFile),"",600,600);
-            makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
+            makeMultiPanelCanvas(c5[iFile],4,1,0.0,0.0,0.17,0.17,0.02);
             
             
             for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
