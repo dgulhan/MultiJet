@@ -52,34 +52,95 @@ void SigmaSmearing(){
                                 };
     int nCentr = 4;
     
-    TH1D *hist[nFiles];
-    TF1 *func[nFiles];
+    TH1D *hist[nFiles][nCentr];
+    TF1 *func[nFiles][nCentr];
     TF1 f1("f1","gaus",-0.02,0.02);
     
     int Color[] = {kRed,kBlue};
     
-    float SigmaFit[nFiles];
+    float SigmaFit[nFiles][nCentr];
 
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         
         file[iFile] = TFile::Open( Files[iFile].Data() );
         tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
-        hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-0.025,0.025);
         
         tree[iFile]->SetAlias("dt","magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)");
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
         tree[iFile]->SetAlias( "reftheta23" , "acos((refPullEta2*(refEta3-refEta2)+refPullPhi2*deltaPhi(refPhi3,refPhi2))/( magnitude(refPullEta2,refPullPhi2)*magnitude(refEta3-refEta2,deltaPhi(refPhi3,refPhi2)) ))");
         
-        tree[iFile]->Draw(Form("dt>>hist%i",iFile),Cut[iFile]);
-        hist[iFile]->Scale(1.0/hist[iFile]->Integral());
-        hist[iFile]->Fit("gaus");
-        
-        func[iFile] = (TF1*)hist[iFile]->GetFunction("gaus");
-        func[iFile]->SetLineColor(Color[iFile]);
-        hist[iFile]->SetLineColor(Color[iFile]);
-        cout<<"fit"<<endl;
-        SigmaFit[nFiles] = func[iFile]->GetParameter(2);
+        if (iFile==0) {
+            for (int iCentr=0; iCentr<nCentr; iCentr++) {
+                
+                hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),"",50,-0.025,0.025);
+                
+                tree[iFile]->Draw(Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
+                
+                hist[iFile][iCentr]->Scale(1.0/hist[iFile][iCentr]->Integral());
+                hist[iFile][iCentr]->Fit("gaus");
+                
+                func[iFile][iCentr] = (TF1*)hist[iFile][iCentr]->GetFunction("gaus");
+                func[iFile][iCentr]->SetLineColor(Color[iFile]);
+                hist[iFile][iCentr]->SetLineColor(Color[iFile]);
+                cout<<"fit"<<endl;
+                SigmaFit[nFiles][iCentr] = func[iFile][iCentr]->GetParameter(2);
+                
+            }
+            
+        }
+        if (iFile == 1) {
+            int iCentr=0
+            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),"",50,-0.025,0.025);
+            
+            tree[iFile][iCentr]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
+            hist[iFile][iCentr]->Scale(1.0/hist[iFile][iCentr]->Integral());
+            hist[iFile][iCentr]->Fit("gaus");
+            
+            func[iFile][iCentr] = (TF1*)hist[iFile][iCentr]->GetFunction("gaus");
+            func[iFile][iCentr]->SetLineColor(Color[iFile]);
+            hist[iFile][iCentr]->SetLineColor(Color[iFile]);
+            cout<<"fit"<<endl;
+            SigmaFit[nFiles][iCentr] = func[iFile][iCentr]->GetParameter(2);
+
+        }
+
     }
+    
+    
+    
+    TCanvas *c5[nFiles];
+    
+    for (int iFile = 0 ; iFile<nFiles; iFile++) {
+        if (iFile==0) {
+            c5[iFile] = new TCanvas(Form("c5%i",iFile),"",4*600,600);
+            makeMultiPanelCanvas(c5[iFile],4,1,0.0,0.0,0.17,0.17,0.02);
+            
+            
+            for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
+                
+                c5[iFile]->cd(iCentr+1);
+                hist[iFile][iCentr]->Draw("COLZ");
+                
+                
+            }
+            
+        }
+        if (iFile==1) {
+            c5[iFile] = new TCanvas(Form("c5%i",iFile),"",600,600);
+            
+            hist[iFile][0]->Draw("COLZ");
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    /***
+    
     
     
     TCanvas *c1 = new TCanvas("c1","",600,600);
@@ -147,6 +208,7 @@ void SigmaSmearing(){
     
 
 
+    ***/
     
     
     
