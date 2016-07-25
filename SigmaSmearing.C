@@ -129,7 +129,7 @@ void SigmaSmearing(){
             t2->SetFillStyle(0);
             t2->SetTextFont(43);
             t2->SetTextSize(19);
-            t2->AddEntry(c2 ,CentrText[iCentr].Data(),"");
+            t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
             if (iFile==0 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA+HYDJET","l");
             if (iFile==0 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
 
