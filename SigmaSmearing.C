@@ -122,20 +122,20 @@ void SigmaSmearing(){
     
     TCanvas *c5[nFiles];
 
-    int iFile=0
+    int iFile=0;
     c5[iFile] = new TCanvas(Form("c5%i",iFile),600,600);
     makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
 
     
-    for (int iCentr = 0 ; iCentr < nCentrBins ; iCentr++) {
+    for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
         
-        c5->cd(iCentr+1);
+        c5[iFile]->cd(iCentr+1);
         corr[iFile][iCentr]->Draw("COLZ");
 
             
     }
     
-    int iFile=1
+    int iFile=1;
     c5[iFile] = new TCanvas(Form("c5%i",iFile),600,600);
 
     corr[iFile][0]->Draw("COLZ");
