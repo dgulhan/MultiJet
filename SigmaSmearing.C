@@ -39,7 +39,7 @@ void SigmaSmearing(){
         tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-0.025,0.025);
         tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)>>hist%i",iFile),Cut[iFile]);
-        hist[iFile]->Fit("gaus","0");
+        hist[iFile]->Fit("gaus");
         
         func[iFile] = (TF1*)hist[iFile]->GetFunction("gaus");
         func[iFile]->SetLineColor(Color[iFile]);
@@ -49,11 +49,11 @@ void SigmaSmearing(){
     
     
     TCanvas *c1 = new TCanvas("c1","",600,600);
-
-    for (int iFile = 0; iFile < nFiles ; iFile++ ) {
-        func[iFile]->Draw("SAME");
-        hist[iFile]->Draw("SAME");
-    }
+    
+    int iFile = 0;
+    func[iFile]->Draw("SAME");
+    hist[iFile]->Draw("SAME");
+    
     
     
     
