@@ -41,8 +41,8 @@ void SigmaSmearing(){
     TFile *file[nFiles];
     TTree *tree[nFiles];
     
-    TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
-                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"
+    TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.7",
+                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.7"
                  };
     
     TH1D *hist[nFiles];
@@ -92,7 +92,7 @@ void SigmaSmearing(){
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         
-        corr[iFile] = new TH2D (Form("corr%i",iFile),"",50,-TMath::Pi(),TMath::Pi(),50,0.0,0.02);
+        corr[iFile] = new TH2D (Form("corr%i",iFile),"",50,-TMath::Pi(),TMath::Pi(),50,-0.02,0.02);
         tree[iFile]->Draw(Form("dt:(theta23-reftheta23)>>corr%i",iFile),Cut[iFile]);
         
         
