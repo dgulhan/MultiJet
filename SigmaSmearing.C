@@ -69,68 +69,45 @@ void SigmaSmearing(){
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
         tree[iFile]->SetAlias( "reftheta23" , "acos((refPullEta2*(refEta3-refEta2)+refPullPhi2*deltaPhi(refPhi3,refPhi2))/( magnitude(refPullEta2,refPullPhi2)*magnitude(refEta3-refEta2,deltaPhi(refPhi3,refPhi2)) ))");
         
-        if (iFile==0) {
-            for (int iCentr=0; iCentr<nCentr; iCentr++) {
+        for (int iCentr=0; iCentr<nCentr; iCentr++) {
                 
-                hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),"",50,-0.025,0.025);
-                
-                tree[iFile]->Draw(Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
-                
-                hist[iFile][iCentr]->Scale(1.0/hist[iFile][iCentr]->Integral());
-                hist[iFile][iCentr]->Fit("gaus");
-                
-                func[iFile][iCentr] = (TF1*)hist[iFile][iCentr]->GetFunction("gaus");
-                func[iFile][iCentr]->SetLineColor(Color[iFile]);
-                hist[iFile][iCentr]->SetLineColor(Color[iFile]);
-                cout<<"fit"<<endl;
-                SigmaFit[nFiles][iCentr] = func[iFile][iCentr]->GetParameter(2);
-                
-            }
-            
-        }
-        if (iFile == 1) {
-            int iCentr=0;
             hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),"",50,-0.025,0.025);
-            
-            tree[iFile]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
+                
+            if (iFile==0)  tree[iFile]->Draw(Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
+            if (iFile == 1) tree[iFile]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
+                
             hist[iFile][iCentr]->Scale(1.0/hist[iFile][iCentr]->Integral());
             hist[iFile][iCentr]->Fit("gaus");
-            
+                
             func[iFile][iCentr] = (TF1*)hist[iFile][iCentr]->GetFunction("gaus");
             func[iFile][iCentr]->SetLineColor(Color[iFile]);
             hist[iFile][iCentr]->SetLineColor(Color[iFile]);
+            hist[iFile][iCentr]->SetStats(0);
             cout<<"fit"<<endl;
             SigmaFit[nFiles][iCentr] = func[iFile][iCentr]->GetParameter(2);
-
+                
         }
-
     }
     
     
     
-    TCanvas *c5[nFiles];
+    TCanvas *c5;
     
+    c5 = new TCanvas(Form("c5%i",0),"",4*450,400);
+    makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
+
     for (int iFile = 0 ; iFile<nFiles; iFile++) {
-        if (iFile==0) {
-            c5[iFile] = new TCanvas(Form("c5%i",iFile),"",4*600,600);
-            makeMultiPanelCanvas(c5[iFile],4,1,0.0,0.0,0.17,0.17,0.02);
-            
-            
-            for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
+        for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
                 
-                c5[iFile]->cd(iCentr+1);
-                hist[iFile][iCentr]->Draw("COLZ");
+                c5->cd(iCentr+1);
+                hist[iFile][iCentr]->Draw("SAME");
                 
                 
-            }
-            
         }
-        if (iFile==1) {
-            c5[iFile] = new TCanvas(Form("c5%i",iFile),"",600,600);
             
-            hist[iFile][0]->Draw("COLZ");
-        }
     }
+   
+    
 
     
     
