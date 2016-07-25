@@ -51,12 +51,12 @@ void SigmaSmearing(){
     
     TCanvas *c1 = new TCanvas("c1","",600,600);
     TLatex *latex[nFiles];
-    char text[iFile][100];
+    char text[nFiles][100];
 
     
     int iFile = 0;
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
-        sprintf(text[iFile],Form("f%i = %g*e^{#frac{x%g}{%g}}",iFile),
+        sprintf(text[iFile],"f%i = %g*e^{#frac{x%g}{%g}}",iFile,
                 func[iFile]->GetParameter(0),
                 func[iFile]->GetParameter(1),
                 func[iFile]->GetParameter(2));
