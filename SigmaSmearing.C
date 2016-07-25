@@ -34,7 +34,7 @@ void SigmaSmearing(){
         
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-4.0,4.0);
         
-        tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refpullEta,refpullPhi)>>hist%i",iFile),Cut[iFile])
+        tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refpullEta,refpullPhi)>>hist%i",iFile),Cut[iFile]);
         
         hist[iFile]->Fit("gaus");
         
