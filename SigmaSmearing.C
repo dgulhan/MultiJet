@@ -38,9 +38,9 @@ void SigmaSmearing(){
         cout<<"load histo"<<endl;
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-4.0,4.0);
         cout<<"def histo"<<endl;
-        tree[iFile]->Draw(Form("pullEta>>hist%i",iFile),Cut[iFile]);
+        tree[iFile]->Draw("pullEta");
         cout<<"proj histo"<<endl;
-        hist[iFile]->Fit("gaus");
+        //hist[iFile]->Fit("gaus");
         cout<<"fit"<<endl;
     }
     
