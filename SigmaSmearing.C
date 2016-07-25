@@ -112,36 +112,39 @@ void SigmaSmearing(){
     t3->SetTextSize(15);
     t3->SetTextAlign(13);
     
-    for (int iFile = 0 ; iFile<nFiles; iFile++) {
-        for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
-                
-            c5->cd(iCentr+1);
+    for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
+
+        TLegend *t2;
+        t2->SetFillColor(0);
+        t2->SetBorderSize(0);
+        t2->SetFillStyle(0);
+        t2->SetTextFont(43);
+        t2->SetTextSize(19);
+
+        c5->cd(iCentr+1);
+
+        if (iCentr == 0){ t2=new TLegend(0.20,0.80,0.26,0.92);}
+        if (iCentr > 0){ t2=new TLegend(0.017,0.80,0.03,0.92);}
+        t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
+        if (iCentr == 0){
+            drawText("CMS Preliminary",0.20,0.93,23);
+        }
+        if (iCentr == 1) {
+            drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.03,0.93,18);
+        }
+
+        for (int iFile = 0 ; iFile<nFiles; iFile++) {
+            
             hist[iFile][iCentr]->Draw("SAME");
             hist[iFile][iCentr]->SetMaximum(0.45);
             
-            TLegend *t2;
             
-            if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
-            if (iCentr > 0){ t2=new TLegend(0.015,0.83,0.03,0.95);}
-            
-            t2->SetFillColor(0);
-            t2->SetBorderSize(0);
-            t2->SetFillStyle(0);
-            t2->SetTextFont(43);
-            t2->SetTextSize(19);
-            t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
             if (iFile==0 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA+HYDJET","l");
             if (iFile==1 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
 
             t2->Draw("SAME");
             
-            if (iCentr == 0){
-                drawText("CMS Preliminary",0.20,0.93,23);
-            }
-            if (iCentr == 1) {
-                drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.03,0.93,18);
-            }
-                
+            
         }
             
     }
