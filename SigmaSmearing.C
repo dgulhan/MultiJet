@@ -29,15 +29,19 @@ void SigmaSmearing(){
     TH1D *hist[nFiles];
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
+        cout<<"read file"<<endl;
+        
         file[iFile] = TFile::Open( Files[iFile].Data() );
+        
+        cout<<"load tree"<<endl;
         tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_P");
-        
+        cout<<"load histo"<<endl;
         hist[iFile] =  new TH1D(Form("hist%i",iFile),"",50,-4.0,4.0);
-        
+        cout<<"def histo"<<endl;
         tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refpullEta,refpullPhi)>>hist%i",iFile),Cut[iFile]);
-        
+        cout<<"proj histo"<<endl;
         hist[iFile]->Fit("gaus");
-        
+        cout<<"fit"<<endl;
     }
     
     
