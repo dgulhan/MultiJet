@@ -27,6 +27,11 @@ void SigmaSmearing(){
                  };
     
     TH1D *hist[nFiles];
+    TF1 *func[nFiles]
+    TF1 f1("f1","gaus",-0.02,0.02);
+    
+    int Color[] = {kRed,kBlue};
+    
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         cout<<"read file"<<endl;
@@ -40,8 +45,18 @@ void SigmaSmearing(){
         cout<<"def histo"<<endl;
         tree[iFile]->Draw(Form("magnitude(pullEta,pullPhi)-magnitude(refPullEta,refPullPhi)>>hist%i",iFile),Cut[iFile]);
         cout<<"proj histo"<<endl;
-        hist[iFile]->Fit("gaus");
+        hist[iFile]->Fit("gaus","0");
+        func[iFile] = (TF1*)hist[iFile]->GetFunction("gaus");
+        func[iFile]->SetLineColor(Color[iFile]);
         cout<<"fit"<<endl;
+    }
+    
+    
+    TCanvas *c1 = new TCanvas("c1","",600,600);
+
+    for (int iFile = 0; iFile < nFiles ; iFile++ ) {
+        func[iFile]->Draw("SAME");
+        hist[iFile]->Draw("SAME");
     }
     
     
