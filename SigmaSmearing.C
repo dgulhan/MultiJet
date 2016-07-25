@@ -89,10 +89,10 @@ void SigmaSmearing(){
             
         }
         if (iFile == 1) {
-            int iCentr=0
+            int iCentr=0;
             hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),"",50,-0.025,0.025);
             
-            tree[iFile][iCentr]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
+            tree[iFile]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
             hist[iFile][iCentr]->Scale(1.0/hist[iFile][iCentr]->Integral());
             hist[iFile][iCentr]->Fit("gaus");
             
