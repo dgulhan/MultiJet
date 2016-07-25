@@ -50,6 +50,8 @@ void SigmaSmearing(){
                                   " 10 < hiBin/2 && hiBin/2 < 30 " ,
                                   " 0 < hiBin/2 && hiBin/2 < 10"
                                 };
+    TString CentrText[] = {"Centr. 100-50%","Centr. 50-30%","Centr. 30-10%","Centr. 10-0%"};
+
     int nCentr = 4;
     
     TH1D *hist[nFiles][nCentr];
@@ -59,9 +61,10 @@ void SigmaSmearing(){
     int Color[] = {kRed,kBlue};
     
     float SigmaFit[nFiles][nCentr];
-
+    
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
-        
+
+    
         file[iFile] = TFile::Open( Files[iFile].Data() );
         tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
         
@@ -86,8 +89,12 @@ void SigmaSmearing(){
             makePretty(hist[iFile][iCentr]);
             cout<<"fit"<<endl;
             SigmaFit[nFiles][iCentr] = func[iFile][iCentr]->GetParameter(2);
-                
+            
+            
+    
         }
+        
+
     }
     
     
@@ -97,13 +104,43 @@ void SigmaSmearing(){
     c5 = new TCanvas(Form("c5%i",0),"",4*450,400);
     makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
 
+    TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
+    t3->SetFillColor(0);
+    t3->SetBorderSize(0);
+    t3->SetFillStyle(0);
+    t3->SetTextFont(43);
+    t3->SetTextSize(15);
+    t3->SetTextAlign(13);
+    
     for (int iFile = 0 ; iFile<nFiles; iFile++) {
         for (int iCentr = 0 ; iCentr < nCentr ; iCentr++) {
                 
-                c5->cd(iCentr+1);
-                hist[iFile][iCentr]->Draw("SAME");
-                hist[iFile][iCentr]->SetMaximum(0.35);
+            c5->cd(iCentr+1);
+            hist[iFile][iCentr]->Draw("SAME");
+            hist[iFile][iCentr]->SetMaximum(0.35);
             
+            TLegend *t2;
+            
+            if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
+            if (iCentr > 0){ t2=new TLegend(0.015,0.83,0.03,0.95);}
+            
+            t2->SetFillColor(0);
+            t2->SetBorderSize(0);
+            t2->SetFillStyle(0);
+            t2->SetTextFont(43);
+            t2->SetTextSize(19);
+            t2->AddEntry(c2 ,CentrText[iCentr].Data(),"");
+            if (iFile==0 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA+HYDJET","l");
+            if (iFile==0 )  t2->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
+
+            t2->Draw("SAME");
+            
+            if (iCentr == 0){
+                drawText("CMS Preliminary",0.20,0.93,23);
+            }
+            if (iCentr == 1) {
+                drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.03,0.93,18);
+            }
                 
         }
             
