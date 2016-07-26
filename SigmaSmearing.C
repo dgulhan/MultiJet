@@ -124,7 +124,7 @@ void SigmaSmearing(){
             
             if (iCentr == 0){
                 t2=new TLegend(0.19,0.83,0.26,0.95);
-                drawText(Form("#sigma_{diff}=%0.6f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))),0.13,0.80,18);
+                drawText(Form("#sigma_{diff}=%0.6f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))),0.18,0.80,18);
                 
             }
             if (iCentr > 0){
@@ -159,6 +159,8 @@ void SigmaSmearing(){
 
             }
             
+            cout<<"iFile "<<iFile<<"    iCentr"<<iCentr<<"  Sigma "<<SigmaFit[iFile][iCentr]<<endl;
+            cout<<Form("#sigma_{diff}=%0.6f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0)))<<endl;
         }
             
     }
