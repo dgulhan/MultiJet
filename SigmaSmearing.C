@@ -30,7 +30,7 @@ float deltaPhi( float phi1, float phi2) {
     return dphi;
 }
 
-
+/***
 void SigmaSmearing(){
     
     TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
@@ -166,14 +166,13 @@ void SigmaSmearing(){
         
     }
     
-    c5->SaveAs("SigmaSmearingPullVector.png");
-    c5->SaveAs("SigmaSmearingPullVector.eps");
-    c5->SaveAs("SigmaSmearingPullVector.gif");
+    c5->SaveAs("SigmaSmearingTheta.png");
+    c5->SaveAs("SigmaSmearingTheta.eps");
+    c5->SaveAs("SigmaSmearingTheta.gif");
     
  
+  ***/
     
-    
-/***
 void SigmaSmearing(){
  
     TString Files[] = {"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
@@ -313,7 +312,6 @@ void SigmaSmearing(){
     c5->SaveAs("SigmaSmearingPullVector.eps");
     c5->SaveAs("SigmaSmearingPullVector.gif");
 
- ***/
 
     
     
