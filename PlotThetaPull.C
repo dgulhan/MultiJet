@@ -81,7 +81,7 @@ void PlotThetaPull(){
     
     TCanvas *c5;
     
-    c5 = new TCanvas(Form("c",0),"",451,450);
+    c5 = new TCanvas("c5","",451,450);
     makeMultiPanelCanvas(c5,1,1,0.0,0.0,0.17,0.17,0.02);
     
     TLegend *t3=new TLegend(0.42,0.80,0.56,0.88);
@@ -111,12 +111,12 @@ void PlotThetaPull(){
             hist[iFile]->SetMarkerStyle(20);
             hist[iFile]->SetMarkerSize(0.5);
             hist[iFile]->SetMarkerColor(Color[iFile]);
-            hist[iFile]->SetLineColor(ColorAK[iFile]);
+            hist[iFile]->SetLineColor(Color[iFile]);
             hist[iFile]->Draw("SAME HIST");
 
         }
         
-        t3->AddEntry(hist[iFile],Label[iFile].Data(),LabelMode[iFile].Data())
+        t3->AddEntry(hist[iFile],Label[iFile].Data(),LabelMode[iFile].Data());
         
 
     }
