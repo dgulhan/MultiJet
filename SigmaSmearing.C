@@ -41,7 +41,7 @@ void SigmaSmearing(){
     TFile *file[nFiles];
     TTree *tree[nFiles];
     
-    TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5",
+    TCut Cut[] = {"pt1>120 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5",
                   "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5"
                  };
     
@@ -74,7 +74,7 @@ void SigmaSmearing(){
         
         for (int iCentr=0; iCentr<nCentr; iCentr++) {
                 
-            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),"",50,-0.025,0.025);
+            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#vec{t_{raw}}|-|#vec{t_{ref}}|;Event Fraction",50,-0.025,0.025);
                 
             if (iFile==0)  tree[iFile]->Draw(Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
             if (iFile == 1) tree[iFile]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
@@ -136,11 +136,15 @@ void SigmaSmearing(){
             t3->Draw("SAME");
             
             if (iCentr == 0){
-                drawText("CMS Preliminary",0.20,0.93,23);
+                drawText("",0.20,0.93,23);
             }
             if (iCentr == 1) {
                 drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.03,0.93,18);
             }
+            if (iCentr == 2){
+                drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2",0.03,0.93,18);
+            }
+                
             if (iCentr == nCentr-1) {
                 if (iFile==0 )  t3->AddEntry(hist[iFile][iCentr],"XCone PYTHIA+HYDJET","l");
                 if (iFile==1 )  t3->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
