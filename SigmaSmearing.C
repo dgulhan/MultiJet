@@ -74,7 +74,7 @@ void SigmaSmearing(){
         
         for (int iCentr=0; iCentr<nCentr; iCentr++) {
                 
-            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#vec{t}_{raw}|-|#vec{t]_{ref}|;Event Fraction",50,-0.025,0.025);
+            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#vec{t}_{raw}|-|#vec{t}_{ref}|;Event Fraction",50,-0.025,0.025);
                 
             if (iFile==0)  tree[iFile]->Draw(Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
             if (iFile == 1) tree[iFile]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
@@ -131,7 +131,7 @@ void SigmaSmearing(){
             t2->SetTextFont(43);
             t2->SetTextSize(19);
             t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
-            t2->AddEntry(c5,Form("#sigma_{diff}=%0.2f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][iCentr],2.0))),"");
+            drawText(Form("#sigma_{diff}=%0.2f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))));
             
             t2->Draw("SAME");
             
