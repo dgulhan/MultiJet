@@ -75,7 +75,7 @@ void SigmaSmearing(){
         
         for (int iCentr=0; iCentr<nCentr; iCentr++) {
             
-            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#theta_{2,3 raw}^{pull}|-|#theta_{2,3 ref}^{pull}|;Event Fraction",50,-0.025,0.025);
+            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#theta_{2,3 raw}^{pull}|-|#theta_{2,3 ref}^{pull}|;Event Fraction",50,-TMath::Pi(),TMath::Pi());
             
             if (iFile==0)  tree[iFile]->Draw(Form("(theta23-reftheta23)>>hist%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
             if (iFile == 1) tree[iFile]->Draw( Form("(theta23-reftheta23)>>hist%i%i",iFile,iCentr),Cut[iFile] );
