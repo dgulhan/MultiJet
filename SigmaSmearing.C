@@ -146,7 +146,7 @@ void SigmaSmearing(){
                 drawText("",0.20,0.93,23);
             }
             if (iCentr == 1) {
-                drawText("p_{T,1}>180 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.03,0.93,18);
+                drawText("p_{T,1}>120 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
             }
             if (iCentr == 2){
                 drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2",0.03,0.93,18);
@@ -165,6 +165,10 @@ void SigmaSmearing(){
             
     }
    
+    c5->SaveAs("SigmaSmearingPullVector.png");
+    c5->SaveAs("SigmaSmearingPullVector.eps");
+    c5->SaveAs("SigmaSmearingPullVector.gif");
+
     
 
     
