@@ -119,18 +119,18 @@ void SigmaSmearing(){
             
             c5->cd(iCentr+1);
             hist[iFile][iCentr]->Draw("SAME");
-            hist[iFile][iCentr]->SetMaximum(0.45);
+            hist[iFile][iCentr]->SetMaximum(0.2);
             
             TLegend *t2;
             
             if (iCentr == 0){
                 t2=new TLegend(0.19,0.83,0.26,0.95);
-                drawText(Form("#sigma_{diff}=%0.6f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))),0.18,0.80,18);
+                drawText(Form("#sigma_{diff}=%0.6f",sqrt(abs(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0)))),0.18,0.80,18);
                 
             }
             if (iCentr > 0){
                 t2=new TLegend(0.015,0.83,0.03,0.95);
-                drawText(Form("#sigma_{diff}=%0.6f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))),0.03,0.80,18);
+                drawText(Form("#sigma_{diff}=%0.6f",sqrt(abs(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0)))),0.03,0.80,18);
             }
             
             t2->SetFillColor(0);
@@ -161,7 +161,7 @@ void SigmaSmearing(){
             }
             
             cout<<"iFile "<<iFile<<"    iCentr"<<iCentr<<"  Sigma "<<SigmaFit[iFile][iCentr]<<endl;
-            cout<<Form("#sigma_{diff}=%0.6f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0)))<<endl;
+            cout<<Form("#sigma_{diff}=%0.6f",sqrt(abs(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))))<<endl;
         }
         
     }
