@@ -261,7 +261,7 @@ void SigmaSmearing(){
                 
             c5->cd(iCentr+1);
             hist[iFile][iCentr]->Draw("SAME");
-            hist[iFile][iCentr]->SetMaximum(0.35);
+            hist[iFile][iCentr]->SetMaximum(0.25);
             
             TLegend *t2;
             
