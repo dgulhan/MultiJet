@@ -74,7 +74,7 @@ void SigmaSmearing(){
         
         for (int iCentr=0; iCentr<nCentr; iCentr++) {
                 
-            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#vec{t_{raw}}|-|#vec{t_{ref}}|;Event Fraction",50,-0.025,0.025);
+            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#vec{t}_{raw}|-|#vec{t]_{ref}|;Event Fraction",50,-0.025,0.025);
                 
             if (iFile==0)  tree[iFile]->Draw(Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
             if (iFile == 1) tree[iFile]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
@@ -104,7 +104,7 @@ void SigmaSmearing(){
     c5 = new TCanvas(Form("c5%i",0),"",4*451,450);
     makeMultiPanelCanvas(c5,4,1,0.0,0.0,0.17,0.17,0.02);
 
-    TLegend *t3=new TLegend(0.38,0.80,0.54,0.88);
+    TLegend *t3=new TLegend(0.42,0.80,0.56,0.88);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -131,9 +131,9 @@ void SigmaSmearing(){
             t2->SetTextFont(43);
             t2->SetTextSize(19);
             t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
+            t2->AddEntry(c5,Form("#sigma_{diff}=%0.2f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][iCentr],2.0))),"");
             
             t2->Draw("SAME");
-            t3->Draw("SAME");
             
             if (iCentr == 0){
                 drawText("",0.20,0.93,23);
@@ -148,6 +148,7 @@ void SigmaSmearing(){
             if (iCentr == nCentr-1) {
                 if (iFile==0 )  t3->AddEntry(hist[iFile][iCentr],"XCone PYTHIA+HYDJET","l");
                 if (iFile==1 )  t3->AddEntry(hist[iFile][iCentr],"XCone PYTHIA","l");
+                t3->Draw("SAME");
 
             }
             
