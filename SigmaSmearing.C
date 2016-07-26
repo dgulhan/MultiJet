@@ -131,7 +131,7 @@ void SigmaSmearing(){
             t2->SetTextFont(43);
             t2->SetTextSize(19);
             t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
-            drawText(Form("#sigma_{diff}=%0.2f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))));
+            drawText(Form("#sigma_{diff}=%0.2f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))),0.03,0.80,18);
             
             t2->Draw("SAME");
             
