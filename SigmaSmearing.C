@@ -217,7 +217,7 @@ void SigmaSmearing(){
         
         for (int iCentr=0; iCentr<nCentr; iCentr++) {
                 
-            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#vec{t}_{raw}|-|#vec{t}_{ref}|;Event Fraction",50,-0.015,0.015);
+            hist[iFile][iCentr] =  new TH1D(Form("hist%i%i",iFile,iCentr),";|#vec{t}_{raw}|-|#vec{t}_{ref}|;Event Fraction",50,-0.01,0.01);
                 
             if (iFile==0)  tree[iFile]->Draw(Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] && CentralityBinsCuts[iCentr]);
             if (iFile == 1) tree[iFile]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
@@ -261,7 +261,7 @@ void SigmaSmearing(){
                 
             c5->cd(iCentr+1);
             hist[iFile][iCentr]->Draw("SAME");
-            hist[iFile][iCentr]->SetMaximum(0.45);
+            hist[iFile][iCentr]->SetMaximum(0.35);
             
             TLegend *t2;
             
