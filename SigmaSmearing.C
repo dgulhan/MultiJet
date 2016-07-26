@@ -88,7 +88,7 @@ void SigmaSmearing(){
             hist[iFile][iCentr]->SetStats(0);
             makePretty(hist[iFile][iCentr]);
             cout<<"fit"<<endl;
-            SigmaFit[nFiles][iCentr] = func[iFile][iCentr]->GetParameter(2);
+            SigmaFit[iFile][iCentr] = func[iFile][iCentr]->GetParameter(2);
             
             
     
