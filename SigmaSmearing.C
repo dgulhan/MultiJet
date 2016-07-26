@@ -122,8 +122,15 @@ void SigmaSmearing(){
             
             TLegend *t2;
             
-            if (iCentr == 0){ t2=new TLegend(0.19,0.83,0.26,0.95);}
-            if (iCentr > 0){ t2=new TLegend(0.015,0.83,0.03,0.95);}
+            if (iCentr == 0){
+                t2=new TLegend(0.19,0.83,0.26,0.95);
+                drawText(Form("#sigma_{diff}=%0.6f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))),0.13,0.80,18);
+                
+            }
+            if (iCentr > 0){
+                t2=new TLegend(0.015,0.83,0.03,0.95);
+                drawText(Form("#sigma_{diff}=%0.6f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))),0.03,0.80,18);
+            }
             
             t2->SetFillColor(0);
             t2->SetBorderSize(0);
@@ -131,7 +138,7 @@ void SigmaSmearing(){
             t2->SetTextFont(43);
             t2->SetTextSize(19);
             t2->AddEntry(c5 ,CentrText[iCentr].Data(),"");
-            drawText(Form("#sigma_{diff}=%0.2f",sqrt(pow(SigmaFit[0][iCentr],2.0)-pow(SigmaFit[1][0],2.0))),0.03,0.80,18);
+            
             
             t2->Draw("SAME");
             
