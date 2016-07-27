@@ -105,7 +105,7 @@ void PlotThetaPull(){
         cout<<"out of here 2"<<endl;
 
         c5->cd(1);
-        hist[iFile]->SetMaximum(0.6);
+        hist[iFile]->SetMaximum(0.06);
         
         if (iFile == 0 || iFile == 2) {
             if (iFile == 0) hist[iFile]->SetFillStyle(3005);
