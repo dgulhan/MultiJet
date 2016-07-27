@@ -82,8 +82,8 @@ void PlotThetaPull(){
 
             hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";|#vec{t}_{3}|#theta_{3,2}^{pull};Event Fraction",20,0,0.055);
         
-            if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("magnitude(pullEta3,pullPhi3)*theta32>>hist%i%i",iFile,iAlgo),Cut[iFile] && CentralityBinsCuts[0]);
-            if (iFile == 2 || iFile ==3 )tree[iFile][iAlgo]->Draw(Form("magnitude(pullEta3,pullPhi3)*theta32>>hist%i%i",iFile,iAlgo),Cut[iFile] );
+            if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("magnitude(pullEta3,pullPhi3)*theta32>>hist%i%i",iFile,iAlgo),Cut[iFile] && CentralityBinsCuts[0] && "theta32<TMath::Pi()/2");
+            if (iFile == 2 || iFile ==3 )tree[iFile][iAlgo]->Draw(Form("magnitude(pullEta3,pullPhi3)*theta32>>hist%i%i",iFile,iAlgo),Cut[iFile] && "theta32<TMath::Pi()/2" );
 
             hist[iFile][iAlgo]->Scale(1.0/hist[iFile][iAlgo]->Integral());
        
@@ -145,10 +145,10 @@ void PlotThetaPull(){
             
             if (iAlgo==0) {
                 drawText("p_{T,1}>160 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.18,0.93,18);
-                drawText("XCone",0.18,0.83,18);
+                drawText("XCone #theta_{3,2}^{pull}<#pi/2",0.18,0.83,18);
                 drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 #Delta R_{2,3}<#pi/2 #Delta R_{2,3}>0.8",0.18,0.88,18);
             }
-            if (iAlgo==1) drawText("Anti-kT",0.03,0.83,18);
+            if (iAlgo==1) drawText("Anti-kT #theta_{3,2}^{pull}<#pi/2",0.03,0.83,18);
 
 
         }
