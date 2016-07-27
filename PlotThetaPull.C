@@ -44,19 +44,19 @@ void PlotThetaPull(){
     
     
     TFile *file[nFiles];
-    TTree *tree[nFiles];
+    TTree *tree[nFiles][2];
     
-    TCut Cut[] = {"pt1>120 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)"
+    TCut Cut[] = {"pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)"
     };
     
     TCut CentralityBinsCuts[] = { " 0 < hiBin/2 && hiBin/2 < 30"  };
     TString CentrText[] = { "Centr. 30-0%" };
     
     
-    TH1D *hist[nFiles];
+    TH1D *hist[nFiles][2];
     
     
     int Color[] = {kRed,kRed,kBlue,kBlue};
@@ -65,28 +65,33 @@ void PlotThetaPull(){
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get("ak4PF");
-        
-        tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
+        for (int iAlgo=0; iAlgo<2 ; iAlgo++)
+        {
+            if (iAlgo==0) tree[iFile][iAlgo] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
+            if (iAlgo==1) tree[iFile][iAlgo] = (TTree*)file[iFile]->Get("ak4PF");
 
-        hist[iFile] =  new TH1D(Form("hist%i",iFile),"XCone R>0.8 R<pi/2;#theta_{2,3}^{pull};Event Fraction",50,0,TMath::Pi());
         
-        if (iFile == 0 || iFile ==1 )tree[iFile]->Draw(Form("theta23>>hist%i",iFile),Cut[iFile] && CentralityBinsCuts[0]);
-        if (iFile == 2 || iFile ==3 )tree[iFile]->Draw(Form("theta23>>hist%i",iFile),Cut[iFile] );
+        
+            tree[iFile][iAlgo]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
 
-        hist[iFile]->Scale(1.0/hist[iFile]->Integral());
+            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),"R>0.8 R<pi/2;#theta_{2,3}^{pull};Event Fraction",30,0,TMath::Pi());
+        
+            if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile] && CentralityBinsCuts[0]);
+            if (iFile == 2 || iFile ==3 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile] );
+
+            hist[iFile][iAlgo]->Scale(1.0/hist[iFile][iAlgo]->Integral());
        
-        hist[iFile]->SetStats(0);
-        makePretty(hist[iFile]);
-        
+            hist[iFile][iAlgo]->SetStats(0);
+            makePretty(hist[iFile][iAlgo]);
+        }
     }
     
     cout<<"out of here 0"<<endl;
     
     TCanvas *c5;
     
-    c5 = new TCanvas("c5","",451,450);
-    makeMultiPanelCanvas(c5,1,1,0.0,0.0,0.17,0.17,0.02);
+    c5 = new TCanvas("c5","",2*451,450);
+    makeMultiPanelCanvas(c5,2,1,0.0,0.0,0.17,0.17,0.02);
     
     TLegend *t3=new TLegend(0.42,0.80,0.56,0.88);
     t3->SetFillColor(0);
@@ -102,39 +107,47 @@ void PlotThetaPull(){
     cout<<"out of here 1"<<endl;
 
     for (int iFile = 0 ; iFile<nFiles; iFile++) {
-        cout<<"out of here 2"<<endl;
-
-        c5->cd(1);
-        hist[iFile]->SetMaximum(0.06);
         
-        if (iFile == 0 || iFile == 2) {
-            if (iFile == 0) hist[iFile]->SetFillStyle(3005);
-            if (iFile == 2) hist[iFile]->SetFillStyle(3004);
-            hist[iFile]->SetLineColor(Color[iFile]);
-            hist[iFile]->SetFillColorAlpha(Color[iFile],0.35);
-            hist[iFile]->Draw("SAME HIST");
-            cout<<"out of here 3"<<endl;
+        for (int iAlgo; iAlgo<2; iAlgo++) {
+    
+       
+            cout<<"out of here 2"<<endl;
+
+            c5->cd(iAlgo+1);
+            hist[iFile][iAlgo]->SetMaximum(0.06);
+        
+            if (iFile == 0 || iFile == 2) {
+                if (iFile == 0) hist[iFile][iAlgo]->SetFillStyle(3005);
+                if (iFile == 2) hist[iFile][iAlgo]->SetFillStyle(3004);
+                hist[iFile][iAlgo]->SetLineColor(Color[iFile]);
+                hist[iFile][iAlgo]->SetFillColorAlpha(Color[iFile],0.35);
+                hist[iFile][iAlgo]->Draw("SAME HIST");
+                cout<<"out of here 3"<<endl;
+
+            }
+            if (iFile == 1 || iFile == 3) {
+                hist[iFile][iAlgo]->SetMarkerStyle(20);
+                hist[iFile][iAlgo]->SetMarkerSize(0.5);
+                hist[iFile][iAlgo]->SetMarkerColor(Color[iFile]);
+                hist[iFile][iAlgo]->Draw("SAME");
+                cout<<"out of here 4"<<endl;
+
+            }
+            cout<<"out of here 5"<<endl;
+
+            
+            if (iAlgo==0) drawText("XCone",0.03,0.73,18);
+            if (iAlgo==1) drawText("Anti-kT",0.03,0.73,18);
+
 
         }
-        if (iFile == 1 || iFile == 3) {
-            hist[iFile]->SetMarkerStyle(20);
-            hist[iFile]->SetMarkerSize(0.5);
-            hist[iFile]->SetMarkerColor(Color[iFile]);
-            hist[iFile]->Draw("SAME");
-            cout<<"out of here 4"<<endl;
-
-        }
-        cout<<"out of here 5"<<endl;
-
-        t3->AddEntry(hist[iFile],Label[iFile].Data(),LabelMode[iFile].Data());
+        t3->AddEntry(hist[iFile][1],Label[iFile].Data(),LabelMode[iFile].Data());
         cout<<"out of here 6"<<endl;
-
-
     }
     cout<<"out of here 7"<<endl;
 
     drawText("p_{T,1}>120 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
-    drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2",0.03,0.93,18);
+    drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 R<pi/2 R>0.8",0.03,0.93,18);
     t3->Draw("SAME");
     cout<<"out of here 8"<<endl;
 
