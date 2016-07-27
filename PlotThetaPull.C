@@ -136,8 +136,8 @@ void PlotThetaPull(){
             cout<<"out of here 5"<<endl;
 
             
-            if (iAlgo==0) drawText("XCone",0.03,0.73,18);
-            if (iAlgo==1) drawText("Anti-kT",0.03,0.73,18);
+            //if (iAlgo==0) drawText("XCone",0.03,0.73,18);
+            //if (iAlgo==1) drawText("Anti-kT",0.03,0.73,18);
 
 
         }
