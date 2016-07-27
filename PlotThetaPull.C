@@ -85,6 +85,9 @@ void PlotThetaPull(){
             makePretty(hist[iFile][iAlgo]);
         }
     }
+    TCanvas *c1 = new TCanvas("c1","",600,600);
+    hist[0][0]->Draw();
+    hist[0][1]->Draw("SAME");
     
     cout<<"out of here 0"<<endl;
     
