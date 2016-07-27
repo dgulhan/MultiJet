@@ -74,7 +74,7 @@ void PlotThetaPull(){
         
             tree[iFile][iAlgo]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
 
-            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),"R>0.8 R<pi/2;#theta_{2,3}^{pull};Event Fraction",30,0,TMath::Pi());
+            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";#theta_{2,3}^{pull};Event Fraction",30,0,TMath::Pi());
         
             if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile] && CentralityBinsCuts[0]);
             if (iFile == 2 || iFile ==3 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile] );
@@ -96,7 +96,7 @@ void PlotThetaPull(){
     c5 = new TCanvas("c5","",2*451,450);
     makeMultiPanelCanvas(c5,2,1,0.0,0.0,0.17,0.17,0.02);
     
-    TLegend *t3=new TLegend(0.42,0.80,0.56,0.88);
+    TLegend *t3=new TLegend(0.47,0.80,0.61,0.88);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -117,7 +117,7 @@ void PlotThetaPull(){
             cout<<"out of here 2"<<endl;
 
             c5->cd(iAlgo+1);
-            hist[iFile][iAlgo]->SetMaximum(0.06);
+            hist[iFile][iAlgo]->SetMaximum(0.07);
         
             if (iFile == 0 || iFile == 2) {
                 if (iFile == 0) hist[iFile][iAlgo]->SetFillStyle(3005);
@@ -132,6 +132,7 @@ void PlotThetaPull(){
                 hist[iFile][iAlgo]->SetMarkerStyle(20);
                 hist[iFile][iAlgo]->SetMarkerSize(0.5);
                 hist[iFile][iAlgo]->SetMarkerColor(Color[iFile]);
+                hist[iFile][iAlgo]->SetLineColor(Color[iFile]);
                 hist[iFile][iAlgo]->Draw("SAME");
                 cout<<"out of here 4"<<endl;
 
@@ -139,8 +140,12 @@ void PlotThetaPull(){
             cout<<"out of here 5"<<endl;
 
             
-            if (iAlgo==0) drawText("XCone",0.03,0.73,18);
-            if (iAlgo==1) drawText("Anti-kT",0.03,0.73,18);
+            if (iAlgo==0) {
+                drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
+                drawText("XCone",0.13,0.83,18);
+                drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 R<#pi/2 R>0.8",0.03,0.88,18);
+            }
+            if (iAlgo==1) drawText("Anti-kT",0.03,0.83,18);
 
 
         }
@@ -149,8 +154,7 @@ void PlotThetaPull(){
     }
     cout<<"out of here 7"<<endl;
 
-    drawText("p_{T,1}>120 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
-    drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 R<pi/2 R>0.8",0.03,0.93,18);
+    
     t3->Draw("SAME");
     cout<<"out of here 8"<<endl;
 
