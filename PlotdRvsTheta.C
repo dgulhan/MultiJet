@@ -142,8 +142,15 @@ void PlotdRvsTheta(){
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
     }
     
-    gr[nFiles-1+1] = new TGraphErrors(nPoints,X,CountTheta[0]/CountTheta[2],Xerr);
-    gr[nFiles-1+2] = new TGraphErrors(nPoints,X,CountTheta[1]/CountTheta[3],Xerr);
+    Double_t RatioPoints[2][nPoints];
+    
+    for (int iPoint = 0 ; iPoint<nPoints ; iPoint ++ ){
+        RatioPoints[0][iPoint] = CountTheta[0]/CountTheta[2];
+        RatioPoints[1][iPoint] = CountTheta[1]/CountTheta[3];
+    }
+    
+    gr[nFiles-1+1] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr);
+    gr[nFiles-1+2] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr);
     gr[nFiles-1+1]->SetFillColor(kBlue-2);
     gr[nFiles-1+1]->SetLineColor(kBlue-2);
     gr[nFiles-1+2]->SetFillColor(kPink);
