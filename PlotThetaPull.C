@@ -120,7 +120,7 @@ void PlotThetaPull(){
             cout<<"out of here 2"<<endl;
 
             c5->cd(iAlgo+1);
-            hist[iFile][iAlgo]->SetMaximum(0.35);
+            hist[iFile][iAlgo]->SetMaximum(0.55);
         
             if (iFile == 0 || iFile == 2) {
                 if (iFile == 0) hist[iFile][iAlgo]->SetFillStyle(3005);
