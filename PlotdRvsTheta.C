@@ -147,6 +147,8 @@ void PlotdRvsTheta(){
     for (int iPoint = 0 ; iPoint<nPoints ; iPoint ++ ){
         RatioPoints[0][iPoint] = CountTheta[0][iPoint]/CountTheta[2][iPoint];
         RatioPoints[1][iPoint] = CountTheta[1][iPoint]/CountTheta[3][iPoint];
+        cout<<"bla: "<<RatioPoints[0][iPoint]<<endl;
+        cout<<"bla bla: "<<RatioPoints[1][iPoint]<<endl;
     }
     
     gr[nFiles-1+1] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr);
