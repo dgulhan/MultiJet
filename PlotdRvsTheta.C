@@ -66,7 +66,7 @@ void PlotdRvsTheta(){
     
     TTree *tree[nFiles];
     TFile *file[nFiles];
-    TGraphErrors * gr[nFiles];
+    TGraphErrors * gr[nFiles+2];
     
     Double_t Y[nFiles][nPoints];
     Double_t Yerr[nFiles][nPoints];
@@ -141,6 +141,19 @@ void PlotdRvsTheta(){
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
     }
+    
+    gr[nFiles-1+1] = new TGraphErrors(nPoints,X,CountTheta[0]/CountTheta[2],Xerr);
+    gr[nFiles-1+2] = new TGraphErrors(nPoints,X,CountTheta[1]/CountTheta[3],Xerr);
+    gr[nFiles-1+1]->SetFillColor(kBlue-2);
+    gr[nFiles-1+1]->SetLineColor(kBlue-2);
+    gr[nFiles-1+2]->SetFillColor(kPink);
+    gr[nFiles-1+2]->SetLineColor(kPink);
+    
+    t3->AddEntry(gr[nFiles-1+2],"bla","l");
+    t3->AddEntry(gr[nFiles-1+1],"bla bla","l");
+    gr[nFiles-1+1]->Draw("SAME");
+    gr[nFiles-1+2]->Draw("SAME");
+    
     
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.12,0.85,23);
