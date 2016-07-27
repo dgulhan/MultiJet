@@ -155,11 +155,11 @@ void PlotdRvsTheta(){
     gr[nFiles-1+2] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr);
     gr[nFiles-1+1]->SetFillColor(kBlue-2);
     gr[nFiles-1+1]->SetLineColor(kBlue-2);
-    gr[nFiles-1+2]->SetFillColor(kPink);
-    gr[nFiles-1+2]->SetLineColor(kPink);
+    gr[nFiles-1+2]->SetFillColor(kOrange+1);
+    gr[nFiles-1+2]->SetLineColor(kOrange+1);
     
-    t3->AddEntry(gr[nFiles-1+2],"bla","l");
-    t3->AddEntry(gr[nFiles-1+1],"bla bla","l");
+    t3->AddEntry(gr[nFiles-1+2],"PYTHIA + HYDJET / PYTHIA","l");
+    t3->AddEntry(gr[nFiles-1+1],"PbPb Data / pp Data","l");
     gr[nFiles-1+1]->Draw("SAME");
     gr[nFiles-1+2]->Draw("SAME");
     
