@@ -85,10 +85,7 @@ void PlotThetaPull(){
             makePretty(hist[iFile][iAlgo]);
         }
     }
-    TCanvas *c1 = new TCanvas("c1","",600,600);
-    hist[0][0]->Draw();
-    hist[0][1]->Draw("SAME");
-    
+   
     cout<<"out of here 0"<<endl;
     
     TCanvas *c5;
@@ -96,7 +93,7 @@ void PlotThetaPull(){
     c5 = new TCanvas("c5","",2*451,450);
     makeMultiPanelCanvas(c5,2,1,0.0,0.0,0.17,0.17,0.02);
     
-    TLegend *t3=new TLegend(0.47,0.80,0.61,0.88);
+    TLegend *t3=new TLegend(0.47,0.80,0.61,0.90);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -141,9 +138,9 @@ void PlotThetaPull(){
 
             
             if (iAlgo==0) {
-                drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
-                drawText("XCone",0.13,0.83,18);
-                drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 R<#pi/2 R>0.8",0.03,0.88,18);
+                drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.18,0.93,18);
+                drawText("XCone",0.18,0.83,18);
+                drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 #Delta R_{2,3}<#pi/2 #Delta R_{2,3}>0.8",0.18,0.88,18);
             }
             if (iAlgo==1) drawText("Anti-kT",0.03,0.83,18);
 
