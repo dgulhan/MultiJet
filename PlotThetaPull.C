@@ -78,6 +78,7 @@ void PlotThetaPull(){
         
     }
     
+    cout<<"out of here 0"<<endl;
     
     TCanvas *c5;
     
@@ -94,8 +95,12 @@ void PlotThetaPull(){
     
     TString Label[] = { "PbPb PYTHIA+HYDJET" , "PbPb Data",  "pp PYTHIA" ,"pp Data" };
     TString LabelMode[] = { "f" , "p" , "f", "p"};
+    
+    cout<<"out of here 1"<<endl;
+
     for (int iFile = 0 ; iFile<nFiles; iFile++) {
-        
+        cout<<"out of here 2"<<endl;
+
         c5->cd(1);
         hist[iFile]->SetMaximum(0.2);
         
@@ -105,6 +110,7 @@ void PlotThetaPull(){
             hist[iFile]->SetLineColor(Color[iFile]);
             hist[iFile]->SetFillColorAlpha(Color[iFile],0.35);
             hist[iFile]->Draw("SAME HIST");
+            cout<<"out of here 3"<<endl;
 
         }
         if (iFile == 1 || iFile == 3) {
@@ -113,14 +119,21 @@ void PlotThetaPull(){
             hist[iFile]->SetMarkerColor(Color[iFile]);
             hist[iFile]->SetLineColor(Color[iFile]);
             hist[iFile]->Draw("SAME HIST");
+            cout<<"out of here 4"<<endl;
 
         }
-        
+        cout<<"out of here 5"<<endl;
+
         t3->AddEntry(hist[iFile],Label[iFile].Data(),LabelMode[iFile].Data());
-        
+        cout<<"out of here 6"<<endl;
+
 
     }
+    cout<<"out of here 7"<<endl;
+
     drawText("p_{T,1}>120 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
     drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2",0.03,0.93,18);
     t3->Draw("SAME");
+    cout<<"out of here 8"<<endl;
+
 }
