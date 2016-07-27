@@ -69,7 +69,7 @@ void PlotThetaPull(){
         
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
 
-        hist[iFile] =  new TH1D(Form("hist%i",iFile),";#theta_{2,3}^{pull};Event Fraction",50,0,TMath::Pi());
+        hist[iFile] =  new TH1D(Form("hist%i",iFile),"XCone R>0.8 R<pi/2;#theta_{2,3}^{pull};Event Fraction",50,0,TMath::Pi());
         
         if (iFile == 0 || iFile ==1 )tree[iFile]->Draw(Form("theta23>>hist%i",iFile),Cut[iFile] && CentralityBinsCuts[0]);
         if (iFile == 2 || iFile ==3 )tree[iFile]->Draw(Form("theta23>>hist%i",iFile),Cut[iFile] );
@@ -105,7 +105,7 @@ void PlotThetaPull(){
         cout<<"out of here 2"<<endl;
 
         c5->cd(1);
-        hist[iFile]->SetMaximum(0.1);
+        hist[iFile]->SetMaximum(0.6);
         
         if (iFile == 0 || iFile == 2) {
             if (iFile == 0) hist[iFile]->SetFillStyle(3005);
