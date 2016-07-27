@@ -80,7 +80,7 @@ void PlotThetaPull(){
             //tree[iFile][iAlgo]->SetAlias("t3","magnitude(pullEta3,pullPhi3)");
 
 
-            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";|#vec{t}_{3}|#theta_{3,2}^{pull};Event Fraction",20,0,0.16);
+            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";|#vec{t}_{3}|#theta_{3,2}^{pull};Event Fraction",20,0,0.06);
         
             if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("magnitude(pullEta3,pullPhi3)*theta32>>hist%i%i",iFile,iAlgo),Cut[iFile] && CentralityBinsCuts[0]);
             if (iFile == 2 || iFile ==3 )tree[iFile][iAlgo]->Draw(Form("magnitude(pullEta3,pullPhi3)*theta32>>hist%i%i",iFile,iAlgo),Cut[iFile] );
@@ -120,7 +120,7 @@ void PlotThetaPull(){
             cout<<"out of here 2"<<endl;
 
             c5->cd(iAlgo+1);
-            hist[iFile][iAlgo]->SetMaximum(0.09);
+            hist[iFile][iAlgo]->SetMaximum(0.15);
         
             if (iFile == 0 || iFile == 2) {
                 if (iFile == 0) hist[iFile][iAlgo]->SetFillStyle(3005);
