@@ -39,7 +39,7 @@ void PlotThetaPull(){
                         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160726/ppDataHighPt80+pullHiForest_ALL.root"
     };
     
-    int nFiles=4;
+    int nFiles=1;
     
     
     TFile *file[nFiles];
