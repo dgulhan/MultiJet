@@ -101,7 +101,7 @@ void PlotdRvsTheta(){
                 tree[iFile]->Draw(Form("theta23>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint]);
             }
             
-            CountTheta[iFile][iPoint] = (Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0.) , Hist[iFile][iPoint]->FindBin(TMath::Pi()/2.) ) ) / (Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(TMath::Pi()/2.) , Hist[iFile][iPoint]->FindBin(TMath::Pi()) ) );
+            CountTheta[iFile][iPoint] = (Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0.) , Hist[iFile][iPoint]->FindBin(TMath::Pi()/2.) ) ) / (Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0) , Hist[iFile][iPoint]->FindBin(TMath::Pi()) ) );
             
             Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
             
