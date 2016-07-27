@@ -46,10 +46,10 @@ void PlotThetaPull(){
     TFile *file[nFiles];
     TTree *tree[nFiles][2];
     
-    TCut Cut[] = {"pt1>180 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>180 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>180 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>180 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)"
+    TCut Cut[] = {"pt1>190 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>190 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>190 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>190 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)"
     };
     
     TCut CentralityBinsCuts[] = { " 0 < hiBin/2 && hiBin/2 < 30"  };
@@ -67,7 +67,7 @@ void PlotThetaPull(){
         file[iFile] = TFile::Open( Files[iFile].Data() );
         for (int iAlgo=0; iAlgo<2 ; iAlgo++)
         {
-            if (iAlgo==0) tree[iFile][iAlgo] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
+            if (iAlgo==0) tree[iFile][iAlgo] = (TTree*)file[iFile]->Get("xc_R4_N4_PF");
             if (iAlgo==1) tree[iFile][iAlgo] = (TTree*)file[iFile]->Get("ak4PF");
 
         
@@ -138,7 +138,7 @@ void PlotThetaPull(){
 
             
             if (iAlgo==0) {
-                drawText("p_{T,1}>180 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.18,0.93,18);
+                drawText("p_{T,1}>190 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.18,0.93,18);
                 drawText("XCone",0.18,0.83,18);
                 drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 #Delta R_{2,3}<#pi/2 #Delta R_{2,3}>0.8",0.18,0.88,18);
             }
