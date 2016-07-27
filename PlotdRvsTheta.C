@@ -51,7 +51,7 @@ void PlotdRvsTheta(){
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
     
     Double_t X[]={0.9,1.1,1.4};
-    Double_t Xerr[]={0.01,0.01,0.01,0.01,0.01,0.01};
+    Double_t Xerr[]={0.01,0.01,0.01};
     
     
     
@@ -130,7 +130,7 @@ void PlotdRvsTheta(){
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
             gr[iFile]->GetYaxis()->SetTitleOffset(2.4);
             gr[iFile]->SetMinimum(0.40);
-            gr[iFile]->SetMaximum(0.75);
+            gr[iFile]->SetMaximum(0.83);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[#pi/2,#pi] ");
             
             gr[iFile]->Draw();
