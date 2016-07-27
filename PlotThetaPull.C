@@ -65,7 +65,7 @@ void PlotThetaPull(){
     
     for (int iFile = 0; iFile < nFiles ; iFile++ ) {
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get("XC_R4_N3_PF");
+        tree[iFile] = (TTree*)file[iFile]->Get("ak4PF");
         
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
 
