@@ -33,14 +33,13 @@ float deltaPhi( float phi1, float phi2) {
 
 void PlotThetaPull(){
     
-    /***TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
+    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
                         "/afs/cern.ch/work/e/eruizvel/public/PbPbDataHIHardProbes+pullHiForest_ALL.root",
                         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root",
                         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160726/ppDataHighPt80+pullHiForest_ALL.root"
     };
-     ***/
-    TString Files[] = { "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root"};
-    int nFiles=1;
+    
+    int nFiles=4;
     
     
     TFile *file[nFiles];
@@ -71,7 +70,9 @@ void PlotThetaPull(){
 
         hist[iFile] =  new TH1D(Form("hist%i",iFile),";#theta_{2,3}^{pull};Event Fraction",50,0,TMath::Pi());
         
-        tree[iFile]->Draw(Form("theta23>>hist%i",iFile),Cut[iFile] && CentralityBinsCuts[0]);
+        if (iFile == 0 || iFile ==1 )tree[iFile]->Draw(Form("theta23>>hist%i",iFile),Cut[iFile] && CentralityBinsCuts[0]);
+        if (iFile == 2 || iFile ==3 )tree[iFile]->Draw(Form("theta23>>hist%i",iFile),Cut[iFile] );
+
         hist[iFile]->Scale(1.0/hist[iFile]->Integral());
        
         hist[iFile]->SetStats(0);
