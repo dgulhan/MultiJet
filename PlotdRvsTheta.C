@@ -23,7 +23,7 @@ float deltaPhi( float phi1, float phi2) {
     return dphi;
 }
 
-float mag(float x, float y){
+float magnitude(float x, float y){
     return sqrt( pow(x,2)+pow(y,2));
 }
 
