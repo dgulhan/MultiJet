@@ -111,7 +111,7 @@ void PlotThetaPull(){
 
     for (int iFile = 0 ; iFile<nFiles; iFile++) {
         
-        for (int iAlgo; iAlgo<2; iAlgo++) {
+        for (int iAlgo=0; iAlgo<2; iAlgo++) {
     
        
             cout<<"out of here 2"<<endl;
@@ -139,19 +139,19 @@ void PlotThetaPull(){
             cout<<"out of here 5"<<endl;
 
             
-            //if (iAlgo==0) drawText("XCone",0.03,0.73,18);
-            //if (iAlgo==1) drawText("Anti-kT",0.03,0.73,18);
+            if (iAlgo==0) drawText("XCone",0.03,0.73,18);
+            if (iAlgo==1) drawText("Anti-kT",0.03,0.73,18);
 
 
         }
-        //t3->AddEntry(hist[iFile][1],Label[iFile].Data(),LabelMode[iFile].Data());
+        t3->AddEntry(hist[iFile][1],Label[iFile].Data(),LabelMode[iFile].Data());
         cout<<"out of here 6"<<endl;
     }
     cout<<"out of here 7"<<endl;
 
-    //drawText("p_{T,1}>120 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
-    //drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 R<pi/2 R>0.8",0.03,0.93,18);
-    //t3->Draw("SAME");
+    drawText("p_{T,1}>120 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
+    drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 R<pi/2 R>0.8",0.03,0.93,18);
+    t3->Draw("SAME");
     cout<<"out of here 8"<<endl;
 
 }
