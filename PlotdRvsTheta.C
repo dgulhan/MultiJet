@@ -164,7 +164,7 @@ void PlotdRvsTheta(){
             gr[iFile]->SetLineStyle(9);
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
             gr[iFile]->SetMinimum(0.3);
-            gr[iFile]->SetMaximum(1.0);
+            gr[iFile]->SetMaximum(0.95);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
             
             gr[iFile]->Draw();
@@ -180,6 +180,7 @@ void PlotdRvsTheta(){
         if (iFile==2) {
             gr[iFile]->SetLineColor(kBlue-7);
             gr[iFile]->SetLineStyle(9);
+            gr[iFile]->Draw("SAME");
         }
         if (iFile==3) {
             gr[iFile]->SetMarkerStyle(21);
@@ -192,14 +193,15 @@ void PlotdRvsTheta(){
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
     }
-    t3->AddEntry(c2,"anti-k_{T} R=0.4","");
+    
+    t3->AddEntry(c2,"Anti-k_{T} R=0.4","");
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.22,0.85,23);
     drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.23,0.82,16);
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.23,0.78,16);
     drawText("0 -30% Centrality",0.23,0.74,16);
 
-    /***
+    
     
     TCanvas *c3 = new TCanvas("c3","c2",610,600);
     c3->SetLeftMargin(0.2);
@@ -215,29 +217,34 @@ void PlotdRvsTheta(){
     
     rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
     rat[1] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
-    rat[1]->SetFillColor(kBlue-2);
-    rat[1]->SetLineColor(kBlue-2);
-    rat[0]->SetFillColor(kOrange+1);
-    rat[0]->SetLineColor(kOrange+1);
     
-    
+    rat[0]->SetLineColor(kGrey+1);
+    rat[0]->SetLineStyle(9);
     rat[0]->SetMinimum(0.5);
     rat[0]->SetMaximum(1.6);
-    rat[0]->Draw("SAME");
-    rat[1]->Draw("SAME");
+    rat[0]->Draw();
+    
+    rat[1]->SetMarkerStyle(21);
+    rat[1]->SetMarkerSize(1);
+    rat[1]->SetMarkerColor(kViolet);
+    rat[1]->SetLineColor(kViolet);
+    rat[1]->Draw("P SAME");
+
+    
     drawText("CMS Preliminary",0.22,0.85,23);
     drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.23,0.82,16);
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.23,0.78,16);
     drawText("0 -30% Centrality",0.23,0.74,16);
 
-    
+    t4->AddEntry(c3,"Anti-k_{T} R=0.4","");
+
     t4->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
     t4->AddEntry(rat[1],"PbPb Data / pp Data","l");
     
     t4->Draw("SAME");
     
     
-    ***/
+
     
     
     
