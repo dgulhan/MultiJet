@@ -45,7 +45,7 @@ void PlotdRvsTheta(){
         
     };
     
-    TCut CutSeePull[] = {"pt1>190 && pt3>70 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " };
+    TCut CutSeePull[] = {"pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " };
     TCut centrality = "0 < hiBin/2 && hiBin/2 < 30";
     
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
