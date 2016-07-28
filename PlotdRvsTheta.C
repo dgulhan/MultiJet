@@ -36,9 +36,10 @@ void PlotdRvsTheta(){
     int nR=1;
     int nN=1; //XCone
     
-    int nPoints = 5;
+    int nPoints = 6;
     
     TCut CutsR[] = {
+        "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.4",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.4 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.6",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.6 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.8",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.0",
@@ -142,7 +143,7 @@ void PlotdRvsTheta(){
     
     
     TCanvas *c2 = new TCanvas ("c2","",610,600);
-    
+    c2->SetLeftMargin(0.2)
     
     
     TLegend *t3=new TLegend(0.50,0.64,0.83,0.77);
@@ -163,7 +164,7 @@ void PlotdRvsTheta(){
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
             gr[iFile]->GetYaxis()->SetTitleOffset(2.4);
             gr[iFile]->SetMinimum(0.34);
-            gr[iFile]->SetMaximum(1.23);
+            gr[iFile]->SetMaximum(1.43);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[#pi/2,#pi] ");
             
             gr[iFile]->Draw();
