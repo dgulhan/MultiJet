@@ -142,7 +142,7 @@ void PlotdRvsTheta(){
     
     
     TCanvas *c2 = new TCanvas ("c2","c2",610,600);
-    c2->SetLeftMargin(0.4);
+    c2->SetLeftMargin(0.23);
     
     
     TLegend *t3=new TLegend(0.55,0.64,0.88,0.77);
