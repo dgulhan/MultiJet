@@ -36,7 +36,7 @@ void PlotdRvsTheta(){
     int nR=1;
     int nN=1; //XCone
     
-    int nPoints = 6;
+    int nPoints = 5;
     
     TCut CutsR[] = {
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.4",
@@ -53,8 +53,8 @@ void PlotdRvsTheta(){
     
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
     
-    double X[]={0.3,0.5,0.7,0.9,1.1,1.4};
-    double Xerr[]={0.01,0.01,0.01,0.01,0.01,0.01};
+    double X[]={0.5,0.7,0.9,1.1,1.4};
+    double Xerr[]={0.01,0.01,0.01,0.01,0.01};
     
     
     
@@ -146,12 +146,12 @@ void PlotdRvsTheta(){
     c2->SetLeftMargin(0.2);
     
     
-    TLegend *t3=new TLegend(0.50,0.64,0.83,0.77);
+    TLegend *t3=new TLegend(0.40,0.64,0.83,0.77);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
     t3->SetTextFont(43);
-    t3->SetTextSize(18);
+    t3->SetTextSize(16);
     TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"};
     
     
@@ -164,7 +164,7 @@ void PlotdRvsTheta(){
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
             gr[iFile]->GetYaxis()->SetTitleOffset(2.4);
             gr[iFile]->SetMinimum(0.20);
-            gr[iFile]->SetMaximum(1.66);
+            gr[iFile]->SetMaximum(1.76);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
             
             gr[iFile]->Draw();
