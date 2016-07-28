@@ -89,7 +89,7 @@ void PlotdRvsTheta(){
         
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
+        tree[iFile] = (TTree*)file[iFile]->Get("ak4PF");
         
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
         tree[iFile]->SetAlias( "theta32" , "acos((pullEta3*(eta2-eta3)+pullPhi3*deltaPhi(phi2,phi3))/( magnitude(pullEta3,pullPhi3)*magnitude(eta2-eta3,deltaPhi(phi2,phi3)) ))");
@@ -193,7 +193,7 @@ void PlotdRvsTheta(){
     
     t3->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
     t3->AddEntry(rat[1],"PbPb Data / pp Data","l");
-    t3->AddEntry(c2,"XCone R=0.4 N=3","");
+    t3->AddEntry(c2,"anti-k_{T} R=0.4","");
     
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.22,0.85,23);
