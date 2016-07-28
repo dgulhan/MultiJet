@@ -53,8 +53,8 @@ void PlotdRvsTheta(){
     
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
     
-    double X[]={0.5,0.7,0.9,1.1,1.4};
-    double Xerr[]={0.01,0.01,0.01,0.01,0.01};
+    double X[]={0.3,0.5,0.7,0.9,1.1,1.4};
+    double Xerr[]={0.01,0.01,0.01,0.01,0.01,0.01};
     
     
     
@@ -164,7 +164,7 @@ void PlotdRvsTheta(){
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
             gr[iFile]->GetYaxis()->SetTitleOffset(2.4);
             gr[iFile]->SetMinimum(0.34);
-            gr[iFile]->SetMaximum(1.43);
+            gr[iFile]->SetMaximum(1.48);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[#pi/2,#pi] ");
             
             gr[iFile]->Draw();
@@ -195,10 +195,10 @@ void PlotdRvsTheta(){
     t3->AddEntry(rat[1],"PbPb Data / pp Data","l");
     
     t3->Draw("SAME");
-    drawText("CMS Preliminary",0.12,0.85,23);
-    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.13,0.82,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
-    drawText("0 -30% Centrality",0.13,0.74,16);
+    drawText("CMS Preliminary",0.22,0.85,23);
+    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.23,0.82,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.23,0.78,16);
+    drawText("0 -30% Centrality",0.23,0.74,16);
 
     
     
