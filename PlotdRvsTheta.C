@@ -90,7 +90,7 @@ void PlotdRvsTheta(){
         
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
+        tree[iFile] = (TTree*)file[iFile]->Get("ak4PF");
         
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
         tree[iFile]->SetAlias( "theta32" , "acos((pullEta3*(eta2-eta3)+pullPhi3*deltaPhi(phi2,phi3))/( magnitude(pullEta3,pullPhi3)*magnitude(eta2-eta3,deltaPhi(phi2,phi3)) ))");
@@ -196,7 +196,7 @@ void PlotdRvsTheta(){
         t3->AddEntry(gr[iFile],LabelGraph[iFile],LabelGraphMarc[iFile]);
     }
     
-    t3->AddEntry(c2,"XCone R=0.4 N=3","");
+    t3->AddEntry(c2,"anti-k_{T} R=0.4 N=3","");
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.25,0.85,23);
     drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.25,0.82,16);
@@ -245,7 +245,7 @@ void PlotdRvsTheta(){
 
     t4->AddEntry(rat[0],"PYTHIA+HYDJET/PYTHIA","l");
     t4->AddEntry(rat[1],"PbPb Data/pp Data","p");
-    t4->AddEntry(c3,"XCone R=0.4 N=3","");
+    t4->AddEntry(c3,"anti-k_{T} R=0.4 N=3","");
 
     t4->Draw("SAME");
     
@@ -259,8 +259,8 @@ void PlotdRvsTheta(){
     
     
     
-    c2->SaveAs("xcPlotdRvsTheta0.pdf");
-    c3->SaveAs("xcPlotdRvsTheta1.pdf");
+    c2->SaveAs("akPlotdRvsTheta0.pdf");
+    c3->SaveAs("akPlotdRvsTheta1.pdf");
     //c2->SaveAs("meanpull.gif");
     
     
