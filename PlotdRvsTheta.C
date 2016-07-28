@@ -79,8 +79,8 @@ void PlotdRvsTheta(){
     TH1D * Hist[nFiles][nPoints];
     
     
-    Double_t Ntheta;
-    Double_t Nall;
+    Double_t Ntheta[nFiles][nPoints];
+    Double_t Nall[nFiles][nPoints];
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
         
         
@@ -105,17 +105,17 @@ void PlotdRvsTheta(){
                 tree[iFile]->Draw(Form("theta23>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint]);
             }
             
-            Ntheta = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0.) , Hist[iFile][iPoint]->FindBin(TMath::Pi()/2.) );
-            Nall = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0) , Hist[iFile][iPoint]->FindBin(TMath::Pi()));
+            Ntheta[iFile][iPoint] = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0.) , Hist[iFile][iPoint]->FindBin(TMath::Pi()/2.) );
+            Nall[iFile][iPoint] = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0) , Hist[iFile][iPoint]->FindBin(TMath::Pi()));
             
-            CountTheta[iFile][iPoint] = Ntheta/Nall ;
-            ErrCountTheta[iFile][iPoint] = (Ntheta /Nall)*(sqrt((1./Ntheta)+ (1./Nall) ) ) ;
+            CountTheta[iFile][iPoint] = Ntheta[iFile][iPoint]/Nall[iFile][iPoint] ;
+            ErrCountTheta[iFile][iPoint] = (Ntheta[iFile][iPoint] /Nall[iFile][iPoint])*(sqrt((1./Ntheta[iFile][iPoint])+ (1./Nall[iFile][iPoint]) ) ) ;
             
             
-            Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
+            //Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
             
             cout<<"Ratio: "<<CountTheta[iFile][iPoint]<<endl;
-            Yerr[iFile][iPoint] = Hist[iFile][iPoint]->GetMeanError();
+            //Yerr[iFile][iPoint] = Hist[iFile][iPoint]->GetMeanError();
         }
     }
     
@@ -159,7 +159,7 @@ void PlotdRvsTheta(){
         ErrRatioPoints[0][iPoint] = (ErrCountTheta[0][iPoint]*CountTheta[2][iPoint] + ErrCountTheta[2][iPoint]*CountTheta[0][iPoint])/pow(CountTheta[2][iPoint],2.0);
 
         RatioPoints[1][iPoint] = CountTheta[1][iPoint]/CountTheta[3][iPoint];
-        ErrRatioPoints[0][iPoint] = (ErrCountTheta[1][iPoint]*CountTheta[3][iPoint] + ErrCountTheta[3][iPoint]*CountTheta[1][iPoint])/pow(CountTheta[3][iPoint],2.0);
+        ErrRatioPoints[1][iPoint] = (ErrCountTheta[1][iPoint]*CountTheta[3][iPoint] + ErrCountTheta[3][iPoint]*CountTheta[1][iPoint])/pow(CountTheta[3][iPoint],2.0);
         
         cout<<"bla: "<<RatioPoints[0][iPoint]<<"+- "<<ErrRatioPoints[0][iPoint]<<endl;
         cout<<"bla bla: "<<RatioPoints[1][iPoint]<<"+- "<<ErrRatioPoints[1][iPoint]<<endl;
