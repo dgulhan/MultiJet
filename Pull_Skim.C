@@ -347,9 +347,13 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", i
                             vector<PseudoJet> jGenConstituents = fjGenJets[ialgo][iR][iN][ijet].constituents();
                             
                             for (unsigned jConst = 0; jConst< jGenConstituents.size(); jConst++){ //!load pf constituents of the jet. Here we sum over the pull value for each particle constituent
+                                float constitPt = jGenConstituents[jConst].pt();
+                                
+                                if (constitPt>2.0) continue;
+                                
 							    float constitPhi = jGenConstituents[jConst].phi() - 3.141592653589;
 							    float constitEta = jGenConstituents[jConst].eta();
-							    float constitPt = jGenConstituents[jConst].pt();
+							    
                                 genratio_i = w_ratio_i(genEta, genPhi, genPt, constitEta, constitPhi, constitPt);
                                 genPullEta += genratio_i*(constitEta-genEta);
                                 genPullPhi += genratio_i*(deltaPhi(constitPhi,genPhi));
@@ -379,9 +383,12 @@ void Pull_Skim(TString dataset = "", TString outfname = "", TString mode = "", i
                         float ratio_i = 0;
                         vector<PseudoJet> jPFConstituents = fjPFjets[ialgo][iR][iN][ijet].constituents();
                         for (unsigned jConst = 0; jConst< jPFConstituents.size(); jConst++){ //!load pf constituents of the jet. Here we sum over the pull value for each particle constituent
+                            float constitPt = jPFConstituents[jConst].pt();
+                            if (constitPt>2.0) continue;
 							float constitPhi = jPFConstituents[jConst].phi() - 3.141592653589;
 							float constitEta = jPFConstituents[jConst].eta();
-							float constitPt = jPFConstituents[jConst].pt();
+							
+
                             ratio_i = w_ratio_i(jtEta, jtPhi, jtPt, constitEta, constitPhi, constitPt);
                             jtPullEta += ratio_i*(constitEta - jtEta);
                             jtPullPhi += ratio_i*(deltaPhi(constitPhi, jtPhi));
