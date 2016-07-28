@@ -36,9 +36,11 @@ void PlotdRvsTheta(){
     int nR=1;
     int nN=1; //XCone
     
-    int nPoints = 5;
+    int nPoints = 6;
     
+
     TCut CutsR[] = {
+        "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.4",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.4 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.6",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.6 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.8",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.0",
@@ -52,8 +54,8 @@ void PlotdRvsTheta(){
     
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
     
-    double X[]={0.5,0.7,0.9,1.1,1.4};
-    double Xerr[]={0.01,0.01,0.01,0.01,0.01};
+    double X[]={0.3,0.5,0.7,0.9,1.1,1.4};
+    double Xerr[]={0.01,0.01,0.01,0.01,0.01,0.01};
     
     
     
@@ -222,6 +224,7 @@ void PlotdRvsTheta(){
     
     rat[0]->SetLineColor(kGray+1);
     rat[0]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
+    rat[0]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
     rat[0]->SetLineStyle(9);
     rat[0]->SetMinimum(0.5);
     rat[0]->SetMaximum(1.6);
