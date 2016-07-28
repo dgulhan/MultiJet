@@ -176,10 +176,10 @@ void PlotdRvsTheta(){
     
     rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
     rat[1] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
-    rat[0]->SetFillColor(kBlue-2);
-    rat[0]->SetLineColor(kBlue-2);
-    rat[1]->SetFillColor(kOrange+1);
-    rat[1]->SetLineColor(kOrange+1);
+    rat[1]->SetFillColor(kBlue-2);
+    rat[1]->SetLineColor(kBlue-2);
+    rat[0]->SetFillColor(kOrange+1);
+    rat[0]->SetLineColor(kOrange+1);
     
     
     rat[0]->Draw("SAME");
