@@ -166,8 +166,8 @@ void PlotdRvsTheta(){
             gr[iFile]->SetLineColor(kRed-7);
             gr[iFile]->SetLineStyle(9);
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
-            gr[iFile]->SetMinimum(0.3);
-            gr[iFile]->SetMaximum(0.95);
+            gr[iFile]->SetMinimum(0.19);
+            gr[iFile]->SetMaximum(1.05);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
             gr[iFile]->Draw();
         }
