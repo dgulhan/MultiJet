@@ -164,7 +164,7 @@ void PlotdRvsTheta(){
         gr[iFile]->SetLineColor(Color[iFile]);
         if (iFile==0) {
             gr[iFile]->SetLineColor(kRed-7);
-            gr[iFile]->SetLineStyle(9);
+            //gr[iFile]->SetLineStyle(9);
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
             gr[iFile]->SetMinimum(0.19);
             gr[iFile]->SetMaximum(1.05);
@@ -181,7 +181,7 @@ void PlotdRvsTheta(){
         }
         if (iFile==2) {
             gr[iFile]->SetLineColor(kBlue-7);
-            gr[iFile]->SetLineStyle(9);
+            //gr[iFile]->SetLineStyle(9);
             gr[iFile]->Draw("SAME");
         }
         if (iFile==3) {
@@ -225,7 +225,7 @@ void PlotdRvsTheta(){
     rat[0]->SetLineColor(kGray+1);
     rat[0]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
     rat[0]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
-    rat[0]->SetLineStyle(9);
+    //rat[0]->SetLineStyle(9);
     rat[0]->SetMinimum(0.5);
     rat[0]->SetMaximum(1.6);
     rat[0]->Draw();
@@ -259,8 +259,8 @@ void PlotdRvsTheta(){
     
     
     
-    //c2->SaveAs("meanpull.png");
-    //c2->SaveAs("meanpull.pdf");
+    c2->SaveAs("xcPlotdRvsTheta0.pdf");
+    c3->SaveAs("xcPlotdRvsTheta1.pdf");
     //c2->SaveAs("meanpull.gif");
     
     
