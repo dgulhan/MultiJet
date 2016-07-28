@@ -167,7 +167,7 @@ void PlotdRvsTheta(){
             gr[iFile]->SetMaximum(1.0);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
             
-            gr[iFile]->Draw("SAME");
+            gr[iFile]->Draw();
         }
 
         if (iFile==1) {
