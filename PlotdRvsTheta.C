@@ -217,7 +217,7 @@ void PlotdRvsTheta(){
     rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
     rat[1] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
     
-    rat[0]->SetLineColor(kGrey+1);
+    rat[0]->SetLineColor(kGray+1);
     rat[0]->SetLineStyle(9);
     rat[0]->SetMinimum(0.5);
     rat[0]->SetMaximum(1.6);
