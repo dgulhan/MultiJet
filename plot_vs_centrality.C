@@ -17,12 +17,11 @@ void plot_vs_centrality(){
     int nBinsCentr = 4;
     
     TCut CentralityBinsCuts[] = { "0 < hiBin/2 && hiBin/2 < 10","10 < hiBin/2 && hiBin/2 < 30 ","30 < hiBin/2 && hiBin/2 < 50" ,"50 < hiBin/2 && hiBin/2 < 100" };
-    TCut Cut[] = {"pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
-                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
-                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"};
+    TCut Cut[] = {"pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"};
 
-    int Color [] = { kRed , kBlue, kGreen, kMagenta };
     
     int nFiles = 4;
     TFile *file[nFiles];
@@ -78,44 +77,63 @@ void plot_vs_centrality(){
     }
     
     
-    TCanvas *c = new TCanvas ("c","",600,600);
+    TCanvas *c = new TCanvas ("c","",610,600);
+    c->SetLeftMargin(0.23);
     
-    TLegend *t3=new TLegend(0.50,0.64,0.83,0.77);
+    
+    TLegend *t3=new TLegend(0.55,0.63,0.88,0.78);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
     t3->SetTextFont(43);
-    t3->SetTextSize(18);
+    t3->SetTextSize(16);
     TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"};
+    TString LabelGraphMarc[] = {"l", "p" , "l", "p"};
+    
     
     for (int iFile = 0; iFile<nFiles; iFile++) {
         gr[iFile] = new TGraphErrors(nBinsCentr,X,Y[iFile],Xerr,Yerr[iFile]);
-        gr[iFile]->SetLineColor(Color[iFile]);
         gr[iFile]->GetXaxis()->SetLimits(0,100);
         gr[iFile]->GetXaxis()->SetTitle("% Centrality ");
         gr[iFile]->GetYaxis()->SetTitle("#LT P_{T} Balance #GT");
-        gr[iFile]->SetLineStyle(9);
         
         if (iFile == 0) {
-            gr[iFile]->SetMinimum(0.11);
-            gr[iFile]->SetMaximum(0.34);
-            gr[iFile]->GetYaxis()->SetTitleOffset(1.4);
+            gr[iFile]->SetMinimum(0.10);
+            gr[iFile]->SetMaximum(0.31);
+            gr[iFile]->SetLineColor(kRed-7);
             gr[iFile]->Draw();
-        } else {
-            gr[iFile]->GetYaxis()->SetTitleOffset(1.4);
+        }
+        if (iFile==1) {
+            gr[iFile]->SetMarkerStyle(21);
+            gr[iFile]->SetMarkerSize(1);
+            gr[iFile]->SetMarkerColor(kRed);
+            gr[iFile]->Draw("P SAME");
+
+        }
+        if (iFile==2) {
+            gr[iFile]->SetLineColor(kBlue-7);
+            //gr[iFile]->SetLineStyle(9);
             gr[iFile]->Draw("SAME");
         }
+        if (iFile==3) {
+            gr[iFile]->SetMarkerStyle(21);
+            gr[iFile]->SetMarkerColor(kBlue);
+            gr[iFile]->SetMarkerSize(1);
+            gr[iFile]->Draw("P SAME");
+            
+        }
+
         
-        t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
+        t3->AddEntry(gr[iFile],LabelGraph[iFile],LabelGraphMarc[iFile]);
 
     }
     
+    t3->AddEntry(c2,"anti-k_{T} R=0.4","");
 
     t3->Draw("SAME");
-    drawText("CMS Preliminary",0.12,0.85,23);
-    drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.13,0.82,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
-
+    drawText("CMS Preliminary",0.25,0.85,23);
+    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.25,0.82,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.25,0.78,16);
 
     
     
