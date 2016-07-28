@@ -36,9 +36,11 @@ void PlotdRvsTheta(){
     int nR=1;
     int nN=1; //XCone
     
-    int nPoints = 3;
+    int nPoints = 5;
     
     TCut CutsR[] = {
+        "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.4 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.6",
+        "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.6 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.8",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.0",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>1.0 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.2",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>1.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.6",
@@ -50,8 +52,8 @@ void PlotdRvsTheta(){
     
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
     
-    double X[]={0.9,1.1,1.4};
-    double Xerr[]={0.01,0.01,0.01};
+    double X[]={0.5,0.7,0.9,1.1,1.4};
+    double Xerr[]={0.01,0.01,0.01,0.01,0.01};
     
     
     
@@ -176,7 +178,7 @@ void PlotdRvsTheta(){
     }
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.12,0.85,23);
-    drawText("p_{T,1}>190 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.13,0.82,16);
+    drawText("p_{T,1}>120 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.13,0.82,16);
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
     drawText("0 -30% Centrality",0.13,0.74,16);
 
