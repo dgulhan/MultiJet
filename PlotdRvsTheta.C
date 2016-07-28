@@ -141,18 +141,7 @@ void PlotdRvsTheta(){
     
     TCanvas *c2 = new TCanvas ("c2","",610,600);
     
-    TGraphErrors * rat[2];
     
-    rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
-    rat[1] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
-    rat[0]->SetFillColor(kBlue-2);
-    rat[0]->SetLineColor(kBlue-2);
-    rat[1]->SetFillColor(kOrange+1);
-    rat[1]->SetLineColor(kOrange+1);
-    
-    
-    rat[0]->Draw("SAME");
-    rat[1]->Draw("SAME");
     
     TLegend *t3=new TLegend(0.50,0.64,0.83,0.77);
     t3->SetFillColor(0);
@@ -182,6 +171,19 @@ void PlotdRvsTheta(){
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
     }
+    
+    TGraphErrors * rat[2];
+    
+    rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
+    rat[1] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
+    rat[0]->SetFillColor(kBlue-2);
+    rat[0]->SetLineColor(kBlue-2);
+    rat[1]->SetFillColor(kOrange+1);
+    rat[1]->SetLineColor(kOrange+1);
+    
+    
+    rat[0]->Draw("SAME");
+    rat[1]->Draw("SAME");
     
     t3->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
     t3->AddEntry(rat[1],"PbPb Data / pp Data","l");
