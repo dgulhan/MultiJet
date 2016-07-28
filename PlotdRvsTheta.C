@@ -88,7 +88,7 @@ void PlotdRvsTheta(){
         
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
+        tree[iFile] = (TTree*)file[iFile]->Get("ak4PF");
         
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
         tree[iFile]->SetAlias( "theta32" , "acos((pullEta3*(eta2-eta3)+pullPhi3*deltaPhi(phi2,phi3))/( magnitude(pullEta3,pullPhi3)*magnitude(eta2-eta3,deltaPhi(phi2,phi3)) ))");
@@ -159,23 +159,56 @@ void PlotdRvsTheta(){
         gr[iFile] = new TGraphErrors(nPoints,X,CountTheta[iFile],Xerr,ErrCountTheta[iFile]);
         gr[iFile]->SetFillColor(Color[iFile]);
         gr[iFile]->SetLineColor(Color[iFile]);
+        if (iFile==0) {
+            gr[iFile]->SetLineColor(kRed-7);
+            gr[iFile]->SetLineStyle(9);
+        }
+
+        if (iFile==1) {
+            gr[iFile]->SetMarkerStyle(21);
+            gr[iFile]->SetMarkerColor(kRed);
+        }
+        if (iFile==2) {
+            gr[iFile]->SetLineColor(kBlue-7);
+            gr[iFile]->SetLineStyle(9);
+        }
+        if (iFile==3) {
+            gr[iFile]->SetMarkerStyle(21);
+            gr[iFile]->SetMarkerColor(kBlue);
+        }
         if (iFile == 0) {
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
-            gr[iFile]->GetYaxis()->SetTitleOffset(2.4);
-            gr[iFile]->SetMinimum(0.20);
-            gr[iFile]->SetMaximum(1.6);
+            gr[iFile]->SetMinimum(0.3);
+            gr[iFile]->SetMaximum(1.0);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
             
             gr[iFile]->Draw();
         }
         else{
             gr[iFile]->Draw("SAME");
-            gr[iFile]->SetMinimum(0.25);
-            gr[iFile]->SetMaximum(1.78);
+            
         }
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
     }
+    t3->AddEntry(c2,"anti-k_{T} R=0.4","");
+    t3->Draw("SAME");
+    drawText("CMS Preliminary",0.22,0.85,23);
+    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.23,0.82,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.23,0.78,16);
+    drawText("0 -30% Centrality",0.23,0.74,16);
+
+    
+    
+    TCanvas *c3 = new TCanvas("c3","",610,600);
+    
+    TLegend *t4=new TLegend(0.55,0.64,0.88,0.77);
+    t4->SetFillColor(0);
+    t4->SetBorderSize(0);
+    t4->SetFillStyle(0);
+    t4->SetTextFont(43);
+    t4->SetTextSize(16);
+    
     TGraphErrors * rat[2];
     
     rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
@@ -186,20 +219,22 @@ void PlotdRvsTheta(){
     rat[0]->SetLineColor(kOrange+1);
     
     
-    
+    rat[0]->SetMinimum(0.5);
+    rat[0]->SetMaximum(1.6);
     rat[0]->Draw("SAME");
     rat[1]->Draw("SAME");
-    
-    t3->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
-    t3->AddEntry(rat[1],"PbPb Data / pp Data","l");
-    t3->AddEntry(c2,"anti-k_{T} R=0.4","");
-    
-    t3->Draw("SAME");
     drawText("CMS Preliminary",0.22,0.85,23);
     drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.23,0.82,16);
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.23,0.78,16);
     drawText("0 -30% Centrality",0.23,0.74,16);
 
+    
+    t4->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
+    t4->AddEntry(rat[1],"PbPb Data / pp Data","l");
+    
+    t4->Draw("SAME");
+    
+    
     
     
     
