@@ -167,6 +167,8 @@ void PlotdRvsTheta(){
         }
         else{
             gr[iFile]->Draw("SAME");
+            gr[iFile]->SetMinimum(0.34);
+            gr[iFile]->SetMaximum(1.23);
         }
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
@@ -180,7 +182,10 @@ void PlotdRvsTheta(){
     rat[1]->SetLineColor(kBlue-2);
     rat[0]->SetFillColor(kOrange+1);
     rat[0]->SetLineColor(kOrange+1);
-    
+    rat[0]->SetMinimum(0.34);
+    rat[0]->SetMaximum(1.23);
+    rat[1]->SetMinimum(0.34);
+    rat[1]->SetMaximum(1.23);
     
     rat[0]->Draw("SAME");
     rat[1]->Draw("SAME");
