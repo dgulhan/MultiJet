@@ -199,7 +199,7 @@ void PlotdRvsTheta(){
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.23,0.78,16);
     drawText("0 -30% Centrality",0.23,0.74,16);
 
-    
+    /***
     
     TCanvas *c3 = new TCanvas("c3","c2",610,600);
     c3->SetLeftMargin(0.2);
@@ -237,7 +237,7 @@ void PlotdRvsTheta(){
     t4->Draw("SAME");
     
     
-    
+    ***/
     
     
     
