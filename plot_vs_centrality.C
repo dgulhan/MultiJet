@@ -78,7 +78,7 @@ void plot_vs_centrality(){
     
     
     TCanvas *c = new TCanvas ("c","",610,600);
-    c->SetLeftMargin(0.25);
+    c->SetLeftMargin(0.35);
     
     
     TLegend *t3=new TLegend(0.55,0.63,0.88,0.78);
@@ -131,9 +131,9 @@ void plot_vs_centrality(){
     t3->AddEntry(c,"anti-k_{T} R=0.4","");
 
     t3->Draw("SAME");
-    drawText("CMS Preliminary",0.28,0.85,23);
-    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.28,0.82,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.28,0.78,16);
+    drawText("CMS Preliminary",0.30,0.85,23);
+    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.30,0.82,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.30,0.78,16);
 
     
     
