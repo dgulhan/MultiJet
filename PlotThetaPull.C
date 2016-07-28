@@ -47,10 +47,10 @@ void PlotThetaPull(){
     TTree *tree[nFiles][2];
     
     TCut Cut[] = {
-        "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
-                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)"
+        "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)",
+                  "pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)"
     };
     
     TCut CentralityBinsCuts[] = { " 0 < hiBin/2 && hiBin/2 < 30"  };
@@ -128,7 +128,7 @@ void PlotThetaPull(){
                 if (iFile == 2) hist[iFile][iAlgo]->SetFillStyle(3004);
                 hist[iFile][iAlgo]->SetLineColor(Color[iFile]);
                 hist[iFile][iAlgo]->SetFillColorAlpha(Color[iFile],0.35);
-                hist[iFile][iAlgo]->Draw("SAME HIST");
+                //hist[iFile][iAlgo]->Draw("SAME HIST");
                 cout<<"out of here 3"<<endl;
 
             }
@@ -145,15 +145,15 @@ void PlotThetaPull(){
 
             
             if (iAlgo==0) {
-                drawText("p_{T,1}>160 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.18,0.93,18);
+                drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.18,0.93,18);
                 drawText("XCone #theta_{3,2}^{pull}<#pi/2",0.18,0.83,18);
                 drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 #Delta R_{2,3}<#pi/2 #Delta R_{2,3}>0.8",0.18,0.88,18);
             }
-            if (iAlgo==1) drawText("Anti-kT #theta_{3,2}^{pull}<#pi/2",0.03,0.83,18);
+            if (iAlgo==1) drawText("anti-kT #theta_{3,2}^{pull}<#pi/2",0.03,0.83,18);
 
 
         }
-        t3->AddEntry(hist[iFile][1],Label[iFile].Data(),LabelMode[iFile].Data());
+        if (iFile == 1 || iFile == 3) t3->AddEntry(hist[iFile][1],Label[iFile].Data(),LabelMode[iFile].Data());
         cout<<"out of here 6"<<endl;
     }
     cout<<"out of here 7"<<endl;
