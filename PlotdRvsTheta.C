@@ -66,7 +66,7 @@ void PlotdRvsTheta(){
     
     TTree *tree[nFiles];
     TFile *file[nFiles];
-    TGraphErrors * gr[nFiles+2];
+    TGraphErrors * gr[nFiles];
     
     Double_t Y[nFiles][nPoints];
     Double_t Yerr[nFiles][nPoints];
@@ -106,7 +106,8 @@ void PlotdRvsTheta(){
             }
             
             Ntheta[iFile][iPoint] = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0.) , Hist[iFile][iPoint]->FindBin(TMath::Pi()/2.) );
-            Nall[iFile][iPoint] = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0) , Hist[iFile][iPoint]->FindBin(TMath::Pi()));
+            
+            Nall[iFile][iPoint] = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0) , Hist[iFile][iPoint]->FindBin( TMath::Pi() ) );
             
             CountTheta[iFile][iPoint] = Ntheta[iFile][iPoint]/Nall[iFile][iPoint] ;
             ErrCountTheta[iFile][iPoint] = (Ntheta[iFile][iPoint] /Nall[iFile][iPoint])*(sqrt((1./Ntheta[iFile][iPoint])+ (1./Nall[iFile][iPoint]) ) ) ;
@@ -165,17 +166,19 @@ void PlotdRvsTheta(){
         cout<<"bla bla: "<<RatioPoints[1][iPoint]<<"+- "<<ErrRatioPoints[1][iPoint]<<endl;
     }
     
-    gr[nFiles-1+1] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
-    gr[nFiles-1+2] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
-    gr[nFiles-1+1]->SetFillColor(kBlue-2);
-    gr[nFiles-1+1]->SetLineColor(kBlue-2);
-    gr[nFiles-1+2]->SetFillColor(kOrange+1);
-    gr[nFiles-1+2]->SetLineColor(kOrange+1);
+    TGraphErrors * rat[2];
+
+    rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
+    rat[1] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
+    rat[0]->SetFillColor(kBlue-2);
+    rat[0]->SetLineColor(kBlue-2);
+    rat[1]->SetFillColor(kOrange+1);
+    rat[1]->SetLineColor(kOrange+1);
     
-    t3->AddEntry(gr[nFiles-1+2],"PYTHIA + HYDJET / PYTHIA","l");
-    t3->AddEntry(gr[nFiles-1+1],"PbPb Data / pp Data","l");
-    gr[nFiles-1+1]->Draw("SAME");
-    gr[nFiles-1+2]->Draw("SAME");
+    t3->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
+    t3->AddEntry(rat[1],"PbPb Data / pp Data","l");
+    rat[0]->Draw("SAME");
+    rat[1]->Draw("SAME");
     
     
     t3->Draw("SAME");
