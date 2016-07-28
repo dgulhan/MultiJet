@@ -121,6 +121,23 @@ void PlotdRvsTheta(){
     }
     
     
+    Double_t RatioPoints[2][nPoints];
+    Double_t ErrRatioPoints[2][nPoints];
+    
+    for (int iPoint = 0 ; iPoint<nPoints ; iPoint ++ ){
+        
+        RatioPoints[0][iPoint] = CountTheta[0][iPoint]/CountTheta[2][iPoint];
+        ErrRatioPoints[0][iPoint] = (ErrCountTheta[0][iPoint]*CountTheta[2][iPoint] + ErrCountTheta[2][iPoint]*CountTheta[0][iPoint])/pow(CountTheta[2][iPoint],2.0);
+        
+        RatioPoints[1][iPoint] = CountTheta[1][iPoint]/CountTheta[3][iPoint];
+        ErrRatioPoints[1][iPoint] = (ErrCountTheta[1][iPoint]*CountTheta[3][iPoint] + ErrCountTheta[3][iPoint]*CountTheta[1][iPoint])/pow(CountTheta[3][iPoint],2.0);
+        
+        cout<<"bla: "<<RatioPoints[0][iPoint]<<"+- "<<ErrRatioPoints[0][iPoint]<<endl;
+        cout<<"bla bla: "<<RatioPoints[1][iPoint]<<"+- "<<ErrRatioPoints[1][iPoint]<<endl;
+    }
+    
+
+    
     
     TCanvas *c2 = new TCanvas ("c2","",610,600);
     TLegend *t3=new TLegend(0.50,0.64,0.83,0.77);
@@ -150,20 +167,6 @@ void PlotdRvsTheta(){
         }
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
-    }
-    
-    Double_t RatioPoints[2][nPoints];
-    Double_t ErrRatioPoints[2][nPoints];
-
-    for (int iPoint = 0 ; iPoint<nPoints ; iPoint ++ ){
-        RatioPoints[0][iPoint] = CountTheta[0][iPoint]/CountTheta[2][iPoint];
-        ErrRatioPoints[0][iPoint] = (ErrCountTheta[0][iPoint]*CountTheta[2][iPoint] + ErrCountTheta[2][iPoint]*CountTheta[0][iPoint])/pow(CountTheta[2][iPoint],2.0);
-
-        RatioPoints[1][iPoint] = CountTheta[1][iPoint]/CountTheta[3][iPoint];
-        ErrRatioPoints[1][iPoint] = (ErrCountTheta[1][iPoint]*CountTheta[3][iPoint] + ErrCountTheta[3][iPoint]*CountTheta[1][iPoint])/pow(CountTheta[3][iPoint],2.0);
-        
-        cout<<"bla: "<<RatioPoints[0][iPoint]<<"+- "<<ErrRatioPoints[0][iPoint]<<endl;
-        cout<<"bla bla: "<<RatioPoints[1][iPoint]<<"+- "<<ErrRatioPoints[1][iPoint]<<endl;
     }
     
     TGraphErrors * rat[2];
