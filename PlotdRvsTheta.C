@@ -178,7 +178,7 @@ void PlotdRvsTheta(){
     }
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.12,0.85,23);
-    drawText("p_{T,1}>120 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.13,0.82,16);
+    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.13,0.82,16);
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
     drawText("0 -30% Centrality",0.13,0.74,16);
 
