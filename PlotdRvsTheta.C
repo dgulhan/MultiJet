@@ -202,7 +202,9 @@ void PlotdRvsTheta(){
     
     
     TCanvas *c3 = new TCanvas("c3","",610,600);
-    
+    c3->SetLeftMargin(0.2);
+    TGraphErrors * rat[2];
+
     TLegend *t4=new TLegend(0.55,0.64,0.88,0.77);
     t4->SetFillColor(0);
     t4->SetBorderSize(0);
@@ -210,7 +212,6 @@ void PlotdRvsTheta(){
     t4->SetTextFont(43);
     t4->SetTextSize(16);
     
-    TGraphErrors * rat[2];
     
     rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
     rat[1] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
