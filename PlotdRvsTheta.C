@@ -115,7 +115,7 @@ void PlotdRvsTheta(){
             
             //Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
             
-            cout<<"Ratio: "<<CountTheta[iFile][iPoint]<<endl;
+            cout<<"Ratio: "<<CountTheta[iFile][iPoint]<<" +- "<<ErrCountTheta[iFile][iPoint]<<endl;
             //Yerr[iFile][iPoint] = Hist[iFile][iPoint]->GetMeanError();
         }
     }
