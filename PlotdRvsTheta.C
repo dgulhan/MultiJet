@@ -142,7 +142,7 @@ void PlotdRvsTheta(){
     
     
     TCanvas *c2 = new TCanvas ("c2","c2",610,600);
-    c2->SetLeftMargin(0.2);
+    c2->SetLeftMargin(0.4);
     
     
     TLegend *t3=new TLegend(0.55,0.64,0.88,0.77);
@@ -152,6 +152,7 @@ void PlotdRvsTheta(){
     t3->SetTextFont(43);
     t3->SetTextSize(16);
     TString LabelGraph[] = {"PbPb PYTHIA+HYDJET", "PbPb Data" , "pp PYTHIA", "pp Data"};
+    TString LabelGraphMarc[] = {"l", "p" , "l", "p"};
     
     
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
@@ -190,7 +191,7 @@ void PlotdRvsTheta(){
         }
       
         
-        t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
+        t3->AddEntry(gr[iFile],LabelGraph[iFile],LabelGraphMarc[iFile]);
     }
     
     t3->AddEntry(c2,"Anti-k_{T} R=0.4","");
@@ -203,10 +204,12 @@ void PlotdRvsTheta(){
     
     
     TCanvas *c3 = new TCanvas("c3","c2",610,600);
+    c3->SetLeftMargin(0.4);
+
     c3->SetLeftMargin(0.2);
     TGraphErrors * rat[2];
 
-    TLegend *t4=new TLegend(0.55,0.64,0.88,0.77);
+    TLegend *t4=new TLegend(0.50,0.64,0.83,0.77);
     t4->SetFillColor(0);
     t4->SetBorderSize(0);
     t4->SetFillStyle(0);
@@ -218,6 +221,7 @@ void PlotdRvsTheta(){
     rat[1] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
     
     rat[0]->SetLineColor(kGray+1);
+    rat[0]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
     rat[0]->SetLineStyle(9);
     rat[0]->SetMinimum(0.5);
     rat[0]->SetMaximum(1.6);
@@ -235,11 +239,11 @@ void PlotdRvsTheta(){
     drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.23,0.78,16);
     drawText("0 -30% Centrality",0.23,0.74,16);
 
+
+    t4->AddEntry(rat[0],"PYTHIA+HYDJET/PYTHIA","l");
+    t4->AddEntry(rat[1],"PbPb Data/pp Data","p");
     t4->AddEntry(c3,"Anti-k_{T} R=0.4","");
 
-    t4->AddEntry(rat[0],"PYTHIA+HYDJET / PYTHIA","l");
-    t4->AddEntry(rat[1],"PbPb Data / pp Data","l");
-    
     t4->Draw("SAME");
     
     
