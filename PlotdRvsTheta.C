@@ -174,7 +174,15 @@ void PlotdRvsTheta(){
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
     }
+    t3->Draw("SAME");
+    drawText("CMS Preliminary",0.12,0.85,23);
+    drawText("p_{T,1}>190 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.13,0.82,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
+    drawText("0 -30% Centrality",0.13,0.74,16);
+
     
+    TCanvas *c3 = new TCanvas ("c3","",610,600);
+
     TGraphErrors * rat[2];
     
     rat[0] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
@@ -183,24 +191,19 @@ void PlotdRvsTheta(){
     rat[1]->SetLineColor(kBlue-2);
     rat[0]->SetFillColor(kOrange+1);
     rat[0]->SetLineColor(kOrange+1);
-    rat[0]->SetMinimum(0.34);
+    rat[0]->SetMinimum(0.0);
     rat[0]->SetMaximum(1.23);
-    rat[1]->SetMinimum(0.34);
+    rat[1]->SetMinimum(0.0);
     rat[1]->SetMaximum(1.23);
     
     rat[0]->Draw("SAME");
     rat[1]->Draw("SAME");
     
-    t3->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
-    t3->AddEntry(rat[1],"PbPb Data / pp Data","l");
+    //t3->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
+    //t3->AddEntry(rat[1],"PbPb Data / pp Data","l");
     
     
     
-    t3->Draw("SAME");
-    drawText("CMS Preliminary",0.12,0.85,23);
-    drawText("p_{T,1}>190 GeV  p_{T,2}>70 GeV p_{T,3}>70 GeV",0.13,0.82,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.13,0.78,16);
-    drawText("0 -30% Centrality",0.13,0.74,16);
     
     
     
