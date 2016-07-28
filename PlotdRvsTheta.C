@@ -109,7 +109,7 @@ void PlotdRvsTheta(){
             Nall = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0) , Hist[iFile][iPoint]->FindBin(TMath::Pi()));
             
             CountTheta[iFile][iPoint] = Ntheta/Nall ;
-            ErrCountTheta[iFile][iPoint] = Ntheta / (Nall*sqrt((1./Ntheta)+ (1./Nall) ) ) ;
+            ErrCountTheta[iFile][iPoint] = (Ntheta /Nall)*(sqrt((1./Ntheta)+ (1./Nall) ) ) ;
             
             
             Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
