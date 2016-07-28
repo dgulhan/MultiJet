@@ -50,7 +50,7 @@ void plot_vs_centrality(){
         
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get(Form("ak4PF",R[0],N[0]));
+        tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R4_N3_PF",R[0],N[0]));
         
         for (int iCentr = 0 ; iCentr < nBinsCentr ; iCentr++) {
             cout<<"def hist"<<endl;
@@ -128,7 +128,7 @@ void plot_vs_centrality(){
 
     }
     
-    t3->AddEntry(c,"anti-k_{T} R=0.4","");
+    t3->AddEntry(c,"XCone R=0.4 N=3","");
 
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.23,0.85,23);
