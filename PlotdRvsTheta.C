@@ -141,7 +141,7 @@ void PlotdRvsTheta(){
 
     
     
-    TCanvas *c2 = new TCanvas ("c2","",610,600);
+    TCanvas *c2 = new TCanvas ("c2","c2",610,600);
     c2->SetLeftMargin(0.2);
     
     
@@ -172,7 +172,7 @@ void PlotdRvsTheta(){
 
         if (iFile==1) {
             gr[iFile]->SetMarkerStyle(21);
-            gr[iFile]->SetMarkerSize(2);
+            gr[iFile]->SetMarkerSize(1);
             gr[iFile]->SetMarkerColor(kRed);
             gr[iFile]->Draw("P SAME");
 
@@ -184,7 +184,7 @@ void PlotdRvsTheta(){
         if (iFile==3) {
             gr[iFile]->SetMarkerStyle(21);
             gr[iFile]->SetMarkerColor(kBlue);
-            gr[iFile]->SetMarkerSize(2);
+            gr[iFile]->SetMarkerSize(1);
             gr[iFile]->Draw("P SAME");
 
         }
@@ -201,7 +201,7 @@ void PlotdRvsTheta(){
 
     
     
-    TCanvas *c3 = new TCanvas("c3","",610,600);
+    TCanvas *c3 = new TCanvas("c3","c2",610,600);
     c3->SetLeftMargin(0.2);
     TGraphErrors * rat[2];
 
