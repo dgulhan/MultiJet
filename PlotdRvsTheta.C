@@ -145,7 +145,7 @@ void PlotdRvsTheta(){
     c2->SetLeftMargin(0.23);
     
     
-    TLegend *t3=new TLegend(0.55,0.64,0.88,0.77);
+    TLegend *t3=new TLegend(0.55,0.63,0.88,0.78);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -196,10 +196,10 @@ void PlotdRvsTheta(){
     
     t3->AddEntry(c2,"Anti-k_{T} R=0.4","");
     t3->Draw("SAME");
-    drawText("CMS Preliminary",0.22,0.85,23);
-    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.23,0.82,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.23,0.78,16);
-    drawText("0 -30% Centrality",0.23,0.74,16);
+    drawText("CMS Preliminary",0.25,0.85,23);
+    drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.25,0.82,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.25,0.78,16);
+    drawText("0 -30% Centrality",0.25,0.74,16);
 
     
     
