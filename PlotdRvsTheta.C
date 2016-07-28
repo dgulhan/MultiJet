@@ -162,11 +162,20 @@ void PlotdRvsTheta(){
         if (iFile==0) {
             gr[iFile]->SetLineColor(kRed-7);
             gr[iFile]->SetLineStyle(9);
+            gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
+            gr[iFile]->SetMinimum(0.3);
+            gr[iFile]->SetMaximum(1.0);
+            gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
+            
+            gr[iFile]->Draw("SAME");
         }
 
         if (iFile==1) {
             gr[iFile]->SetMarkerStyle(21);
+            gr[iFile]->SetMarkerSize(2);
             gr[iFile]->SetMarkerColor(kRed);
+            gr[iFile]->Draw("P SAME");
+
         }
         if (iFile==2) {
             gr[iFile]->SetLineColor(kBlue-7);
@@ -175,19 +184,11 @@ void PlotdRvsTheta(){
         if (iFile==3) {
             gr[iFile]->SetMarkerStyle(21);
             gr[iFile]->SetMarkerColor(kBlue);
+            gr[iFile]->SetMarkerSize(2);
+            gr[iFile]->Draw("P SAME");
+
         }
-        if (iFile == 0) {
-            gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
-            gr[iFile]->SetMinimum(0.3);
-            gr[iFile]->SetMaximum(1.0);
-            gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
-            
-            gr[iFile]->Draw();
-        }
-        else{
-            gr[iFile]->Draw("SAME");
-            
-        }
+      
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
     }
