@@ -184,8 +184,8 @@ void SigmaSmearing(){
     TFile *file[nFiles];
     TTree *tree[nFiles];
     
-    TCut Cut[] = {"pt1>120 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5",
-                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.5"
+    TCut Cut[] = {"pt1>120 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8  && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>1.57079632679",
+                  "pt1>120 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>1.57079632679"
                  };
     
     TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ",
@@ -199,8 +199,8 @@ void SigmaSmearing(){
     
     TH1D *hist[nFiles][nCentr];
     TF1 *func[nFiles][nCentr];
-    TF1 f1("f1","gaus",-0.02,0.02);
-    
+    TF1 *f1[nFiles][nCentr];
+	
     int Color[] = {kRed,kBlue};
     
     float SigmaFit[nFiles][nCentr];
@@ -223,9 +223,15 @@ void SigmaSmearing(){
             if (iFile == 1) tree[iFile]->Draw( Form("dt>>hist%i%i",iFile,iCentr),Cut[iFile] );
                 
             hist[iFile][iCentr]->Scale(1.0/hist[iFile][iCentr]->Integral());
-            hist[iFile][iCentr]->Fit("gaus");
+            
+			float maxBinCenter = hist[iFile][iCentr]->GetBinCenter(hist[iFile][iCentr]->GetMaximumBin());
+			float histRMS = hist[iFile][iCentr]->GetRMS();
+			
+			func[iFile][iCentr] = new TF1(Form("func_%d_%d", iFile, iCentr),"gaus(0)", maxBinCenter - 2*histRMS, maxBinCenter + 2*histRMS);
+			
+			hist[iFile][iCentr]->Fit(func[iFile][iCentr],"R LL");
                 
-            func[iFile][iCentr] = (TF1*)hist[iFile][iCentr]->GetFunction("gaus");
+            // func[iFile][iCentr] = (TF1*)hist[iFile][iCentr]->GetFunction("gaus");
             func[iFile][iCentr]->SetLineColor(Color[iFile]);
             hist[iFile][iCentr]->SetLineColor(Color[iFile]);
             hist[iFile][iCentr]->SetStats(0);
