@@ -29,7 +29,7 @@ float magnitude(float x, float y){
 
 
 
-void PlotdRvsTheta(){
+void PlotdRvsTheta(){ 
     
     Int_t R[] = {4};
     Int_t N[] = {3};
@@ -50,8 +50,8 @@ void PlotdRvsTheta(){
     
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
     
-    Double_t X[]={0.9,1.1,1.4};
-    Double_t Xerr[]={0.01,0.01,0.01};
+    double X[]={0.9,1.1,1.4};
+    double Xerr[]={0.01,0.01,0.01};
     
     
     
@@ -68,19 +68,19 @@ void PlotdRvsTheta(){
     TFile *file[nFiles];
     TGraphErrors * gr[nFiles];
     
-    Double_t Y[nFiles][nPoints];
-    Double_t Yerr[nFiles][nPoints];
+    double Y[nFiles][nPoints];
+    double Yerr[nFiles][nPoints];
     
-    Double_t CountTheta[nPoints][nFiles];
-    Double_t ErrCountTheta[nPoints][nFiles];
+    double CountTheta[nFiles][nPoints];
+    double ErrCountTheta[nFiles][nPoints];
     
     int Color [] = { kRed , kBlue, kGreen, kMagenta };
     
     TH1D * Hist[nFiles][nPoints];
     
     
-    Double_t Ntheta[nFiles][nPoints];
-    Double_t Nall[nFiles][nPoints];
+    double Ntheta[nFiles][nPoints];
+    double Nall[nFiles][nPoints];
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
         
         
@@ -121,18 +121,17 @@ void PlotdRvsTheta(){
         }
     }
     
-    
-    Double_t RatioPoints[2][nPoints];
-    Double_t ErrRatioPoints[2][nPoints];
+    double RatioPoints[2][nPoints];
+    double ErrRatioPoints[2][nPoints];
     
     for (int iPoint = 0 ; iPoint<nPoints ; iPoint ++ ){
-        
+
         RatioPoints[0][iPoint] = CountTheta[0][iPoint]/CountTheta[2][iPoint];
         ErrRatioPoints[0][iPoint] = (ErrCountTheta[0][iPoint]*CountTheta[2][iPoint] + ErrCountTheta[2][iPoint]*CountTheta[0][iPoint])/pow(CountTheta[2][iPoint],2.0);
-        
+
         RatioPoints[1][iPoint] = CountTheta[1][iPoint]/CountTheta[3][iPoint];
         ErrRatioPoints[1][iPoint] = (ErrCountTheta[1][iPoint]*CountTheta[3][iPoint] + ErrCountTheta[3][iPoint]*CountTheta[1][iPoint])/pow(CountTheta[3][iPoint],2.0);
-        
+
         cout<<"pythia rat: "<<RatioPoints[0][iPoint]<<"+- "<<ErrRatioPoints[0][iPoint]<<endl;
         cout<<"data rat: "<<RatioPoints[1][iPoint]<<"+- "<<ErrRatioPoints[1][iPoint]<<endl;
     }
@@ -154,6 +153,7 @@ void PlotdRvsTheta(){
     
     
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
+
         gr[iFile] = new TGraphErrors(nPoints,X,CountTheta[iFile],Xerr,ErrCountTheta[iFile]);
         gr[iFile]->SetFillColor(Color[iFile]);
         gr[iFile]->SetLineColor(Color[iFile]);
