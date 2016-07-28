@@ -71,13 +71,16 @@ void PlotdRvsTheta(){
     Double_t Y[nFiles][nPoints];
     Double_t Yerr[nFiles][nPoints];
     
-    double_t CountTheta[nPoints][nFiles];
+    Double_t CountTheta[nPoints][nFiles];
+    Double_t ErrCountTheta[nPoints][nFiles];
     
     int Color [] = { kRed , kBlue, kGreen, kMagenta };
     
     TH1D * Hist[nFiles][nPoints];
     
     
+    Double_t Ntheta;
+    Double_t Nall;
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
         
         
@@ -86,6 +89,7 @@ void PlotdRvsTheta(){
         tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R4_N3_PF",R[0],N[0]));
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
         tree[iFile]->SetAlias( "theta32" , "acos((pullEta3*(eta2-eta3)+pullPhi3*deltaPhi(phi2,phi3))/( magnitude(pullEta3,pullPhi3)*magnitude(eta2-eta3,deltaPhi(phi2,phi3)) ))");
+        
         
         for ( int iPoint = 0 ; iPoint< nPoints ; iPoint++){
             
@@ -101,7 +105,12 @@ void PlotdRvsTheta(){
                 tree[iFile]->Draw(Form("theta23>>h%i%i",iFile,iPoint),CutSeePull[0] && CutsR[iPoint]);
             }
             
-            CountTheta[iFile][iPoint] = (Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0.) , Hist[iFile][iPoint]->FindBin(TMath::Pi()/2.) ) ) / (Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0) , Hist[iFile][iPoint]->FindBin(TMath::Pi()) ) );
+            Ntheta = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0.) , Hist[iFile][iPoint]->FindBin(TMath::Pi()/2.) );
+            Nall = Hist[iFile][iPoint]->Integral( Hist[iFile][iPoint]->FindBin(0) , Hist[iFile][iPoint]->FindBin(TMath::Pi()));
+            
+            CountTheta[iFile][iPoint] = Ntheta/Nall ;
+            ErrCountTheta[iFile][iPoint] = Ntheta / (Nall*sqrt((1./Ntheta)+ (1./Nall) ) ) ;
+            
             
             Y[iFile][iPoint] = Hist[iFile][iPoint]->GetMean();
             
@@ -123,7 +132,7 @@ void PlotdRvsTheta(){
     
     
     for ( int iFile = 0 ; iFile < nFiles ; iFile ++){
-        gr[iFile] = new TGraphErrors(nPoints,X,CountTheta[iFile],Xerr);
+        gr[iFile] = new TGraphErrors(nPoints,X,CountTheta[iFile],Xerr,ErrCountTheta[iFile]);
         gr[iFile]->SetFillColor(Color[iFile]);
         gr[iFile]->SetLineColor(Color[iFile]);
         if (iFile == 0) {
@@ -143,16 +152,21 @@ void PlotdRvsTheta(){
     }
     
     Double_t RatioPoints[2][nPoints];
-    
+    Double_t ErrRatioPoints[2][nPoints];
+
     for (int iPoint = 0 ; iPoint<nPoints ; iPoint ++ ){
         RatioPoints[0][iPoint] = CountTheta[0][iPoint]/CountTheta[2][iPoint];
+        ErrRatioPoints[0][iPoint] = (ErrCountTheta[0][iPoint]*CountTheta[2][iPoint] + ErrCountTheta[2][iPoint]*CountTheta[0][iPoint])/pow(CountTheta[2][iPoint],2.0);
+
         RatioPoints[1][iPoint] = CountTheta[1][iPoint]/CountTheta[3][iPoint];
-        cout<<"bla: "<<RatioPoints[0][iPoint]<<endl;
-        cout<<"bla bla: "<<RatioPoints[1][iPoint]<<endl;
+        ErrRatioPoints[0][iPoint] = (ErrCountTheta[1][iPoint]*CountTheta[3][iPoint] + ErrCountTheta[3][iPoint]*CountTheta[1][iPoint])/pow(CountTheta[3][iPoint],2.0);
+        
+        cout<<"bla: "<<RatioPoints[0][iPoint]<<"+- "<<ErrRatioPoints[0][iPoint]<<endl;
+        cout<<"bla bla: "<<RatioPoints[1][iPoint]<<"+- "<<ErrRatioPoints[1][iPoint]<<endl;
     }
     
-    gr[nFiles-1+1] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr);
-    gr[nFiles-1+2] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr);
+    gr[nFiles-1+1] = new TGraphErrors(nPoints,X,RatioPoints[0],Xerr,ErrRatioPoints[0]);
+    gr[nFiles-1+2] = new TGraphErrors(nPoints,X,RatioPoints[1],Xerr,ErrRatioPoints[1]);
     gr[nFiles-1+1]->SetFillColor(kBlue-2);
     gr[nFiles-1+1]->SetLineColor(kBlue-2);
     gr[nFiles-1+2]->SetFillColor(kOrange+1);
