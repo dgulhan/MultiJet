@@ -145,7 +145,7 @@ void PlotdRvsTheta(){
     c2->SetLeftMargin(0.2);
     
     
-    TLegend *t3=new TLegend(0.55,0.64,0.85,0.77);
+    TLegend *t3=new TLegend(0.55,0.64,0.88,0.77);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
