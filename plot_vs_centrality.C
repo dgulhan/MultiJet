@@ -17,10 +17,10 @@ void plot_vs_centrality(){
     int nBinsCentr = 4;
     
     TCut CentralityBinsCuts[] = { "0 < hiBin/2 && hiBin/2 < 10","10 < hiBin/2 && hiBin/2 < 30 ","30 < hiBin/2 && hiBin/2 < 50" ,"50 < hiBin/2 && hiBin/2 < 100" };
-    TCut Cut[] = {"pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && refpt1>0 && refpt2 > 0 && refpt3 > 0",
-                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
-                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-                  "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"};
+    TCut Cut[] = {"pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+                  "pt1>160 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2"};
 
     int Color [] = { kRed , kBlue, kGreen, kMagenta };
     
@@ -98,7 +98,7 @@ void plot_vs_centrality(){
         
         if (iFile == 0) {
             gr[iFile]->SetMinimum(0.11);
-            gr[iFile]->SetMaximum(0.30);
+            gr[iFile]->SetMaximum(0.34);
             gr[iFile]->GetYaxis()->SetTitleOffset(1.4);
             gr[iFile]->Draw();
         } else {
