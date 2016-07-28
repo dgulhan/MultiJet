@@ -81,7 +81,7 @@ void PlotThetaPull(){
             //tree[iFile][iAlgo]->SetAlias("t3","magnitude(pullEta3,pullPhi3)");
 
 
-            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";|#vec{t}_{3}|#theta_{3,2}^{pull};Event Fraction",20,0,0.055);
+            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";|#vec{t}_{3}|#theta_{3,2}^{pull};Event Fraction",20,0,0.04001);
         
             if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("magnitude(pullEta3,pullPhi3)*theta32>>hist%i%i",iFile,iAlgo),Cut[iFile] && CentralityBinsCuts[0] && "theta32<TMath::Pi()/2");
             if (iFile == 2 || iFile ==3 )tree[iFile][iAlgo]->Draw(Form("magnitude(pullEta3,pullPhi3)*theta32>>hist%i%i",iFile,iAlgo),Cut[iFile] && "theta32<TMath::Pi()/2" );
@@ -134,7 +134,7 @@ void PlotThetaPull(){
             }
             if (iFile == 1 || iFile == 3) {
                 hist[iFile][iAlgo]->SetMarkerStyle(20);
-                hist[iFile][iAlgo]->SetMarkerSize(0.5);
+                hist[iFile][iAlgo]->SetMarkerSize(1.5);
                 hist[iFile][iAlgo]->SetMarkerColor(Color[iFile]);
                 hist[iFile][iAlgo]->SetLineColor(Color[iFile]);
                 if (iFile==1) hist[iFile][iAlgo]->Draw();
@@ -146,11 +146,12 @@ void PlotThetaPull(){
 
             
             if (iAlgo==0) {
-                drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.18,0.93,18);
-                drawText("XCone #theta_{3,2}^{pull}<#pi/2",0.18,0.83,18);
-                drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 #Delta R_{2,3}<#pi/2 #Delta R_{2,3}>0.8",0.18,0.88,18);
+                drawText("XCone",0.19,0.93,19);
+                drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.18,0.87,18);
+                drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 #Delta R_{2,3}<#pi/2 #Delta R_{2,3}>0.8",0.18,0.82,18);
+                drawText("#theta_{3,2}^{pull}<#pi/2",0.18,0.77,18);
             }
-            if (iAlgo==1) drawText("anti-kT #theta_{3,2}^{pull}<#pi/2",0.03,0.83,18);
+            if (iAlgo==1) drawText("anti-k_{T}",0.03,0.93,19);
 
 
         }
