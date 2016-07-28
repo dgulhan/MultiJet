@@ -39,7 +39,6 @@ void PlotdRvsTheta(){
     int nPoints = 5;
     
     TCut CutsR[] = {
-        "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.4",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.4 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.6",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.6 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.8",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.0",
@@ -89,7 +88,7 @@ void PlotdRvsTheta(){
         
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get("ak4PF");
+        tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
         
         tree[iFile]->SetAlias( "theta23" , "acos((pullEta2*(eta3-eta2)+pullPhi2*deltaPhi(phi3,phi2))/( magnitude(pullEta2,pullPhi2)*magnitude(eta3-eta2,deltaPhi(phi3,phi2)) ))");
         tree[iFile]->SetAlias( "theta32" , "acos((pullEta3*(eta2-eta3)+pullPhi3*deltaPhi(phi2,phi3))/( magnitude(pullEta3,pullPhi3)*magnitude(eta2-eta3,deltaPhi(phi2,phi3)) ))");
@@ -146,7 +145,7 @@ void PlotdRvsTheta(){
     c2->SetLeftMargin(0.2);
     
     
-    TLegend *t3=new TLegend(0.40,0.64,0.83,0.77);
+    TLegend *t3=new TLegend(0.55,0.64,0.85,0.77);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -164,15 +163,15 @@ void PlotdRvsTheta(){
             gr[iFile]->GetXaxis()->SetTitle("#Delta R_{2,3} Cut");
             gr[iFile]->GetYaxis()->SetTitleOffset(2.4);
             gr[iFile]->SetMinimum(0.20);
-            gr[iFile]->SetMaximum(1.76);
+            gr[iFile]->SetMaximum(1.6);
             gr[iFile]->GetYaxis()->SetTitle("#theta_{2,3}^{Pull}[0,#pi/2]/ #theta_{2,3}^{Pull}[0,#pi] ");
             
             gr[iFile]->Draw();
         }
         else{
             gr[iFile]->Draw("SAME");
-            gr[iFile]->SetMinimum(0.34);
-            gr[iFile]->SetMaximum(1.23);
+            gr[iFile]->SetMinimum(0.25);
+            gr[iFile]->SetMaximum(1.78);
         }
         
         t3->AddEntry(gr[iFile],LabelGraph[iFile],"l");
