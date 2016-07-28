@@ -237,7 +237,7 @@ void PlotdRvsTheta(){
 
     t4->AddEntry(c3,"Anti-k_{T} R=0.4","");
 
-    t4->AddEntry(rat[0],"PYTHIA + HYDJET / PYTHIA","l");
+    t4->AddEntry(rat[0],"PYTHIA+HYDJET / PYTHIA","l");
     t4->AddEntry(rat[1],"PbPb Data / pp Data","l");
     
     t4->Draw("SAME");
