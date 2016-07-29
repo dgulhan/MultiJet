@@ -43,32 +43,32 @@ void plotCentralityBins(){
     TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ", " 30 < hiBin/2 && hiBin/2 < 50 " , " 10 < hiBin/2 && hiBin/2 < 30 " , " 0 < hiBin/2 && hiBin/2 < 10" };
     
     TCut ppCuts[] = {
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
     };
     
     
 
     
     TCut PbPbCuts[] = {
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
-        " pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
     };
 
     
@@ -222,9 +222,11 @@ void plotCentralityBins(){
         
         if (iCentr == 0){
             drawText("CMS Preliminary",0.20,0.93,23);
+            
         }
         if (iCentr == 1) {
-            drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.03,0.93,18);
+            drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
+            drawText("w/o Const",0.03,0.80,18);
         }
         if (iCentr == 2){
             drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
@@ -233,7 +235,7 @@ void plotCentralityBins(){
         for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
             if (iCentr == nCentrBins-1 ){
                 if (iFile == 0 ) {
-                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET w/o Const","f");
+                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET ","f");
                 }
                 if (iFile == 1) {
                     t3->AddEntry(hist[iFile][iCentr],"Xcone PbPb Data","p");
