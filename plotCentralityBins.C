@@ -31,7 +31,8 @@ void plotCentralityBins(){
 
     
     TString Files[] = {
-        "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
+        //"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
+        "/afs/cern.ch/work/e/eruizvel/public/CutconstPbPbMCpthat80+pullHiForestAOD_ALL.root",
         "/afs/cern.ch/work/e/eruizvel/public/PbPbDataHIHardProbes+pullHiForest_ALL.root",
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root",
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160726/ppDataHighPt80+pullHiForest_ALL.root"
@@ -232,7 +233,7 @@ void plotCentralityBins(){
         for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
             if (iCentr == nCentrBins-1 ){
                 if (iFile == 0 ) {
-                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET","f");
+                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET w/o Const","f");
                 }
                 if (iFile == 1) {
                     t3->AddEntry(hist[iFile][iCentr],"Xcone PbPb Data","p");
