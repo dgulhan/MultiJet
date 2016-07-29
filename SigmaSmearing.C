@@ -228,7 +228,7 @@ void SigmaSmearing(){
 			float histRMS = hist[iFile][iCentr]->GetRMS();
 			
 			func[iFile][iCentr] = new TF1(Form("func_%d_%d", iFile, iCentr),"gaus(0)", maxBinCenter - 2*histRMS, maxBinCenter + 2*histRMS);
-			func[iFile][iCentr]->SetParameters(0.1,0.,1.);
+			func[iFile][iCentr]->SetParameters(0.1,0.,0.5);
 			hist[iFile][iCentr]->Fit(func[iFile][iCentr],"R LL");
                 
             // func[iFile][iCentr] = (TF1*)hist[iFile][iCentr]->GetFunction("gaus");
