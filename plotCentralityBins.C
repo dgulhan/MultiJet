@@ -138,7 +138,7 @@ void plotCentralityBins(){
         //if (iFile  < 3 ){tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));}
         
         //tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R%i_N%i_PF",R,N));
-        tree[iFile] = (TTree*)file[iFile]->Get(Form("xc_R4_N3_PF",R,N));
+        tree[iFile] = (TTree*)file[iFile]->Get(Form("ak4PF",R,N));
 
         for ( int iCentr = 0 ; iCentr < nCentrBins ; iCentr++ ) {
             
