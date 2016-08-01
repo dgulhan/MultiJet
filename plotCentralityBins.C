@@ -24,25 +24,55 @@ void plotCentralityBins(){
     TString CentrText[] = {"Centr. 100-50%","Centr. 50-30%","Centr. 30-10%","Centr. 10-0%"};
     int nCentrBins = 4;
     
-    TString XAxis[] = {"sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3)", "acos(cos(phi1-phi3))","acos(cos(phi1-phi2))","acos(cos(phi2-phi3))","sign(eta1)*(eta3-eta1)","sign(eta1)*(eta2-eta1)","sign(eta2)*(eta3-eta2)","sqrt(pow(acos(cos(phi1-phi3)),2.)+pow(eta1-eta3,2.))","sqrt(pow(acos(cos(phi1-phi2)),2.)+pow(eta1-eta2,2.))","sqrt(pow(acos(cos(phi2-phi3)),2.)+pow(eta2-eta3,2.))" };
+    TString XAxis[] = {
+        "(pt1-pt2)/(pt1+pt2)",
+        "sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3)",
+        "acos(cos(phi1-phi3))",
+        "acos(cos(phi1-phi2))",
+        "acos(cos(phi2-phi3))",
+        "sign(eta1)*(eta3-eta1)",
+        "sign(eta1)*(eta2-eta1)",
+        "sign(eta2)*(eta3-eta2)",
+        "sqrt(pow(acos(cos(phi1-phi3)),2.)+pow(eta1-eta3,2.))",
+        "sqrt(pow(acos(cos(phi1-phi2)),2.)+pow(eta1-eta2,2.))",
+        "sqrt(pow(acos(cos(phi2-phi3)),2.)+pow(eta2-eta3,2.))"
+    };
     
-    TString XLabel[] = {"P_{T_{Bal}}","#Delta#phi_{1,3}" , "#Delta#phi_{1,2}" , "#Delta#phi_{2,3}" , "#Delta#eta_{1,3}" , "#Delta#eta_{1,2}" , "#Delta#eta_{2,3}" , "#Delta R_{1,3}" , "#Delta R_{1,2}" , "#Delta R_{2,3}" };
+    TString XLabel[] = {
+        "A_{j}",
+        "P_{T_{Bal}}",
+        "#Delta#phi_{1,3}" ,
+        "#Delta#phi_{1,2}" ,
+        "#Delta#phi_{2,3}" ,
+        "#Delta#eta_{1,3}" ,
+        "#Delta#eta_{1,2}" ,
+        "#Delta#eta_{2,3}" ,
+        "#Delta R_{1,3}" ,
+        "#Delta R_{1,2}" ,
+        "#Delta R_{2,3}"
+    };
     
 
     
     TString Files[] = {
         //"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
         "/afs/cern.ch/work/e/eruizvel/public/CutconstPbPbMCpthat80+pullHiForestAOD_ALL.root",
-        "/afs/cern.ch/work/e/eruizvel/public/PbPbDataHIHardProbes+pullHiForest_ALL.root",
+        "/afs/cern.ch/work/e/eruizvel/public/PbPbDataHIHardProbes+pullHiForest_ALLrepro.root",
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root",
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160726/ppDataHighPt80+pullHiForest_ALL.root"
     };
     
     int nFiles = 4;
     
-    TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100 ", " 30 < hiBin/2 && hiBin/2 < 50 " , " 10 < hiBin/2 && hiBin/2 < 30 " , " 0 < hiBin/2 && hiBin/2 < 10" };
+    TCut CentralityBinsCuts[] = {
+        " 50 < hiBin/2 && hiBin/2 < 100 ",
+        " 30 < hiBin/2 && hiBin/2 < 50 " ,
+        " 10 < hiBin/2 && hiBin/2 < 30 " ,
+        " 0 < hiBin/2 && hiBin/2 < 10"
+    };
     
     TCut ppCuts[] = {
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && abs(eta1-eta2)>0.2" ,
@@ -61,6 +91,7 @@ void plotCentralityBins(){
     TCut PbPbCuts[] = {
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
@@ -77,6 +108,7 @@ void plotCentralityBins(){
     TString TextCut[] = {
         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
+        "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
         "|#Delta#eta_{1,2}|>0.2" ,
         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
         "#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2" ,
@@ -88,9 +120,9 @@ void plotCentralityBins(){
     };
 
     
-    Double_t YMaxHist[] = {0.16,0.12,0.25,0.12,0.095,0.09,0.13,0.15,0.17,0.12};
-    Double_t XMin[] = {0,0,0,0,-2.,-2.,-2.,0.,0.,0.};
-    Double_t XMax[] = {1.0,TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.};
+    Double_t YMaxHist[] = {0.2,0.16,0.12,0.25,0.12,0.095,0.09,0.13,0.15,0.17,0.12};
+    Double_t XMin[] = {0,0,0,0,0,-2.,-2.,-2.,0.,0.,0.};
+    Double_t XMax[] = {1.0,1.0,TMath::Pi(),TMath::Pi(),TMath::Pi(),2.,2.,2.,4.,4.,4.};
     
     
     TFile *file[nFiles];
@@ -226,7 +258,7 @@ void plotCentralityBins(){
         }
         if (iCentr == 1) {
             drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
-            drawText("w/o Const",0.03,0.80,18);
+            drawText("",0.03,0.80,18);
         }
         if (iCentr == 2){
             drawText(Form("%s",TextCut[iVar].Data()),0.03,0.93,18);
