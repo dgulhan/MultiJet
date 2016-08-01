@@ -49,7 +49,7 @@ void PlotdRvsTheta(){
         
     };
     
-    TCut CutSeePull[] = {"pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 " };
+    TCut CutSeePull[] = {"pt1>140 && pt3>50 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && sqrt((pt1*cos(phi1)+pt2*cos(phi2)+pt3*cos(phi3))^2 + (pt1*sin(phi1)+pt2*sin(phi2)+pt3*sin(phi3))^2)/(pt1+pt2+pt3)>0.3 " };
     TCut centrality = "0 < hiBin/2 && hiBin/2 < 30";
     
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
@@ -61,8 +61,9 @@ void PlotdRvsTheta(){
     
     int nFiles = 4;
     TString Files[] = {
-        "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
-        "/afs/cern.ch/work/e/eruizvel/public/PbPbDataHIHardProbes+pullHiForest_ALL.root",
+        //"root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/PbPbMCpthat80+pullHiForestAOD_ALL.root",
+        "/afs/cern.ch/work/e/eruizvel/public/CutconstPbPbMCpthat80+pullHiForestAOD_ALL.root",
+        "/afs/cern.ch/work/e/eruizvel/public/PbPbDataHIHardProbes+pullHiForest_ALLrepro.root",
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160720/ppMCpthat80+pullHiForestAOD_ALL.root",
         "root://eoscms//eos/cms/store/group/cmst3/user/dgulhan/MultiJetSkims/20160726/ppDataHighPt80+pullHiForest_ALL.root"
     };
@@ -200,7 +201,7 @@ void PlotdRvsTheta(){
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.25,0.85,23);
     drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.25,0.82,16);
-    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2",0.25,0.78,16);
+    drawText("|#Delta#phi_{2,3}|>2#pi/3 |#Delta#eta_{2,3}|>0.2 P_{T_{Bal}}>0.3",0.25,0.78,16);
     drawText("0 -30% Centrality",0.25,0.74,16);
 
     
