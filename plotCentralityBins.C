@@ -257,7 +257,8 @@ void plotCentralityBins(){
             
         }
         if (iCentr == 1) {
-            drawText("p_{T,1}>180 GeV  p_{T,2}>10 GeV p_{T,3}>10 GeV",0.03,0.93,18);
+            //drawText("p_{T,1}>180 GeV  p_{T,2}>10 GeV p_{T,3}>10 GeV",0.03,0.93,18);
+            drawText("p_{T,1}>0 GeV  p_{T,2}>0 GeV p_{T,3}>0 GeV",0.03,0.93,18);
             drawText("",0.03,0.80,18);
         }
         if (iCentr == 2){
