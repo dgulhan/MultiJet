@@ -72,7 +72,7 @@ void plotCentralityBins(){
     };
     
     TCut ppCuts[] = {
-        " pt1>180 && pt3>10 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+        " pt3>0 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && abs(eta1-eta2)>0.2" ,
@@ -89,7 +89,7 @@ void plotCentralityBins(){
 
     
     TCut PbPbCuts[] = {
-        " pt1>180 && pt3>10 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt3>0 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && abs(eta1-eta2)>0.2" ,
