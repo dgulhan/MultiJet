@@ -267,16 +267,16 @@ void plotCentralityBins(){
         for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
             if (iCentr == nCentrBins-1 ){
                 if (iFile == 0 ) {
-                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET ","f");
+                    t3->AddEntry(hist[iFile][iCentr],"anti-kt PbPb PYTHIA+HYDJET ","f");
                 }
                 if (iFile == 1) {
-                    t3->AddEntry(hist[iFile][iCentr],"Xcone PbPb Data","p");
+                    t3->AddEntry(hist[iFile][iCentr],"anti-kt PbPb Data","p");
                 }
                 if (iFile == 2 ){
-                    t3->AddEntry(hist[iFile][0],"XCone pp PYTHIA","f");
+                    t3->AddEntry(hist[iFile][0],"anti-kt pp PYTHIA","f");
                 }
                 if (iFile == 3) {
-                    t3->AddEntry(hist[iFile][0],"XCone pp Data","p");
+                    t3->AddEntry(hist[iFile][0],"anti-kt pp Data","p");
 
                 }
             t3->Draw("SAME");
