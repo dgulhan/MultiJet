@@ -197,7 +197,7 @@ void PlotdRvsTheta(){
         t3->AddEntry(gr[iFile],LabelGraph[iFile],LabelGraphMarc[iFile]);
     }
     
-    t3->AddEntry(c2,"anti-k_{T} R=0.4 N=3","");
+    t3->AddEntry(c2,"XCone R=0.4 N=3","");
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.25,0.85,23);
     drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>10 GeV",0.25,0.82,16);
