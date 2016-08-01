@@ -72,7 +72,7 @@ void plotCentralityBins(){
     };
     
     TCut ppCuts[] = {
-        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
+        " pt1>180 && pt3>10 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2",
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && abs(eta1-eta2)>0.2" ,
@@ -89,7 +89,7 @@ void plotCentralityBins(){
 
     
     TCut PbPbCuts[] = {
-        " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
+        " pt1>180 && pt3>10 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2" ,
         " pt1>100 && pt3>30 && abs(eta1-eta2)>0.2" ,
@@ -257,7 +257,7 @@ void plotCentralityBins(){
             
         }
         if (iCentr == 1) {
-            drawText("p_{T,1}>100 GeV  p_{T,2}>30 GeV p_{T,3}>30 GeV",0.03,0.93,18);
+            drawText("p_{T,1}>180 GeV  p_{T,2}>10 GeV p_{T,3}>10 GeV",0.03,0.93,18);
             drawText("",0.03,0.80,18);
         }
         if (iCentr == 2){
