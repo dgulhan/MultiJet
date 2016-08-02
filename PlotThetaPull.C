@@ -82,7 +82,7 @@ void PlotThetaPull(){
             //tree[iFile][iAlgo]->SetAlias("t3","magnitude(pullEta3,pullPhi3)");
 
 
-            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";|#vec{t}_{3}|#theta_{3,2}^{pull};Event Fraction",20,0,0.04001);
+            hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";#theta_{2,3}^{pull};Event Fraction",20,0,TMath::Pi());
         
             if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile] && CentralityBinsCuts[0] );
             if (iFile == 2 || iFile ==3 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile]  );
@@ -134,8 +134,8 @@ void PlotThetaPull(){
 
             }
             if (iFile == 1 || iFile == 3) {
-                hist[iFile][iAlgo]->SetMarkerStyle(20);
-                hist[iFile][iAlgo]->SetMarkerSize(1.5);
+                //hist[iFile][iAlgo]->SetMarkerStyle(20);
+                //hist[iFile][iAlgo]->SetMarkerSize(1.5);
                 hist[iFile][iAlgo]->SetMarkerColor(Color[iFile]);
                 hist[iFile][iAlgo]->SetLineColor(Color[iFile]);
                 if (iFile==1) hist[iFile][iAlgo]->Draw();
