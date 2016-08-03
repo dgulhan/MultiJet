@@ -129,7 +129,8 @@ void PlotThetaPull(){
                 if (iFile == 2) hist[iFile][iAlgo]->SetFillStyle(3004);
                 hist[iFile][iAlgo]->SetLineColor(Color[iFile]);
                 hist[iFile][iAlgo]->SetFillColorAlpha(Color[iFile],0.35);
-                hist[iFile][iAlgo]->Draw("SAME HIST");
+                if (iFile==0) hist[iFile][iAlgo]->Draw("HIST");
+                if (iFile==2) hist[iFile][iAlgo]->Draw("SAME HIST");
                 cout<<"out of here 3"<<endl;
 
             }
@@ -138,8 +139,8 @@ void PlotThetaPull(){
                 hist[iFile][iAlgo]->SetMarkerSize(0.8);
                 hist[iFile][iAlgo]->SetMarkerColor(Color[iFile]);
                 hist[iFile][iAlgo]->SetLineColor(Color[iFile]);
-                if (iFile==1) hist[iFile][iAlgo]->Draw();
-                if (iFile==3) hist[iFile][iAlgo]->Draw("SAME");
+                //if (iFile==1) hist[iFile][iAlgo]->Draw();
+                //if (iFile==3) hist[iFile][iAlgo]->Draw("SAME");
                 cout<<"out of here 4"<<endl;
 
             }
