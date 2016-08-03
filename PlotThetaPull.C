@@ -101,7 +101,7 @@ void PlotThetaPull(){
     c5 = new TCanvas("c5","",2*451,450);
     makeMultiPanelCanvas(c5,2,1,0.0,0.0,0.17,0.17,0.02);
 
-    TLegend *t3=new TLegend(0.47,0.80,0.61,0.90);
+    TLegend *t3=new TLegend(0.52,0.85,0.64,0.95);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
