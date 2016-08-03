@@ -238,7 +238,7 @@ void PlotdRvsTheta(){
     rat[1]->SetMarkerSize(1);
     rat[1]->SetMarkerColor(kViolet);
     rat[1]->SetLineColor(kViolet);
-    rat[1]->Draw("P SAME");
+    //rat[1]->Draw("P SAME");
 
 
     drawText("CMS Preliminary",0.22,0.85,23);
@@ -248,7 +248,7 @@ void PlotdRvsTheta(){
 
 
     t4->AddEntry(rat[0],"PYTHIA+HYDJET/PYTHIA","l");
-    t4->AddEntry(rat[1],"PbPb Data/pp Data","p");
+    //t4->AddEntry(rat[1],"PbPb Data/pp Data","p");
     t4->AddEntry(c3,"XCone R=0.4 N=3","");
 
     t4->Draw("SAME");
