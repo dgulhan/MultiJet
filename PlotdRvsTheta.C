@@ -36,11 +36,11 @@ void PlotdRvsTheta(){
     int nR=1;
     int nN=1; //XCone
 
-    int nPoints = 6;
+    int nPoints = 5;
 
 
     TCut CutsR[] = {
-        "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.4",
+        //"sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.4",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.4 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.6",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.6 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<0.8",
         "sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<1.0",
@@ -54,8 +54,8 @@ void PlotdRvsTheta(){
 
     //;&& acos((pull_y3*pull_y2+pull_phi3*pull_phi2)/(sqrt(pow(pull_y3,2.)+pow(pull_phi3,2.))*sqrt(pow(pull_y2,2.)+pow(pull_phi2,2.))))>TMath::Pi()/2"};
 
-    double X[]={0.3,0.5,0.7,0.9,1.1,1.4};
-    double Xerr[]={0.01,0.01,0.01,0.01,0.01,0.01};
+    double X[]={0.5,0.7,0.9,1.1,1.4};
+    double Xerr[]={0.01,0.01,0.01,0.01,0.01};
 
 
 
@@ -91,7 +91,7 @@ void PlotdRvsTheta(){
 
         cout<<"loading file:"<<Files[iFile].Data()<<endl;
         file[iFile] = TFile::Open( Files[iFile].Data() );
-        tree[iFile] = (TTree*)file[iFile]->Get("xc_R4_N3_PF");
+        tree[iFile] = (TTree*)file[iFile]->Get("ak4PF");
 
 
         tree[iFile]->SetAlias( "aj" , "(pt1-pt2)/(pt1+pt2)");
@@ -200,7 +200,7 @@ void PlotdRvsTheta(){
         if (iFile==0 || iFile==2) t3->AddEntry(gr[iFile],LabelGraph[iFile],LabelGraphMarc[iFile]);
     }
 
-    t3->AddEntry(c2,"XCone R=0.4 N=3","");
+    t3->AddEntry(c2,"anti-k_{t} R=0.4","");
     t3->Draw("SAME");
     drawText("CMS Preliminary",0.25,0.85,23);
     drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.25,0.82,16);
@@ -249,7 +249,7 @@ void PlotdRvsTheta(){
 
     t4->AddEntry(rat[0],"PYTHIA+HYDJET/PYTHIA","l");
     //t4->AddEntry(rat[1],"PbPb Data/pp Data","p");
-    t4->AddEntry(c3,"XCone R=0.4 N=3","");
+    t4->AddEntry(c3,"anti-k_{t} R=0.4","");
 
     t4->Draw("SAME");
 
