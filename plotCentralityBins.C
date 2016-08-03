@@ -177,7 +177,7 @@ void plotCentralityBins(){
     TCanvas * c2 = new TCanvas("c2","c2",4*451,450);
     makeMultiPanelCanvas(c2,4,1,0.0,0.0,0.17,0.17,0.02);
 
-    TLegend *t3=new TLegend(0.33,0.80,0.49,0.96);
+    TLegend *t3=new TLegend(0.33,0.84,0.49,0.96);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -269,13 +269,13 @@ void plotCentralityBins(){
         for ( int iFile = 0 ; iFile < nFiles ; iFile++ ){
             if (iCentr == nCentrBins-1 ){
                 if (iFile == 0 ) {
-                    t3->AddEntry(hist[iFile][iCentr],"anti-kt PbPb PYTHIA+HYDJET ","f");
+                    t3->AddEntry(hist[iFile][iCentr],"XCone PbPb PYTHIA+HYDJET ","f");
                 }
                 if (iFile == 1) {
                     //t3->AddEntry(hist[iFile][iCentr],"anti-kt PbPb Data","p");
                 }
                 if (iFile == 2 ){
-                    t3->AddEntry(hist[iFile][0],"anti-kt pp PYTHIA","f");
+                    t3->AddEntry(hist[iFile][0],"XCone pp PYTHIA","f");
                 }
                 if (iFile == 3) {
                     //t3->AddEntry(hist[iFile][0],"anti-kt pp Data","p");
