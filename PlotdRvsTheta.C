@@ -197,7 +197,7 @@ void PlotdRvsTheta(){
         }
 
 
-        if (iFile==0 || iFile==1) t3->AddEntry(gr[iFile],LabelGraph[iFile],LabelGraphMarc[iFile]);
+        if (iFile==0 || iFile==2) t3->AddEntry(gr[iFile],LabelGraph[iFile],LabelGraphMarc[iFile]);
     }
 
     t3->AddEntry(c2,"XCone R=0.4 N=3","");
