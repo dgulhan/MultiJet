@@ -101,7 +101,7 @@ void PlotThetaPull(){
     c5 = new TCanvas("c5","",2*451,450);
     makeMultiPanelCanvas(c5,2,1,0.0,0.0,0.17,0.17,0.02);
 
-    TLegend *t3=new TLegend(0.52,0.85,0.64,0.95);
+    TLegend *t3=new TLegend(0.54,0.85,0.66,0.95);
     t3->SetFillColor(0);
     t3->SetBorderSize(0);
     t3->SetFillStyle(0);
@@ -151,7 +151,7 @@ void PlotThetaPull(){
                 drawText("XCone R=0.4 N=3",0.19,0.93,19);
                 drawText("p_{T,1}>140 GeV  p_{T,2}>50 GeV p_{T,3}>50 GeV",0.18,0.87,18);
                 drawText("#Delta#phi_{1,2}> 2#pi/3 |#Delta#eta_{1,2}|>0.2 #Delta R_{2,3}<#pi/2 #Delta R_{2,3}>0.8",0.18,0.82,18);
-                drawText("#theta_{3,2}^{pull}<#pi/2",0.18,0.77,18);
+                drawText("#theta_{3,2}^{pull}<#pi/2",0.18,0.76,18);
             }
             if (iAlgo==1) drawText("anti-k_{T} R=0.4",0.03,0.93,19);
 
