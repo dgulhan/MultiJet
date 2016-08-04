@@ -54,8 +54,8 @@ void PlotThetaPull(){
         "pt1>100 && pt3>30 && acos(cos(phi1-phi2))>2*TMath::Pi()/3 && abs(eta1-eta2)>0.2 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))>0.8 && sqrt(pow(deltaPhi(phi3,phi2),2.)+pow(eta2-eta3,2.))<(TMath::Pi()/2)"
     };
 
-    TCut CentralityBinsCuts[] = { " 0 < hiBin/2 && hiBin/2 < 30"  };
-    TString CentrText[] = { "Centr. 30-0%" };
+    TCut CentralityBinsCuts[] = { " 50 < hiBin/2 && hiBin/2 < 100"  };
+    TString CentrText[] = { "Centr. 100-50%" };
 
 
     TH1D *hist[nFiles][2];
@@ -84,7 +84,7 @@ void PlotThetaPull(){
 
             hist[iFile][iAlgo] =  new TH1D(Form("hist%i%i",iFile,iAlgo),";#theta_{2,3}^{pull};Event Fraction",23,0,TMath::Pi());
 
-            if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile]  );
+            if (iFile == 0 || iFile ==1 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile] && CentralityBinsCuts[0] );
             if (iFile == 2 || iFile ==3 )tree[iFile][iAlgo]->Draw(Form("theta23>>hist%i%i",iFile,iAlgo),Cut[iFile]  );
 
             hist[iFile][iAlgo]->Scale(1.0/hist[iFile][iAlgo]->Integral());
